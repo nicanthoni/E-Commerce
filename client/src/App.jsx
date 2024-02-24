@@ -7,7 +7,7 @@ import {
 import "./App.css";
 
 // Pages
-import Test from "./pages/test";
+import Test from "./pages/Test";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";
