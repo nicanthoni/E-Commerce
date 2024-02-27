@@ -7,7 +7,6 @@ import {
 import "./App.css";
 
 // Pages
-import Test from "./pages/Test";
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 
@@ -17,15 +16,14 @@ import RootLayout from "./layouts/RootLayout";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      {/* <Route index element={<Test />} /> */}
-      <Route path="test" element={<Test />} />
+      <Route index element={<Home />} />
       <Route path="home" element={<Home />} />
       <Route path="checkout" element={<Checkout />} />
     </Route>
   )
 );
 
-function App() {
+function App()
   return <RouterProvider router={router} />;
 }
 
