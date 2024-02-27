@@ -1,14 +1,14 @@
 // RootLayout.jsx
 import { Typography, Grid } from "@mui/material";
 import { red } from "@mui/material/colors";
+import { Outlet } from "react-router-dom";
 
 export default function RootLayout() {
-//   return (
-//     <Grid container>
-//       <Grid item>
-//         <Typography color={{ primary: red[500] }}>Root Layout Working</Typography>
-//       </Grid>
-//     </Grid>
-//   );
+  return (
+<>
+      <main>
+        <Outlet />
+      </main>
+</>
+  );
 }
-

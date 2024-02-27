@@ -8,6 +8,8 @@ import "./App.css";
 
 // Pages
 import Test from "./pages/Test";
+import Home from "./pages/Home";
+import Checkout from "./pages/Checkout";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";
@@ -17,6 +19,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       {/* <Route index element={<Test />} /> */}
       <Route path="test" element={<Test />} />
+      <Route path="home" element={<Home />} />
+      <Route path="checkout" element={<Checkout />} />
     </Route>
   )
 );
