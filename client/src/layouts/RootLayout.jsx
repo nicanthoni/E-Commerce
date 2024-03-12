@@ -1,13 +1,13 @@
 // RootLayout to hold NavBar, Outlet, and Footer components
 
-import { Typography, Grid } from "@mui/material";
-import { red } from "@mui/material/colors";
+import Navbar from "../components/Navbar";
+import { Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 export default function RootLayout() {
   return (
     <>
-      <Typography>Navbar Component</Typography>
+      <Navbar />
       <main>
         <Outlet />
       </main>
