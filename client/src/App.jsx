@@ -5,6 +5,26 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./App.css";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+
+// Custom Theme instance - Colors, Fonts, etc go here for global use/overriding default values
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#A6A6A6',
+    },
+    secondary: {
+      main: '#595959',
+    },
+    third: {
+      main: '#262626',
+    },
+    fourth: {
+      main: '#0D0D0D',
+    },
+  },
+})
 
 // Pages
 import Home from "./pages/Home";
@@ -28,7 +48,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  )
 }
 
 export default App;
