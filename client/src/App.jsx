@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import "./App.css";
+import "./index.css";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 
@@ -39,10 +39,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path="home" element={<Home />} />
-      <Route path="explore" element={<Explore />} />
-      <Route path="product" element={<Product />} />
-      <Route path="checkout" element={<Checkout />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/explore/:category" element={<Explore />} />
+      <Route path="/product/:productId" element={<Product />} />
+      <Route path="/checkout" element={<Checkout />} />
     </Route>
   )
 );

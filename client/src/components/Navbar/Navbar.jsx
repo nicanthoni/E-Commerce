@@ -1,4 +1,3 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useState } from "react";
 
 // adjustable width of responsive nav drawer
 const drawerWidth = 250;
@@ -20,16 +20,17 @@ const navItems = ["Home", "Men", "Women", "Explore"];
 
 export default function Navbar(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
+// Sidebar
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        NS
+        XYZ
       </Typography>
       <Divider />
       <List>
@@ -66,11 +67,12 @@ export default function Navbar(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Nic's Store
+            XYZ Store
           </Typography>
+          {/* Main navbar items on desktop view - need to link these to asscoiated routes */}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
+              <Button key={item} sx={{ color: "#0D0D0D" }}>
                 {item}
               </Button>
             ))}
@@ -78,13 +80,14 @@ export default function Navbar(props) {
         </Toolbar>
       </AppBar>
       <nav>
+        {/* Sidebar */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, // Better open performance on mobile
           }}
           sx={{
             display: { xs: "block", sm: "none" },
