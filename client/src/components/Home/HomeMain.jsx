@@ -2,6 +2,7 @@
 import React from "react";
 import HomeInfo from "./HomeInfo"
 import HomeModels from "./HomeModels"
+import "./HomeMain.css";
 
 export default function HomeMain() {
     return (
