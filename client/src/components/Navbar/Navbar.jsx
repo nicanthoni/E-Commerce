@@ -48,7 +48,12 @@ export default function Navbar(props) {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <NavLink
+                to={routes[item]}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ListItemText primary={item} />
+              </NavLink>
             </ListItemButton>
           </ListItem>
         ))}
@@ -80,7 +85,8 @@ export default function Navbar(props) {
           >
             XYZ Store
           </Typography>
-          {/* Main navbar items on desktop view - need to link these to asscoiated routes */}
+          
+          {/* Main (top) navbar items on desktop view */}
           <Box
             className="nav-link-Container"
             sx={{ display: { xs: "none", sm: "block" } }}
