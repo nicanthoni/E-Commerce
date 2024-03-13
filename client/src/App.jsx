@@ -12,19 +12,22 @@ import { ThemeProvider } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#A6A6A6',
+      main: "#A6A6A6",
     },
     secondary: {
-      main: '#595959',
+      main: "#595959",
     },
     third: {
-      main: '#262626',
+      main: "#262626",
     },
     fourth: {
-      main: '#0D0D0D',
+      main: "#0D0D0D",
     },
   },
-})
+});
+
+// Layouts
+import RootLayout from "./layouts/RootLayout";
 
 // Pages
 import Home from "./pages/Home";
@@ -32,15 +35,13 @@ import Explore from "./pages/Explore";
 import Product from "./pages/Product";
 import Checkout from "./pages/Checkout";
 
-// Layouts
-import RootLayout from "./layouts/RootLayout";
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/explore/:category" element={<Explore />} />
+      <Route path="/explore/all" element={<Explore />} />
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/checkout" element={<Checkout />} />
     </Route>
@@ -52,7 +53,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
     </ThemeProvider>
-  )
+  );
 }
 
 export default App;

@@ -13,10 +13,21 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 // adjust width of responsive nav drawer
 const drawerWidth = 250;
+
+// Nav items array
 const navItems = ["Home", "Men", "Women", "Explore"];
+
+// Nav item routes
+const routes = {
+  Home: "/",
+  Men: "explore/men",
+  Women: "explore/women",
+  Explore: "/explore/all",
+};
 
 export default function Navbar(props) {
   const { window } = props;
@@ -26,7 +37,7 @@ export default function Navbar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-// Responsive sidebar/drawer
+  // Responsive sidebar/drawer
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -70,10 +81,18 @@ export default function Navbar(props) {
             XYZ Store
           </Typography>
           {/* Main navbar items on desktop view - need to link these to asscoiated routes */}
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box
+            className="nav-link-Container"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
             {navItems.map((item) => (
               <Button key={item} sx={{ color: "#0D0D0D" }}>
-                {item}
+                <NavLink
+                  to={routes[item]}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  {item}
+                </NavLink>
               </Button>
             ))}
           </Box>
