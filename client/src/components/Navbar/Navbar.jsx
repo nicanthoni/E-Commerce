@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 
-// adjustable width of responsive nav drawer
+// adjust width of responsive nav drawer
 const drawerWidth = 250;
 const navItems = ["Home", "Men", "Women", "Explore"];
 
