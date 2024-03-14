@@ -3,9 +3,9 @@
 import "./HomeModels.css";
 
 export default function HomeModels() {
-    return (
-      <>
+  return (
+    <>
       {/* Graphics, logos, models, etc to go here alongside the HomeInfo section */}
-      </>
-    )
+    </>
+  );
 }

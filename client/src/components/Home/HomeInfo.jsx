@@ -2,23 +2,38 @@
 
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import "./HomeInfo.css";
 
 export default function HomeInfo() {
   return (
     // Need to apply grid / flex layout
-    <article>
-      <Typography className="info-header" variant="h2" sx={{ fontWeight: "bold" }}>
-        STEP INTO ELEGANCE.
-      </Typography>
-      <Typography className="info-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-        quaerat nostrum quia nam earum, libero, expedita impedit delectus
-        provident quo eveniet.
-      </Typography>
-      <Button className="discover-products-btn" variant="contained" href="explore/all">
-        Discover Products
-      </Button>
-    </article>
+    <Grid container className="home-info-Container">
+      <Grid item>
+        <Typography
+          className="info-header"
+          variant="h2"
+          sx={{ fontWeight: "bold" }}
+        >
+          STEP INTO ELEGANCE.
+        </Typography>
+      </Grid>
+      <Grid item>
+        <Typography className="info-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
+          quaerat nostrum quia nam earum, libero, expedita impedit delectus
+          provident quo eveniet.
+        </Typography>
+      </Grid>
+      <Grid item>
+        <Button
+          className="discover-products-btn"
+          variant="contained"
+          href="explore/all"
+        >
+          Discover Products
+        </Button>
+      </Grid>
+    </Grid>
   );
 }

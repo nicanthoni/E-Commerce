@@ -85,7 +85,7 @@ export default function Navbar(props) {
           >
             XYZ Store
           </Typography>
-          
+
           {/* Main (top) navbar items on desktop view */}
           <Box
             className="nav-link-Container"
