@@ -3,12 +3,17 @@ import React from "react";
 import HomeInfo from "./HomeInfo";
 import HomeModels from "./HomeModels";
 import "./HomeMain.css";
+import Grid from "@mui/material/Unstable_Grid2";
 
 export default function HomeMain() {
   return (
-    <main className="home-main-Container">
-      <HomeInfo />
-      <HomeModels />
-    </main>
+    <Grid container>
+      <Grid item>
+        <HomeInfo />
+      </Grid>
+      <Grid item>
+        <HomeModels />
+      </Grid>
+    </Grid>
   );
 }
