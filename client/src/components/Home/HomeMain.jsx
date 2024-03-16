@@ -9,8 +9,7 @@ export default function HomeMain() {
   return (
     <Grid container className="home-main-container" 
     marginX={4}
-    columnSpacing={3}
-    justifyContent={'center'}
+    columnSpacing={6}
     alignItems={'center'}
     paddingTop={3}
     paddingBottom={3}

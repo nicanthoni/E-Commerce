@@ -1,20 +1,22 @@
 /* Style sheet for HomeModels component section */
+
+
 .model-container {
-  justify-items: center;
   align-items: center;
 }
 
 .model-wrapper {
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
+  width: 30%;
+  height: 30%;
 }
 
 .model-photo {
-  width: 10%;
-  height: 10%;
+  width: 100%;
+  height: 100%;
   filter: grayscale(100%);
   transition: all 0.2s;
+  border-radius: 10px;
 }
 
 .model-photo:hover {
