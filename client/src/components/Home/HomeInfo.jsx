@@ -7,8 +7,7 @@ import "./HomeInfo.css";
 
 export default function HomeInfo() {
   return (
-    // Need to apply grid / flex layout
-    <Grid className="home-info-Container" container direction={"column"}>
+    <Grid container className="home-info-Container" direction={"column"} rowSpacing={1}>
       <Grid item>
         <Typography
           className="info-header"
