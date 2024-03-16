@@ -3,6 +3,7 @@
 
 .model-container {
   align-items: center;
+
 }
 
 .model-wrapper {
@@ -17,6 +18,7 @@
   filter: grayscale(100%);
   transition: all 0.2s;
   border-radius: 10px;
+  margin-bottom: 8px;
 }
 
 .model-photo:hover {
