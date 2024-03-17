@@ -7,12 +7,14 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 export default function HomeMain() {
   return (
-    <Grid container className="home-main-container" 
-    marginX={4}
-    columnSpacing={6}
-    alignItems={'center'}
-    paddingTop={3}
-    paddingBottom={3}
+    <Grid
+      container
+      className="home-main-container"
+      marginX={4}
+      columnSpacing={6}
+      alignItems={"center"}
+      paddingTop={3}
+      paddingBottom={3}
     >
       <Grid item xs={12} md={6} className="home-info">
         <HomeInfo />

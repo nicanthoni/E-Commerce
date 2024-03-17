@@ -14,6 +14,9 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge } from "@mui/material";
+import "./Navbar.css";
 
 // adjust width of responsive nav drawer
 const drawerWidth = 250;
@@ -27,6 +30,11 @@ const routes = {
   Men: "explore/men",
   Women: "explore/women",
   Explore: "/explore/all",
+};
+
+// TBD if direct to diff page or show
+const toggleShowCart = () => {
+  console.log("Cart clicked");
 };
 
 export default function Navbar(props) {
@@ -67,13 +75,19 @@ export default function Navbar(props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{backgroundColor: 'transparent'}} elevation={0}>
+      <AppBar
+        component="nav"
+        sx={{ backgroundColor: "transparent", display: "flex" }}
+        elevation={0}
+      >
         <Toolbar>
           <IconButton
+            className="menu-icon"
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
+            alignItems="left"
             sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
@@ -81,7 +95,10 @@ export default function Navbar(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              flexGrow: 1,
+              textAlign: { xs: "center", sm: "left" },
+            }}
           >
             XYZ Store
           </Typography>
@@ -89,10 +106,10 @@ export default function Navbar(props) {
           {/* Main (top) navbar items on desktop view */}
           <Box
             className="nav-link-Container"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "yes" } }}
           >
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#0D0D0D" }}>
+              <Button key={item} sx={{ color: "fourth.main" }}>
                 <NavLink
                   to={routes[item]}
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -101,6 +118,11 @@ export default function Navbar(props) {
                 </NavLink>
               </Button>
             ))}
+          </Box>
+          <Box className="cart-icon" alignItems="right" sx={{ ml: 3 }}>
+            <Badge badgeContent={1} max={10} color="success">
+              <ShoppingCartIcon onClick={toggleShowCart} />
+            </Badge>
           </Box>
         </Toolbar>
       </AppBar>
