@@ -88,7 +88,7 @@ export default function Navbar(props) {
             edge="start"
             onClick={handleDrawerToggle}
             alignItems="left"
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ ml: 3, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -98,6 +98,7 @@ export default function Navbar(props) {
             sx={{
               flexGrow: 1,
               textAlign: { xs: "center", sm: "left" },
+              marginLeft: 4,
             }}
           >
             XYZ Store
@@ -119,7 +120,7 @@ export default function Navbar(props) {
               </Button>
             ))}
           </Box>
-          <Box className="cart-icon" alignItems="right" sx={{ ml: 3 }}>
+          <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
             <Badge badgeContent={1} max={10} color="success">
               <ShoppingCartIcon onClick={toggleShowCart} />
             </Badge>

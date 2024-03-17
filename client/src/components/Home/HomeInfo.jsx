@@ -29,7 +29,8 @@ export default function HomeInfo() {
           className="discover-products-btn"
           variant="contained"
           href="explore/all"
-          color="secondary"
+          sx={{bgcolor: "fourth.main", color: "white" }}
+
         >
           Discover Products
         </Button>

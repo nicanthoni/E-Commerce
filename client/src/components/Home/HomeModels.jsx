@@ -9,7 +9,7 @@ import model4 from "../../assets/images/model4.jpg";
 export default function HomeModels() {
   return (
     <Grid container className="model-container" spacing={3}>
-      <Grid item className="model-wrapper">
+      <Grid item className="model-wrapper left">
         <img src={model1} className="model-photo" alt="model photograph" />
         <img src={model3} className="model-photo" alt="model photograph" />
       </Grid>

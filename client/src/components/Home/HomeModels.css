@@ -10,15 +10,21 @@
   overflow: hidden;
   width: 30%;
   height: 30%;
+  
 }
 
+
 .model-photo {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   filter: grayscale(100%);
   transition: all 0.2s;
-  border-radius: 10px;
+  /* border-radius: 8px; */
   margin-bottom: 8px;
+}
+
+.left {
+ margin-left: 140px;
 }
 
 .model-photo:hover {
