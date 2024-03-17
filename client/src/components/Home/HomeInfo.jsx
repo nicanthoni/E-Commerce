@@ -1,5 +1,3 @@
-// This is marketing typography shown on the landing page (slogan, etc)
-
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
@@ -7,7 +5,12 @@ import "./HomeInfo.css";
 
 export default function HomeInfo() {
   return (
-    <Grid container className="home-info-Container" direction={"column"} rowSpacing={1}>
+    <Grid
+      container
+      className="home-info-Container"
+      direction={"column"}
+      rowSpacing={2}
+    >
       <Grid item>
         <Typography
           className="info-header"
@@ -19,9 +22,10 @@ export default function HomeInfo() {
       </Grid>
       <Grid item>
         <Typography className="info-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-          quaerat nostrum quia nam earum, libero, expedita impedit delectus
-          provident quo eveniet.
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum nulla
+          voluptatibus consequatur animi recusandae unde ipsa eligendi magni,
+          porro fugiat dicta ut sequi at perspiciatis. Necessitatibus, et
+          numquam. Autem, aperiam.
         </Typography>
       </Grid>
       <Grid item>
@@ -29,8 +33,7 @@ export default function HomeInfo() {
           className="discover-products-btn"
           variant="contained"
           href="explore/all"
-          sx={{bgcolor: "fourth.main", color: "white" }}
-
+          sx={{ bgcolor: "fourth.main", color: "white" }}
         >
           Discover Products
         </Button>

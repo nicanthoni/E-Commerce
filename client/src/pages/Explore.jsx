@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import fetchFromApi from "../utils/fetchFromApi"; // util for FakeStoreAPI
 
 export default function Explore() {
   const [products, setProducts] = useState([]);

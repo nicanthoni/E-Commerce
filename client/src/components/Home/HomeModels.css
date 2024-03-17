@@ -13,14 +13,13 @@
   
 }
 
-
 .model-photo {
   width: 80%;
   height: 80%;
   filter: grayscale(100%);
   transition: all 0.2s;
-  /* border-radius: 8px; */
   margin-bottom: 8px;
+   border-radius: 6px;
 }
 
 .left {

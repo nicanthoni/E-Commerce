@@ -101,7 +101,7 @@ export default function Navbar(props) {
               marginLeft: 4,
             }}
           >
-            XYZ Store
+            <NavLink to="/">XYZ Store</NavLink>
           </Typography>
 
           {/* Main (top) navbar items on desktop view */}
