@@ -34,12 +34,14 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Product from "./pages/Product";
 import Checkout from "./pages/Checkout";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/explore/:category" element={<Explore />} />
       <Route path="/explore/all" element={<Explore />} />
       <Route path="/product/:productId" element={<Product />} />
