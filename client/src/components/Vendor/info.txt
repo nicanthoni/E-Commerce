@@ -1,0 +1,1 @@
+This folder {Vendor} exists to potentially house all the components that are ONLY used on Vendor's view/accounts

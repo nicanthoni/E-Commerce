@@ -1,0 +1,1 @@
+This folder {Buyer} exists to potentially house all the components that are ONLY used on Buyer's view
