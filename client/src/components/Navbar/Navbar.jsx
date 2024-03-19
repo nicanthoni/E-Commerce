@@ -58,7 +58,7 @@ export default function Navbar() {
         </Typography>
       </Box>
       <Divider />
-      <List>
+      <List sx={{ display: 'inline-block'}}>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -66,7 +66,7 @@ export default function Navbar() {
                 to={routes[item]}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <ListItemText primary={item} />
+                <ListItemText primary={item}/>
               </NavLink>
             </ListItemButton>
           </ListItem>
