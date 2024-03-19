@@ -17,6 +17,8 @@ import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import "./Navbar.css";
+import CheckoutMain from "../Checkout/CheckoutMain";
+
 
 // adjust width of responsive nav drawer
 const drawerWidth = 250;
@@ -32,35 +34,41 @@ const routes = {
   Explore: "/explore/all",
 };
 
-// TBD if direct to diff page or show
-const toggleShowCart = () => {
-  console.log("Cart clicked");
-};
-
-export default function Navbar(props) {
-  const { window } = props;
+export default function Navbar() {
+  const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Toggle CHECKOUT drawer component
+  const toggleShowCart = () => {
+    console.log("Cart clicked");
+    setShowCart((prevShowCart) => !prevShowCart); // functional update to ensure proper synchronization
+  };
+
+  // Toggle MENU drawer component (mobile only)
   const handleDrawerToggle = () => {
+    console.log("Menu icon clicked");
     setMobileOpen((prevState) => !prevState);
   };
 
-  // Responsive sidebar/drawer
-  const drawer = (
+  // MENU drawer for mobile (Decompose as a separate component?)
+  const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Box 
+      sx={{ bgcolor: "primary.main" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         XYZ
       </Typography>
+      </Box>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton>
               <NavLink
                 to={routes[item]}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <ListItemText primary={item} />
+                <ListItemText primary={item}/>
               </NavLink>
             </ListItemButton>
           </ListItem>
@@ -68,9 +76,6 @@ export default function Navbar(props) {
       </List>
     </Box>
   );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -124,13 +129,12 @@ export default function Navbar(props) {
             <Badge badgeContent={1} max={10} color="success">
               <ShoppingCartIcon onClick={toggleShowCart} />
             </Badge>
+            {showCart && <CheckoutMain />} 
           </Box>
         </Toolbar>
       </AppBar>
       <nav>
-        {/* Sidebar */}
         <Drawer
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
@@ -145,12 +149,9 @@ export default function Navbar(props) {
             },
           }}
         >
-          {drawer}
+          {menuDrawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-      </Box>
     </Box>
   );
 }

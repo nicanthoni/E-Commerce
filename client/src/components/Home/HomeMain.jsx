@@ -14,7 +14,7 @@ export default function HomeMain() {
       marginX={4}
       columnSpacing={4}
       alignItems={"center"}
-      paddingTop={5}
+      marginTop={18}
     >
       <Grid item xs={12} md={6} lg={6} className="home-info">
         <HomeInfo />
@@ -22,9 +22,9 @@ export default function HomeMain() {
       <Grid item xs={0} md={6} lg={6} className="home-models">
         <HomeModels />
       </Grid>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
       <Footer/>
-      </Grid>
+      </Grid> */}
     </Grid>
   )
 }
