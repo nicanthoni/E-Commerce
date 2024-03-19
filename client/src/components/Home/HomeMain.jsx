@@ -4,6 +4,7 @@ import HomeInfo from "./HomeInfo";
 import HomeModels from "./HomeModels";
 import "./HomeMain.css";
 import Grid from "@mui/material/Unstable_Grid2";
+import Footer from "../Footer/Footer";
 
 export default function HomeMain() {
   return (
@@ -22,5 +23,6 @@ export default function HomeMain() {
         <HomeModels />
       </Grid>
     </Grid>
+    
   );
 }
