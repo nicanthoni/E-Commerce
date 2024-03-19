@@ -19,8 +19,7 @@ import { Badge } from "@mui/material";
 import "./Navbar.css";
 import CheckoutMain from "../Checkout/CheckoutMain";
 
-
-// adjust width of responsive nav drawer
+// adjust width of menu drawer
 const drawerWidth = 250;
 
 // Nav items array
@@ -53,14 +52,13 @@ export default function Navbar() {
   // MENU drawer for mobile (Decompose as a separate component?)
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box 
-      sx={{ bgcolor: "primary.main" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        XYZ
-      </Typography>
+      <Box sx={{ bgcolor: "primary.main" }}>
+        <Typography variant="h6" sx={{ my: 2, display: 'inline-block' }}>
+          XYZ
+        </Typography>
       </Box>
       <Divider />
-      <List>
+      <List sx={{ display: 'inline-block'}}>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -129,7 +127,7 @@ export default function Navbar() {
             <Badge badgeContent={1} max={10} color="success">
               <ShoppingCartIcon onClick={toggleShowCart} />
             </Badge>
-            {showCart && <CheckoutMain />} 
+            {showCart && <CheckoutMain />}
           </Box>
         </Toolbar>
       </AppBar>
