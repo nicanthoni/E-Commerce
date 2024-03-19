@@ -17,7 +17,7 @@ import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import "./Navbar.css";
-import CheckoutMain from "../Checkout/CheckoutMain";
+import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
 
 // adjust width of menu drawer
 const drawerWidth = 250;
