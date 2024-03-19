@@ -6,6 +6,9 @@ import CheckoutUser from "./CheckoutUser";
 import CheckoutOrder from "./CheckoutOrder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+// adjust drawer width
+const drawerWidth = 250;
+
 // Checkout Drawer Component
 export default function CheckoutMain() {
   const [open, setOpen] = useState(true);
@@ -31,9 +34,23 @@ export default function CheckoutMain() {
 
   return (
     <Box>
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+      <Drawer 
+      anchor="right" 
+      open={open} 
+      onClose={toggleDrawer(false)}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile
+      }}
+      sx={{
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: drawerWidth,
+        },
+      }}
+      >
         {DrawerList}
       </Drawer>
     </Box>
+    
   );
 }
