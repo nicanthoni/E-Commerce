@@ -5,6 +5,8 @@ import Divider from "@mui/material/Divider";
 import CheckoutUser from "./CheckoutUser";
 import CheckoutOrder from "./CheckoutOrder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Button } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 // adjust drawer width
 const drawerWidth = 250;
@@ -18,39 +20,54 @@ export default function CheckoutMain() {
 
   // Sub components displayed in Drawer
   const DrawerList = (
-    <Box
+    <Grid
+      container
+      direction={'column'}
       sx={{ width: 250, textAlign: "center" }}
-      role="presentation"
       onClick={toggleDrawer(false)}
+      rowSpacing={3}
     >
-      <Box sx={{ bgcolor: "primary.main"}}>
-        <ShoppingCartIcon sx={{ my: 2 }} />
-      </Box>
+      <Grid item sx={{ bgcolor: "primary.main" }} xs={12}>
+        <ShoppingCartIcon sx={{ my: 2  }}/>
+      </Grid>
       <Divider />
-      <CheckoutUser />
-      <CheckoutOrder />
-    </Box>
+      <Grid item xs={12}>
+        <CheckoutUser />
+      </Grid>
+      <Grid item xs={12}>
+        <CheckoutOrder />
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          className="checkout-btn"
+          variant="contained"
+          href="/checkout"
+          sx={{ bgcolor: "fourth.main", color: "white" }}
+        >
+          Checkout
+        </Button>
+      </Grid>
+    </Grid>
   );
 
   return (
     <Box>
-      <Drawer 
-      anchor="right" 
-      open={open} 
-      onClose={toggleDrawer(false)}
-      ModalProps={{
-        keepMounted: true, // Better open performance on mobile
-      }}
-      sx={{
-        "& .MuiDrawer-paper": {
-          boxSizing: "border-box",
-          width: drawerWidth,
-        },
-      }}
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={toggleDrawer(false)}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile
+        }}
+        sx={{
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+          },
+        }}
       >
         {DrawerList}
       </Drawer>
     </Box>
-    
   );
 }
