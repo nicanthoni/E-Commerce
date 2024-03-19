@@ -1,7 +1,11 @@
-import { Typography } from "@mui/material";
+import CheckoutMain from "../components/Checkout/CheckoutMain";
+import { Box } from "@mui/material";
+
 
 export default function Checkout () {
     return (
-        <Typography variant="h2">Checkout Page</Typography>
+        <Box className='checkout-container'>
+        <CheckoutMain/>
+        </Box>
     )
 }
