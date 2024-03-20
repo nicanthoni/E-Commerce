@@ -25,7 +25,6 @@ export default function CheckoutMain() {
       sx={{ width: 250, textAlign: "center" }}
       onClick={toggleDrawer(false)}
       rowSpacing={3}
-      minHeight={'100vh'}
     >
       <Grid item sx={{ bgcolor: "primary.main" }} xs={12}>
         <ShoppingCartIcon sx={{ my: 2  }}/>
