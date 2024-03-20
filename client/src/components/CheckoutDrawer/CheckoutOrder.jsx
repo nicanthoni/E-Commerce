@@ -13,7 +13,7 @@ export default function CheckoutOrder() {
     <Card sx={{ maxWidth: 245 }} elevation={1}>
       <CardMedia
         component="img"
-        sx={{ height: 10 }}
+        sx={{ height:'100%', width: '100%'}}
         src={productPhoto}
         title="Product Name"
       />
