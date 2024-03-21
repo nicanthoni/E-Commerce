@@ -14,9 +14,9 @@ export default function CheckoutOrder() {
     direction={"row"} 
     gap={1} 
     padding={1}
-    margin={1}
     justifyContent={'center'} 
     alignItems={'center'} 
+    margin={1}
  >
         <Box sx={{height: "100px", width: "100px"}}>
           <img src={productPhoto}
