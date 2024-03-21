@@ -10,25 +10,32 @@ import { Divider } from "@mui/material";
 // ORDER SUMMARY
 export default function CheckoutOrder() {
   return (
-    <Card sx={{ maxWidth: 245 }} elevation={1}>
+    <Card
+      className="order-container"
+      sx={{ display: "flex", maxWidth: 245, padding: 1 }}
+      elevation={1}
+    >
       <CardMedia
+        className="order-img"
         component="img"
-        sx={{ height:'100%', width: '100%'}}
+        sx={{ width: "50%", height: "50%", objectFit: "contain" }}
         src={productPhoto}
         title="Product Name"
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+      <CardContent className="order-description-container">
+        <Typography variant="h6">
           Product Name
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Category:
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Quantity:
+        </Typography>
+        <CardActions sx={{}}>
+          <Button size="small">Remove</Button>
+        </CardActions>
       </CardContent>
-      <CardActions>
-        <Button size="small">Remove</Button>
-      </CardActions>
     </Card>
-   
   );
 }
