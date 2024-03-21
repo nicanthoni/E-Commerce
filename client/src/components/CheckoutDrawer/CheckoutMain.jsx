@@ -2,10 +2,9 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
-import CheckoutUser from "./CheckoutUser";
 import CheckoutOrder from "./CheckoutOrder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 // adjust drawer width
@@ -22,7 +21,7 @@ export default function CheckoutMain() {
   const DrawerList = (
     <Grid
       container
-      direction={'column'}
+      direction={'row'}
       sx={{ width: 250, textAlign: "center" }}
       onClick={toggleDrawer(false)}
       rowSpacing={3}
@@ -32,12 +31,12 @@ export default function CheckoutMain() {
       </Grid>
       <Divider />
       <Grid item xs={12}>
-        <CheckoutUser />
-      </Grid>
-      <Grid item xs={12}>
         <CheckoutOrder />
       </Grid>
       <Grid item xs={12}>
+        <Typography className="total-cost">
+          Total: $
+        </Typography>
         <Button
           className="checkout-btn"
           variant="contained"
