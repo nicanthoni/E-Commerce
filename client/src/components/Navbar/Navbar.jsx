@@ -127,8 +127,8 @@ export default function Navbar() {
             <Badge badgeContent={1} max={10} color="success">
               <ShoppingCartIcon onClick={toggleShowCart} />
             </Badge>
-            {showCart && <CheckoutMain />}
           </Box>
+          {showCart && <CheckoutMain />}
         </Toolbar>
       </AppBar>
       <nav>
