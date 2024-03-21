@@ -26,6 +26,7 @@ export default function CheckoutMain() {
       onClick={toggleDrawer(false)}
       rowSpacing={2}
       margin={0}
+    
     >
       <Grid item sx={{ bgcolor: "primary.main" }} xs={12} alignSelf={'flex-start'}>
         <ShoppingCartIcon sx={{ my: 2  }}/>
@@ -33,17 +34,19 @@ export default function CheckoutMain() {
       <Grid item xs={12}>
         <CheckoutOrder />
       </Grid>
-       <Grid item xs={12} alignSelf={'flex-end'}>
+       <Grid item xs={12} alignSelf={'flex-end'}sx={{ padding: 0  }}>
         <Typography>
            Total: $
         </Typography>
+        <Box sx={{ bgcolor: "primary.main" }} xs={12}>
         <Button
           variant="contained"
           href="/checkout"
-          sx={{ bgcolor: "fourth.main", color: "white" }}
+          sx={{ bgcolor: "fourth.main", color: "white", my: 2  }}
         >
           Checkout
        </Button>
+       </Box>
       </Grid>
     </Grid>
   );
