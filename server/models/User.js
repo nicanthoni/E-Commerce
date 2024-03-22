@@ -31,6 +31,12 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.ObjectId,
             ref: 'Item'
         }
+    ],
+    buyHistory: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Item'
+        }
     ]
 })
 

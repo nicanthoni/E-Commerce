@@ -10,6 +10,11 @@ module.exports = {
       code: 'UNAUTHENTICATED',
     },
   }),
+  LoginInError: new GraphQLError('User is already logged in.', {
+    extensions: {
+      code: 'LOGGEDINALREADY',
+    },
+  }),
   authMiddleware: function ({ req }) {
     let token = req.body.token || req.query.token || req.headers.authorization
 
