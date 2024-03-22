@@ -16,9 +16,9 @@ export default function CheckoutMain() {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
+  
   // Layout of components inside Drawer
-  const DrawerList = (
+  const DrawerItems = (
     <Grid
       container
       sx={{ width: 250, height: '100%', textAlign: "center" }}
@@ -28,13 +28,15 @@ export default function CheckoutMain() {
       alignItems="flex-start"
     >
       {/* Top Shopping Cart icon */}
-      <Grid item sx={{ bgcolor: "primary.main" }} xs={12} alignSelf={'flex-start'} >
+      <Grid item sx={{ bgcolor: "primary.main" }} xs={12} alignSelf={'flex-start'}>
         <ShoppingCartIcon sx={{ my: 2  }}/>
       </Grid>
+
       {/* Product summary */}
       <Grid item xs={12} alignSelf='flex-start'>
         <CheckoutOrder />
       </Grid>
+
       {/* Base container for Checkout btn and Total price */}
        <Grid item xs={12} alignSelf='flex-end' sx={{ padding: 0  }}>
         <Box sx={{ bgcolor: "primary.main" }} xs={12}>
@@ -52,6 +54,7 @@ export default function CheckoutMain() {
   // Navbar component renders Drawer onClick
   return (
       <Drawer
+        variant="temporary"
         anchor="right"
         open={open}
         onClose={toggleDrawer(false)}
@@ -65,7 +68,7 @@ export default function CheckoutMain() {
           },
         }}
       >
-        {DrawerList}
+        {DrawerItems}
       </Drawer>
   );
 }

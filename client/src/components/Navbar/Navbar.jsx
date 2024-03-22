@@ -37,19 +37,19 @@ export default function Navbar() {
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Toggle CHECKOUT drawer component
+  // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
     console.log("Cart clicked");
     setShowCart((prevShowCart) => !prevShowCart); // functional update to ensure proper synchronization
   };
 
-  // Toggle MENU drawer component (mobile only)
+  // Toggle MENU drawer (mobile only)
   const handleDrawerToggle = () => {
     console.log("Menu icon clicked");
     setMobileOpen((prevState) => !prevState);
   };
 
-  // MENU drawer for mobile (Decompose as a separate component?)
+  // Items in MENU drawer - Decompose as a separate component?
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
@@ -75,6 +75,7 @@ export default function Navbar() {
     </Box>
   );
 
+  // Main Navbar
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -107,7 +108,7 @@ export default function Navbar() {
             <NavLink to="/">XYZ Store</NavLink>
           </Typography>
 
-          {/* Main (top) navbar items on desktop view */}
+          {/* Main Navbar items on desktop view */}
           <Box
             className="nav-link-Container"
             sx={{ display: { xs: "none", sm: "yes" } }}
@@ -123,6 +124,8 @@ export default function Navbar() {
               </Button>
             ))}
           </Box>
+
+          {/* CheckoutMain component drawer renders on Cart click */}
           <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
             <Badge badgeContent={1} max={10} color="success">
               <ShoppingCartIcon onClick={toggleShowCart} />
@@ -131,6 +134,7 @@ export default function Navbar() {
           {showCart && <CheckoutMain />}
         </Toolbar>
       </AppBar>
+
       <nav>
         <Drawer
           variant="temporary"
