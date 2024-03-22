@@ -27,7 +27,7 @@ export default function CheckoutMain() {
       margin={0}
       alignItems="flex-start"
     >
-      {/* Top Shopping Cart icon */}
+      {/* Shopping Cart icon */}
       <Grid item sx={{ bgcolor: "primary.main" }} xs={12} alignSelf={'flex-start'}>
         <ShoppingCartIcon sx={{ my: 2  }}/>
       </Grid>
@@ -37,7 +37,7 @@ export default function CheckoutMain() {
         <CheckoutOrder />
       </Grid>
 
-      {/* Base container for Checkout btn and Total price */}
+      {/* Container for Checkout btn and Total price */}
        <Grid item xs={12} alignSelf='flex-end' sx={{ padding: 0  }}>
         <Box sx={{ bgcolor: "primary.main" }} xs={12}>
         <Typography paddingTop={2} fontWeight={'bold'}>Total: $</Typography>
