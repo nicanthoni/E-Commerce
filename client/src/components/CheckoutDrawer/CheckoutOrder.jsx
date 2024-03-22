@@ -29,10 +29,10 @@ export default function CheckoutOrder() {
           />
         </Box>
       <Stack spacing={1} divider={<Divider orientation="horizontal"/>}>
-        <Typography variant="caption"> Product Name </Typography>
-        <Typography variant="caption"> Product Category </Typography>
-        <Typography variant="caption"> Quantity: </Typography>
-        <Typography variant="caption"> Item Price: </Typography>
+        <Typography variant="caption" fontWeight={'bold'}sx={{fontSize: 10}}>Product Name</Typography>
+        <Typography variant="caption"sx={{fontSize: 10}}> Quantity: </Typography>
+        <Typography variant="caption"sx={{fontSize: 10}}> Item Price: </Typography>
+        <Typography variant="caption"sx={{fontSize: 10}}> Product Category </Typography>
       </Stack>
     </Stack>
   );

@@ -35,7 +35,7 @@ export default function CheckoutMain() {
         <CheckoutOrder />
       </Grid>
        <Grid item xs={12} alignSelf={'flex-end'}sx={{ padding: 0  }}>
-        <Typography>
+        <Typography fontWeight={'bold'}>
            Total: $
         </Typography>
         <Box sx={{ bgcolor: "primary.main" }} xs={12}>
