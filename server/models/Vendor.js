@@ -22,7 +22,8 @@ const vendorSchema = new mongoose.Schema({
     },
     inventory: [
         {
-            type: mongoose.Schema.ObjectId
+            type: mongoose.Schema.ObjectId,
+            ref: 'Item'
         }
     ],
     sales: {
