@@ -19,36 +19,58 @@ export default function CheckoutMain() {
   
   // Layout of components inside Drawer
   const DrawerItems = (
-    <Grid
-      container
-      sx={{ width: 250, height: '100%', textAlign: "center" }}
-      onClick={toggleDrawer(false)}
-      rowSpacing={2}
-      margin={0}
-      alignItems="flex-start"
-    >
-      {/* Shopping Cart icon */}
-      <Grid item sx={{ bgcolor: "primary.main" }} xs={12} alignSelf={'flex-start'}>
-        <ShoppingCartIcon sx={{ my: 2  }}/>
-      </Grid>
+<Grid
+  container
+  sx={{
+    width: 250,
+    height: '100%',
+    textAlign: "center",
+    flexDirection: 'column', // Stack items vertically
+    overflowY: 'auto'
+  }}
+  onClick={toggleDrawer(false)}
+  rowSpacing={2}
+  margin={0}
+>
+  {/* Shopping Cart icon */}
+  <Grid item xs={12} sx={{ bgcolor: "primary.main" }}>
+    <ShoppingCartIcon sx={{ my: 2 }} />
+  </Grid>
 
-      {/* Product summary */}
-      <Grid item xs={12} alignSelf='flex-start'>
-        <CheckoutOrder />
-      </Grid>
+  {/* Product summary */}
+  <Grid item xs={12}>
+    <CheckoutOrder />
+  </Grid>
 
-      {/* Container for Checkout btn and Total price */}
-       <Grid item xs={12} alignSelf='flex-end' sx={{ padding: 0  }}>
-        <Box sx={{ bgcolor: "primary.main" }} xs={12}>
-        <Typography paddingTop={2} fontWeight={'bold'}>Total: $</Typography>
-        <Button
-          variant="contained"
-          href="/checkout"
-          sx={{ bgcolor: "fourth.main", color: "white", marginBottom: 2  }}
-        >Checkout</Button>
-       </Box>
-      </Grid>
-    </Grid>
+  {/* BELOW is for overflow issue 
+  - needs to be scrollable with component shrinking when item count  */}
+
+  {/* <Grid item xs={12}>
+    <CheckoutOrder />
+  </Grid>  
+  <Grid item xs={12}>
+    <CheckoutOrder />
+  </Grid>  
+  <Grid item xs={12}>
+    <CheckoutOrder />
+  </Grid>
+  <Grid item xs={12}>
+    <CheckoutOrder />
+  </Grid> */}
+
+  {/* Container for Checkout btn and Total price */}
+  <Grid item xs={12} sx={{ padding: 0, marginTop: 'auto' }}>
+    <Box sx={{ bgcolor: "primary.main" }}>
+      <Typography padding={1} fontWeight={'bold'}>Total: $__</Typography>
+      <Button
+        variant="contained"
+        href="/checkout"
+        sx={{ bgcolor: "fourth.main", color: "white", marginBottom: 2 }}
+      >Checkout</Button>
+    </Box>
+  </Grid>
+</Grid>
+
   );
 
   // Navbar component renders Drawer onClick
