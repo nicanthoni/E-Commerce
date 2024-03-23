@@ -1,17 +1,17 @@
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/Explore/ProductCard";
 
 export default function Explore() {
-  const [products, setProducts] = useState([]);
-  const [priceFlter, setPriceFilter] = useState("default");
-  const [checkBoxState, setCheckBoxState] = useState({
-    men: false,
-    women: false,
-  });
-
   const { category } = useParams();
+  // const [products, setProducts] = useState([]);
+  // const [priceFlter, setPriceFilter] = useState("default");
+  // const [checkBoxState, setCheckBoxState] = useState({
+  //   men: false,
+  //   women: false,
+  // });
+
 
   //   useEffect(() => {
   //     console.log(`category: ${category}`)
@@ -26,31 +26,35 @@ export default function Explore() {
   //     setCheckBoxState({ ...resetCheckBoxState, [category]: true });
   //   }, [category]);
 
+
   return (
-    <>
-      <Grid container>
+    <Container maxWidth='lg' >
+      <Grid container 
+      className="products-Container"
+      direction={'column'}
+      >
         {/* Conditional page title rendering */}
-        <Grid item>
+        <Grid item  marginTop={15}>
           {category === "men" ? (
-            <Typography variant="h3">Explore Men's</Typography>
+            <Typography variant="h3" align="center">Explore Men's</Typography>
           ) : category === "women" ? (
-            <Typography variant="h3">Explore Women's</Typography>
+            <Typography variant="h3" align="center">Explore Women's</Typography>
           ) : (
-            <Typography variant="h3">Explore All</Typography>
+            <Typography variant="h3" align="center">Explore All</Typography>
           )}
         </Grid>
 
-        {/* Item Cards */}
-        <Grid item>
+        {/* Products */}
+        <Grid item xs={12} sm={4} marginTop={2}>
           <ProductCard />
         </Grid>
 
         {/* Category Filter (Men/Women check boxes) */}
         <Grid item></Grid>
 
-        {/* Sory by Filter (lowest/highest price) */}
+        {/* Sort by Filter (lowest/highest price) */}
         <Grid item></Grid>
       </Grid>
-    </>
+      </Container>
   );
 }
