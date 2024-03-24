@@ -2,6 +2,7 @@ import { Typography, Grid, Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/Explore/ProductCard";
+import Data from "../productData.json";
 
 export default function Explore() {
   const { category } = useParams();
@@ -11,7 +12,6 @@ export default function Explore() {
   //   men: false,
   //   women: false,
   // });
-
 
   //   useEffect(() => {
   //     console.log(`category: ${category}`)
@@ -26,15 +26,10 @@ export default function Explore() {
   //     setCheckBoxState({ ...resetCheckBoxState, [category]: true });
   //   }, [category]);
 
-
   return (
-    <Container maxWidth='lg' >
-      <Grid container 
-      className="products-Container"
-      direction={'column'}
-      >
-        {/* Conditional page title rendering */}
-        <Grid item  marginTop={15}>
+    <Grid container className="products-Container">
+      {/* Conditional page title rendering */}
+      {/* <Grid item>
           {category === "men" ? (
             <Typography variant="h3" align="center">Explore Men's</Typography>
           ) : category === "women" ? (
@@ -42,19 +37,30 @@ export default function Explore() {
           ) : (
             <Typography variant="h3" align="center">Explore All</Typography>
           )}
-        </Grid>
+        </Grid> */}
 
-        {/* Products */}
+      {/* Products */}
+
+        
+          <ProductCard />
+    
+
+
+      {/* <Grid item xs={12} sm={4} marginTop={2}>
+          <ProductCard />
+        </Grid>
         <Grid item xs={12} sm={4} marginTop={2}>
           <ProductCard />
         </Grid>
+        <Grid item xs={12} sm={4} marginTop={2}>
+          <ProductCard />
+        </Grid> */}
 
-        {/* Category Filter (Men/Women check boxes) */}
-        <Grid item></Grid>
+      {/* Category Filter (Men/Women check boxes) */}
+      <Grid item></Grid>
 
-        {/* Sort by Filter (lowest/highest price) */}
-        <Grid item></Grid>
-      </Grid>
-      </Container>
+      {/* Sort by Filter (lowest/highest price) */}
+      <Grid item></Grid>
+    </Grid>
   );
 }

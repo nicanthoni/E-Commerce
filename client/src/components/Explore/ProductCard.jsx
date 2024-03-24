@@ -1,40 +1,61 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import productImg from '../../assets/images/shirt.jpg'
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Button, CardActionArea, CardActions, Box, Grid } from "@mui/material";
+import productImg from "../../assets/images/shirt.jpg";
+import Data from '../../productData.json'
 
+export default function ProductCard() {
+  const handleAddtoCart = () => {
+    console.log("Added to Cart");
+  };
 
-export default function ProductCard () {
-    return (
-        <Card sx={{ maxWidth: 275 }}>
-        <CardActionArea>
+  return (
+    // Map through Data's array of objects, and create a Grid item Card for each
+    <>
+    {Data.map((result, index) => (
+      <Grid item xs={12} sm={4} marginTop={2} key={index}>
+    <Card raised sx={{ maxWidth: 275, padding: "10px", marginBottom: "30px" }}>
+      <CardActionArea>
+        <Box sx={{ height: "100px", width: "100px" }}>
           <CardMedia
             component="img"
-            height="140"
-            image={productImg}
-            alt="green iguana"
+            image={result.img} /* IMAGE data */
+            alt="Product Photo"
+            sx={{
+              borderRadius: "5px",
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Name
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Description Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button 
-          size="small" 
-          variant='contained'
+        </Box>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {/* NAME data */}
+            { result.name }
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {/* DESCRIPTION  data */}
+           {result.description} 
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button
+          size="small"
+          variant="contained"
+          onClick={handleAddtoCart}
           sx={{ bgcolor: "fourth.main", color: "white" }}
-          >
-            Add to cart
-          </Button>
-        </CardActions>
-      </Card>
-      
-)}
+        >
+          Add to cart
+        </Button>
+      </CardActions>
+    </Card>
+    </Grid>
+      ))}
+      </>
+  );
+}

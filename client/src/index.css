@@ -1,6 +1,5 @@
 :root {
-  line-height: 1.5;
-  font-weight: 400;
+
 }
 
 * {
@@ -9,16 +8,21 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-  color: black;
+/* ROOT LAYOUT - outlet sits below */
+.root-Navbar {
+  margin-bottom: 100px;
 }
 
-li {
-  list-style: none;
+/* PAGE WRAPPERS */
+/* Home Page */
+.home-Page {
+
+}
+
+a {
+  text-decoration: none;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
 }

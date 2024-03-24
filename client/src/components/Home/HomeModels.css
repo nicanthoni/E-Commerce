@@ -19,7 +19,7 @@
   filter: grayscale(100%);
   transition: all 0.2s;
   margin-bottom: 8px;
-   border-radius: 6px;
+  border-radius: 6px;
 }
 
 .left {
