@@ -13,7 +13,7 @@ export default function CheckoutOrder() {
       alignItems="center"
       margin={1}
     >
-      
+
       {/* Product image */}
       <Box sx={{ height: "100px", width: "100px" }}>
         <img

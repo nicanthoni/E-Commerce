@@ -81,7 +81,7 @@ export default function Navbar() {
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: "transparent", display: "flex" }}
+        sx={{ backgroundColor: "#fff", display: "flex" }}
         elevation={0}
       >
         <Toolbar>

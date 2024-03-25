@@ -1,0 +1,50 @@
+[
+    {
+    "id": 1,
+    "name": "Test Product 1",
+    "description": "2 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg"
+    },
+    {
+    "id": 12,
+    "name": "Test Product 2",
+    "description": "2 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg"
+    },
+    {
+    "id": 3,
+    "name": "Test Product 3",
+    "description": "3 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg"
+    },
+    {
+    "id": 4,
+    "name": "Test Product 4",
+    "description": "4 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg"
+    },
+    {
+    "id": 5,
+    "name": "Test Product 5",
+    "description": "5 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg"
+    },
+    {
+    "id": 6,
+    "name": "Test Product 6",
+    "description": "6 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg"
+    },
+    {
+    "id": 7,
+    "name": "Test Product 7",
+    "description": "7 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg"
+    },
+    {
+    "id": 8,
+    "name": "Test Product 8",
+    "description": "8 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg"
+    }
+]

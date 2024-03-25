@@ -1,41 +1,40 @@
-import { Typography } from "@mui/material";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Typography, Grid, Container } from "@mui/material";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import fetchFromApi from "../utils/fetchFromApi"; // util for FakeStoreAPI
+import ProductCard from "../components/Explore/ProductCard";
 
 export default function Explore() {
-  const [products, setProducts] = useState([]);
-  const [priceFlter, setPriceFilter] = useState("default");
-  const [checkBoxState, setCheckBoxState] = useState({
-    men: false,
-    women: false,
-  });
-
   const { category } = useParams();
+  // const [products, setProducts] = useState([]);
+  // const [priceFlter, setPriceFilter] = useState("default");
+  // const [checkBoxState, setCheckBoxState] = useState({
+  //   men: false,
+  //   women: false,
+  // });
 
-//   useEffect(() => {
-//     console.log(`category: ${category}`)
-//     let resetCheckBoxState = {
-//       men: false,
-//       women: false,
-//     };
-//     if (category === "all") {
-//       setCheckBoxState(resetCheckBoxState);
-//       return;
-//     }
-//     setCheckBoxState({ ...resetCheckBoxState, [category]: true });
-//   }, [category]);
+  //   useEffect(() => {
+  //     console.log(`category: ${category}`)
+  //     let resetCheckBoxState = {
+  //       men: false,
+  //       women: false,
+  //     };
+  //     if (category === "all") {
+  //       setCheckBoxState(resetCheckBoxState);
+  //       return;
+  //     }
+  //     setCheckBoxState({ ...resetCheckBoxState, [category]: true });
+  //   }, [category]);
 
   return (
-    <>
-      {category === "men" ? (
-        <Typography variant="h3">Explore Men's</Typography>
-      ) : category === "women" ? (
-        <Typography variant="h3">Explore Women's</Typography>
-      ) : (
-        <Typography variant="h3">Explore All</Typography>
-      )}
-    </>
+    <Container>
+      <Grid container className="products-Container">
+        
+        {/* Products */}
+        <ProductCard />
+
+        {/* Grid item - Category Filter (Men/Women check boxes) */}
+        {/* Grid item - Sort by Filter (lowest/highest price) */}
+      </Grid>
+    </Container>
   );
 }

@@ -8,7 +8,7 @@ import "./index.css";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 
-// Custom Theme - Colors, Fonts, etc go here for global use/overriding default values
+// Custom Theme - for global use/overriding default values
 const theme = createTheme({
   palette: {
     primary: {
