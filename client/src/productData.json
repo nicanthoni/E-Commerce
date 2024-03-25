@@ -2,7 +2,7 @@
     {
     "id": 1,
     "name": "Test Product 1",
-    "description": "2 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "1 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg"
     },
     {

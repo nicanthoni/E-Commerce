@@ -37,7 +37,16 @@ export default function ProductCard() {
             {/* NAME data */}
             { result.name }
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary"
+          sx={{
+            // Apply ellipsis and hidden overflow when description content exceeds two lines length
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+          }}
+          >
             {/* DESCRIPTION  data */}
            {result.description} 
           </Typography>

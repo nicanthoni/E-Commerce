@@ -25,8 +25,9 @@ export default function AddItemForm() {
         const data = new FormData(event.currentTarget);
         console.log({
           vendor: data.get("vendor"),
-          email: data.get("email"),
-          password: data.get("password"),
+          product: data.get("product"),
+          description: data.get("description"),
+          price: data.get("price"),
         });
       };
     
