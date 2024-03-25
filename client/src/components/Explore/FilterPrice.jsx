@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import { Grid } from '@mui/material';
 
 export default function FilterPrice() {
-  const [price, setPrice] = useState('All');
+  const [price, setPrice] = useState('Show all');
 
   const handleChange = (event) => {
     setPrice(event.target.value);
@@ -27,7 +27,7 @@ export default function FilterPrice() {
         >
           <MenuItem value={10}>Lowest to highest</MenuItem>
           <MenuItem value={20}>Highest to lowest</MenuItem>
-          <MenuItem value={30}>All</MenuItem>
+          <MenuItem value={20}>Show all</MenuItem>
         </Select>
       </FormControl>
     </Box>

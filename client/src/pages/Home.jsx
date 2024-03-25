@@ -1,13 +1,13 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Container } from "@mui/material";
 import HomeMain from "../components/Home/HomeMain";
 
+
+// Home Page
 export default function Home() {
-    return (
-        <>
-        <Box className='home-Page'>
-        <HomeMain/>
-        </Box>
-        </>
-    )
+  return (
+    <>
+        <HomeMain />
+    </>
+  );
 }

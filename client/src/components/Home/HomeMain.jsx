@@ -11,8 +11,6 @@ export default function HomeMain() {
     <Grid
       container
       className="home-main-container"
-      marginX={4}
-      columnSpacing={4}
       alignItems={"center"}
     >
       <Grid item xs={12} md={6} lg={6} className="home-info">
