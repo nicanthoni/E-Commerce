@@ -14,10 +14,10 @@ export default function FilterPrice() {
   };
 
   return (
-    <Grid item xs={6} display={'flex'} justifyContent={'center'}>
+    <Grid item xs={6} display={'flex'} justifyContent={'left'}  padding={2}>
     <Box sx={{ width: 105 }}>
       <FormControl fullWidth size='small' >
-        <InputLabel id="price-filter-select-label">Price</InputLabel>
+        <InputLabel id="price-filter-select-label">Sort by Price</InputLabel>
         <Select
           labelId="price-label"
           id="filter-price"
@@ -26,7 +26,7 @@ export default function FilterPrice() {
           onChange={handleChange}
         >
           <MenuItem value={10}>Lowest to highest</MenuItem>
-          <MenuItem value={20}>Highest to Lowest</MenuItem>
+          <MenuItem value={20}>Highest to lowest</MenuItem>
           <MenuItem value={30}>All</MenuItem>
         </Select>
       </FormControl>

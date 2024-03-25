@@ -14,7 +14,7 @@ export default function FilterCategory() {
   };
 
   return (
-    <Grid item xs={6} display={'flex'} justifyContent={'center'}>
+    <Grid item xs={6} display={'flex'} justifyContent={'right'} padding={2}>
     <Box sx={{ width: 105 }}>
       <FormControl fullWidth size='small' >
         <InputLabel id="category-select-label">Category</InputLabel>
