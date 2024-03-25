@@ -4,8 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions, Box, Grid } from "@mui/material";
-import productImg from "../../assets/images/shirt.jpg";
-import Data from '../../productData.json'
+import Data from '../../productData.json' // Sample product data
+
 
 export default function ProductCard() {
   const handleAddtoCart = () => {
@@ -16,8 +16,8 @@ export default function ProductCard() {
     // Map through Data's array of objects, and create a Grid item Card for each
     <>
     {Data.map((result, index) => (
-      <Grid item xs={12} sm={4} marginTop={2} key={index}>
-    <Card raised sx={{ maxWidth: 275, padding: "10px", marginBottom: "30px" }}>
+    <Grid item xs={12} sm={6} md={4} marginTop={2} key={index} align="center">
+     <Card sx={{ maxWidth: 275, padding: "10px", marginBottom: "30px" }}>
       <CardActionArea>
         <Box sx={{ height: "100px", width: "100px" }}>
           <CardMedia
@@ -32,7 +32,7 @@ export default function ProductCard() {
             }}
           />
         </Box>
-        <CardContent>
+        <CardContent align='left'>
           <Typography gutterBottom variant="h5" component="div">
             {/* NAME data */}
             { result.name }
@@ -49,8 +49,7 @@ export default function ProductCard() {
           variant="contained"
           onClick={handleAddtoCart}
           sx={{ bgcolor: "fourth.main", color: "white" }}
-        >
-          Add to cart
+        >Add to cart
         </Button>
       </CardActions>
     </Card>
