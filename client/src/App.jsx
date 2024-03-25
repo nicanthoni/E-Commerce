@@ -36,6 +36,7 @@ import Product from "./pages/Product";
 import Checkout from "./pages/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
+import VendorAddItem from "./pages/Vendor/AddItem"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +49,7 @@ const router = createBrowserRouter(
       <Route path="/explore/all" element={<Explore />} />
       <Route path="/product/:productId" element={<Product />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="/additem" element={<VendorAddItem />} />
     </Route>
   )
 );
