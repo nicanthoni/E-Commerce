@@ -27,9 +27,9 @@ export default function Explore() {
 
   return (
     <Container>
-      <Grid container className="products-Container" spacing={1}>
+      <Grid container className="products-Container">
+        
         {/* Products */}
-
         <ProductCard />
 
         {/* Grid item - Category Filter (Men/Women check boxes) */}
