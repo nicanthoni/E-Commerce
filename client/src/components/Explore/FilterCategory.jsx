@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import { Grid } from '@mui/material';
 
 export default function FilterCategory() {
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState('Show all');
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -27,7 +27,7 @@ export default function FilterCategory() {
         >
           <MenuItem value={10}>Men</MenuItem>
           <MenuItem value={20}>Women</MenuItem>
-          <MenuItem value={30}>All</MenuItem>
+          <MenuItem value={30}>Show all</MenuItem>
         </Select>
       </FormControl>
     </Box>
