@@ -15,9 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import UploadButton from "./UploadButton";
 
   
-  // TODO remove, this demo shouldn't need to reset the theme.
+
   
-  const defaultTheme = createTheme();
+const defaultTheme = createTheme();
 
 export default function AddItemForm() {
     const handleSubmit = (event) => {
@@ -25,8 +25,9 @@ export default function AddItemForm() {
         const data = new FormData(event.currentTarget);
         console.log({
           vendor: data.get("vendor"),
-          email: data.get("email"),
-          password: data.get("password"),
+          product: data.get("product"),
+          description: data.get("description"),
+          price: data.get("price"),
         });
       };
     
@@ -42,15 +43,17 @@ export default function AddItemForm() {
                 alignItems: "center",
               }}
             >
-              {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-              </Avatar> */}
+
               <Typography component="h1" variant="h5">
                 Add Product
               </Typography>
+
               <Box margin={1}>
+                {/* Upload image file component */}
               <UploadButton/>
               </Box>
+
+              {/* Form */}
               <Box
                 component="form"
                 noValidate
@@ -58,6 +61,7 @@ export default function AddItemForm() {
                 sx={{ mt: 3 }}
               >
                 <Grid container spacing={2}>
+                    {/* Vendors Name */}
                   <Grid item xs={12}>
                     <TextField
                       required
@@ -67,6 +71,7 @@ export default function AddItemForm() {
                       name="vendor"
                     />
                   </Grid>
+                  {/* Vendors Product */}
                   <Grid item xs={12}>
                     <TextField
                       required
@@ -76,6 +81,7 @@ export default function AddItemForm() {
                       name="product"
                     />
                   </Grid>
+                  {/* Product Description */}
                   <Grid item xs={12}>
                     <TextField
                       required
@@ -85,6 +91,7 @@ export default function AddItemForm() {
                       id="vendorProductDescription"
                     />
                   </Grid>
+                  {/* $ Product Price $ */}
                   <Grid item xs={12}>
                     <TextField
                       required
@@ -95,6 +102,7 @@ export default function AddItemForm() {
                     />
                   </Grid>
                 </Grid>
+                {/* Submit Button */}
                 <Button
                   type="submit"
                   fullWidth
@@ -104,6 +112,7 @@ export default function AddItemForm() {
                   Submit 
                 </Button>
               </Box>
+
             </Box>
           </Container>
         </ThemeProvider>
