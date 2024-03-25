@@ -2,49 +2,57 @@
     {
     "id": 1,
     "name": "Test Product 1",
-    "description": "1 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/shirt.jpg"
+    "description": "1 Mens Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg",
+    "category": "mens"
     },
     {
     "id": 12,
     "name": "Test Product 2",
-    "description": "2 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/bag.jpg"
+    "description": "2 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "category": "womens"
     },
     {
     "id": 3,
     "name": "Test Product 3",
-    "description": "3 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/shirt.jpg"
+    "description": "3 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg",
+    "category": "womens"
     },
     {
     "id": 4,
     "name": "Test Product 4",
-    "description": "4 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/bag.jpg"
+    "description": "4 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "category": "womens"
     },
     {
     "id": 5,
     "name": "Test Product 5",
-    "description": "5 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/shirt.jpg"
+    "description": "5 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg",
+    "category": "mens"
     },
     {
     "id": 6,
     "name": "Test Product 6",
-    "description": "6 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/bag.jpg"
+    "description": "6 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "category": "mens"
     },
     {
     "id": 7,
     "name": "Test Product 7",
-    "description": "7 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/shirt.jpg"
+    "description": "7 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/shirt.jpg",
+    "category": "womens"
     },
     {
     "id": 8,
     "name": "Test Product 8",
-    "description": "8 Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/bag.jpg"
+    "description": "8 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "category": "mens"
     }
 ]

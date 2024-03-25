@@ -16,8 +16,8 @@ export default function ProductCard() {
     // Map through Data's array of objects, and create a Grid item Card for each
     <>
     {Data.map((result, index) => (
-    <Grid item xs={12} sm={6} md={4} marginTop={2} key={index} align="center">
-     <Card sx={{ maxWidth: 275, padding: "10px", marginBottom: "30px" }}>
+    <Grid item xs={12} sm={6} md={4} marginTop={5} key={index} align="center">
+     <Card sx={{ maxWidth: 275, padding: "10px", marginBottom: '10px' }}>
       <CardActionArea>
         <Box sx={{ height: "100px", width: "100px" }}>
           <CardMedia
