@@ -16,16 +16,24 @@ export default function HomeMain() {
         spacing={1}
         margin={1}
       >
+        {/* Text Section */}
         <Grid item xs={12} md={6} lg={6} className="homeInfo">
           <HomeInfo />
         </Grid>
+
+        {/* Logo Section */}
         <Grid item xs={0} md={6} lg={6} className="homeLogo">
           <HomeLogo />
         </Grid>
+
+        {/*  Services Section */}
+        <Grid item xs={12} className="homeServices">
+          <HomeServices />
+        </Grid>
       </Grid>
-      <Grid item xs={12} className="homeServices" >
-        <HomeServices />
-      </Grid>
+
+        {/* Testimonial Section */}
+      <Grid item></Grid>
     </Container>
   );
 }
