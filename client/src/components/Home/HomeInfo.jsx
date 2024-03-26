@@ -1,10 +1,10 @@
-import { Typography } from "@mui/material";
-import { Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import "./HomeInfo.css";
 
 export default function HomeInfo() {
   return (
+
     <Grid
       container
       className="home-info-Container"
