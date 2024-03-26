@@ -1,4 +1,4 @@
-import { Typography, Grid, Container, Box } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/Explore/ProductCard";
@@ -31,7 +31,6 @@ export default function Explore() {
     <Container>
       <Grid container className="products-Container">
         
-        
         {/* Grid item - Category Filter (Men/Women check boxes) */}
         <><FilterCategory/></>
 
@@ -40,7 +39,6 @@ export default function Explore() {
 
         {/* Products */}
         <><ProductCard/></>
-
 
       </Grid>
     </Container>

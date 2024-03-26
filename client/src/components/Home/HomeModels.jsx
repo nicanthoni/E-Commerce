@@ -1,21 +1,43 @@
-import "./HomeModels.css";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import Grid from "@mui/material/Grid"; // Grid version 2
 import model1 from "../../assets/images/model1.jpg";
 import model2 from "../../assets/images/model2.jpg";
 import model3 from "../../assets/images/model3.jpg";
-
-
+import StorefrontIcon from "@mui/icons-material/Storefront"; // Discover products icon
+import AddBusinessIcon from "@mui/icons-material/AddBusiness"; // Become vendor icon
+import { Stack, Typography, Button } from "@mui/material";
 
 export default function HomeModels() {
   return (
-    <Grid container className="model-container" gap={2} justifyContent={'flex-end'}>
-      <Grid item className="model-wrapper left">
-        <img src={model1} className="model-photo" alt="model photograph" />
-        <img src={model2} className="model-photo" alt="model photograph" />
-      </Grid>
-      <Grid item className="model-wrapper right">
-        <img src={model3} className="model-photo" alt="model photograph" />
-      </Grid>
-    </Grid>
+    <>
+      <Stack
+        direction="column"
+        alignItems="flex-start"
+        justifyContent="center"
+        spacing={1}
+      >
+        <Stack direction="row" alignItems={"center"} spacing={1}>
+          <Stack direction="column" alignItems={"center"}>
+            <StorefrontIcon sx={{ fontSize: 90 }} />
+            <Button sx={{ color: "fourth.main" }}>Shop</Button>
+          </Stack>
+          <Typography variant="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, cumque dolore. Placeat fuga eaque.</Typography>
+        </Stack>
+        <Stack direction="row" alignItems={"center"} spacing={1}>
+          <Stack direction="column" alignItems={"center"}>
+            <AddBusinessIcon sx={{ fontSize: 90 }} />
+            <Button sx={{ color: "fourth.main" }}>Sell</Button>
+          </Stack>
+          <Typography variant="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Typography>
+        </Stack>
+        <Stack direction="row" alignItems={"center"} spacing={1}>
+          <Stack direction="column" alignItems={"center"}>
+            <AddBusinessIcon sx={{ fontSize: 90 }} />
+            <Button sx={{ color: "fourth.main" }}>Sell</Button>
+          </Stack>
+          <Typography variant="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum iste illo adipisci omnis veniam quod tempora provident.</Typography>
+        </Stack>
+      </Stack>
+    </>
   );
 }
+

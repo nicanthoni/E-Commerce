@@ -12,6 +12,7 @@ export default function HomeMain() {
       container
       className="home-main-container"
       alignItems={"center"}
+      spacing={3}
     >
       <Grid item xs={12} md={6} lg={6} className="home-info">
         <HomeInfo />
@@ -19,9 +20,6 @@ export default function HomeMain() {
       <Grid item xs={0} md={6} lg={6} className="home-models">
         <HomeModels />
       </Grid>
-      {/* <Grid item xs={12}>
-      <Footer/>
-      </Grid> */}
     </Grid>
   )
 }
