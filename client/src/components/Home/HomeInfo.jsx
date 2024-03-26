@@ -10,12 +10,13 @@ export default function HomeInfo() {
       className="home-info-Container"
       direction={"column"}
       rowSpacing={2}
+      sx={{ alignItems: {xs:'center', sm: 'normal'}}}
     >
       <Grid item>
         <Typography
           className="info-header"
           variant="h2"
-          sx={{ fontWeight: "bold" }}
+          sx={{ fontWeight: "bold", textAlign: {xs:'center', sm: 'left'}  }}
         >
           STEP INTO ELEGANCE.
         </Typography>

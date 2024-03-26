@@ -23,7 +23,7 @@ export default function HomeMain() {
           <HomeLogo />
         </Grid>
       </Grid>
-      <Grid item xs={0} md={12} lg={12} className="homeServices">
+      <Grid item xs={12} className="homeServices" >
         <HomeServices />
       </Grid>
     </Container>

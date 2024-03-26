@@ -10,7 +10,8 @@ export default function HomeServices() {
       justifyContent={"space-around"}
       alignItems={"center"}
       marginY={8}
-      sx={{}}
+      // On small screens, change direction to column
+      sx={{ flexDirection: { xs: 'column', sm:'row',  }, marginY: {xs: 1, sm: 4, lg: 8}}} 
       bgcolor={'#0D0D0D'}
       
     >
