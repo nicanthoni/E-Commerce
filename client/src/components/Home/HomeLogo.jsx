@@ -9,7 +9,7 @@ export default function HomeLogo() {
         <img src={ecommerceImg} />
         {/* Link required without premium sub */}
         {/* If screen is xs size, do not display link (since img is hidden on xs size) */}
-        <Link href="https://storyset.com/people" sx={{ display: {xs: 'none', md: 'yes'}}}>
+        <Link justifyContent={'center'} fontSize={8} marginTop={0} href="https://storyset.com/people" sx={{ display: {xs: 'none', md: 'yes'}}}>
           People illustrations by Storyset
         </Link>
       </Box>
