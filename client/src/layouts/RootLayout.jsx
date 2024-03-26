@@ -6,14 +6,10 @@ import { Outlet } from "react-router-dom";
 export default function RootLayout() {
   return (
     <>
-    <Container className="root-Container" maxWidth='xl'>
       <Box className="root-Navbar">
         <Navbar />
       </Box>
-      <main className="root-Outlet">
-        <Outlet />
-      </main>
-      </Container>
-      </>
+      <Outlet />
+    </>
   );
 }
