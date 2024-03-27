@@ -17,7 +17,7 @@ export default function HomeMain() {
         margin={1}
       >
         {/* Text Section */}
-        <Grid item xs={12} md={6} lg={6} className="homeInfo">
+        <Grid item xs={12} md={6} lg={6} className="homeInfo" bgcolor={'primary.main'}>
           <HomeInfo />
         </Grid>
 

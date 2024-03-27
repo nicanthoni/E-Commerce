@@ -34,7 +34,7 @@ export default function CheckoutMain() {
 >
   {/* Shopping Cart icon */}
   <Grid item xs={12} sx={{ bgcolor: "primary.main" }}>
-    <ShoppingCartIcon sx={{ my: 2 }} />
+    <ShoppingCartIcon sx={{ my: 2, color: '#fff' }} />
   </Grid>
 
   {/* Product summary */}
@@ -61,11 +61,11 @@ export default function CheckoutMain() {
   {/* Container for Checkout btn and Total price */}
   <Grid item xs={12} sx={{ padding: 0, marginTop: 'auto' }}>
     <Box sx={{ bgcolor: "primary.main" }}>
-      <Typography padding={1} fontWeight={'bold'}>Total: $__</Typography>
+      <Typography padding={1} fontWeight={'bold'} color='#fff'>Total: $0</Typography>
       <Button
         variant="contained"
         href="/checkout"
-        sx={{ bgcolor: "fourth.main", color: "white", marginBottom: 2 }}
+        sx={{ bgcolor: "secondary.main", color: "primary.main", marginBottom: 2, fontWeight: 'bold' }}
       >Checkout</Button>
     </Box>
   </Grid>
