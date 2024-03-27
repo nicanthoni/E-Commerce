@@ -111,7 +111,7 @@ export default function Navbar() {
             }}
           >
             <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
-              <SkateboardingIcon />
+              <SkateboardingIcon /> AppName
             </NavLink>
           </Typography>
 
