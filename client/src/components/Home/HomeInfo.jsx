@@ -16,25 +16,31 @@ export default function HomeInfo() {
         <Typography
           className="info-header"
           variant="h2"
-          sx={{ fontWeight: "bold", textAlign: {xs:'center', sm: 'left'}  }}
+          sx={{ fontWeight: "bold", textAlign: {xs:'center', sm: 'center', md: 'left'}  }}
+          color='#fff'
         >
           STEP INTO ELEGANCE.
         </Typography>
       </Grid>
       <Grid item>
-        <Typography className="info-text">
+        <Typography 
+        className="info-text" 
+        color='#fff'
+        sx={{ textAlign: {xs:'center', sm: 'center', md: 'left'}  }}
+        >
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum nulla
           voluptatibus consequatur animi recusandae unde ipsa eligendi magni,
           porro fugiat dicta ut sequi at perspiciatis. Necessitatibus, et
           numquam. Autem, aperiam.
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid item sx={{ textAlign: {xs:'center', sm: 'center', md: 'left'}  }}>
         <Button
           className="discover-products-btn"
           variant="contained"
           href="explore/all"
-          sx={{ bgcolor: "fourth.main", color: "white" }}
+          color="secondary"
+          sx={{ bgcolor: "seconday.main", color: "primary" }}
         >
           Discover Products
         </Button>

@@ -8,17 +8,17 @@ import "./index.css";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 
-// Custom Theme - for global use/overriding default values
+// Custom Theme - for global use
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#A6A6A6",
+      main: "#024959",
     },
     secondary: {
-      main: "#595959",
+      main: "#FACFCE",
     },
     third: {
-      main: "#262626",
+      main: "#F2F2F2",
     },
     fourth: {
       main: "#0D0D0D",

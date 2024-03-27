@@ -18,6 +18,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import "./Navbar.css";
 import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
+import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
 
 // adjust width of menu drawer
 const drawerWidth = 250;
@@ -53,12 +54,16 @@ export default function Navbar() {
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
-        <Typography variant="h6" sx={{ my: 2, display: 'inline-block' }}>
-          XYZ
+        <Typography
+          variant="h6"
+          color="#fff"
+          sx={{ my: 2, display: "inline-block" }}
+        >
+          <SkateboardingIcon/>
         </Typography>
       </Box>
       <Divider />
-      <List sx={{ display: 'inline-block'}}>
+      <List sx={{ display: "inline-block" }}>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -66,7 +71,7 @@ export default function Navbar() {
                 to={routes[item]}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <ListItemText primary={item}/>
+                <ListItemText primary={item} />
               </NavLink>
             </ListItemButton>
           </ListItem>
@@ -77,22 +82,21 @@ export default function Navbar() {
 
   // Main Navbar
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} >
       <CssBaseline />
       <AppBar
         component="nav"
-        sx={{ backgroundColor: "#fff", display: "flex" }}
+        sx={{ backgroundColor: "primary", display: "flex" }}
         elevation={0}
       >
         <Toolbar>
           <IconButton
             className="menu-icon"
-            color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
             alignItems="left"
-            sx={{ ml: 3, display: { sm: "none" } }}
+            sx={{ ml: 3, display: { sm: "none", color: "#fff" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -103,9 +107,12 @@ export default function Navbar() {
               flexGrow: 1,
               textAlign: { xs: "center", sm: "left" },
               marginLeft: 4,
+              color: "secondary.main",
             }}
           >
-            <NavLink to="/">XYZ Store</NavLink>
+            <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
+              <SkateboardingIcon />
+            </NavLink>
           </Typography>
 
           {/* Main Navbar items on desktop view */}
@@ -114,7 +121,7 @@ export default function Navbar() {
             sx={{ display: { xs: "none", sm: "yes" } }}
           >
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "fourth.main" }}>
+              <Button key={item} sx={{ color: "#fff" }}>
                 <NavLink
                   to={routes[item]}
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -127,7 +134,8 @@ export default function Navbar() {
 
           {/* CheckoutMain component drawer renders on Cart click */}
           <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
-            <Badge badgeContent={1} max={10} color="success">
+            <Badge badgeContent={1} max={10} color="secondary">
+              {/* Color for icon controlled in <CheckoutMain/> */}
               <ShoppingCartIcon onClick={toggleShowCart} />
             </Badge>
           </Box>
