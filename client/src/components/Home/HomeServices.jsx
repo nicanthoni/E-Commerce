@@ -11,36 +11,30 @@ export default function HomeServices() {
       alignItems={"center"}
       marginY={8}
       // On small screens, change direction to column
-      sx={{ flexDirection: { xs: 'column', sm:'row',  }, marginY: {xs: 1, sm: 4, lg: 8}}} 
-      bgcolor={'#0D0D0D'}
-      
+      sx={{
+        flexDirection: { xs: "column", sm: "row" },
+        marginY: { xs: 1, sm: 4, lg: 8 },
+      }}
+      bgcolor={"#0D0D0D"}
     >
-      <Stack padding={5} alignItems='center'>
-        <StorefrontIcon sx={{ fontSize: 100, color: "white" }} />
-        <Button 
-        variant="outlined" 
-        href="explore/all">
-            Shop
+      <Stack padding={4} alignItems="center">
+        <StorefrontIcon sx={{ fontSize: 90, color: "white" }} />
+        <Button variant="outlined" href="explore/all">
+          Shop
         </Button>
       </Stack>
 
-      <Stack padding={5} alignItems='center'>
-        <AddBusinessIcon sx={{ fontSize: 100, color: "white" }} />
-        <Button 
-        variant="outlined"
-        href="#"
-        >
-            Sell
+      <Stack padding={4} alignItems="center">
+        <AddBusinessIcon sx={{ fontSize: 90, color: "white" }} />
+        <Button variant="outlined" href="#">
+          Sell
         </Button>
       </Stack>
 
-      <Stack padding={5} alignItems='center'>
-        <ContactSupportIcon sx={{ fontSize: 100, color: "white" }} />
-        <Button 
-        variant="outlined"
-        href="#"
-        >
-            Ask
+      <Stack padding={4} alignItems="center">
+        <ContactSupportIcon sx={{ fontSize: 90, color: "white" }} />
+        <Button variant="outlined" href="#">
+          Ask
         </Button>
       </Stack>
     </Stack>

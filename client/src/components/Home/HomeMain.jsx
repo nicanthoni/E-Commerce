@@ -32,7 +32,7 @@ export default function HomeMain() {
         </Grid>
       </Grid>
 
-        {/* Testimonial Section */}
+      {/* Testimonial Section */}
       <Grid item></Grid>
     </Container>
   );

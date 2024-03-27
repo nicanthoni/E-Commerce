@@ -1,3 +1,16 @@
+:root {
+  /*
+   Pallete:  
+  https://color.adobe.com/Pale-Blue-color-theme-84741eb6-da62-4a15-9bfe-14279dfa835e 
+  
+  */
+  --white: #FFFFFF;
+  --gray-blue: #5E6F7F;
+  --light-blue: #BDDEFF;
+  --dark-blue: #43627F;
+  --off-blue: #97B2CC;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -14,7 +27,7 @@ body {
 
 /* ROOT LAYOUT - outlet sits below */
 .root-Navbar {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 /* PAGE WRAPPERS */
