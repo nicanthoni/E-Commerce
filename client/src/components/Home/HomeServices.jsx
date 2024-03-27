@@ -9,31 +9,31 @@ export default function HomeServices() {
       direction="row"
       justifyContent={"space-around"}
       alignItems={"center"}
-      marginY={8}
       // On small screens, change direction to column
       sx={{
         flexDirection: { xs: "column", sm: "row" },
-        marginY: { xs: 1, sm: 4, lg: 8 },
-      }}
-      bgcolor={"#0D0D0D"}
-    >
+        marginY: { xs: 1, sm: 2, lg: 4 },
+      }}>
       <Stack padding={4} alignItems="center">
-        <StorefrontIcon sx={{ fontSize: 90, color: "white" }} />
-        <Button variant="outlined" href="explore/all">
+        <StorefrontIcon sx={{ fontSize: 90, color: "primary.main" }} />
+        <Button variant="contained" href="explore/all">
           Shop
         </Button>
       </Stack>
 
       <Stack padding={4} alignItems="center">
-        <AddBusinessIcon sx={{ fontSize: 90, color: "white" }} />
-        <Button variant="outlined" href="#">
+        <AddBusinessIcon sx={{ fontSize: 90, color: "primary.main" }} />
+        <Button variant="contained" href="#">
           Sell
         </Button>
       </Stack>
 
       <Stack padding={4} alignItems="center">
-        <ContactSupportIcon sx={{ fontSize: 90, color: "white" }} />
-        <Button variant="outlined" href="#">
+        <ContactSupportIcon sx={{ fontSize: 90, color: "primary.main" }} />
+        <Button 
+        sx={{ color: "secondary.main " }}
+        variant="contained" href="#"
+        >
           Ask
         </Button>
       </Stack>

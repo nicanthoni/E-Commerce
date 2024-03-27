@@ -18,7 +18,7 @@ const theme = createTheme({
       main: "#FACFCE",
     },
     third: {
-      main: "#262626",
+      main: "#F2F2F2",
     },
     fourth: {
       main: "#0D0D0D",

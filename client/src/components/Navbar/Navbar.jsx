@@ -18,7 +18,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import "./Navbar.css";
 import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
-import SkateboardingIcon from '@mui/icons-material/Skateboarding'; // Logo placeholder
+import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
 
 // adjust width of menu drawer
 const drawerWidth = 250;
@@ -54,12 +54,16 @@ export default function Navbar() {
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
-        <Typography variant="h6" color='#fff' sx={{ my: 2, display: 'inline-block' }}>
-          XYZ
+        <Typography
+          variant="h6"
+          color="#fff"
+          sx={{ my: 2, display: "inline-block" }}
+        >
+          <SkateboardingIcon/>
         </Typography>
       </Box>
       <Divider />
-      <List sx={{ display: 'inline-block'}}>
+      <List sx={{ display: "inline-block" }}>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -67,7 +71,7 @@ export default function Navbar() {
                 to={routes[item]}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <ListItemText primary={item}/>
+                <ListItemText primary={item} />
               </NavLink>
             </ListItemButton>
           </ListItem>
@@ -78,7 +82,7 @@ export default function Navbar() {
 
   // Main Navbar
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} >
       <CssBaseline />
       <AppBar
         component="nav"
@@ -92,9 +96,9 @@ export default function Navbar() {
             edge="start"
             onClick={handleDrawerToggle}
             alignItems="left"
-            sx={{ ml: 3, display: { sm: "none", color: '#fff' } }}
+            sx={{ ml: 3, display: { sm: "none", color: "#fff" } }}
           >
-            <MenuIcon/>
+            <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
@@ -103,15 +107,12 @@ export default function Navbar() {
               flexGrow: 1,
               textAlign: { xs: "center", sm: "left" },
               marginLeft: 4,
-              color: "secondary.main"
+              color: "secondary.main",
             }}
           >
-            <NavLink to="/"
-            style={{ textDecoration: "none", color: "#fff" }}
-            >
-             <SkateboardingIcon/>
-              
-              </NavLink>
+            <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
+              <SkateboardingIcon />
+            </NavLink>
           </Typography>
 
           {/* Main Navbar items on desktop view */}
