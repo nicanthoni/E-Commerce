@@ -1,4 +1,5 @@
-
+// import ratings
+// import paper(?)
 
 export default function HomeTestimonials() {
     return (

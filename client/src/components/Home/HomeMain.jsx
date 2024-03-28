@@ -29,10 +29,14 @@ export default function HomeMain() {
 
       {/* Testimonial Section */}
       <Container style={{ backgroundColor: "#F2F2F2" }} maxWidth="false">
-        <Grid item>
-        <HomeTestimonials/>
+        <Grid container  alignItems={"center"}>
+          <Grid item xs={12}>
+            <HomeTestimonials />
+          </Grid>
         </Grid>
       </Container>
+
+      {/* 1-2 more sections - another Discover button included, a footer with social icons */}
     </div>
   );
 }
