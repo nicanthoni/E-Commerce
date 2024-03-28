@@ -87,11 +87,12 @@ export default function Navbar() {
       <AppBar
         component="nav"
         sx={{ backgroundColor: "primary", display: "flex" }}
+        
         elevation={0}
       >
         {/* Container provides maxwidth and horizontal centering */}
         <Container maxWidth="xl">
-          <Toolbar>
+          <Toolbar disableGutters>
             <IconButton
               className="menu-icon"
               aria-label="open drawer"
@@ -108,7 +109,6 @@ export default function Navbar() {
               sx={{
                 flexGrow: 1,
                 textAlign: { xs: "center", sm: "left" },
-                marginLeft: 4,
               }}
             >
               <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
