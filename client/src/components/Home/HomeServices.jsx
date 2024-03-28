@@ -15,24 +15,30 @@ export default function HomeServices() {
         marginY: { xs: 1, sm: 2, lg: 4 },
       }}>
       <Stack padding={4} alignItems="center">
-        <StorefrontIcon sx={{ fontSize: 90, color: "primary.main" }} />
-        <Button variant="contained" href="explore/all">
+        <StorefrontIcon sx={{ fontSize: 90, color: "secondary.main" }} />
+        <Button 
+        variant="contained" href="explore/all"
+        sx={{ color: "primary.main" , bgcolor: 'secondary.main' }}
+        >
           Shop
         </Button>
       </Stack>
 
       <Stack padding={4} alignItems="center">
-        <AddBusinessIcon sx={{ fontSize: 90, color: "primary.main" }} />
-        <Button variant="contained" href="#">
+        <AddBusinessIcon sx={{ fontSize: 90, color: "secondary.main" }} />
+        <Button 
+        variant="contained" href="#"
+        sx={{ color: "primary.main" , bgcolor: 'secondary.main' }}
+        >
           Sell
         </Button>
       </Stack>
 
       <Stack padding={4} alignItems="center">
-        <ContactSupportIcon sx={{ fontSize: 90, color: "primary.main" }} />
+        <ContactSupportIcon sx={{ fontSize: 90, color: "secondary.main" }} />
         <Button 
-        sx={{ color: "secondary.main " }}
         variant="contained" href="#"
+        sx={{ color: "primary.main" , bgcolor: 'secondary.main' }}
         >
           Ask
         </Button>
