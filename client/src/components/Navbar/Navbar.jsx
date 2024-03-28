@@ -16,6 +16,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
+import { Container } from "@mui/material";
 import "./Navbar.css";
 import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
@@ -59,7 +60,7 @@ export default function Navbar() {
           color="#fff"
           sx={{ my: 2, display: "inline-block" }}
         >
-          <SkateboardingIcon/>
+          <SkateboardingIcon />
         </Typography>
       </Box>
       <Divider />
@@ -82,65 +83,66 @@ export default function Navbar() {
 
   // Main Navbar
   return (
-    <Box sx={{ display: "flex" }} >
-      <CssBaseline />
+    <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
         sx={{ backgroundColor: "primary", display: "flex" }}
+        
         elevation={0}
       >
-        <Toolbar>
-          <IconButton
-            className="menu-icon"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            alignItems="left"
-            sx={{ ml: 3, display: { sm: "none", color: "#fff" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              textAlign: { xs: "center", sm: "left" },
-              marginLeft: 4,
-              color: "secondary.main",
-            }}
-          >
-            <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
-              <SkateboardingIcon />
-            </NavLink>
-          </Typography>
+        {/* Container provides maxwidth and horizontal centering */}
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <IconButton
+              className="menu-icon"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              alignItems="left"
+              sx={{ ml: 3, display: { sm: "none", color: "#fff" } }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                textAlign: { xs: "center", sm: "left" },
+              }}
+            >
+              <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
+                <SkateboardingIcon /> AppName
+              </NavLink>
+            </Typography>
 
-          {/* Main Navbar items on desktop view */}
-          <Box
-            className="nav-link-Container"
-            sx={{ display: { xs: "none", sm: "yes" } }}
-          >
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                <NavLink
-                  to={routes[item]}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  {item}
-                </NavLink>
-              </Button>
-            ))}
-          </Box>
+            {/* Main Navbar items on desktop view */}
+            <Box
+              className="nav-link-Container"
+              sx={{ display: { xs: "none", sm: "flex" } }}
+            >
+              {navItems.map((item) => (
+                <Button key={item} sx={{ color: "#fff" }}>
+                  <NavLink
+                    to={routes[item]}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {item}
+                  </NavLink>
+                </Button>
+              ))}
+            </Box>
 
-          {/* CheckoutMain component drawer renders on Cart click */}
-          <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
-            <Badge badgeContent={1} max={10} color="secondary">
-              {/* Color for icon controlled in <CheckoutMain/> */}
-              <ShoppingCartIcon onClick={toggleShowCart} />
-            </Badge>
-          </Box>
-          {showCart && <CheckoutMain />}
-        </Toolbar>
+            {/* CheckoutMain component drawer renders on Cart click */}
+            <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
+              <Badge badgeContent={1} max={10} color="secondary">
+                {/* Color for icon controlled in <CheckoutMain/> */}
+                <ShoppingCartIcon onClick={toggleShowCart} />
+              </Badge>
+            </Box>
+            {showCart && <CheckoutMain />}
+          </Toolbar>
+        </Container>
       </AppBar>
 
       <nav>

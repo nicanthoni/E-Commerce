@@ -2,7 +2,6 @@
   /*
    Pallete:  
   https://color.adobe.com/Pale-Blue-color-theme-84741eb6-da62-4a15-9bfe-14279dfa835e 
-
   */
   --primary-blue: #024959;
   --primary-pink: #FACFCE;
@@ -15,16 +14,20 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  
 }
 
 a {
   text-decoration: none;
 }
 
+body {
+
+}
+
 /* ROOT LAYOUT - outlet sits below */
 .root-Navbar {
   margin-bottom: 55px;
 }
+
 
 /* PAGE WRAPPERS */

@@ -1,14 +1,10 @@
-import {
-  createBrowserRouter,
-  Route,
-  createRoutesFromElements,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 
-// Custom Theme - for global use
+
+// Custom Theme
 const theme = createTheme({
   palette: {
     primary: {
@@ -17,13 +13,14 @@ const theme = createTheme({
     secondary: {
       main: "#FACFCE",
     },
-    third: {
-      main: "#F2F2F2",
-    },
-    fourth: {
-      main: "#0D0D0D",
-    },
   },
+  typography: {
+    fontFamily: 'muli, sans-serif',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 600,
+  }
 });
 
 // Layouts
@@ -37,6 +34,7 @@ import Checkout from "./pages/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import VendorAddItem from "./pages/Vendor/AddItem"
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +51,7 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+
 
 function App() {
   return (

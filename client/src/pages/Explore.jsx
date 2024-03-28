@@ -28,7 +28,7 @@ export default function Explore() {
   //   }, [category]);
 
   return (
-    <Container>
+    <Container maxWidth='xl' sx={{ marginTop: 12 }}>
       <Grid container className="products-Container">
         
         {/* Grid item - Category Filter (Men/Women check boxes) */}
