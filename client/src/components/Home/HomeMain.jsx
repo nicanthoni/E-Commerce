@@ -41,7 +41,7 @@ export default function HomeMain() {
       </Box>
 
       {/* Services Section */}
-        <Box style={{ backgroundColor: "#FFF", width: "100%" }}>
+        <Box style={{ backgroundColor: "#FFF", width: "100%" }} padding={2}>
           <Container maxWidth="xl">
             <HomeServices />
           </Container>
@@ -49,12 +49,18 @@ export default function HomeMain() {
 
 
       {/* Testimonial Section */}
- 
       <Box style={{ backgroundColor: "#F2F2F2", width: "100%" }}>
         <Container maxWidth="xl">
           <HomeTestimonials />
         </Container>
       </Box>
+
+      {/* Call to Action section with Button */}
+
+
+
+
+      {/* Footer - add to root-layout?*/}
 
       </>
   );

@@ -11,7 +11,6 @@ export default function HomeTestimonials() {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      spacing={3}
     >
       {/* Section Heading */}
       <Typography
@@ -19,8 +18,9 @@ export default function HomeTestimonials() {
         color="primary.main"
         fontWeight="bold"
         textAlign="center"
+        padding={6}
       >
-        Testimonials
+        Customers around the globe love [AppName]
       </Typography>
 
       {/* Reviews */}
@@ -28,57 +28,79 @@ export default function HomeTestimonials() {
         direction="row"
         justifyContent="space-around"
         alignItems="center"
+        textAlign='center'
         // On small screens, change direction to column
         sx={{ flexDirection: { xs: "column", sm: "row" } }}
       >
         {/* Review 1 */}
-        <Stack padding={1} alignItems="center" gap={1} direction="column">
-          <Avatar src={NicsAvatar} sx={{ bgcolor: "primary.main" }}></Avatar>
+        <Stack padding={3} alignItems="center" gap={1} direction="column">
+          <Avatar src={NicsAvatar} alt='Customer Photo' 
+          sx={{ bgcolor: "primary.main", width: 68, height: 68 }}>
+          </Avatar>
+
           <Typography>
             "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos
             repellat id quidem!"
           </Typography>
-          <Typography>
-            Name
+
+          <Typography variant="caption">
+           - Denji
           </Typography>
-          <Typography>
-            Web Developer
+
+          <Typography variant="caption">
+            Engineering Manager
           </Typography>
+
           <Rating name="read-only" value={5} readOnly />
         </Stack>
 
+
         {/* Review 2 */}
-        <Stack padding={1} alignItems="center" gap={1} direction="column">
-          <Avatar src={NicsAvatar} sx={{ bgcolor: "primary.main" }}></Avatar>
+        <Stack padding={3} alignItems="center" gap={1} direction="column">
+          <Avatar src={NicsAvatar} alt='Customer Photo' 
+          sx={{ bgcolor: "primary.main", width: 68, height: 68 }}>
+          </Avatar>
+
           <Typography>
             "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos
             repellat id quidem!"
           </Typography>
-          <Typography>
-            Name
+
+          <Typography variant="caption">
+            - Marcus
           </Typography>
-          <Typography>
-            Web Developer
+
+          <Typography variant="caption">
+            Head of Finance
           </Typography>
+
           <Rating name="read-only" value={5} readOnly />
         </Stack>
 
         {/* Review 3 */}
-        <Stack padding={1} alignItems="center" gap={1} direction="column">
-          <Avatar src={NicsAvatar} sx={{ bgcolor: "primary.main" }}></Avatar>
+        <Stack padding={3} alignItems="center" gap={1} direction="column">
+          <Avatar src={NicsAvatar} alt='Customer Photo' 
+          sx={{ bgcolor: "primary.main", width: 68, height: 68 }}>
+          </Avatar>
+
           <Typography>
             "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos
             repellat id quidem!"
           </Typography>
-          <Typography>
-            Name
+
+          <Typography variant="caption">
+            - Libby
           </Typography>
-          <Typography>
-            Web Developer
+
+          <Typography  variant="caption">
+            CEO
           </Typography>
+
           <Rating name="read-only" value={5} readOnly />
         </Stack>
+
       </Stack>
+
     </Stack>
   );
 }
