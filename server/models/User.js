@@ -5,43 +5,77 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
+        maxlength: 20,
         required: true
+    },
+    firstname: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    lastname: {
+        type: String,
+        required: true,
+        trim: true
     },
     email: {
         type: String,
         unique: true,
+        maxlength: 100,
+        match: /.+\@.+\..+/,
         required: true
     },
     password: {
         type: String,
+        minlength: 8,
+        maxlength: 100,
         required: true
     },
     isOnline: {
         type: Boolean,
         default: false
     },
-    wishlist: [
-        {
+    wishlist: [{
+        item: {
             type: mongoose.Schema.ObjectId,
             ref: 'Item'
+        },
+        quantity: {
+            type: Number,
+            default: 1
         }
-    ],
-    cart: [
-        {
+    }],
+    cart: [{
+        item: {
             type: mongoose.Schema.ObjectId,
             ref: 'Item'
+        },
+        quantity: {
+            type: Number,
+            default: 1
         }
-    ],
-    buyHistory: [
-        {
+    }],
+    buyHistory: [{
+        item: {
             type: mongoose.Schema.ObjectId,
             ref: 'Item'
+        },
+        quantity: {
+            type: Number,
+            default: 1
         }
-    ]
+    }],
+    ratings: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Rating'
+    }]
 })
 
 userSchema.virtual('total').get(function () {
-    let totalPrice = this.cart.reduce((total, item => total + item.price, 0))
+    let totalPrice = this.cart.reduce((total, item) => {
+        const itemPrice = item.item.price * item.quantity
+        return total + itemPrice
+    }, 0)
     return totalPrice
 })
 userSchema.pre('save', async function (next) {

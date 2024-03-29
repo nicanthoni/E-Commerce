@@ -1,4 +1,4 @@
-const { User, Vendor, Item } = require('../models')
+const { User, Vendor, Item, Rating } = require('../models')
 const { signToken, AuthenticationError, LoginInError } = require('../utils/auth')
 
 const resolvers = {
@@ -8,7 +8,13 @@ const resolvers = {
     },
     user: async (parent, { id }) => {
       console.log('User ID:', id)
-      const user = await User.findById(id)
+      const user = await User.findById(id).populate({
+        path: 'cart.item',
+        populate: { path: 'vendor' }
+      }).populate({
+        path: 'wishlist.item',
+        populate: { path: 'vendor' }
+      })
       console.log('User Data:', user)
       return user
     },
@@ -65,9 +71,9 @@ const resolvers = {
         if (!checkPassword) {
           throw AuthenticationError
         }
-        if (user.isOnline = true) {
-          throw LoginInError
-        }
+        // if (user.isOnline = true) {
+        //   throw LoginInError
+        // }
         const token = signToken(user)
         user.isOnline = true
         await user.save()
@@ -114,9 +120,9 @@ const resolvers = {
         if (!checkPassword) {
           throw AuthenticationError
         }
-        if (vendor.isOnline = true) {
-          throw LoginInError
-        }
+        // if (vendor.isOnline = true) {
+        //   throw LoginInError
+        // }
         const token = signToken(vendor)
         vendor.isOnline = true
         await vendor.save()
@@ -171,7 +177,17 @@ const resolvers = {
         if (!item || !user) {
           throw new Error('Item or User not found')
         }
-        user.cart.push(item._id)
+        if (item.inventory < 1) {
+          throw new Error('Item not in stock')
+        }
+        const alreadyInCart = user.cart.findIndex(cartItem => cartItem.item.toString() === itemId)
+        if (alreadyInCart !== -1) {
+          user.cart[alreadyInCart].quantity += 1
+        } else {
+          user.cart.push({ item: item._id, quantity: 1 })
+        }
+        item.inCart += 1
+        await item.save()
         await user.save()
         return `${item.name} added to ${user.username}'s cart`
       } catch (e) {
@@ -185,7 +201,9 @@ const resolvers = {
         if (!item || !user) {
           throw new Error('Item or User not found')
         }
-        user.cart = user.cart.filter(cartItems => cartItems.toString() !== itemId)
+        user.cart = user.cart.filter(cartItems => cartItems.item.toString() !== itemId)
+        item.inCart -= 1
+        await item.save()
         await user.save()
         return `${item.name} deleted from ${user.username}'s cart`
       } catch (e) {
@@ -199,7 +217,12 @@ const resolvers = {
         if (!item || !user) {
           throw new Error('Item or User not found')
         }
-        user.wishlist.push(item._id)
+        const alreadyInWishlist = user.wishlist.findIndex(cartItem => cartItem.item.toString() === itemId)
+        if (alreadyInWishlist !== -1) {
+          user.wishlist[alreadyInWishlist].quantity += 1
+        } else {
+          user.wishlist.push({ item: item._id, quantity: 1 })
+        }
         await user.save()
         return `${item.name} added to ${user.username}'s wishlist`
       } catch (e) {
@@ -213,7 +236,7 @@ const resolvers = {
         if (!item || !user) {
           throw new Error('Item or User not found')
         }
-        user.wishlist = user.wishlist.filter(wishlistItems => wishlistItems.toString() !== itemId)
+        user.wishlist = user.wishlist.filter(wishlistItems => wishlistItems.item.toString() !== itemId)
         await user.save()
         return `${item.name} deleted from ${user.username}'s wishlist`
       } catch (e) {
@@ -227,14 +250,50 @@ const resolvers = {
         if (!item || !user) {
           throw new Error('Item or User not found')
         }
-        user.cart.push(item._id)
+        if (item.inventory < 1) {
+          throw new Error('Item not in stock')
+        }
+        user.cart.push({ item: item._id, quanity: 1 })
         user.wishlist = user.wishlist.filter(wishlistItems => wishlistItems.toString() !== itemId)
+        item.inCart += 1
+        await item.save()
         await user.save()
         return `${item.name} was moved from ${user.username}'s wishlist and added to their cart`
       } catch (e) {
         throw new Error(e)
       }
+    },
+    AddRating: async (parent, { itemId, userId, stars, review }) => {
+      try {
+        const item = await Item.findById(itemId)
+        const user = await User.findById(userId)
+        if (!item || !user) {
+          throw new Error('Item or User not found')
+        }
+        const rating = await Rating.create({
+          user: userId,
+          item: itemId,
+          stars,
+          review
+        })
+        item.ratings.push(rating._id)
+        user.ratings.push(rating._id)
+        return `${user.username} left a review on ${item.name}`
+      } catch (e) {
+        throw new Error(e)
+      }
     }
+    // checkout: async (parent, { userId }) => {
+    //   try {
+    //     const user = await User.findById(userId).populate('cart.item')
+    //     if (!user) {
+    //       throw new Error('User not found')
+    //     }
+    //     const cart = user.cart
+    //   } catch (e) {
+    //     throw new Error(e)
+    //   }
+    // }
   }
 }
 module.exports = resolvers
