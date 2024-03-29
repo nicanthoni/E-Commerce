@@ -10,6 +10,10 @@ const itemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    description: {
+        type: String,
+        maxlength: 2000
+    },
     category: {
         type: Number,
         required: true
@@ -24,6 +28,18 @@ const itemSchema = new mongoose.Schema({
     },
     img: {
         type: String
+    },
+    inCart: {
+        type: Number,
+        default: 0
+    },
+    ratings: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Rating'
+    }],
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 })
 
