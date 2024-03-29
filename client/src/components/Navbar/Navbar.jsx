@@ -135,7 +135,7 @@ export default function Navbar() {
 
             {/* CheckoutMain component drawer renders on Cart click */}
             <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
-              <Badge badgeContent={1} max={10} color="secondary">
+              <Badge badgeContent={1} max={10} color="error">
                 {/* Color for icon controlled in <CheckoutMain/> */}
                 <ShoppingCartIcon onClick={toggleShowCart} />
               </Badge>
