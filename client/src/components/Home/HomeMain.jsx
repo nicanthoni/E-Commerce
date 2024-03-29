@@ -5,6 +5,7 @@ import HomeTestimonials from "./HomeTestimonials";
 import "./HomeMain.css";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box, Container } from "@mui/material";
+import Footer from "../Footer/Footer";
 
 // Parent Home component
 export default function HomeMain() {
@@ -58,9 +59,9 @@ export default function HomeMain() {
       {/* Call to Action section with Button */}
 
 
-
-
       {/* Footer - add to root-layout?*/}
+      <Footer/>
+
 
       </>
   );

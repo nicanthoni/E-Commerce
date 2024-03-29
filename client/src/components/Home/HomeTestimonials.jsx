@@ -33,7 +33,7 @@ export default function HomeTestimonials() {
         sx={{ flexDirection: { xs: "column", sm: "row" } }}
       >
         {/* Review 1 */}
-        <Stack padding={3} alignItems="center" gap={1} direction="column">
+        <Stack padding={2} alignItems="center" gap={1} direction="column">
           <Avatar src={NicsAvatar} alt='Customer Photo' 
           sx={{ bgcolor: "primary.main", width: 68, height: 68 }}>
           </Avatar>
@@ -56,7 +56,7 @@ export default function HomeTestimonials() {
 
 
         {/* Review 2 */}
-        <Stack padding={3} alignItems="center" gap={1} direction="column">
+        <Stack padding={2} alignItems="center" gap={1} direction="column">
           <Avatar src={NicsAvatar} alt='Customer Photo' 
           sx={{ bgcolor: "primary.main", width: 68, height: 68 }}>
           </Avatar>
@@ -78,7 +78,7 @@ export default function HomeTestimonials() {
         </Stack>
 
         {/* Review 3 */}
-        <Stack padding={3} alignItems="center" gap={1} direction="column">
+        <Stack padding={2} alignItems="center" gap={1} direction="column">
           <Avatar src={NicsAvatar} alt='Customer Photo' 
           sx={{ bgcolor: "primary.main", width: 68, height: 68 }}>
           </Avatar>
