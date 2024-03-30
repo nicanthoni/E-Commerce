@@ -131,14 +131,13 @@ export default function Navbar() {
                 </Button>
               ))}
               {/* Sign up button */}
-              <Button variant="contained" color="secondary" disablePadding
+              <Button 
+              href="/accounttype"
+              variant="contained" 
+              color="secondary" disablePadding
               sx={{ textTransform: 'none'}}
               >
-                <NavLink to={"#"}
-                style={{ textDecoration: "none", color: "inherit"}}
-                >
-                  Get Started!
-                  </NavLink>
+              Get Started!
               </Button>
             </Box>
 

@@ -1,6 +1,5 @@
 import { Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import "./HomeInfo.css";
 
 export default function HomeInfo() {
   return (
@@ -38,11 +37,11 @@ export default function HomeInfo() {
         <Button
           className="discover-products-btn"
           variant="contained"
-          href="explore/all"
+          href="/accounttype"
           color="secondary"
           sx={{ bgcolor: "seconday.main", color: "primary", textTransform: 'none' }}
         >
-          Discover Products
+          Get Started
         </Button>
       </Grid>
     </Grid>
