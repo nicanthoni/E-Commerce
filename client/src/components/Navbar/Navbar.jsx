@@ -22,7 +22,7 @@ import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
 
 // adjust width of menu drawer
-const drawerWidth = 250;
+const drawerWidth = 285;
 
 // Nav items array
 const navItems = ["Home", "Men", "Women", "Explore"];
@@ -87,7 +87,6 @@ export default function Navbar() {
       <AppBar
         component="nav"
         sx={{ backgroundColor: "primary", display: "flex" }}
-        
         elevation={0}
       >
         {/* Container provides maxwidth and horizontal centering */}
@@ -122,7 +121,7 @@ export default function Navbar() {
               sx={{ display: { xs: "none", sm: "flex" } }}
             >
               {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#fff" }}>
+                <Button key={item} sx={{ color: "#fff", textTransform: 'none' }}>
                   <NavLink
                     to={routes[item]}
                     style={{ textDecoration: "none", color: "inherit" }}
@@ -131,6 +130,16 @@ export default function Navbar() {
                   </NavLink>
                 </Button>
               ))}
+              {/* Sign up button */}
+              <Button variant="contained" color="secondary" disablePadding
+              sx={{ textTransform: 'none'}}
+              >
+                <NavLink to={"#"}
+                style={{ textDecoration: "none", color: "inherit"}}
+                >
+                  Get Started!
+                  </NavLink>
+              </Button>
             </Box>
 
             {/* CheckoutMain component drawer renders on Cart click */}

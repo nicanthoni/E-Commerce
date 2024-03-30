@@ -18,7 +18,7 @@ export default function HomeServices() {
         <StorefrontIcon sx={{ fontSize: 90, color: "primary.main" }} />
         <Button 
         variant="contained" href="explore/all"
-        sx={{ color: "primary.main" , bgcolor: 'secondary.main' }}
+        sx={{ color: "primary.main" , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
           Shop
         </Button>
@@ -28,7 +28,7 @@ export default function HomeServices() {
         <AddBusinessIcon sx={{ fontSize: 90, color: "primary.main" }} />
         <Button 
         variant="contained" href="#"
-        sx={{ color: "primary.main" , bgcolor: 'secondary.main' }}
+        sx={{ color: "primary.main" , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
           Sell
         </Button>
@@ -38,7 +38,7 @@ export default function HomeServices() {
         <ContactSupportIcon sx={{ fontSize: 90, color: "primary.main" }} />
         <Button 
         variant="contained" href="#"
-        sx={{ color: "primary.main" , bgcolor: 'secondary.main' }}
+        sx={{ color: "primary.main" , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
           Ask
         </Button>

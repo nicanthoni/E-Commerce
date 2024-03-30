@@ -40,7 +40,7 @@ export default function HomeInfo() {
           variant="contained"
           href="explore/all"
           color="secondary"
-          sx={{ bgcolor: "seconday.main", color: "primary" }}
+          sx={{ bgcolor: "seconday.main", color: "primary", textTransform: 'none' }}
         >
           Discover Products
         </Button>
