@@ -4,7 +4,7 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 
 
-// Custom Theme
+// Custom Theme - Colors & Font
 const theme = createTheme({
   palette: {
     primary: {

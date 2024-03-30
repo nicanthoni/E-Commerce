@@ -8,9 +8,9 @@ import Link from "@mui/material/Link";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary" textAlign={'center'}>
+    <Typography variant="body2" color="text.primary" textAlign={'center'}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://mui.com/" sx={{ textDecoration: 'none'}}>
         My Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -19,34 +19,25 @@ function Copyright() {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
 
 export default function Footer() {
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          minHeight: "100vh",
         }}
       >
-        <CssBaseline />
         <Box
           component="footer"
           sx={{
-            py: 3,
-            px: 2,
+            py: 6,
             mt: "auto",
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
+            backgroundColor: '#fff',
           }}
         >
-          <Container maxWidth="sm">
-            <Typography variant="body1" 
+          <Container maxWidth="xl">
+            <Typography variant="body2" 
             textAlign={"center"}>
               My sticky footer can be found here.
             </Typography>
@@ -54,6 +45,5 @@ export default function Footer() {
           </Container>
         </Box>
       </Box>
-    </ThemeProvider>
   );
 }

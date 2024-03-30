@@ -9,7 +9,7 @@ export default function HomeInfo() {
       container
       className="home-info-Container"
       direction={"column"}
-      rowSpacing={2}
+      rowSpacing={3}
       sx={{ alignItems: {xs:'center', sm: 'normal'}}}
     >
       <Grid item>
