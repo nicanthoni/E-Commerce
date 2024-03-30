@@ -1,30 +1,51 @@
 const typeDefs = `
+
     type User {
         _id: ID
         username: String
+        firstName: String
+        lastName: String
         email: String
         isOnline: Boolean
-        wishlist: [Item]
-        cart: [Item]
-        buyHistory: [Item]
-        total: Int
+        wishlist: [CartItem]
+        cart: [CartItem]
+        buyHistory: [CartItem]
+        ratings: [Rating]
+        total: Float
+    }
+    type CartItem {
+        item: Item
+        quantity: Int
     }
     type Vendor {
         _id: ID
         username: String
+        companyName: String
         email: String
         isOnline: Boolean
         inventory: [Item]
-        sales: Int
+        sales: Float
     }
     type Item {
         _id: ID
         name: String
-        price: Int
+        price: Float
+        description: String
         category: Int
         vendor: Vendor
         inventory: Int
         img: String
+        inCart: Int
+        ratings: [Rating]
+        createdAt: String
+    }
+    type Rating {
+        _id: ID
+        user: User
+        item: Item
+        review: String
+        stars: Float
+        createdAt: String
     }
     type Auth {
         token: ID!
@@ -51,6 +72,8 @@ const typeDefs = `
         AddToWishlist(itemId: ID!, userId: ID!): String
         DeleteFromWishlist(itemId: ID!, userId: ID!): String
         AddFromWishlistToCart(itemId: ID!, userId: ID!): String
+        AddRating(itemId: ID!, userId: ID!, stars: Float!, review: String): String
+
     }
 `
 module.exports = typeDefs

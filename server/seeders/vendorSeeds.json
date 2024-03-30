@@ -1,0 +1,26 @@
+[
+  {
+    "username": "notamazon",
+    "companyname": "NotAmazon",
+    "email": "notamazon@amazon.com",
+    "password": "password"
+  },
+  {
+    "username": "notwalmart",
+    "companyname": "NotWalmart",
+    "email": "notwalmart@walmart.com",
+    "password": "password"
+  },
+  {
+    "username": "notcosco",
+    "companyname": "NotCosco",
+    "email": "notcosco@cosco.com",
+    "password": "password"
+  },
+  {
+    "username": "nottarget",
+    "companyname": "NotTarget",
+    "email": "nottarget@target.com",
+    "password": "password"
+  }
+]

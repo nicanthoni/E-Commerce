@@ -5,15 +5,25 @@ const vendorSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
+        maxlength: 20,
+        required: true
+    },
+    companyname: {
+        type: String,
+        unique: true,
+        maxlength: 100,
         required: true
     },
     email: {
         type: String,
         unique: true,
+        maxlength: 100,
+        match: /.+\@.+\..+/,
         required: true
     },
     password: {
         type: String,
+        maxlength: 100,
         required: true
     },
     isOnline: {
@@ -26,10 +36,15 @@ const vendorSchema = new mongoose.Schema({
             ref: 'Item'
         }
     ],
-    sales: {
-        type: Number,
-        default: 0
-    }
+    sales: [{
+        item: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Item'
+        },
+        sold: {
+            type: Number,
+        }
+    }]
 })
 vendorSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
