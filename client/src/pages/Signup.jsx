@@ -7,7 +7,9 @@ import VendorSignup from "../components/Signup/VendorSignup";
 
 
 export default function Signup() {
+  
     const { userType } = useParams();
+
   return (
     userType === "buyer" ? (
       <BuyerSignup />

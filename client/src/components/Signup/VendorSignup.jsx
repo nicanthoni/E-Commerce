@@ -1,14 +1,13 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import StorefrontIcon from '@mui/icons-material/Storefront';
+
 
 function Copyright(props) {
   return (
@@ -19,8 +18,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        AppName
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -28,9 +27,6 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
 
 export default function VendorSignup() {
   const handleSubmit = (event) => {
@@ -44,22 +40,20 @@ export default function VendorSignup() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 14,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+            <StorefrontIcon  />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Vendor Sign up
+          <Typography variant="h5">
+            Vendor Registration
           </Typography>
           <Box
             component="form"
@@ -124,21 +118,21 @@ export default function VendorSignup() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, textTransform: 'none' }}
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="center">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" sx={{textDecoration: 'none'}}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 3 }} />
       </Container>
-    </ThemeProvider>
+   
   );
 }
