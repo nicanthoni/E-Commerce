@@ -44,7 +44,7 @@ export default function BuyerSignup() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{  marginBottom: 3, bgcolor: 'primary.main' }}>
             <ShoppingBasketIcon />
           </Avatar>
           <Typography variant="h5">
@@ -99,7 +99,7 @@ export default function BuyerSignup() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, textTransform: 'none' }}
+              sx={{ mt: 3, mb: 2, textTransform: 'none', bgcolor: 'secondary.main', color: 'primary.main' }}
             >
               Sign Up
             </Button>

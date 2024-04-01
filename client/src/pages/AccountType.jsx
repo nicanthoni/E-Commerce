@@ -1,13 +1,10 @@
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket"; // buyer icon
-import StorefrontIcon from "@mui/icons-material/Storefront"; // vendor icon
+
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -15,8 +12,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
-import Footer from "../components/Footer/Footer";
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -40,9 +37,9 @@ function Copyright(props) {
 
 export default function AccountType() {
   const navigate = useNavigate();
-  const [value, setValue] = React.useState("");
-  const [error, setError] = React.useState(false);
-  const [helperText, setHelperText] = React.useState("You can create both, but email addresses must be unique");
+  const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState("You can have both, but email addresses must be unique");
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -69,8 +66,7 @@ export default function AccountType() {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <Grid item xs={false} sm={4} md={7} sx={{ bgcolor: "primary.main" }} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12}>
         <Box
           sx={{
             my: 8,
@@ -116,7 +112,8 @@ export default function AccountType() {
                     type="submit"
                     sx={{
                       mt: 2,
-                      bgcolor: "primary.main",
+                      bgcolor: "secondary.main",
+                      color: 'primary.main',
                       textTransform: "none",
                     }}
                   >

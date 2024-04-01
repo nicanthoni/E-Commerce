@@ -49,7 +49,7 @@ export default function VendorSignup() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
             <StorefrontIcon  />
           </Avatar>
           <Typography variant="h5">
@@ -118,7 +118,7 @@ export default function VendorSignup() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, textTransform: 'none' }}
+              sx={{ mt: 3, mb: 2, textTransform: 'none', bgcolor: 'secondary.main', color: 'primary.main' }}
             >
               Sign Up
             </Button>
