@@ -17,7 +17,7 @@ export default function HomeServices() {
       <Stack padding={4} alignItems="center">
         <StorefrontIcon sx={{ fontSize: 90, color: "primary.main" }} />
         <Button 
-        variant="contained" href="explore/all"
+        variant="contained" href="signup/buyer"
         sx={{ color: "primary.main" , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
           Shop
@@ -27,7 +27,7 @@ export default function HomeServices() {
       <Stack padding={4} alignItems="center">
         <AddBusinessIcon sx={{ fontSize: 90, color: "primary.main" }} />
         <Button 
-        variant="contained" href="#"
+        variant="contained" href="/signup/vendor"
         sx={{ color: "primary.main" , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
           Sell
