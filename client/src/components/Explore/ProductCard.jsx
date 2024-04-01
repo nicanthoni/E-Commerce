@@ -57,7 +57,7 @@ export default function ProductCard() {
           size="small"
           variant="contained"
           onClick={handleAddtoCart}
-          sx={{ bgcolor: "fourth.main", color: "white" }}
+          sx={{ bgcolor: "fourth.main", color: "white", textTransform: 'none' }}
         >Add to cart
         </Button>
       </CardActions>

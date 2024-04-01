@@ -1,6 +1,5 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box, Container } from "@mui/material";
-import "./HomeMain.css";
 import HomeInfo from "./HomeInfo";
 import HomeLogo from "./HomeLogo";
 import HomeServices from "./HomeServices";

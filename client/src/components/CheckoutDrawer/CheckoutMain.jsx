@@ -8,7 +8,7 @@ import { Button, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 // adjust drawer width
-const drawerWidth = 250;
+const drawerWidth = 285;
 
 // Checkout Drawer Component
 export default function CheckoutMain() {
@@ -22,7 +22,7 @@ export default function CheckoutMain() {
 <Grid
   container
   sx={{
-    width: 250,
+    width: 285,
     height: '100%',
     textAlign: "center",
     flexDirection: 'column', // Stack items vertically
@@ -65,7 +65,7 @@ export default function CheckoutMain() {
       <Button
         variant="contained"
         href="/checkout"
-        sx={{ bgcolor: "secondary.main", color: "primary.main", marginBottom: 2, fontWeight: 'bold' }}
+        sx={{ bgcolor: "secondary.main", color: "primary.main", marginBottom: 2, fontWeight: 'bold', textTransform: 'none' }}
       >Checkout</Button>
     </Box>
   </Grid>

@@ -4,6 +4,9 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { Box, Paper, Typography } from "@mui/material";
 import NicsAvatar from '../../assets/images/MyAvatar-PNG.png'
+import {Divider} from "@mui/material";
+
+
 
 export default function HomeTestimonials() {
   return (
@@ -20,7 +23,7 @@ export default function HomeTestimonials() {
         textAlign="center"
         padding={6}
       >
-        Customers around the globe love [AppName]
+        Customers around the globe love AppName
       </Typography>
 
       {/* Reviews */}
@@ -53,7 +56,7 @@ export default function HomeTestimonials() {
 
           <Rating name="read-only" value={5} readOnly />
         </Stack>
-
+        <Divider flexItem/>
 
         {/* Review 2 */}
         <Stack padding={2} alignItems="center" gap={1} direction="column">
@@ -76,6 +79,7 @@ export default function HomeTestimonials() {
 
           <Rating name="read-only" value={5} readOnly />
         </Stack>
+        <Divider flexItem/>
 
         {/* Review 3 */}
         <Stack padding={2} alignItems="center" gap={1} direction="column">

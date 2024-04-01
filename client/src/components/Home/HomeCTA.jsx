@@ -12,9 +12,10 @@ export default function HomeCTA() {
       </Typography>
       <Button
         variant="contained"
-        sx={{ bgcolor: "secondary.main", color: "primary.main" }}
+        href="/accounttype"
+        sx={{ bgcolor: "secondary.main", color: "primary.main", textTransform: 'none' }}
       >
-        Discover Products
+        Get Started!
       </Button>
     </Stack>
   );
