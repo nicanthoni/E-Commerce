@@ -16,8 +16,9 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Footer from "../components/Footer/Footer";
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+
 
 function Copyright(props) {
   return (
@@ -41,7 +42,7 @@ export default function AccountType() {
   const navigate = useNavigate();
   const [value, setValue] = React.useState("");
   const [error, setError] = React.useState(false);
-  const [helperText, setHelperText] = React.useState("Choose wisely");
+  const [helperText, setHelperText] = React.useState("You can create both, but email addresses must be unique");
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -53,17 +54,15 @@ export default function AccountType() {
     event.preventDefault();
 
     if (value === "buyer") {
-      console.log("buyer confirmed");
       setHelperText("Shopping, here we come 💃");
       setError(false);
       navigate("/signup/buyer");
     } else if (value === "vendor") {
-      console.log("vendor confirmed");
       setHelperText("Lets get this bread 😎");
       setError(false);
       navigate("/signup/vendor");
     } else {
-      setHelperText("Please select an option.");
+      setHelperText("Please select an account type.");
       setError(true);
     }
   };
@@ -81,38 +80,50 @@ export default function AccountType() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+
+          
+          <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
+            <SensorOccupiedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Account Type
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <FormControl sx={{ m: 3 }} error={error} variant="standard">
-              <FormLabel id="demo-error-radios">Pop quiz: MUI is...</FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-error-radios"
-                name="quiz"
-                value={value}
-                onChange={handleRadioChange}
-              >
-                <FormControlLabel
-                  value="buyer"
-                  control={<Radio />}
-                  label="Buyer"
-                />
-                <FormControlLabel
-                  value="vendor"
-                  control={<Radio />}
-                  label="Vendor"
-                />
-              </RadioGroup>
-              <FormHelperText>{helperText}</FormHelperText>
-              <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="outlined">
-                Submit
-              </Button>
-            </FormControl>
-          </form>
+
+          <Typography variant="h5">Choose your account type</Typography>
+
+              <form onSubmit={handleSubmit}>
+                <FormControl sx={{ m: 3 }} error={error} variant="standard">
+                  <FormLabel id="demo-error-radios" sx={{ marginBottom: 2}}>
+                    Hint: Do you intend to sell or purchase items?
+                  </FormLabel>
+                  <RadioGroup
+                    aria-labelledby="demo-error-radios"
+                    name="quiz"
+                    value={value}
+                    onChange={handleRadioChange}
+                  >
+                    <FormControlLabel
+                      value="buyer"
+                      control={<Radio />}
+                      label="Buyer"
+                    />
+                    <FormControlLabel
+                      value="vendor"
+                      control={<Radio />}
+                      label="Vendor"
+                    />
+                  </RadioGroup>
+                  <FormHelperText>{helperText}</FormHelperText>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                      mt: 2,
+                      bgcolor: "primary.main",
+                      textTransform: "none",
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </FormControl>
+              </form>
           <Copyright sx={{ mt: 3 }} />
         </Box>
       </Grid>
