@@ -30,7 +30,7 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import SingleProductView from "./pages/SingleProductView";
-import Checkout from "./pages/Checkout";
+import Checkout from "./pages/Buyer/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import VendorAddItem from "./pages/Vendor/AddItem"
