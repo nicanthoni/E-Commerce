@@ -14,7 +14,7 @@ export default function FilterPrice() {
   };
 
   return (
-    <Grid item xs={6} display={'flex'} justifyContent={'left'}  padding={2}>
+    <Grid item xs={6} display={'flex'} justifyContent={'left'} padding={2}>
     <Box sx={{ width: 105 }}>
       <FormControl fullWidth size='small' >
         <InputLabel id="price-filter-select-label">Sort by Price</InputLabel>

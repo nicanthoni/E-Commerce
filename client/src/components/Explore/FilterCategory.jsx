@@ -19,8 +19,8 @@ export default function FilterCategory() {
       <FormControl fullWidth size='small' >
         <InputLabel id="category-select-label">Category</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="category-label"
+          id="filter-category"
           value={category}
           label="Category"
           onChange={handleChange}

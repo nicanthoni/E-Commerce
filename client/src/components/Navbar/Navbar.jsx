@@ -77,6 +77,15 @@ export default function Navbar() {
             </ListItemButton>
           </ListItem>
         ))}
+        <Button
+          href="/accounttype"
+          variant="contained"
+          color="secondary"
+          disablePadding
+          sx={{ textTransform: "none" }}
+        >
+          Get Started!
+        </Button>
       </List>
     </Box>
   );
@@ -121,7 +130,10 @@ export default function Navbar() {
               sx={{ display: { xs: "none", sm: "flex" } }}
             >
               {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#fff", textTransform: 'none' }}>
+                <Button
+                  key={item}
+                  sx={{ color: "#fff", textTransform: "none" }}
+                >
                   <NavLink
                     to={routes[item]}
                     style={{ textDecoration: "none", color: "inherit" }}
@@ -131,13 +143,14 @@ export default function Navbar() {
                 </Button>
               ))}
               {/* Sign up button */}
-              <Button 
-              href="/accounttype"
-              variant="contained" 
-              color="secondary" disablePadding
-              sx={{ textTransform: 'none'}}
+              <Button
+                href="/accounttype"
+                variant="contained"
+                color="secondary"
+                disablePadding
+                sx={{ textTransform: "none" }}
               >
-              Get Started!
+                Get Started!
               </Button>
             </Box>
 
