@@ -29,7 +29,7 @@ import RootLayout from "./layouts/RootLayout";
 // Pages
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
-import SingleProduct from "./pages/SingleProduct";
+import SingleProductView from "./pages/SingleProductView";
 import Checkout from "./pages/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
       <Route path="/signin/:userType" element={<Signin />} />
       <Route path="/explore/:category" element={<Explore />} />
       <Route path="/explore/all" element={<Explore />} />
-      <Route path="/product/:productId" element={<SingleProduct />} />
+      <Route path="/product/:productId" element={<SingleProductView />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/additem" element={<VendorAddItem />} />
     </Route>
