@@ -1,3 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect} from 'react';
+import { useMutation } from '@apollo/client'
+import { signup } from '../../utils/mutations'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -24,15 +28,77 @@ function Copyright(props) {
 }
 
 
+
 export default function BuyerSignup() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      navigate(`/profile/${Auth.getProfile().data._id}`)
+    }
+  }, [])
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+  })
+
+
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false)
+  const [showErrorAlert, setShowErrorAlert] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const [AddUser, { error, data }] = useMutation(signup)
+
+  // OnChange handleChange:
+const handleChange = (event) => {
+  const { name, value } = event.target
+  setFormState({
+    ...formState,
+    [name]: value,
+  })
+}
+
+// On form Submission:
+const handleSubmit = async (event) => {
+  event.preventDefault()
+
+  setErrorMessage('') // Clear previous error message
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(formState.email)) {
+    setErrorMessage('Invalid email')
+  }
+
+  if (formState.password.length < 8) {
+    setErrorMessage((prevMessage) => prevMessage + ' Password should be at least 8 characters long')
+  }
+
+  if (errorMessage) {
+    setShowErrorAlert(true)
+    return
+  }
+
+  try {
+    const { data } = await AddUser({
+      variables: { ...formState },
+    })
+    Auth.login(data.AddUser.token)
+    setShowSuccessAlert(true)
+
+    setTimeout(() => {
+      navigate(`/Profile/${data.AddUser.user._id}`)
+    }, 1500)
+  } catch (e) {
+    setShowErrorAlert(true)
+    console.error('AddUser Error:', e)
+  }
+}
+
+// const handleClearError = () => {
+//   setErrorMessage('')
+//   setShowErrorAlert(false)
+// }
+
 
   return (
     
@@ -61,6 +127,7 @@ export default function BuyerSignup() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
@@ -72,6 +139,7 @@ export default function BuyerSignup() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -82,6 +150,7 @@ export default function BuyerSignup() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,6 +162,7 @@ export default function BuyerSignup() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
