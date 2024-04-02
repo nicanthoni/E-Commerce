@@ -32,7 +32,7 @@ export default function Explore() {
       <Grid container className="products-Container">
         
         {/* Grid item - Category Filter (Men/Women check boxes) */}
-        <><FilterCategory/></>
+        <><FilterCategory /></>
 
         {/* Grid item - Sort by Filter (lowest/highest price) */}
         <><FilterPrice/></>

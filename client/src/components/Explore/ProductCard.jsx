@@ -9,7 +9,7 @@ import Data from '../../productData.json'; // Sample product data
 
 export default function ProductCard() {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} marginTop={4}>
       {Data.map((result, index) => (
         <Grid item xs={12} sm={6} md={4} key={index} align="center">
           <Card sx={{ maxWidth: 275, padding: "10px", marginBottom: '10px' }}>
