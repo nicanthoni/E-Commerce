@@ -63,11 +63,11 @@ export default function AccountType() {
   };
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
+    <Grid container component="main">
       <Grid item xs={12}>
         <Box
           sx={{
-            my: 8,
+            my: 7,
             mx: 4,
             display: "flex",
             flexDirection: "column",
