@@ -4,12 +4,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions, Box, Grid } from "@mui/material";
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import Data from '../../productData.json'; // Sample product data
-import {Tooltip} from "@mui/material";
-
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import Data from "../../productData.json"; // Sample product data
+import { Tooltip } from "@mui/material";
 
 export default function ProductCard() {
   return (
@@ -32,13 +31,15 @@ export default function ProductCard() {
                 />
               </Box>
 
-              <CardContent align='left'>
+              <CardContent align="left">
                 <Typography gutterBottom variant="h5" component="div">
                   {/* NAME data */}
                   {result.name}
                 </Typography>
-                
-                <Typography variant="body2" color="text.secondary"
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
                   sx={{
                     // Apply ellipsis and hidden overflow when description content exceeds two lines length
                     display: "-webkit-box",
@@ -56,19 +57,16 @@ export default function ProductCard() {
             <CardActions>
               <Grid container justifyContent="space-between">
                 <Grid item>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    sx={{ bgcolor: "secondary.main", color: "primary.main", textTransform: 'none' }}
-                  >
-                    Add to cart
-                  </Button>
+                  <Typography fontWeight={"bold"}>${result.price}</Typography>
                 </Grid>
                 <Grid item>
                   <Box>
-                  <Tooltip title="Add to wishlist" placement="right">
-          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-          </Tooltip>
+                    <Tooltip title="Add to wishlist" placement="right">
+                      <Checkbox
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                      />
+                    </Tooltip>
                   </Box>
                 </Grid>
               </Grid>

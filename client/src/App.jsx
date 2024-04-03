@@ -11,7 +11,9 @@ const theme = createTheme({
       main: "#024959",
     },
     secondary: {
-      main: "#FACFCE",
+      // Backup secondary colors:
+      // #BDE9B3 - #FACFCE - #54BFA1 - #F28D77 - #F2A391
+      main: "#F2A391",
     },
   },
   typography: {

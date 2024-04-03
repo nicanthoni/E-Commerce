@@ -39,7 +39,7 @@ export default function HomeInfo() {
           variant="contained"
           href="/accounttype"
           color="secondary"
-          sx={{ bgcolor: "seconday.main", color: "primary", textTransform: 'none' }}
+          sx={{  color: "primary", textTransform: 'none' }}
         >
           Get Started
         </Button>

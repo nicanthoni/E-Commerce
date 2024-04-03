@@ -66,7 +66,7 @@ const handleSubmit = async (event) => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(formState.email)) {
-    setErrorMessage('Invalid email')
+    setErrorMessage('Invalid email address')
   }
 
   if (formState.password.length < 8) {
