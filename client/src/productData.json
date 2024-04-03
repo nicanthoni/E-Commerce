@@ -5,6 +5,7 @@
     "description": "1 Mens Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
+    "rating": 4,
     "category": "mens"
     },
     {
@@ -13,6 +14,7 @@
     "description": "2 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
+    "rating": 5,
     "category": "womens"
     },
     {
@@ -21,6 +23,7 @@
     "description": "3 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
+    "rating": 3,
     "category": "womens"
     },
     {
@@ -29,6 +32,7 @@
     "description": "4 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
+    "rating": 5,
     "category": "womens"
     },
     {
@@ -37,6 +41,7 @@
     "description": "5 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
+    "rating": 1,
     "category": "mens"
     },
     {
@@ -45,6 +50,7 @@
     "description": "6 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
+    "rating": null,
     "category": "mens"
     },
     {
@@ -53,6 +59,7 @@
     "description": "7 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
+    "rating": 5,
     "category": "womens"
     },
     {
@@ -61,6 +68,7 @@
     "description": "8 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
+    "rating": 3,
     "category": "mens"
     }
 ]

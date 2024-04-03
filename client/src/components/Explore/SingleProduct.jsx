@@ -1,9 +1,8 @@
-import { Typography, Box, Button, Container, Stack } from "@mui/material";
+import { Typography, Box, Button, Container, Stack, Rating } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import Tooltip from "@mui/material/Tooltip";
-
 import { useParams } from "react-router-dom";
 import Data from "../../productData.json";
 
@@ -32,13 +31,13 @@ export default function SingleProduct() {
           alignItems: { xs: "center", md: "flex-end" },
         }}
       >
-        <Stack>
+        <Stack alignItems={'center'} gap={2}>
+          {/* IMAGE data */}
           <Box
             sx={{
               height: { xs: "200px", md: "400px" },
               width: { xs: "200px", md: "400px" },
               overflow: "hidden",
-              marginBottom: { xs: 3, md: 0 },
             }}
           >
             <img
@@ -51,7 +50,15 @@ export default function SingleProduct() {
               }}
             />
           </Box>
+
+          {/* RATING data */}
+          <Box
+          sx={{ marginBottom: {xs: 2, md: 0}}}
+          >
+          <Rating name="read-only" value={product.rating} readOnly />
+          </Box>
         </Stack>
+
         <Stack
           direction="column"
           gap={2}
