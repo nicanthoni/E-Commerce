@@ -4,6 +4,8 @@
     "name": "Test Product 1",
     "description": "1 Mens Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
+    "price": 24.99,
+    "rating": 4,
     "category": "mens"
     },
     {
@@ -11,6 +13,8 @@
     "name": "Test Product 2",
     "description": "2 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
+    "price": 39.95,
+    "rating": 5,
     "category": "womens"
     },
     {
@@ -18,6 +22,8 @@
     "name": "Test Product 3",
     "description": "3 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
+    "price": 24.99,
+    "rating": 3,
     "category": "womens"
     },
     {
@@ -25,6 +31,8 @@
     "name": "Test Product 4",
     "description": "4 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
+    "price": 39.95,
+    "rating": 5,
     "category": "womens"
     },
     {
@@ -32,6 +40,8 @@
     "name": "Test Product 5",
     "description": "5 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
+    "price": 24.99,
+    "rating": 1,
     "category": "mens"
     },
     {
@@ -39,6 +49,8 @@
     "name": "Test Product 6",
     "description": "6 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
+    "price": 39.95,
+    "rating": null,
     "category": "mens"
     },
     {
@@ -46,6 +58,8 @@
     "name": "Test Product 7",
     "description": "7 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
+    "price": 24.99,
+    "rating": 5,
     "category": "womens"
     },
     {
@@ -53,6 +67,8 @@
     "name": "Test Product 8",
     "description": "8 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
+    "price": 39.95,
+    "rating": 3,
     "category": "mens"
     }
 ]

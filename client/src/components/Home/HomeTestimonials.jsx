@@ -1,8 +1,7 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import { Box, Paper, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import NicsAvatar from '../../assets/images/MyAvatar-PNG.png'
 import {Divider} from "@mui/material";
 

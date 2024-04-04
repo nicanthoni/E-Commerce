@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 export default function HomeMain() {
   return (
     <>
-      <Box style={{ backgroundColor: "#024959" }}>
+      <Box sx={{ backgroundColor: "primary.main" }}>
         <Container maxWidth="xl" className="home-main-container">
           <Grid container spacing={3} alignItems={"center"}>
             {/* Text Section */}
@@ -42,7 +42,7 @@ export default function HomeMain() {
       </Box>
 
       {/* Services Section */}
-      <Box style={{ backgroundColor: "#FFF", width: "100%" }} padding={2}>
+      <Box sx={{ backgroundColor: "#FFF", width: "100%" }} padding={2}>
         <Container maxWidth="xl">
           <HomeServices />
         </Container>
@@ -56,7 +56,7 @@ export default function HomeMain() {
       </Box>
 
       {/* Call to Action section with Button */}
-      <Box style={{ backgroundColor: "#024959", width: "100%" }}>
+      <Box sx={{ backgroundColor: "primary.main", width: "100%" }}>
         <Container maxWidth="xl">
           <HomeCTA />
         </Container>
