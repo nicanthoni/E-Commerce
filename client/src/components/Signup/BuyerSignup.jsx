@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { signup } from "../../utils/mutations";
+import { buyerSignup } from "../../utils/mutations";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -59,7 +59,7 @@ export default function BuyerSignup() {
   });
 
 //  Mutation
-  const [AddUser, { error, data }] = useMutation(signup);
+  const [AddUser, { error, data }] = useMutation(buyerSignup);
 
   // OnChange handleChange:
   const handleChange = (event) => {
@@ -103,7 +103,7 @@ export default function BuyerSignup() {
       setTimeout(() => {
         navigate(`/Profile/${data.AddUser.user._id}`);
       }, 1500);
-      
+
     } catch (e) {
       setShowErrorAlert(true);
       console.error("AddUser Error:", e);
