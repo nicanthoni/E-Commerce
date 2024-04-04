@@ -55,7 +55,7 @@ export default function SingleProduct() {
           <Box
           sx={{ marginBottom: {xs: 2, md: 0}}}
           >
-          <Rating name="read-only" value={product.rating} readOnly />
+          <Rating name="read-only" value={product.rating} readOnly/>
           </Box>
         </Stack>
 
