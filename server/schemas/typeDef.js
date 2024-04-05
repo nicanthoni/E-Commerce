@@ -59,7 +59,7 @@ const typeDefs = `
         findItems(id: ID!): [Item]
     }
     type Mutation {
-        AddUser(username: String!, email: String!, password: String!): Auth
+        AddUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
         DeleteUser(userId: ID!): String
         Userlogin(email: String!, password: String!): Auth
         AddVendor(username: String!, email: String!, password: String!): Auth

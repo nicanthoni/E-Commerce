@@ -81,7 +81,6 @@ export default function Navbar() {
           href="/accounttype"
           variant="contained"
           color="secondary"
-          disablePadding
           sx={{ textTransform: "none" }}
         >
           Get Started!
@@ -106,7 +105,6 @@ export default function Navbar() {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              alignItems="left"
               sx={{ ml: 3, display: { sm: "none", color: "#fff" } }}
             >
               <MenuIcon />
@@ -147,15 +145,14 @@ export default function Navbar() {
                 href="/accounttype"
                 variant="contained"
                 color="secondary"
-                disablePadding
                 sx={{ textTransform: "none" }}
               >
                 Get Started!
               </Button>
             </Box>
 
-            {/* CheckoutMain component drawer renders on Cart click */}
-            <Box className="cart-icon" alignItems="right" sx={{ ml: 3, mr: 4 }}>
+            {/* CheckoutMain renders on Cart click */}
+            <Box className="cart-icon" sx={{ ml: 3, mr: 4 }}>
               <Badge badgeContent={1} max={10} color="error">
                 {/* Color for icon controlled in <CheckoutMain/> */}
                 <ShoppingCartIcon onClick={toggleShowCart} />
