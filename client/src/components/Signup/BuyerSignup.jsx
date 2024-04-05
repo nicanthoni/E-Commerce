@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { buyerSignup } from "../../utils/mutations";
+import { buyer_Signup } from "../../utils/mutations";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -59,7 +59,7 @@ export default function BuyerSignup() {
   });
 
 //  Mutation
-  const [AddUser, { error, data }] = useMutation(buyerSignup);
+  const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
 
   // OnChange handleChange:
   const handleChange = (event) => {
