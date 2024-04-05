@@ -84,7 +84,7 @@ export default function BuyerSignup() {
     if (formState.password.length < 8) {
       setErrorMessage(
         (prevMessage) =>
-          prevMessage + " Password should be at least 8 characters long"
+          prevMessage + " Password must be at least 8 characters long"
       );
     }
 
@@ -101,7 +101,7 @@ export default function BuyerSignup() {
       Auth.login(data.AddUser.token);
       setShowSuccessAlert(true);
       setTimeout(() => {
-        navigate(`/Profile/${data.AddUser.user._id}`);
+        navigate(`/profile/${data.AddUser.user._id}`);
       }, 1500);
 
     } catch (e) {
@@ -110,7 +110,7 @@ export default function BuyerSignup() {
     }
   };
 
-  // Clear error message once message is closed (onClose)
+  // Clear error message once message is closed (onClose)  
   const handleClearError = () => {
     setErrorMessage('')
     setShowErrorAlert(false)
