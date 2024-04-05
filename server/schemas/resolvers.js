@@ -38,9 +38,9 @@ const resolvers = {
     }
   },
   Mutation: {
-    AddUser: async (parent, { username, email, password }) => {
+    AddUser: async (parent, { firstName, lastName, email, password }) => {
       try {
-        const user = await User.create({ username, email, password })
+        const user = await User.create({ firstName, lastName, email, password })
         if (!user) {
           throw new Error('ERROR')
         }

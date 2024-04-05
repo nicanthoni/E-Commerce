@@ -13,7 +13,7 @@ export default function HomeMain() {
     <>
       <Box sx={{ backgroundColor: "primary.main" }}>
         <Container maxWidth="xl" className="home-main-container">
-          <Grid container spacing={3} alignItems={"center"}>
+          <Grid container spacing={3} alignItems="center">
             {/* Text Section */}
             <Grid
               item
@@ -49,7 +49,7 @@ export default function HomeMain() {
       </Box>
 
       {/* Testimonial Section */}
-      <Box style={{ backgroundColor: "#F2F2F2", width: "100%" }}>
+      <Box sx={{ backgroundColor: "#F2F2F2", width: "100%" }}>
         <Container maxWidth="xl">
           <HomeTestimonials />
         </Container>
@@ -62,7 +62,7 @@ export default function HomeMain() {
         </Container>
       </Box>
 
-      {/* Footer - add to root-layout?*/}
+      {/* Footer */}
       <Footer />
     </>
   );
