@@ -1,11 +1,11 @@
 import { Typography, Container } from "@mui/material";
 
-// Buyer profile 
-export default function BuyerProfile () {
+// Vendor profile 
+export default function VendorProfile () {
  return (
     <Container maxWidth='xl'>
             <Typography>
-                Welcome, Buyer!
+                Welcome, Vendor!
             </Typography>
     </Container>
  )

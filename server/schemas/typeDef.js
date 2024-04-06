@@ -20,7 +20,7 @@ const typeDefs = `
     type Vendor {
         _id: ID
         username: String
-        companyName: String
+        vendorName: String
         email: String
         isOnline: Boolean
         inventory: [Item]
@@ -62,7 +62,7 @@ const typeDefs = `
         AddUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
         DeleteUser(userId: ID!): String
         Userlogin(email: String!, password: String!): Auth
-        AddVendor(username: String!, email: String!, password: String!): Auth
+        AddVendor(vendorName: String!, email: String!, password: String!): Auth
         DeleteVendor(userId: ID!): String
         Vendorlogin(email: String!, password: String!): Auth
         CreateItem(name: String!, price: Int!, category: Int!, vendor: ID!, inventory: Int, img: String): Item

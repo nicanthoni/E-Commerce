@@ -6,9 +6,9 @@ const vendorSchema = new mongoose.Schema({
         type: String,
         unique: true,
         maxlength: 20,
-        required: true
+        required: false
     },
-    companyname: {
+    vendorName: {
         type: String,
         unique: true,
         maxlength: 100,
