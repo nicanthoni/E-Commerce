@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt')
 const vendorSchema = new mongoose.Schema({
     username: {
         type: String,
-        unique: true,
+        unique: false, 
         maxlength: 20,
-        required: false
+        required: false,
     },
     vendorName: {
         type: String,

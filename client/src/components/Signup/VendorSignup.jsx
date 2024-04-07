@@ -44,13 +44,13 @@ export default function VendorSignup() {
   // On first render, check if user is logged in.If so, send to their profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
-      navigate(`/profile/${Auth.getProfile().data._id}`);
+      navigate(`/profile/vendor/${Auth.getProfile().data._id}`);
     }
   }, []);
 
   // Initialize State for form fields
   const [formState, setFormState] = useState({
-    vendor: "",
+    vendorName: "",
     email: "",
     password: "",
   });
@@ -93,13 +93,14 @@ export default function VendorSignup() {
       const { data } = await AddVendor({
         variables: { ...formState },
       });
-
+      console.log("Vendor data structure:", JSON.stringify(data));
       Auth.login(data.AddVendor.token);
       setShowSuccessAlert(true);
       setTimeout(() => {
-        navigate(`/profile/${data.AddVendor.vendor._id}`);
+        navigate(`/profile/vendor/${data.AddVendor.vendor._id}`);
       }, 1500);
     } catch (e) {
+      console.log("Vendor data structure:", JSON.stringify(data));
       setShowErrorAlert(true);
       console.error("AddVendor Error:", e);
     }

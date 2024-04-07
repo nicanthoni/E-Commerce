@@ -50,6 +50,7 @@ const typeDefs = `
     type Auth {
         token: ID!
         user: User
+        vendor: Vendor
     }
     type Query {
         test: String

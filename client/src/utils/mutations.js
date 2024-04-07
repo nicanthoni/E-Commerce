@@ -15,12 +15,11 @@ export const buyer_Signup = gql`
 `
 
 // VENDOR
-
 export const vendor_Signup = gql`
   mutation vendorSignup($vendorName: String!, $email: String!, $password: String!) {
     AddVendor(vendorName: $vendorName, email: $email, password: $password) {
       token
-      user {
+      vendor {
         _id
         email
       }
