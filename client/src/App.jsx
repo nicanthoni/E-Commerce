@@ -36,10 +36,11 @@ import Checkout from "./pages/Buyer/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import BuyerAccount from "./pages/Buyer/BuyerAccount";
+import VendorAccount from "./pages/Vendor/VendorAccount";
 import VendorAddItem from "./pages/Vendor/AddItem"
 import AccountType from "./pages/AccountType";
 
-
+// Routes
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -48,7 +49,9 @@ const router = createBrowserRouter(
       <Route path="/accounttype" element={<AccountType/>} />
       <Route path="/signup/:userType" element={<Signup />} />
       <Route path="/signin/:userType" element={<Signin />} />
+      <Route path="/signin/:userType" element={<Signin />} />
       <Route path="/profile/:userId" element={<BuyerAccount />} />
+      <Route path="/profile/vendor/:vendorId" element={<VendorAccount />} />
       <Route path="/explore/:category" element={<Explore />} />
       <Route path="/explore/all" element={<Explore />} />
       <Route path="/product/:productId" element={<SingleProductView />} />

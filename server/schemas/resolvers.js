@@ -82,9 +82,9 @@ const resolvers = {
         throw new Error(e)
       }
     },
-    AddVendor: async (parent, { username, email, password }) => {
+    AddVendor: async (parent, { vendorName, email, password }) => {
       try {
-        const vendor = await Vendor.create({ username, email, password })
+        const vendor = await Vendor.create({ vendorName, email, password })
         if (!vendor) {
           throw new Error('ERROR')
         }

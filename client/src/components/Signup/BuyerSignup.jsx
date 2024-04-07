@@ -48,9 +48,9 @@ export default function BuyerSignup() {
     if (Auth.loggedIn()) {
       navigate(`/profile/${Auth.getProfile().data._id}`);
     }
-  }, [])
+  }, []);
 
-  // State for form fields
+  // Initialize State for form fields
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -61,7 +61,7 @@ export default function BuyerSignup() {
 //  Mutation
   const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
 
-  // OnChange handleChange:
+  // OnChange, update form state
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -133,7 +133,7 @@ export default function BuyerSignup() {
           )}
           {showErrorAlert && (
             <Alert severity="error" sx={{ width: '100%', mb: 2 }} onClose={handleClearError}>
-              {errorMessage || 'Registration failed! Please be sure all inputs are valid, or try a different email.'}
+              {errorMessage || 'Registration failed! Be sure all fields are complete, or try a different email.'}
             </Alert>
           )}
         <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
