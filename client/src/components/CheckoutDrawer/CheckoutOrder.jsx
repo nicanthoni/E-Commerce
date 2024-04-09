@@ -1,5 +1,6 @@
 import productPhoto from "../../assets/images/shirt.jpg";
 import { Stack, Box, Typography, Divider } from "@mui/material";
+import QuantityIncrementer from "./QuantityIncrementer";
 
 // ORDER SUMMARY
 export default function CheckoutOrder() {
@@ -23,18 +24,20 @@ export default function CheckoutOrder() {
           }}
         />
       </Box>
+      
 
       {/* STACK for product details */}
       <Stack
         direction="column"
         justifyContent="center"
-        alignItems="flex-start"
-        width="50%"
+        alignItems="center"
+        width="60%"
         gap={2}
       >
         {/* Name & Price */}
-        <Stack direction="row" justifyContent="space-between" width="100%">
+        <Stack direction="row" justifyContent="center" width="100%" gap={2}>
           <Typography
+            textAlign='left'
             variant="caption"
             fontWeight={"bold"}
             sx={{ fontSize: 12 }}
@@ -42,18 +45,18 @@ export default function CheckoutOrder() {
             Product Name 
           </Typography>
           <Typography
+          
             variant="caption"
-            fontWeight={"bold"}
-            sx={{ fontSize: 12, marginLeft: "auto" }}
+            fontWeight={"bolder"}
+            sx={{ fontSize: 12}}
           >
             $0
           </Typography>
         </Stack>
 
-        {/* Quantity --> make incrementable componenet to go here */}
-        <Typography variant="caption" sx={{ fontSize: 10 }}>
-          Quantity: __
-        </Typography>
+        {/* Quantity component */}
+          <QuantityIncrementer/>
+        
       </Stack>
     </Stack>
   );

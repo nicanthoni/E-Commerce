@@ -38,10 +38,11 @@ export default function CheckoutMain() {
     <ShoppingCartIcon sx={{ my: 2, color: '#fff' }} />
   </Grid>
 
-  {/* Product information */}
+  {/* Product info display */}
   <Grid item xs={12}>
     <CheckoutOrder />
   </Grid>
+
 
   {/* Container for Checkout btn and Total price */}
   <Grid item xs={12} sx={{ padding: 0, marginTop: 'auto' }}>
