@@ -1,6 +1,6 @@
 import { Typography, Container } from "@mui/material";
 
-// Buyer profile 
+// Buyer profile: Wishlist, 'followed' Shops, Settings, Card info, etc
 export default function BuyerProfile () {
  return (
     <Container maxWidth='xl'>
