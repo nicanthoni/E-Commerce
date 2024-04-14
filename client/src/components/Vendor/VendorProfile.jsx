@@ -1,4 +1,5 @@
 import { Typography, Container } from "@mui/material";
+import Auth from "../../utils/auth";
 
 // Vendor profile 
 export default function VendorProfile () {

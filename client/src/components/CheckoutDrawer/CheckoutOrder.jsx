@@ -38,17 +38,17 @@ export default function CheckoutOrder() {
         <Stack direction="row" justifyContent="center" width="100%" gap={2}>
           <Typography
             textAlign='left'
-            variant="caption"
+            variant="body1"
             fontWeight={"bold"}
-            sx={{ fontSize: 12 }}
+            sx={{ fontSize: 14 }}
           >
             Product Name 
           </Typography>
           <Typography
           
-            variant="caption"
+            variant="body1"
             fontWeight={"bolder"}
-            sx={{ fontSize: 12}}
+            sx={{ fontSize: 14}}
           >
             $0
           </Typography>
@@ -56,7 +56,6 @@ export default function CheckoutOrder() {
 
         {/* Quantity component */}
           <QuantityIncrementer/>
-        
       </Stack>
     </Stack>
   );

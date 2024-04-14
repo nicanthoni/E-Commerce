@@ -47,7 +47,7 @@ export default function CheckoutMain() {
   {/* Container for Checkout btn and Total price */}
   <Grid item xs={12} sx={{ padding: 0, marginTop: 'auto' }}>
     <Box sx={{ bgcolor: "primary.main" }}>
-      <Typography padding={1} fontWeight={'bold'} color='#fff'>Subtotal: $0</Typography>
+      <Typography padding={1} fontWeight={'bold'} color='#fff'>Subtotal (0 items): $0</Typography>
       <Button
         variant="contained"
         href="/checkout"
