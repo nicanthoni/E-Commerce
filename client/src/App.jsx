@@ -38,6 +38,7 @@ import Signin from "./pages/Signin";
 import BuyerAccount from "./pages/Buyer/BuyerAccount";
 import VendorAccount from "./pages/Vendor/VendorAccount";
 import VendorAddItem from "./pages/Vendor/AddItem"
+import LoginType from "./pages/LoginType";
 import AccountType from "./pages/AccountType";
 
 // Routes
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/accounttype" element={<AccountType/>} />
+      <Route path="/signin" element={<LoginType/>} />
       <Route path="/signup/:userType" element={<Signup />} />
       <Route path="/signin/:userType" element={<Signin />} />
       <Route path="/signin/:userType" element={<Signin />} />

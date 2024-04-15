@@ -206,7 +206,7 @@ export default function BuyerSignup() {
           <Grid container justifyContent="center">
             <Grid item>
               <Link
-                href="#"
+                href="/signin/buyer"
                 variant="body2"
                 align="center"
                 sx={{ textDecoration: "none" }}

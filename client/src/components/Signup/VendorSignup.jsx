@@ -193,7 +193,7 @@ export default function VendorSignup() {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+              <Link href="/signin/vendor" variant="body2" sx={{ textDecoration: "none" }}>
                 Already have an account? Sign in
               </Link>
             </Grid>
