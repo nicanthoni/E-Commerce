@@ -16,17 +16,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export default function AccountType() {
+export default function LoginType() {
   const navigate = useNavigate();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState(
-    "You can have both, but email addresses must be unique"
+    ""
   );
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
-    setHelperText(" ");
+    setHelperText("");
     setError(false);
   };
 
@@ -35,12 +35,12 @@ export default function AccountType() {
 
     if (value === "buyer") {
       setError(false);
-      navigate("/signup/buyer");
+      navigate("/signin/buyer");
     } else if (value === "vendor") {
       setError(false);
-      navigate("/signup/vendor");
+      navigate("/signin/vendor");
     } else {
-      setHelperText("Please select an account type.");
+      setHelperText("Please select the type  of account you're logging into");
       setError(true);
     }
   };
@@ -65,9 +65,6 @@ export default function AccountType() {
 
           <form onSubmit={handleSubmit}>
             <FormControl sx={{ m: 3 }} error={error} variant="standard">
-              <FormLabel id="demo-error-radios" sx={{ marginBottom: 2 }}>
-                Hint: Do you intend to sell or purchase items?
-              </FormLabel>
               <RadioGroup
                 aria-labelledby="demo-error-radios"
                 name="quiz"
@@ -100,8 +97,8 @@ export default function AccountType() {
               </Button>
             </FormControl>
           </form>
-          <Link color="text.secondary" href="/signin" variant="body2" sx={{ textDecoration: "none" }}>
-                Already have an account? Sign in
+          <Link color="text.secondary" href="/accounttype" variant="body2" sx={{ textDecoration: "none" }}>
+                Don't have an account? Sign up
               </Link>
           <Copyright sx={{ mt: 3 }} />
         </Box>

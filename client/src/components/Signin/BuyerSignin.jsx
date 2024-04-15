@@ -1,112 +1,172 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Copyright from '../Footer/Copyright';
+import {Avatar, Button, Alert, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
+import { buyer_Signup } from "../../utils/mutations";
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+import Auth from '../../utils/auth';
 
 export default function Signin() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+  // Method to change location
+  const navigate = useNavigate();
+
+// Error & Alert States
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // On first render, check if user is logged in.If so, send to their profile page
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      navigate(`/profile/${Auth.getProfile().data._id}`);
+    }
+  }, []);
+
+  // Initialize State for form fields
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
+
+//  Mutation
+  const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
+
+  // OnChange, update form state
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
     });
   };
 
+  // On form Submission:
+  const handleSubmit = async (event) => {
+
+    event.preventDefault();
+    setErrorMessage(""); // Clear previous error message
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formState.email)) {
+      setErrorMessage("Invalid email address");
+    }
+
+    if (formState.password.length < 8) {
+      setErrorMessage(
+        (prevMessage) =>
+          prevMessage + " Password must be at least 8 characters long"
+      );
+    }
+
+    if (errorMessage) {
+      setShowErrorAlert(true);
+      return;
+    }
+
+    try {
+      const { data } = await AddUser({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.AddUser.token);
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        navigate(`/profile/${data.AddUser.user._id}`);
+      }, 1500);
+
+    } catch (e) {
+      setShowErrorAlert(true);
+      console.error("AddUser Error:", e);
+    }
+  };
+
+  // Clear error message once message is closed (onClose)  
+  const handleClearError = () => {
+    setErrorMessage('')
+    setShowErrorAlert(false)
+  }
+
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Buyer Sign in
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        marginTop: 14,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      {showSuccessAlert && (
+          <Alert severity="success" sx={{ width: '100%', mb: 2 }}>
+            Sign in successful! Redirecting to profile...
+          </Alert>
+        )}
+        {showErrorAlert && (
+          <Alert severity="error" sx={{ width: '100%', mb: 2 }} onClose={handleClearError}>
+            {errorMessage || 'Sign in failed! Double check your credentials and account type are accurate, or create an account if you havent'}
+          </Alert>
+        )}
+      <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
+        <LockOutlinedIcon/>
+      </Avatar>
+      <Typography variant="h5">Buyer Sign in</Typography>
+      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
             <TextField
-              margin="normal"
               required
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              onChange={handleChange}
             />
+          </Grid>
+          <Grid item xs={12}>
             <TextField
-              margin="normal"
               required
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
+              onChange={handleChange}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+          </Grid>
+        </Grid>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{
+            mt: 3,
+            mb: 2,
+            textTransform: "none",
+            bgcolor: "secondary.main",
+            color: "primary.main",
+          }}
+        >
+          Sign in
+        </Button>
+        <Grid container justifyContent="center">
+          <Grid item>
+            <Link
+              href="/signup/buyer"
+              variant="body2"
+              align="center"
+              sx={{ textDecoration: "none" }}
             >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+              Don't have an account? Sign up here
+            </Link>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
+    <Copyright sx={{ mt: 3 }} />
+  </Container>
   );
 }

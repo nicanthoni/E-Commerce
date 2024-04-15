@@ -1,3 +1,4 @@
+import Copyright from "../Footer/Copyright";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -14,23 +15,6 @@ import { useMutation } from "@apollo/client";
 import { vendor_Signup } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        AppName
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function VendorSignup() {
   // Method to change location
@@ -193,7 +177,7 @@ export default function VendorSignup() {
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+              <Link href="/signin/vendor" variant="body2" sx={{ textDecoration: "none" }}>
                 Already have an account? Sign in
               </Link>
             </Grid>

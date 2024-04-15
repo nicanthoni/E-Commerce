@@ -1,5 +1,6 @@
 import productPhoto from "../../assets/images/shirt.jpg";
 import { Stack, Box, Typography, Divider } from "@mui/material";
+import QuantityIncrementer from "./QuantityIncrementer";
 
 // ORDER SUMMARY
 export default function CheckoutOrder() {
@@ -9,12 +10,9 @@ export default function CheckoutOrder() {
       direction="row"
       gap={1}
       padding={1}
-      justifyContent="center"
-      alignItems="center"
-      margin={1}
+      flexWrap="nowrap"
     >
-
-      {/* Product image */}
+      {/* Product img */}
       <Box sx={{ height: "100px", width: "100px" }}>
         <img
           src={productPhoto}
@@ -22,25 +20,42 @@ export default function CheckoutOrder() {
           style={{
             width: "100%",
             height: "100%",
-            objectFit: "contain", // ensures  image fits within the Box
+            objectFit: "contain", // ensures image fits within the Box
           }}
         />
       </Box>
+      
 
-      {/* Product details */}
-      <Stack spacing={1} divider={<Divider orientation="horizontal" />}>
-        <Typography variant="caption" fontWeight={"bold"} sx={{ fontSize: 10 }}>
-          Product Name
-        </Typography>
-        <Typography variant="caption" sx={{ fontSize: 10 }}>
-          Item Price:
-        </Typography>
-        <Typography variant="caption" sx={{ fontSize: 10 }}>
-          Product Category
-        </Typography>
-        <Typography variant="caption" sx={{ fontSize: 10 }}>
-          Quantity:
-        </Typography>
+      {/* STACK for product details */}
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        width="60%"
+        gap={2}
+      >
+        {/* Name & Price */}
+        <Stack direction="row" justifyContent="center" width="100%" gap={2}>
+          <Typography
+            textAlign='left'
+            variant="body1"
+            fontWeight={"bold"}
+            sx={{ fontSize: 14 }}
+          >
+            Product Name 
+          </Typography>
+          <Typography
+          
+            variant="body1"
+            fontWeight={"bolder"}
+            sx={{ fontSize: 14}}
+          >
+            $0
+          </Typography>
+        </Stack>
+
+        {/* Quantity component */}
+          <QuantityIncrementer/>
       </Stack>
     </Stack>
   );

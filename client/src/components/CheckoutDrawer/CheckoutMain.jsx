@@ -17,7 +17,7 @@ export default function CheckoutMain() {
     setOpen(newOpen);
   };
   
-  // Layout of components inside Drawer
+// Layout of Drawers components
   const DrawerItems = (
 <Grid
   container
@@ -26,7 +26,8 @@ export default function CheckoutMain() {
     height: '100%',
     textAlign: "center",
     flexDirection: 'column', // Stack items vertically
-    overflowY: 'auto'
+    overflowY: 'scroll',
+    flexWrap: 'nowrap' // addresses overflow issue
   }}
   onClick={toggleDrawer(false)}
   rowSpacing={2}
@@ -37,31 +38,16 @@ export default function CheckoutMain() {
     <ShoppingCartIcon sx={{ my: 2, color: '#fff' }} />
   </Grid>
 
-  {/* Product summary */}
+  {/* Product info display */}
   <Grid item xs={12}>
     <CheckoutOrder />
   </Grid>
 
-  {/* BELOW is for overflow issue 
-  - needs to be scrollable with component shrinking when item count  */}
-
-  {/* <Grid item xs={12}>
-    <CheckoutOrder />
-  </Grid>  
-  <Grid item xs={12}>
-    <CheckoutOrder />
-  </Grid>  
-  <Grid item xs={12}>
-    <CheckoutOrder />
-  </Grid>
-  <Grid item xs={12}>
-    <CheckoutOrder />
-  </Grid> */}
 
   {/* Container for Checkout btn and Total price */}
   <Grid item xs={12} sx={{ padding: 0, marginTop: 'auto' }}>
     <Box sx={{ bgcolor: "primary.main" }}>
-      <Typography padding={1} fontWeight={'bold'} color='#fff'>Total: $0</Typography>
+      <Typography padding={1} fontWeight={'bold'} color='#fff'>Subtotal (0 items): $0</Typography>
       <Button
         variant="contained"
         href="/checkout"
@@ -70,10 +56,9 @@ export default function CheckoutMain() {
     </Box>
   </Grid>
 </Grid>
+);
 
-  );
-
-  // Navbar component renders Drawer onClick
+  // Component renders on ShoppingCart icon click
   return (
       <Drawer
         variant="temporary"
