@@ -1,3 +1,4 @@
+import Copyright from "../Footer/Copyright";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
@@ -14,24 +15,6 @@ import Container from "@mui/material/Container";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Auth from "../../utils/auth";
 
-// Copyright Footer
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        AppName
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function BuyerSignup() {
 

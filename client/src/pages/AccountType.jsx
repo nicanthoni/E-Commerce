@@ -1,3 +1,4 @@
+import Copyright from "../components/Footer/Copyright";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
@@ -14,24 +15,6 @@ import SensorOccupiedIcon from "@mui/icons-material/SensorOccupied";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        AppName
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function AccountType() {
   const navigate = useNavigate();
