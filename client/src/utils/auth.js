@@ -1,5 +1,4 @@
 import { jwtDecode } from 'jwt-decode'
-
 class AuthService {
   getProfile() {
     return jwtDecode(this.getToken())
@@ -41,7 +40,6 @@ class AuthService {
   }
   logout() {
     localStorage.removeItem('id_token')
-    window.location.reload()
   }
 }
 export default new AuthService()

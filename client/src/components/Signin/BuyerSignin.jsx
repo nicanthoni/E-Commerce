@@ -1,6 +1,6 @@
 import Copyright from '../Footer/Copyright';
-import {Avatar, Button, Alert, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
-import { buyer_Signup } from "../../utils/mutations";
+import { Avatar, Button, Alert, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
+import { buyer_login } from "../../utils/mutations";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
@@ -12,7 +12,7 @@ export default function Signin() {
   // Method to change location
   const navigate = useNavigate();
 
-// Error & Alert States
+  // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,7 +20,7 @@ export default function Signin() {
   // On first render, check if user is logged in.If so, send to their profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
-      navigate(`/profile/${Auth.getProfile().data._id}`);
+      navigate(`/profile`);
     }
   }, []);
 
@@ -30,8 +30,8 @@ export default function Signin() {
     password: "",
   });
 
-//  Mutation
-  const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
+  //  Mutation
+  const [LoginUser, { error, loading, data }] = useMutation(buyer_login);
 
   // OnChange, update form state
   const handleChange = (event) => {
@@ -44,36 +44,17 @@ export default function Signin() {
 
   // On form Submission:
   const handleSubmit = async (event) => {
-
     event.preventDefault();
-    setErrorMessage(""); // Clear previous error message
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formState.email)) {
-      setErrorMessage("Invalid email address");
-    }
-
-    if (formState.password.length < 8) {
-      setErrorMessage(
-        (prevMessage) =>
-          prevMessage + " Password must be at least 8 characters long"
-      );
-    }
-
-    if (errorMessage) {
-      setShowErrorAlert(true);
-      return;
-    }
-
+    setErrorMessage('')
     try {
-      const { data } = await AddUser({
+      const { data } = await LoginUser({
         variables: { ...formState },
       });
-
-      Auth.login(data.AddUser.token);
+      console.log(data.Userlogin)
+      Auth.login(data.Userlogin.token);
       setShowSuccessAlert(true);
       setTimeout(() => {
-        navigate(`/profile/${data.AddUser.user._id}`);
+        navigate(`/profile`);
       }, 1500);
 
     } catch (e) {
@@ -90,15 +71,15 @@ export default function Signin() {
 
   return (
     <Container component="main" maxWidth="xs">
-    <Box
-      sx={{
-        marginTop: 14,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      {showSuccessAlert && (
+      <Box
+        sx={{
+          marginTop: 14,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {showSuccessAlert && (
           <Alert severity="success" sx={{ width: '100%', mb: 2 }}>
             Sign in successful! Redirecting to profile...
           </Alert>
@@ -108,65 +89,65 @@ export default function Signin() {
             {errorMessage || 'Sign in failed! Double check your credentials and account type are accurate, or create an account if you havent'}
           </Alert>
         )}
-      <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
-        <LockOutlinedIcon/>
-      </Avatar>
-      <Typography variant="h5">Buyer Sign in</Typography>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              onChange={handleChange}
-            />
+        <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography variant="h5">Buyer Sign in</Typography>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                onChange={handleChange}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="new-password"
-              onChange={handleChange}
-            />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              textTransform: "none",
+              bgcolor: "secondary.main",
+              color: "primary.main",
+            }}
+          >
+            Sign in
+          </Button>
+          <Grid container justifyContent="center">
+            <Grid item>
+              <Link
+                href="/signup/buyer"
+                variant="body2"
+                align="center"
+                sx={{ textDecoration: "none" }}
+              >
+                Don't have an account? Sign up here
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{
-            mt: 3,
-            mb: 2,
-            textTransform: "none",
-            bgcolor: "secondary.main",
-            color: "primary.main",
-          }}
-        >
-          Sign in
-        </Button>
-        <Grid container justifyContent="center">
-          <Grid item>
-            <Link
-              href="/signup/buyer"
-              variant="body2"
-              align="center"
-              sx={{ textDecoration: "none" }}
-            >
-              Don't have an account? Sign up here
-            </Link>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
-    <Copyright sx={{ mt: 3 }} />
-  </Container>
+      <Copyright sx={{ mt: 3 }} />
+    </Container>
   );
 }

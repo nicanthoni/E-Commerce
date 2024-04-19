@@ -1,25 +1,25 @@
 [
   {
     "username": "notamazon",
-    "companyname": "NotAmazon",
+    "vendorName": "NotAmazon",
     "email": "notamazon@amazon.com",
     "password": "password"
   },
   {
     "username": "notwalmart",
-    "companyname": "NotWalmart",
+    "vendorName": "NotWalmart",
     "email": "notwalmart@walmart.com",
     "password": "password"
   },
   {
     "username": "notcosco",
-    "companyname": "NotCosco",
+    "vendorName": "NotCosco",
     "email": "notcosco@cosco.com",
     "password": "password"
   },
   {
     "username": "nottarget",
-    "companyname": "NotTarget",
+    "vendorName": "NotTarget",
     "email": "nottarget@target.com",
     "password": "password"
   }

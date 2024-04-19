@@ -28,7 +28,7 @@ export default function VendorSignup() {
   // On first render, check if user is logged in.If so, send to their profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
-      navigate(`/profile/vendor/${Auth.getProfile().data._id}`);
+      navigate(`/profile`);
     }
   }, []);
 
@@ -81,7 +81,7 @@ export default function VendorSignup() {
       Auth.login(data.AddVendor.token);
       setShowSuccessAlert(true);
       setTimeout(() => {
-        navigate(`/profile/vendor/${data.AddVendor.vendor._id}`);
+        navigate(`/profile`);
       }, 1500);
     } catch (e) {
       console.log("Vendor data structure:", JSON.stringify(data));

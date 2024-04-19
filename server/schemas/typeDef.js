@@ -17,6 +17,10 @@ const typeDefs = `
         item: Item
         quantity: Int
     }
+    type SoldItems {
+        item: Item
+        sold: Int
+    }
     type Vendor {
         _id: ID
         username: String
@@ -24,7 +28,7 @@ const typeDefs = `
         email: String
         isOnline: Boolean
         inventory: [Item]
-        sales: Float
+        sales: [SoldItems]
     }
     type Item {
         _id: ID

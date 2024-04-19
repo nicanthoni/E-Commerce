@@ -13,6 +13,17 @@ export const buyer_Signup = gql`
     }
   }
 `
+export const buyer_login = gql`
+mutation buyerLogin($email: String!, $password: String!) {
+  Userlogin(email: $email, password: $password) {
+    token
+    user {
+      _id
+      email
+    }
+  }
+}
+`
 
 // VENDOR
 export const vendor_Signup = gql`
@@ -25,4 +36,14 @@ export const vendor_Signup = gql`
       }
     }
   }
+`
+export const vendor_Login = gql`
+mutation vendorLogin($email: String!, $password: String!) {
+  Vendorlogin(email: $email, password: $password) {
+    token
+    vendor {
+      _id
+    }
+  }
+}
 `
