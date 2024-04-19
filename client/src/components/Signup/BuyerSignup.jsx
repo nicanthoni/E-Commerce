@@ -21,7 +21,7 @@ export default function BuyerSignup() {
   // Method to change location
   const navigate = useNavigate();
 
-// Error & Alert States
+  // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -29,7 +29,7 @@ export default function BuyerSignup() {
   // On first render, check if user is logged in.If so, send to their profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
-      navigate(`/profile/${Auth.getProfile().data._id}`);
+      navigate(`/profile`);
     }
   }, []);
 
@@ -41,7 +41,7 @@ export default function BuyerSignup() {
     password: "",
   });
 
-//  Mutation
+  //  Mutation
   const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
 
   // OnChange, update form state
@@ -84,7 +84,7 @@ export default function BuyerSignup() {
       Auth.login(data.AddUser.token);
       setShowSuccessAlert(true);
       setTimeout(() => {
-        navigate(`/profile/${data.AddUser.user._id}`);
+        navigate(`/profile`);
       }, 1500);
 
     } catch (e) {
@@ -110,15 +110,15 @@ export default function BuyerSignup() {
         }}
       >
         {showSuccessAlert && (
-            <Alert severity="success" sx={{ width: '100%', mb: 2 }}>
-              Registration successful! Redirecting to profile...
-            </Alert>
-          )}
-          {showErrorAlert && (
-            <Alert severity="error" sx={{ width: '100%', mb: 2 }} onClose={handleClearError}>
-              {errorMessage || 'Registration failed! Be sure all fields are complete, or try a different email.'}
-            </Alert>
-          )}
+          <Alert severity="success" sx={{ width: '100%', mb: 2 }}>
+            Registration successful! Redirecting to profile...
+          </Alert>
+        )}
+        {showErrorAlert && (
+          <Alert severity="error" sx={{ width: '100%', mb: 2 }} onClose={handleClearError}>
+            {errorMessage || 'Registration failed! Be sure all fields are complete, or try a different email.'}
+          </Alert>
+        )}
         <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
           <ShoppingBasketIcon />
         </Avatar>

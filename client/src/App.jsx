@@ -40,6 +40,7 @@ import VendorAccount from "./pages/Vendor/VendorAccount";
 import VendorAddItem from "./pages/Vendor/AddItem"
 import LoginType from "./pages/LoginType";
 import AccountType from "./pages/AccountType";
+import Profile from "./pages/ProfileType";
 
 // Routes
 const router = createBrowserRouter(
@@ -47,12 +48,11 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/accounttype" element={<AccountType/>} />
-      <Route path="/signin" element={<LoginType/>} />
+      <Route path="/accounttype" element={<AccountType />} />
+      <Route path="/signin" element={<LoginType />} />
       <Route path="/signup/:userType" element={<Signup />} />
       <Route path="/signin/:userType" element={<Signin />} />
-      <Route path="/signin/:userType" element={<Signin />} />
-      <Route path="/profile/:userId" element={<BuyerAccount />} />
+      <Route path="/profile" element={< Profile />} />
       <Route path="/profile/vendor/:vendorId" element={<VendorAccount />} />
       <Route path="/explore/:category" element={<Explore />} />
       <Route path="/explore/all" element={<Explore />} />

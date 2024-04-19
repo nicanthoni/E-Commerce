@@ -14,13 +14,19 @@ const resolvers = {
       }).populate({
         path: 'wishlist.item',
         populate: { path: 'vendor' }
+      }).populate({
+        path: 'buyHistory.item',
+        populate: { path: 'vendor' }
+      }).populate({
+        path: 'ratings',
+        populate: { path: 'item' },
       })
-      console.log('User Data:', user)
+      //console.log('User Data:', user)
       return user
     },
     vendor: async (parent, { id }) => {
       console.log('VendorID:', id)
-      const vendor = await Vendor.findById(id)
+      const vendor = await Vendor.findById(id).populate('inventory').populate('sales.item')
       console.log('Vendor Data:', vendor)
       return vendor
     },
@@ -44,7 +50,7 @@ const resolvers = {
         if (!user) {
           throw new Error('ERROR')
         }
-        const token = signToken(user)
+        const token = signToken({ email: user.email, _id: user._id, userType: 'buyer' })
         user.isOnline = true
         await user.save()
         return { token, user }
@@ -74,7 +80,7 @@ const resolvers = {
         // if (user.isOnline = true) {
         //   throw LoginInError
         // }
-        const token = signToken(user)
+        const token = signToken({ email: user.email, _id: user._id, userType: 'buyer' })
         user.isOnline = true
         await user.save()
         return { token, user }
@@ -88,7 +94,7 @@ const resolvers = {
         if (!vendor) {
           throw new Error('ERROR')
         }
-        const token = signToken(vendor)
+        const token = signToken({ email: vendor.email, _id: vendor._id, userType: 'vendor' })
         vendor.isOnline = true
         await vendor.save()
         return { token, vendor }
@@ -123,7 +129,7 @@ const resolvers = {
         // if (vendor.isOnline = true) {
         //   throw LoginInError
         // }
-        const token = signToken(vendor)
+        const token = signToken({ email: vendor.email, _id: vendor._id, userType: 'vendor' })
         vendor.isOnline = true
         await vendor.save()
         return { token, vendor }
