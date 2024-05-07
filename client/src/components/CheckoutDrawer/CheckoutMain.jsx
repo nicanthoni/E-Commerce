@@ -84,6 +84,8 @@ export default function CheckoutMain() {
         },
       }}
     >
+
+      {/* Conditionally render cart items depending on if loggedIn or not */}
       {Auth.loggedIn() ? (
         DrawerItems
       ) : (

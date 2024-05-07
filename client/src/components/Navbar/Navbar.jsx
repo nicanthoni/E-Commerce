@@ -16,15 +16,15 @@ import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import { Container } from "@mui/material";
-import "./Navbar.css";
 import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
-import Auth from "../../utils/auth";
+import GetStarted from "../Buttons/GetStarted";
 
 // adjust width of menu drawer
 const drawerWidth = 285;
 
 // Nav items array
+
 const navItems = ["Home", "Men", "Women", "Explore"];
 
 // Nav item routes
@@ -34,6 +34,8 @@ const routes = {
   Women: "explore/women",
   Explore: "/explore/all",
 };
+
+
 
 export default function Navbar() {
   const [showCart, setShowCart] = useState(false);
@@ -77,14 +79,7 @@ export default function Navbar() {
             </ListItemButton>
           </ListItem>
         ))}
-        <Button
-          href="/accounttype"
-          variant="contained"
-          color="secondary"
-          sx={{ textTransform: "none" }}
-        >
-          Get Started!
-        </Button>
+        <GetStarted/>
       </List>
     </Box>
   );
@@ -141,18 +136,11 @@ export default function Navbar() {
                 </Button>
               ))}
               {/* Sign up button */}
-              <Button
-                href="/accounttype"
-                variant="contained"
-                color="secondary"
-                sx={{ textTransform: "none" }}
-              >
-                Get Started!
-              </Button>
+              <GetStarted/>
             </Box>
 
             {/* CheckoutMain renders on Cart click */}
-            <Box className="cart-icon" sx={{ ml: 3, mr: 4 }}>
+            <Box className="cart-icon" sx={{ ml: 3, mr: 4, cursor: 'pointer' }}>
               <Badge badgeContent={1} max={10} color="error">
                 {/* Color for icon controlled in <CheckoutMain/> */}
                 <ShoppingCartIcon onClick={toggleShowCart} />

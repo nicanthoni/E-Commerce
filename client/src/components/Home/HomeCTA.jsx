@@ -1,4 +1,5 @@
-import { Button, Typography, Stack } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
+import GetStarted from "../Buttons/GetStarted";
 
 export default function HomeCTA() {
   return (
@@ -10,13 +11,7 @@ export default function HomeCTA() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis dolores
         molestiae accusamus maiores cumque.
       </Typography>
-      <Button
-        variant="contained"
-        href="/accounttype"
-        sx={{ bgcolor: "secondary.main", color: "primary.main", textTransform: 'none' }}
-      >
-        Get Started!
-      </Button>
+      <GetStarted/>
     </Stack>
   );
 }

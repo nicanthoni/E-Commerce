@@ -1,30 +1,22 @@
 import { Typography, Button, Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import Auth from "../../utils/auth";
 import { useLazyQuery } from "@apollo/client";
 import { User } from "../../utils/queries";
 import { useEffect } from "react";
 import { Grid, Box, Avatar, Stack } from "@mui/material";
+import Logout from "../Buttons/Logout";
 
-// Buyer profile: Wishlist, 'followed' Shops, Settings, Card info, etc
 export default function BuyerProfile() {
-  const navigate = useNavigate();
   const id = Auth.getProfile().data._id;
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });
+
   // Check if user is logged in
   if (!Auth.loggedIn()) {
     // If not, navigate to '/'
-
     return null; // Render nothing
   }
-
-  // Logout button handler
-  const handleLogout = () => {
-    navigate("/");
-    Auth.logout();
-  };
 
   useEffect(() => {
     loadUser();
@@ -44,13 +36,33 @@ export default function BuyerProfile() {
 
   return (
     <Container maxWidth="xl">
-      <Grid container direction="column">
+      <Grid container direction="column" marginTop={10}>
         <Grid item>
-          <Stack direction='column' alignItems='center'>
-          <Avatar alt={user.firstName} src="#" />
-          <Typography textAlign="center" variant="h6">
-            Signed in as: {user.firstName} {user.lastName}
-          </Typography>
+          <Stack direction="column" alignItems="center" spacing={2}>
+            <Avatar alt={user.firstName} src="#" />
+            <Typography textAlign="center" variant="h6">
+              Signed in as {user.firstName} {user.lastName}
+            </Typography>
+            <Stack
+              direction="row"
+              justifyContent="space-around"
+              alignItems="center"
+              textAlign="center"
+              spacing={4}
+            >
+              <Stack alignItems="center">
+                <Typography>0</Typography>
+                <Typography variant="caption">Following</Typography>
+              </Stack>
+              <Stack alignItems="center">
+                <Typography>0</Typography>
+                <Typography variant="caption">Wishlist</Typography>
+              </Stack>
+              <Stack alignItems="center">
+                <Typography>0</Typography>
+                <Typography variant="caption">Orders</Typography>
+              </Stack>
+            </Stack>
           </Stack>
         </Grid>
 
@@ -112,11 +124,8 @@ export default function BuyerProfile() {
         </Grid>
       </Grid>
 
-      {/* LOGOUT */}
-      <Button variant="contained" onClick={handleLogout}>
-        Logout
-      </Button>
-
+      {/* LOGOUT Button */}
+      <Logout />
     </Container>
   );
 }
