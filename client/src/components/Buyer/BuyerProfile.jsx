@@ -21,6 +21,7 @@ export default function BuyerProfile() {
   useEffect(() => {
     loadUser();
   }, [loadUser]);
+
   if (error) {
     console.error("GraphQL Error:", error);
     return <p>Error fetching data</p>;
@@ -33,15 +34,16 @@ export default function BuyerProfile() {
   }
 
   const user = data.user;
+  console.log('User data: ', user)
 
   return (
     <Container maxWidth="xl">
-      <Grid container direction="column" marginTop={10}>
+      <Grid container direction="column" marginTop={12}>
         <Grid item>
           <Stack direction="column" alignItems="center" spacing={2}>
             <Avatar alt={user.firstName} src="#" />
             <Typography textAlign="center" variant="h6">
-              Signed in as {user.firstName} {user.lastName}
+              Hi, {user.firstName} {user.lastName} 👋
             </Typography>
             <Stack
               direction="row"
@@ -51,15 +53,15 @@ export default function BuyerProfile() {
               spacing={4}
             >
               <Stack alignItems="center">
-                <Typography>0</Typography>
-                <Typography variant="caption">Following</Typography>
+                <Typography fontWeight='bold' color='secondary.main'>{user.ratings.length}</Typography>
+                <Typography variant="caption">Reviews</Typography>
               </Stack>
               <Stack alignItems="center">
-                <Typography>0</Typography>
+                <Typography fontWeight='bold' color='secondary.main'>{user.wishlist.length}</Typography>
                 <Typography variant="caption">Wishlist</Typography>
               </Stack>
               <Stack alignItems="center">
-                <Typography>0</Typography>
+                <Typography fontWeight='bold' color='secondary.main'>{user.buyHistory.length}</Typography>
                 <Typography variant="caption">Orders</Typography>
               </Stack>
             </Stack>
@@ -114,12 +116,12 @@ export default function BuyerProfile() {
           <Typography>Ratings :</Typography>
           {user.ratings &&
             user.ratings.map((rating) => (
-              <div key={rating.id}>
-                <p>name: {rating.item.name}</p>
-                <p>review: {rating.review}</p>
-                <p>stars: {rating.stars}</p>
-                <p>created at: {rating.createdAt}</p>
-              </div>
+              <Box key={rating.id}>
+                <Typography>name: {rating.item.name}</Typography>
+                <Typography>review: {rating.review}</Typography>
+                <Typography>stars: {rating.stars}</Typography>
+                <Typography>created at: {rating.createdAt}</Typography>
+              </Box>
             ))}
         </Grid>
       </Grid>
