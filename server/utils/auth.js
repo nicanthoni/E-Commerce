@@ -26,7 +26,7 @@ module.exports = {
     }
     try {
       const { data } = jwt.verify(token, secret, { maxAge: exp });
-      if (req.used) {
+      if (req.user) {
         req.user = data;
       } else if (req.vendor) {
         req.vendor = data;
