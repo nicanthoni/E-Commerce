@@ -4,7 +4,9 @@ import { useLazyQuery } from "@apollo/client";
 import { User } from "../../utils/queries";
 import { useEffect } from "react";
 import { Grid, Box, Avatar, Stack } from "@mui/material";
+import NicsAvatar from '../../assets/images/MyAvatar-PNG.png'
 import Logout from "../Buttons/Logout";
+import ProfileAccordion from "./Accordion";
 
 export default function BuyerProfile() {
   const id = Auth.getProfile().data._id;
@@ -41,7 +43,7 @@ export default function BuyerProfile() {
       <Grid container direction="column" marginTop={12}>
         <Grid item>
           <Stack direction="column" alignItems="center" spacing={2}>
-            <Avatar alt={user.firstName} src="#" />
+            <Avatar alt={user.firstName} src={NicsAvatar} />
             <Typography textAlign="center" variant="h6">
               Hi, {user.firstName} {user.lastName} 👋
             </Typography>
@@ -69,10 +71,14 @@ export default function BuyerProfile() {
         </Grid>
 
         <Grid item>
-          <Typography>{user.email}</Typography>
+          <ProfileAccordion/>
         </Grid>
 
-        <Typography>Cart:</Typography>
+        {/* <Grid item>
+          <Typography>{user.email}</Typography>
+        </Grid> */}
+
+        {/* <Typography>Cart:</Typography>
 
         <Grid item>
           {user.cart &&
@@ -84,9 +90,9 @@ export default function BuyerProfile() {
                 <Typography>quanity: {item.quantity}</Typography>
               </Box>
             ))}
-        </Grid>
+        </Grid> */}
 
-        <Typography>Wishlist:</Typography>
+        {/* <Typography>Wishlist:</Typography>
         <Grid item>
           {user.wishlist &&
             user.wishlist.map((item) => (
@@ -97,9 +103,9 @@ export default function BuyerProfile() {
                 <Typography>quanity: {item.quantity}</Typography>
               </Box>
             ))}
-        </Grid>
+        </Grid> */}
 
-        <Grid item>
+        {/* <Grid item>
           <Typography>Buy History:</Typography>
           {user.buyHistory &&
             user.buyHistory.map((item) => (
@@ -110,9 +116,9 @@ export default function BuyerProfile() {
                 <Typography>quanity: {item.quantity}</Typography>
               </Box>
             ))}
-        </Grid>
+        </Grid> */}
 
-        <Grid item>
+        {/* <Grid item>
           <Typography>Ratings :</Typography>
           {user.ratings &&
             user.ratings.map((rating) => (
@@ -123,7 +129,7 @@ export default function BuyerProfile() {
                 <Typography>created at: {rating.createdAt}</Typography>
               </Box>
             ))}
-        </Grid>
+        </Grid> */}
       </Grid>
 
       {/* LOGOUT Button */}
