@@ -11,7 +11,7 @@ import Auth from "../../../utils/auth";
 import TestItem1 from "../../../assets/images/bag.jpg";
 import TestItem2 from "../../../assets/images/shirt.jpg";
 
-export default function AccordionImageList() {
+export default function CartImageList() {
   const id = Auth.getProfile().data._id;
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
@@ -53,6 +53,7 @@ export default function AccordionImageList() {
             src={`${TestItem2}?w=248&fit=crop&auto=format`}
             alt={item.item.name}
             loading="lazy"
+            style={{width: '100px', height: 'auto' }}
           />
           <ImageListItemBar
             title={item.item.name}

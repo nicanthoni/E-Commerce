@@ -9,10 +9,10 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { User } from "../../../utils/queries";
-import Auth from "../../../utils/auth";
-import TestItem1 from "../../../assets/images/bag.jpg";
-import TestItem2 from "../../../assets/images/shirt.jpg";
-import AccordionImageList from "./ImageList";
+import Auth from "../../../utils/auth";;
+import CartImageList from "./CartImageList";
+import OrdersImageList from "./OrdersImageList";
+import ReviewsList from "./ReviewsList";
 
 export default function ProfileAccordion() {
   const id = Auth.getProfile().data._id;
@@ -74,7 +74,7 @@ export default function ProfileAccordion() {
         </AccordionDetails>
       </Accordion>
 
-      {/* CART - will be just IMGs + total price */}
+      {/* CART */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
@@ -88,7 +88,7 @@ export default function ProfileAccordion() {
           {user.cart.length > 0 ? (
             <Typography variant="caption">
               {/* IMGs + total price  */}
-              <AccordionImageList />
+              <CartImageList />
             </Typography>
           ) : (
             <Typography variant="caption">
@@ -98,7 +98,7 @@ export default function ProfileAccordion() {
         </AccordionDetails>
       </Accordion>
 
-      {/*   ORDER HISTORY - Name + Price + Date */}
+      {/*   ORDER HISTORY  */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
@@ -111,17 +111,8 @@ export default function ProfileAccordion() {
         <AccordionDetails>
           {user.buyHistory.length > 0 ? (
             <Typography variant="caption">
-              {user.buyHistory.map((item) => (
-                <Box key={item.id}>
-                  <List>
-                    {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
-                    <ListItem>Item: {item.item.name}</ListItem>
-                    <ListItem>Price: {item.item.price}</ListItem>
-                    <ListItem>Vendor: {item.item.vendor.vendorName}</ListItem>
-                    <ListItem>Quantity: {item.quantity}</ListItem>
-                  </List>
-                </Box>
-              ))}
+              {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
+              <OrdersImageList />
             </Typography>
           ) : (
             <Typography variant="caption">
@@ -131,7 +122,8 @@ export default function ProfileAccordion() {
         </AccordionDetails>
       </Accordion>
 
-      {/*   REVIEW HISTORY - Name + Stars + Review + Date */}
+
+      {/*   REVIEW HISTORY  */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
@@ -144,17 +136,8 @@ export default function ProfileAccordion() {
         <AccordionDetails>
           {user.ratings.length > 0 ? (
             <Typography variant="caption">
-              {user.ratings.map((rating) => (
-                <Box key={rating.id}>
-                  <List>
-                    {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
-                    <ListItem>name: {rating.item.name}</ListItem>
-                    <ListItem>review: {rating.review}</ListItem>
-                    <ListItem>stars: {rating.stars}</ListItem>
-                    <ListItem>created at: {rating.createdAt}</ListItem>
-                  </List>
-                </Box>
-              ))}
+              {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
+              <ReviewsList />
             </Typography>
           ) : (
             <Typography variant="caption">
