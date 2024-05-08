@@ -19,6 +19,7 @@ import { Container } from "@mui/material";
 import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
 import GetStarted from "../Buttons/GetStarted";
+import Auth from "../../utils/auth";
 
 // adjust width of menu drawer
 const drawerWidth = 285;
