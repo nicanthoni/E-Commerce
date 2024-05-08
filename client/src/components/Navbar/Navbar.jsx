@@ -26,13 +26,11 @@ const drawerWidth = 285;
 
 // Nav items array
 
-const navItems = ["Home", "Men", "Women", "Explore"];
+const navItems = ["Home", "Explore"];
 
 // Nav item routes
 const routes = {
   Home: "/",
-  Men: "explore/men",
-  Women: "explore/women",
   Explore: "/explore/all",
 };
 
