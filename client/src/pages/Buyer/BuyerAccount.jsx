@@ -1,9 +1,9 @@
-import BuyerProfile from "../../components/Buyer/BuyerProfile"
+import BuyerProfile from "../../components/Buyer/Profile/ProfileMain";
 
-export default function BuyerAccount () {
-    return (
-        <>
-         <BuyerProfile/>
-        </>
-    )
+export default function BuyerAccount() {
+  return (
+    <>
+      <BuyerProfile />
+    </>
+  );
 }
