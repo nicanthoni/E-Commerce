@@ -11,46 +11,49 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import { Container } from "@mui/material";
 import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
-import GetStarted from "../Buttons/GetStarted";
 import Auth from "../../utils/auth";
+import Logout from "../Buttons/Logout";
+import GetStarted from "../Buttons/GetStarted";
 
-// adjust width of menu drawer
+// Width of menu drawer
 const drawerWidth = 285;
 
 // Nav items array
-
-const navItems = ["Home", "Men", "Women", "Explore"];
+const navItems = ["Home", "Explore"];
 
 // Nav item routes
 const routes = {
   Home: "/",
-  Men: "explore/men",
-  Women: "explore/women",
   Explore: "/explore/all",
 };
 
-
-
 export default function Navbar() {
+  // const [auth, setAuth] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // useEffect(() => {
+  //   if (Auth.loggedIn()) {
+  //     setAuth(true);
+  //   } else {
+  //     setAuth(false);
+  //   }
+  // }, [auth]);
+
   // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
-    console.log("Cart clicked");
     setShowCart((prevShowCart) => !prevShowCart); // functional update to ensure proper synchronization
   };
 
-  // Toggle MENU drawer (mobile only)
+  // Toggle MENU drawer (mobile)
   const handleDrawerToggle = () => {
-    console.log("Menu icon clicked");
     setMobileOpen((prevState) => !prevState);
   };
 
@@ -81,6 +84,7 @@ export default function Navbar() {
           </ListItem>
         ))}
         <GetStarted/>
+        {/* {!auth ? <GetStarted/> : <Logout/>} */}
       </List>
     </Box>
   );

@@ -27,7 +27,7 @@ export default function FilterPrice() {
         >
           <MenuItem value={10}>Lowest to highest</MenuItem>
           <MenuItem value={20}>Highest to lowest</MenuItem>
-          <MenuItem value={20}>Show all</MenuItem>
+          <MenuItem value={30}>Show all</MenuItem>
         </Select>
       </FormControl>
     </Box>
