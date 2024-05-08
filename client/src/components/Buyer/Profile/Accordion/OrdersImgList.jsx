@@ -6,12 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { User } from "../../../utils/queries";
-import Auth from "../../../utils/auth";
-import TestItem1 from "../../../assets/images/bag.jpg";
-import TestItem2 from "../../../assets/images/shirt.jpg";
+import { User } from "../../../../utils/queries";
+import Auth from "../../../../utils/auth";
+import TestItem1 from "../../../../assets/images/bag.jpg";
 
-export default function CartImageList() {
+export default function OrdersImgList() {
   const id = Auth.getProfile().data._id;
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
@@ -36,24 +35,19 @@ export default function CartImageList() {
   // Grab data
   const user = data.user;
 
-  // Calculate cart subtotal
-  const subtotal = user.cart.reduce((total, item) => {
-    return total + item.item.price;
-  }, 0);
-
   return (
     <ImageList sx={{}}>
       <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">Subtotal: ${subtotal} </ListSubheader>
+        <ListSubheader component="div">Orders</ListSubheader>
       </ImageListItem>
-      {user.cart.map((item) => (
+      {user.buyHistory.map((item) => (
         <ImageListItem key={item.id}>
           <img
-            srcSet={`${TestItem2}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${TestItem2}?w=248&fit=crop&auto=format`}
+            srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`${TestItem1}?w=248&fit=crop&auto=format`}
             alt={item.item.name}
             loading="lazy"
-            style={{width: '100px', height: 'auto' }}
+            style={{ width: "100px", height: "auto", alignSelf: "center" }}
           />
           <ImageListItemBar
             title={item.item.name}

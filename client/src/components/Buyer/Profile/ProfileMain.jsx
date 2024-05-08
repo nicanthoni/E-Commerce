@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { Grid, Avatar, Stack } from "@mui/material";
 import NicsAvatar from "../../../assets/images/MyAvatar-PNG.png";
 import Logout from "../../Buttons/Logout";
-import ProfileAccordions from "./AccordionsMain";
+import ProfileAccordions from "./Accordion/AccordionMain";
 
 export default function BuyerProfile() {
   const id = Auth.getProfile().data._id;
@@ -41,9 +41,8 @@ export default function BuyerProfile() {
   return (
     <Container maxWidth="lg">
       <Grid container direction="column" marginTop={12}>
-
         {/* OVERVIEW stats */}
-        <Grid item>
+        <Grid item marginBottom={4}>
           <Stack direction="column" alignItems="center" spacing={2}>
             <Avatar alt={user.firstName} src={NicsAvatar} />
             <Typography textAlign="center" variant="h6">
@@ -78,13 +77,13 @@ export default function BuyerProfile() {
           </Stack>
         </Grid>
 
-        {/* ACCORDIONS   */}
+        {/* ACCORDIONS - component  */}
         <Grid item>
           <ProfileAccordions />
         </Grid>
       </Grid>
 
-      {/* LOGOUT Button */}
+      {/* LOGOUT Button - component */}
       <Logout />
     </Container>
   );

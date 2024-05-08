@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -11,26 +11,26 @@ import IconButton from "@mui/material/IconButton";
 import InfoIcon from "@mui/icons-material/Info";
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { User } from "../../../utils/queries";
-import Auth from "../../../utils/auth";
-import TestItem1 from "../../../assets/images/bag.jpg";
-import { Rating } from '@mui/material';
+import { User } from "../../../../utils/queries";
+import Auth from "../../../../utils/auth";
+import TestItem1 from "../../../../assets/images/bag.jpg";
+import { Rating } from "@mui/material";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
+  bgcolor: "background.paper",
+  border: "1px solid #000",
   boxShadow: 24,
   p: 4,
-  textAlign: 'center'
+  textAlign: "center",
 };
 
-// Modal for each Review
-export default function ReviewsList() {
+// Modal for each wishlist item
+export default function WishImglist() {
   const [openModals, setOpenModals] = useState([]);
 
   const handleOpenModal = (index) => {
@@ -72,28 +72,24 @@ export default function ReviewsList() {
   return (
     <Box>
       <ImageList sx={{}}>
-        <ImageListItem key="Subheader" cols={2}>
-          <ListSubheader component="div">Reviewed Items</ListSubheader>
-        </ImageListItem>
-        {user.ratings.map((rating, index) => (
-          <ImageListItem key={rating.id}>
+        {user.wishlist.map((item, index) => (
+          <ImageListItem key={item.id}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
                 srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 src={`${TestItem1}?w=248&fit=crop&auto=format`}
-                alt={rating.item.name}
+                alt={item.item.name}
                 loading="lazy"
-                style={{width: '100px', height: 'auto' }}
+                style={{ width: "100px", height: "auto" }}
               />
             </Button>
             <ImageListItemBar
-             
-              title={rating.item.name}
-              subtitle={`Rating: ${rating.stars}`}
+              title={item.item.name}
+              subtitle={item.item.price}
               actionIcon={
                 <IconButton
                   sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${rating.item.name}`}
+                  aria-label={`info about ${item.item.name}`}
                 >
                   <InfoIcon />
                 </IconButton>
@@ -106,25 +102,29 @@ export default function ReviewsList() {
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
-              <img
-                srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${TestItem1}?w=248&fit=crop&auto=format`}
-                alt={rating.item.name}
-                loading="lazy"
-                style={{width: '100px', height: 'auto' }}
-              />
+                <img
+                  srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${TestItem1}?w=248&fit=crop&auto=format`}
+                  alt={item.item.name}
+                  loading="lazy"
+                  style={{ width: "100px", height: "auto" }}
+                />
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  {rating.item.name}
-                  
+                  {item.item.name}
                 </Typography>
-                <Typography variant='caption' id="review-description" sx={{ mt: 2 }}>
-                  "{rating.review}"
+                <Typography
+                  id="item-price"
+                  sx={{ mt: 2 }}
+                >
+                  {item.item.price}
                 </Typography>
-
-                
-     
-                <Rating name="read-only" value={rating.stars} readOnly />
-
+                <Typography
+                variant="caption"
+                  id="item-price"
+                  sx={{ mt: 2 }}
+                >
+                  "{item.item.descroption}"
+                </Typography>
               </Box>
             </Modal>
           </ImageListItem>
@@ -133,5 +133,3 @@ export default function ReviewsList() {
     </Box>
   );
 }
-
-// rating.createdAt
