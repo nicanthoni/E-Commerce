@@ -35,6 +35,7 @@ export default function BuyerProfile() {
     return <p>No user data found</p>;
   }
 
+  // Data object
   const user = data.user;
   console.log("User data: ", user);
 
