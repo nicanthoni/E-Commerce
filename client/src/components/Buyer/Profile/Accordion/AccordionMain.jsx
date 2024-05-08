@@ -8,11 +8,12 @@ import { Typography, List, ListItem } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
-import { User } from "../../../utils/queries";
-import Auth from "../../../utils/auth";;
-import CartImageList from "./CartImageList";
-import OrdersImageList from "./OrdersImageList";
-import ReviewsList from "./ReviewsList";
+import { User } from "../../../../utils/queries";
+import Auth from "../../../../utils/auth";
+import CartImgList from "./CartImgList";
+import WishImglist from "./WishlistImgList";
+import OrdersImgList from "./OrdersImgList";
+import ReviewsImgList from "./ReviewsImgList";
 
 export default function ProfileAccordion() {
   const id = Auth.getProfile().data._id;
@@ -41,9 +42,8 @@ export default function ProfileAccordion() {
 
   return (
     <Box>
-      {/* WISHLIST - Once items have image data, the accordion will be a horizontal scroll of imgs*/}
-      {/* Render with accordion OPENED if there are wishlist items */}
-      <Accordion>
+      {/* WISHLIST - render opened - eventually a horizontal scroll of imgs*/}
+      <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls="panel2-content"
@@ -54,21 +54,13 @@ export default function ProfileAccordion() {
         </AccordionSummary>
         <AccordionDetails>
           {user.wishlist.length > 0 ? (
-            <Typography>
-              {user.wishlist.map((item) => (
-                <Box key={item.id}>
-                  <List>
-                    {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
-                    <ListItem>Item: {item.item.name}</ListItem>
-                    <ListItem>Price: {item.item.price}</ListItem>
-                    <ListItem>Vendor: {item.item.vendor.vendorName}</ListItem>
-                  </List>
-                </Box>
-              ))}
+            <Typography variant="caption">
+              {/* IMGs + total price  */}
+              <WishImglist />
             </Typography>
           ) : (
             <Typography variant="caption">
-              There are 0 items in your wishlist.
+              There are 0 items in your wishlist. C'mon, dreaming is free!
             </Typography>
           )}
         </AccordionDetails>
@@ -88,7 +80,7 @@ export default function ProfileAccordion() {
           {user.cart.length > 0 ? (
             <Typography variant="caption">
               {/* IMGs + total price  */}
-              <CartImageList />
+              <CartImgList />
             </Typography>
           ) : (
             <Typography variant="caption">
@@ -112,7 +104,7 @@ export default function ProfileAccordion() {
           {user.buyHistory.length > 0 ? (
             <Typography variant="caption">
               {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
-              <OrdersImageList />
+              <OrdersImgList />
             </Typography>
           ) : (
             <Typography variant="caption">
@@ -121,7 +113,6 @@ export default function ProfileAccordion() {
           )}
         </AccordionDetails>
       </Accordion>
-
 
       {/*   REVIEW HISTORY  */}
       <Accordion>
@@ -137,7 +128,7 @@ export default function ProfileAccordion() {
           {user.ratings.length > 0 ? (
             <Typography variant="caption">
               {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
-              <ReviewsList />
+              <ReviewsImgList />
             </Typography>
           ) : (
             <Typography variant="caption">
