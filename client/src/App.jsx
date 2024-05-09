@@ -35,11 +35,10 @@ import SingleProductView from "./pages/SingleProductView";
 import Checkout from "./pages/Buyer/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
-import BuyerAccount from "./pages/Buyer/BuyerAccount";
 import VendorAccount from "./pages/Vendor/VendorAccount";
 import VendorAddItem from "./pages/Vendor/AddItem"
-import LoginType from "./pages/LoginType";
-import AccountType from "./pages/AccountType";
+import LoginType from "./pages/LoginType"; // Account type to log in to
+import AccountType from "./pages/AccountType"; // Account type to sign up for
 import Profile from "./pages/ProfileType";
 
 // Routes
@@ -48,7 +47,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/accounttype" element={<AccountType />} />
+      <Route path="/signup" element={<AccountType />} /> 
       <Route path="/signin" element={<LoginType />} />
       <Route path="/signup/:userType" element={<Signup />} />
       <Route path="/signin/:userType" element={<Signin />} />

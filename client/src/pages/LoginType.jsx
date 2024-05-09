@@ -97,7 +97,7 @@ export default function LoginType() {
               </Button>
             </FormControl>
           </form>
-          <Link color="text.secondary" href="/accounttype" variant="body2" sx={{ textDecoration: "none" }}>
+          <Link color="text.secondary" href="/signup" variant="body2" sx={{ textDecoration: "none" }}>
                 Don't have an account? Sign up
               </Link>
           <Copyright sx={{ mt: 3 }} />

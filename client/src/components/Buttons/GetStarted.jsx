@@ -6,11 +6,11 @@ export default function GetStarted() {
   return (
     <Button
       variant="contained"
-      href="/accounttype"
+      href="/signup"
       color="secondary"
       sx={{ color: "primary", textTransform: "none" }}
     >
-      Get Started!
+      Get Started
     </Button>
   );
 }

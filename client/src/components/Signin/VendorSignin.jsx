@@ -143,7 +143,7 @@ export default function Signin() {
           <Grid container justifyContent="center">
             <Grid item>
               <Link
-                href="/signup/vendor"
+                href="/signup"
                 variant="body2"
                 align="center"
                 sx={{ textDecoration: "none" }}
