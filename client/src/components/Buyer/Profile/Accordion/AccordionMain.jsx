@@ -14,7 +14,6 @@ import CartImgList from "./CartImgList";
 import WishImglist from "./WishlistImgList";
 import OrdersImgList from "./OrdersImgList";
 import ReviewsImgList from "./ReviewsImgList";
-import { NavLink } from "react-router-dom";
 
 
 export default function ProfileAccordion() {
