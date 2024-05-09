@@ -35,7 +35,6 @@ import SingleProductView from "./pages/SingleProductView";
 import Checkout from "./pages/Buyer/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
-import BuyerAccount from "./pages/Buyer/BuyerAccount";
 import VendorAccount from "./pages/Vendor/VendorAccount";
 import VendorAddItem from "./pages/Vendor/AddItem"
 import LoginType from "./pages/LoginType";

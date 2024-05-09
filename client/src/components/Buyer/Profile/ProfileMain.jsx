@@ -1,4 +1,4 @@
-import { Typography, Container } from "@mui/material";
+import { Typography, Container, Alert } from "@mui/material";
 import Auth from "../../../utils/auth";
 import { useLazyQuery } from "@apollo/client";
 import { User } from "../../../utils/queries";
@@ -14,9 +14,9 @@ export default function BuyerProfile() {
     variables: { userId: id },
   });
 
-  // Check if user is logged in
+  // Auth check
   if (!Auth.loggedIn()) {
-    // If not, navigate to '/'
+    // If not logged in, navigate to '/'
     return null; // Render nothing
   }
 
@@ -42,10 +42,11 @@ export default function BuyerProfile() {
   return (
     <Container maxWidth="lg">
       <Grid container direction="column" marginTop={12}>
+
         {/* OVERVIEW stats */}
         <Grid item marginBottom={4}>
           <Stack direction="column" alignItems="center" spacing={2}>
-            <Avatar alt={user.firstName} src={NicsAvatar} />
+            <Avatar sx={{bgcolor: "primary.main"}} alt={`${user.firstName}'s Avatar`} src={NicsAvatar} />
             <Typography textAlign="center" variant="h6">
               Hi, {user.firstName} {user.lastName} 👋
             </Typography>
@@ -82,8 +83,8 @@ export default function BuyerProfile() {
         <Grid item>
           <ProfileAccordions />
         </Grid>
-      </Grid>
 
+      </Grid>
       {/* LOGOUT Button - component */}
       <br/>
       <Logout />

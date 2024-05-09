@@ -4,7 +4,7 @@ import {
   AccordionDetails,
   Box,
 } from "@mui/material";
-import { Typography, List, ListItem } from "@mui/material";
+import { Typography, List, ListItem, Link } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
@@ -14,6 +14,8 @@ import CartImgList from "./CartImgList";
 import WishImglist from "./WishlistImgList";
 import OrdersImgList from "./OrdersImgList";
 import ReviewsImgList from "./ReviewsImgList";
+import { NavLink } from "react-router-dom";
+
 
 export default function ProfileAccordion() {
   const id = Auth.getProfile().data._id;
@@ -40,7 +42,7 @@ export default function ProfileAccordion() {
   // Grab data
 const user = data.user;
 
-// If user is using the Buyer's data model ("User"), render account type field as "Shopper"
+// If user is a Buyer ( represented as "User"), render account type field as "Shopper" instead
 let accountType = data.user.__typename;
 if (accountType === "User") {
   accountType = "Shopper";
@@ -66,7 +68,8 @@ if (accountType === "User") {
             </Typography>
           ) : (
             <Typography variant="caption">
-              There are 0 items in your wishlist. C'mon, dreaming is free!
+              There are 0 items in your wishlist. 
+              Explore items <Link underline="hover" fontWeight='bold' href='/explore/all'>here!</Link>
             </Typography>
           )}
         </AccordionDetails>
@@ -91,6 +94,7 @@ if (accountType === "User") {
           ) : (
             <Typography variant="caption">
               There are 0 items in your cart.
+              Explore items <Link underline="hover" fontWeight='bold' href='/explore/all'>here!</Link>
             </Typography>
           )}
         </AccordionDetails>
@@ -106,15 +110,15 @@ if (accountType === "User") {
         >
           <Typography>Order History</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails >
           {user.buyHistory.length > 0 ? (
             <Typography variant="caption">
-              {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
-              <OrdersImgList />
+              <OrdersImgList  />
             </Typography>
           ) : (
             <Typography variant="caption">
               There have been 0 orders placed from this account.
+              Explore items <Link underline="hover" fontWeight='bold' href='/explore/all'>here!</Link>
             </Typography>
           )}
         </AccordionDetails>
@@ -153,8 +157,8 @@ if (accountType === "User") {
         >
           <Typography>Account Details</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography variant="caption">
+        <AccordionDetails sx={{backgroundColor: "#F2F2F2"}}>
+          <Typography variant="caption" >
             <List>
               <ListItem>Account Type: {accountType}</ListItem>
               <ListItem>
