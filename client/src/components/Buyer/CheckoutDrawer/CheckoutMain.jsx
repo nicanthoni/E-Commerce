@@ -5,7 +5,7 @@ import CheckoutOrder from "./CheckoutOrder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button, Typography, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import Auth from "../../utils/auth";
+import Auth from "../../../utils/auth";
 
 // adjust drawer width
 const drawerWidth = 285;

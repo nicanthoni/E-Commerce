@@ -85,6 +85,7 @@ export default function BuyerProfile() {
       </Grid>
 
       {/* LOGOUT Button - component */}
+      <br/>
       <Logout />
     </Container>
   );

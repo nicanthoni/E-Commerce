@@ -16,7 +16,7 @@ import { NavLink } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import { Container } from "@mui/material";
-import CheckoutMain from "../CheckoutDrawer/CheckoutMain";
+import CheckoutMain from "../Buyer/CheckoutDrawer/CheckoutMain";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
 import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";

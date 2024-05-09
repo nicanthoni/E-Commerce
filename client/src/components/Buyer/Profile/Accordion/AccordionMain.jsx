@@ -38,7 +38,13 @@ export default function ProfileAccordion() {
   }
 
   // Grab data
-  const user = data.user;
+const user = data.user;
+
+// If user is using the Buyer's data model ("User"), render account type field as "Shopper"
+let accountType = data.user.__typename;
+if (accountType === "User") {
+  accountType = "Shopper";
+}
 
   return (
     <Box>
@@ -150,7 +156,7 @@ export default function ProfileAccordion() {
         <AccordionDetails>
           <Typography variant="caption">
             <List>
-              <ListItem>Account Type:</ListItem>
+              <ListItem>Account Type: {accountType}</ListItem>
               <ListItem>
                 Name: {user.firstName} {user.lastName}
               </ListItem>
