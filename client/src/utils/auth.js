@@ -11,13 +11,14 @@ class AuthService {
     }
     const currentPage = window.location.pathname
     if (
+      currentPage !== '/signup' &&
       currentPage !== '/signup/buyer' &&
       currentPage !== '/signup/vendor' &&
       currentPage !== '/signin/buyer' &&
       currentPage !== '/signin/vendor' &&
       currentPage !== '/'
     ) {
-      return (window.location.href = '/accounttype')
+      return (window.location.href = '/')
     }
   }
   isTokenExpired(token) {

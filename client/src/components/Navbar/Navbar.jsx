@@ -22,30 +22,33 @@ import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";
 import GetStarted from "../Buttons/GetStarted";
 
+
 // Width of menu drawer
 const drawerWidth = 285;
 
+export default function Navbar() {
+const [auth, setAuth] = useState(false);
+const [showCart, setShowCart] = useState(false);
+const [mobileOpen, setMobileOpen] = useState(false);
+
 // Nav items array
-const navItems = ["Home", "Explore"];
+const navItems = ["Home", "Explore", "Support", "Sign In"];
 
 // Nav item routes
 const routes = {
   Home: "/",
   Explore: "/explore/all",
+  Support: "#",
+  "Sign In": "/signin/", // Match 'key' to the nav item
 };
 
-export default function Navbar() {
-  // const [auth, setAuth] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  // useEffect(() => {
-  //   if (Auth.loggedIn()) {
-  //     setAuth(true);
-  //   } else {
-  //     setAuth(false);
-  //   }
-  // }, [auth]);
+  useEffect(() => {
+    if (Auth.loggedIn()) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, []);
 
   // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
@@ -57,7 +60,7 @@ export default function Navbar() {
     setMobileOpen((prevState) => !prevState);
   };
 
-  // Items in MENU drawer - Decompose as a separate component?
+  // MENU items drawer - Decompose as a separate component?
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
@@ -83,8 +86,7 @@ export default function Navbar() {
             </ListItemButton>
           </ListItem>
         ))}
-        <GetStarted/>
-        {/* {!auth ? <GetStarted/> : <Logout/>} */}
+        {!auth ? <GetStarted/> : <Logout/>}
       </List>
     </Box>
   );
