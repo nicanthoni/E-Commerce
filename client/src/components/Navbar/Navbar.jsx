@@ -17,7 +17,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import { Container } from "@mui/material";
 import CheckoutMain from "../Buyer/CheckoutDrawer/CheckoutMain";
-import SkateboardingIcon from "@mui/icons-material/Skateboarding"; // Logo placeholder
+import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
 import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";
 import GetStarted from "../Buttons/GetStarted";
@@ -41,9 +41,12 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    console.log("Effect triggered");
     if (Auth.loggedIn()) {
+      console.log("User logged in");
       setAuth(true);
     } else {
+      console.log("User logged out");
       setAuth(false);
     }
   }, [auth]);
@@ -67,7 +70,7 @@ export default function Navbar() {
           color="#fff"
           sx={{ my: 2, display: "inline-block" }}
         >
-          <SkateboardingIcon />
+          <LogoDevIcon />
         </Typography>
       </Box>
       <Divider />
@@ -137,7 +140,7 @@ export default function Navbar() {
               }}
             >
               <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
-                <SkateboardingIcon /> AppName
+                <LogoDevIcon /> AppName
               </NavLink>
             </Typography>
 
