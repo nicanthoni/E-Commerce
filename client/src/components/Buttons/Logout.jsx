@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 // Reusable Logout button component
 export default function Logout() {
-
   const navigate = useNavigate();
+
   // Logout button handler
-  
   const handleLogout = () => {
     navigate("/");
     Auth.logout();

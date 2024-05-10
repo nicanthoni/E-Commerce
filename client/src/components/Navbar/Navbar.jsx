@@ -22,6 +22,7 @@ import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";
 import GetStarted from "../Buttons/GetStarted";
 
+
 // Width of menu drawer
 const drawerWidth = 285;
 
