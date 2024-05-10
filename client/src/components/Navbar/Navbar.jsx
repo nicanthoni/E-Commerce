@@ -22,25 +22,23 @@ import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";
 import GetStarted from "../Buttons/GetStarted";
 
-
 // Width of menu drawer
 const drawerWidth = 285;
 
 export default function Navbar() {
-const [auth, setAuth] = useState(false);
-const [showCart, setShowCart] = useState(false);
-const [mobileOpen, setMobileOpen] = useState(false);
+  const [auth, setAuth] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-// Nav items array
-const navItems = ["Home", "Explore", "Support", "Sign In"];
+  // Nav items array
+  const navItems = ["Home", "Explore", "Support"];
 
-// Nav item routes
-const routes = {
-  Home: "/",
-  Explore: "/explore/all",
-  Support: "#",
-  "Sign In": "/signin/", // Match 'key' to the nav item
-};
+  // Nav item routes
+  const routes = {
+    Home: "/",
+    Explore: "/explore/all",
+    Support: "#",
+  };
 
   useEffect(() => {
     if (Auth.loggedIn()) {
@@ -48,7 +46,7 @@ const routes = {
     } else {
       setAuth(false);
     }
-  }, []);
+  }, [auth]);
 
   // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
@@ -60,7 +58,7 @@ const routes = {
     setMobileOpen((prevState) => !prevState);
   };
 
-  // MENU items drawer - Decompose as a separate component?
+  // MENU items drawer 
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
@@ -86,12 +84,32 @@ const routes = {
             </ListItemButton>
           </ListItem>
         ))}
-        {!auth ? <GetStarted/> : <Logout/>}
+        {/* Conditionally render by auth status */}
+        {!auth ? (
+          <>
+            <ListItem
+              key="SignIn"
+              disablePadding
+            >
+              <ListItemButton>
+                <NavLink
+                  to="/signin"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <ListItemText primary='Sign In' />
+                </NavLink>
+              </ListItemButton>
+            </ListItem>
+            <GetStarted />
+          </>
+        ) : (
+          <Logout />
+        )}
       </List>
     </Box>
   );
 
-  // Main Navbar
+  // Navbar
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar
@@ -99,7 +117,6 @@ const routes = {
         sx={{ backgroundColor: "primary", display: "flex" }}
         elevation={0}
       >
-        {/* Container provides maxwidth and horizontal centering */}
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <IconButton
@@ -124,7 +141,7 @@ const routes = {
               </NavLink>
             </Typography>
 
-            {/* Main Navbar items on desktop view */}
+            {/* Navbar items - desktop view */}
             <Box
               className="nav-link-Container"
               sx={{ display: { xs: "none", sm: "flex" } }}
@@ -142,12 +159,29 @@ const routes = {
                   </NavLink>
                 </Button>
               ))}
-              {/* Sign up button */}
-              <GetStarted/>
+              {/* Conditionally render by auth status */}
+              {!auth ? (
+                <>
+                  <Button
+                    key="Signin"
+                    sx={{ color: "#fff", textTransform: "none" }}
+                  >
+                    <NavLink
+                      to="/signin"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      Sign In
+                    </NavLink>
+                  </Button>
+                  <GetStarted />
+                </>
+              ) : (
+                <Logout />
+              )}
             </Box>
 
             {/* CheckoutMain renders on Cart click */}
-            <Box className="cart-icon" sx={{ ml: 3, mr: 4, cursor: 'pointer' }}>
+            <Box className="cart-icon" sx={{ ml: 3, mr: 4, cursor: "pointer" }}>
               <Badge badgeContent={1} max={10} color="error">
                 {/* Color for icon controlled in <CheckoutMain/> */}
                 <ShoppingCartIcon onClick={toggleShowCart} />
