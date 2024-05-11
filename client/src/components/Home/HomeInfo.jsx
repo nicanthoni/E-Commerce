@@ -1,4 +1,5 @@
 import { Typography, Button } from "@mui/material";
+import GetStarted from "../Buttons/GetStarted";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 
 export default function HomeInfo() {
@@ -34,15 +35,7 @@ export default function HomeInfo() {
         </Typography>
       </Grid>
       <Grid item sx={{ textAlign: {xs:'center', sm: 'center', md: 'left'}  }}>
-        <Button
-          className="discover-products-btn"
-          variant="contained"
-          href="/accounttype"
-          color="secondary"
-          sx={{  color: "primary", textTransform: 'none' }}
-        >
-          Get Started
-        </Button>
+        <GetStarted/>
       </Grid>
     </Grid>
   );

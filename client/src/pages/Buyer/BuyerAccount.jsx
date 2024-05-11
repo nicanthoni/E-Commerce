@@ -1,10 +1,9 @@
-import BuyerProfile from "../../components/Buyer/BuyerProfile"
-import { Container } from "@mui/material"
+import BuyerProfile from "../../components/Buyer/Profile/ProfileMain";
 
-export default function BuyerAccount () {
-    return (
-        <Container>
-                <BuyerProfile/>
-        </Container>
-    )
+export default function BuyerAccount() {
+  return (
+    <>
+      <BuyerProfile />
+    </>
+  );
 }

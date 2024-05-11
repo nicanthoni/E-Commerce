@@ -1,5 +1,5 @@
-import productPhoto from "../../assets/images/shirt.jpg";
-import { Stack, Box, Typography, Divider } from "@mui/material";
+import productPhoto from "../../../assets/images/shirt.jpg";
+import { Stack, Box, Typography } from "@mui/material";
 import QuantityIncrementer from "./QuantityIncrementer";
 
 // ORDER SUMMARY
