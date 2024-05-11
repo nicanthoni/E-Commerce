@@ -6,8 +6,9 @@ const resolvers = {
     test: async () => {
       return 'test'
     },
-    user: async (parent, { id }) => {
+    user: async (parent, { id }, context) => {
       console.log('User ID:', id)
+      console.log(context)
       const user = await User.findById(id).populate({
         path: 'cart.item',
         populate: { path: 'vendor' }
