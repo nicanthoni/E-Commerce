@@ -50,11 +50,10 @@ export default function AccountType() {
       <Grid item xs={12}>
         <Box
           sx={{
-            my: 7,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+          marginTop: 14,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           }}
         >
           <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
