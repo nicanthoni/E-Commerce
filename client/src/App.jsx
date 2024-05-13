@@ -36,7 +36,7 @@ import Checkout from "./pages/Buyer/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import VendorAccount from "./pages/Vendor/VendorAccount";
-import VendorAddItem from "./pages/Vendor/AddItem"
+import VendorAddItem from "./pages/Vendor/AddItem" // Just to test adding a new item
 import LoginType from "./pages/LoginType"; // Account type to log in to
 import AccountType from "./pages/AccountType"; // Account type to sign up for
 import Profile from "./pages/ProfileType";
