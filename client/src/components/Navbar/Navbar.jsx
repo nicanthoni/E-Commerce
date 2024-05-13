@@ -61,7 +61,7 @@ export default function Navbar() {
     setMobileOpen((prevState) => !prevState);
   };
 
-  // MENU items drawer
+  // MENU items
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
@@ -121,7 +121,6 @@ export default function Navbar() {
     </Box>
   );
 
-  // Navbar
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar

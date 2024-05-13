@@ -40,7 +40,7 @@ export default function HomeServices() {
         variant="contained" href="#"
         sx={{ color: "primary.main" , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
-          Ask
+          Support
         </Button>
       </Stack>
     </Stack>
