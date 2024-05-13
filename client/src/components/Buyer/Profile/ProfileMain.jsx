@@ -7,6 +7,7 @@ import { Grid, Avatar, Stack } from "@mui/material";
 import NicsAvatar from "../../../assets/images/MyAvatar-PNG.png";
 import Logout from "../../Buttons/Logout";
 import ProfileAccordions from "./Accordion/AccordionMain";
+import Navbar from "../../Navbar/Navbar";
 
 export default function BuyerProfile() {
   const id = Auth.getProfile().data._id;
@@ -40,6 +41,8 @@ export default function BuyerProfile() {
   console.log("User data: ", user);
 
   return (
+    <>
+    <Navbar/> 
     <Container maxWidth="lg">
       <Grid container direction="column" marginTop={12}>
 
@@ -89,5 +92,6 @@ export default function BuyerProfile() {
       <br/>
       <Logout />
     </Container>
+    </>
   );
 }

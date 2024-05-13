@@ -17,11 +17,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Badge } from "@mui/material";
 import { Container } from "@mui/material";
 import CheckoutMain from "../Buyer/CheckoutDrawer/CheckoutMain";
-import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
+import LogoDevIcon from "@mui/icons-material/LogoDev"; // Logo placeholder
 import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";
 import GetStarted from "../Buttons/GetStarted";
-
 
 // Width of menu drawer
 const drawerWidth = 285;
@@ -62,7 +61,7 @@ export default function Navbar() {
     setMobileOpen((prevState) => !prevState);
   };
 
-  // MENU items drawer 
+  // MENU items drawer
   const menuDrawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Box sx={{ bgcolor: "primary.main" }}>
@@ -91,23 +90,32 @@ export default function Navbar() {
         {/* Conditionally render by auth status */}
         {!auth ? (
           <>
-            <ListItem
-              key="SignIn"
-              disablePadding
-            >
+            <ListItem key="SignIn" disablePadding>
               <ListItemButton>
                 <NavLink
                   to="/signin"
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <ListItemText primary='Sign In' />
+                  <ListItemText primary="Sign In" />
                 </NavLink>
               </ListItemButton>
             </ListItem>
             <GetStarted />
           </>
         ) : (
-          <Logout />
+          <>
+            <ListItem key="Profile" disablePadding>
+              <ListItemButton>
+                <NavLink
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <ListItemText primary="Profile" />
+                </NavLink>
+              </ListItemButton>
+            </ListItem>
+            <Logout />
+          </>
         )}
       </List>
     </Box>
@@ -180,15 +188,33 @@ export default function Navbar() {
                   <GetStarted />
                 </>
               ) : (
+                <>
+                <Button
+                  key="Profile"
+                  sx={{ color: "#fff", textTransform: "none" }}
+                >
+                  <NavLink
+                    to="/profile"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Profile
+                  </NavLink>
+                </Button>
                 <Logout />
+                </>
               )}
             </Box>
 
             {/* CheckoutMain renders on Cart click */}
             <Box className="cart-icon" sx={{ ml: 3, mr: 4, cursor: "pointer" }}>
-              <Badge badgeContent={1} max={10} color="error">
+              <Badge
+                onClick={toggleShowCart}
+                badgeContent={1}
+                max={10}
+                color="error"
+              >
                 {/* Color for icon controlled in <CheckoutMain/> */}
-                <ShoppingCartIcon onClick={toggleShowCart} />
+                <ShoppingCartIcon />
               </Badge>
             </Box>
             {showCart && <CheckoutMain />}
