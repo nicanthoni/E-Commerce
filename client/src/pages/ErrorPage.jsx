@@ -13,7 +13,7 @@ export default function ErrorPage() {
             
             // Redirect to the /home after selecting "OK" on alert
             navigate('/');
-        }, 2000);
+        }, 1000);
 
         // Cleanup timeout on component unmount
         return () => clearTimeout(timeoutId);

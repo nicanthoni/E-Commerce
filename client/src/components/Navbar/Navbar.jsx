@@ -21,11 +21,15 @@ import LogoDevIcon from "@mui/icons-material/LogoDev"; // Logo placeholder
 import Auth from "../../utils/auth";
 import Logout from "../Buttons/Logout";
 import GetStarted from "../Buttons/GetStarted";
+// import { useContext } from "react";
+// import { AuthContext } from "../../contexts/AuthContext";
+
 
 // Width of menu drawer
 const drawerWidth = 285;
 
 export default function Navbar() {
+  // const {user, login, logout} = useContext(AuthContext) // change 'user' to auth once working
   const [auth, setAuth] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
