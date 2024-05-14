@@ -24,13 +24,12 @@ import GetStarted from "../Buttons/GetStarted";
 // import { useContext } from "react";
 // import { AuthContext } from "../../contexts/AuthContext";
 
-
 // Width of menu drawer
 const drawerWidth = 285;
 
-export default function Navbar() {
+export default function Navbar({ isAuthenticated }) {
   // const {user, login, logout} = useContext(AuthContext) // change 'user' to auth once working
-  const [auth, setAuth] = useState(false);
+
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -44,17 +43,6 @@ export default function Navbar() {
     Support: "#",
   };
 
-  useEffect(() => {
-    console.log("Effect triggered");
-    if (Auth.loggedIn()) {
-      console.log("User logged in");
-      setAuth(true);
-    } else {
-      console.log("User logged out");
-      setAuth(false);
-    }
-  }, [auth]);
-
   // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
     setShowCart((prevShowCart) => !prevShowCart); // functional update to ensure proper synchronization
@@ -64,6 +52,8 @@ export default function Navbar() {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+console.log(isAuthenticated)
 
   // MENU items
   const menuDrawer = (
@@ -92,7 +82,7 @@ export default function Navbar() {
           </ListItem>
         ))}
         {/* Conditionally render by auth status */}
-        {!auth ? (
+        {!isAuthenticated ? (
           <>
             <ListItem key="SignIn" disablePadding>
               <ListItemButton>
@@ -175,7 +165,7 @@ export default function Navbar() {
                 </Button>
               ))}
               {/* Conditionally render by auth status */}
-              {!auth ? (
+              {!isAuthenticated ? (
                 <>
                   <Button
                     key="Signin"
@@ -192,18 +182,18 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                <Button
-                  key="Profile"
-                  sx={{ color: "#fff", textTransform: "none" }}
-                >
-                  <NavLink
-                    to="/profile"
-                    style={{ textDecoration: "none", color: "inherit" }}
+                  <Button
+                    key="Profile"
+                    sx={{ color: "#fff", textTransform: "none" }}
                   >
-                    Profile
-                  </NavLink>
-                </Button>
-                <Logout />
+                    <NavLink
+                      to="/profile"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      Profile
+                    </NavLink>
+                  </Button>
+                  <Logout />
                 </>
               )}
             </Box>

@@ -12,7 +12,7 @@ import Navbar from "../Navbar/Navbar";
 export default function HomeMain() {
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
       <Box sx={{ backgroundColor: "primary.main" }}>
         <Container maxWidth="xl" className="home-main-container">
           <Grid container spacing={3} alignItems="center">
