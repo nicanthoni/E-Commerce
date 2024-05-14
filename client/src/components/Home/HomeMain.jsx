@@ -6,11 +6,13 @@ import HomeServices from "./HomeServices";
 import HomeTestimonials from "./HomeTestimonials";
 import HomeCTA from "./HomeCTA";
 import Footer from "../Footer/Footer";
+import Navbar from "../Navbar/Navbar";
 
 // Parent Home component
 export default function HomeMain() {
   return (
     <>
+    {/* <Navbar/> */}
       <Box sx={{ backgroundColor: "primary.main" }}>
         <Container maxWidth="xl" className="home-main-container">
           <Grid container spacing={3} alignItems="center">

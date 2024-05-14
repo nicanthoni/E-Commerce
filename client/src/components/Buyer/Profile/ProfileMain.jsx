@@ -36,13 +36,13 @@ export default function BuyerProfile() {
     return <p>No user data found</p>;
   }
 
-  // Data object
+  // User data object
   const user = data.user;
-  console.log("User data: ", user);
+  // console.log("User data: ", user);
 
   return (
     <>
-    <Navbar/> 
+    {/* <Navbar/>  */}
     <Container maxWidth="lg">
       <Grid container direction="column" marginTop={12}>
 

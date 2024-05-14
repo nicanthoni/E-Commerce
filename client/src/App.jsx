@@ -1,8 +1,13 @@
-import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
-
+import { useState } from "react";
 
 // Custom Theme - Colors & Font
 const theme = createTheme({
@@ -17,13 +22,16 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'muli, sans-serif',
+    fontFamily: "muli, sans-serif",
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     fontWeightBold: 600,
-  }
+  },
 });
+
+// Contexts 
+import { AuthContextProvider } from "./contexts/AuthContext.jsx";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";
@@ -36,10 +44,11 @@ import Checkout from "./pages/Buyer/Checkout";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import VendorAccount from "./pages/Vendor/VendorAccount";
-import VendorAddItem from "./pages/Vendor/AddItem" // Just to test adding a new item
+import VendorAddItem from "./pages/Vendor/AddItem"; // Just to test adding a new item
 import LoginType from "./pages/LoginType"; // Account type to log in to
 import AccountType from "./pages/AccountType"; // Account type to sign up for
 import Profile from "./pages/ProfileType";
+import ErrorPage from "./pages/ErrorPage";
 
 // Routes
 const router = createBrowserRouter(
@@ -47,27 +56,30 @@ const router = createBrowserRouter(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/signup" element={<AccountType />} /> 
+      <Route path="/signup" element={<AccountType />} />
       <Route path="/signin" element={<LoginType />} />
       <Route path="/signup/:userType" element={<Signup />} />
       <Route path="/signin/:userType" element={<Signin />} />
-      <Route path="/profile" element={< Profile />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/profile/vendor/:vendorId" element={<VendorAccount />} />
       <Route path="/explore/:category" element={<Explore />} />
       <Route path="/explore/all" element={<Explore />} />
       <Route path="/product/:productId" element={<SingleProductView />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/additem" element={<VendorAddItem />} />
+      <Route path="*" element={<ErrorPage />} />
     </Route>
   )
 );
 
-
 function App() {
+
   return (
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthContextProvider>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AuthContextProvider>
   );
 }
 

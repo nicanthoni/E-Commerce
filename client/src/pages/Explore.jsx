@@ -1,5 +1,4 @@
 import { Grid, Container } from "@mui/material";
-import { useState, useEffect } from "react";
 import ProductCard from "../components/Explore/ProductCard";
 import FilterCategory from "../components/Explore/FilterCategory";
 import FilterPrice from "../components/Explore/FilterPrice";
