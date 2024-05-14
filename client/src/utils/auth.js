@@ -19,7 +19,7 @@ class AuthService {
       currentPage !== '/signin/vendor' &&
       currentPage !== '/'
     ) {
-      return (window.location.href = '/') // send to home page
+      return false // send to home page
     }
   }
   isTokenExpired(token) {

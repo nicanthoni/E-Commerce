@@ -40,6 +40,7 @@ import VendorAddItem from "./pages/Vendor/AddItem" // Just to test adding a new 
 import LoginType from "./pages/LoginType"; // Account type to log in to
 import AccountType from "./pages/AccountType"; // Account type to sign up for
 import Profile from "./pages/ProfileType";
+import ErrorPage from "./pages/ErrorPage";
 
 // Routes
 const router = createBrowserRouter(
@@ -58,6 +59,7 @@ const router = createBrowserRouter(
       <Route path="/product/:productId" element={<SingleProductView />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/additem" element={<VendorAddItem />} />
+      <Route path='*' element={<ErrorPage />} />
     </Route>
   )
 );
