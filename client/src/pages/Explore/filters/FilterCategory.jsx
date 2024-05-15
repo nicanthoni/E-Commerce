@@ -17,12 +17,12 @@ export default function FilterCategory() {
     <Grid item xs={6} display={'flex'} justifyContent={'right'} padding={2}>
     <Box sx={{ width: 105 }}>
       <FormControl fullWidth size='small' >
-        <InputLabel id="category-select-label">Category</InputLabel>
+        <InputLabel id='category-select-label'>Category</InputLabel>
         <Select
-          labelId="category-label"
-          id="filter-category"
+          labelId='category-label'
+          id='filter-category'
           value={category}
-          label="Category"
+          label='Category'
           onChange={handleChange}
         >
           <MenuItem value={10}>Men</MenuItem>

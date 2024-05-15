@@ -17,12 +17,12 @@ export default function FilterPrice() {
     <Grid item xs={6} display={'flex'} justifyContent={'left'} padding={2}>
     <Box sx={{ width: 105 }}>
       <FormControl fullWidth size='small' >
-        <InputLabel id="price-filter-select-label">Sort by Price</InputLabel>
+        <InputLabel id='price-filter-select-label'>Sort by Price</InputLabel>
         <Select
-          labelId="price-label"
-          id="filter-price"
+          labelId='price-label'
+          id='filter-price'
           value={price}
-          label="Price Filter"
+          label='Price Filter'
           onChange={handleChange}
         >
           <MenuItem value={10}>Lowest to highest</MenuItem>

@@ -15,11 +15,11 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
       }}
       slotProps={{
         incrementButton: {
-          children: <AddIcon fontSize="small" />,
+          children: <AddIcon fontSize='small' />,
           className: 'increment',
         },
         decrementButton: {
-          children: <RemoveIcon fontSize="small" />,
+          children: <RemoveIcon fontSize='small' />,
         },
       }}
       {...props}
@@ -30,7 +30,7 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
 
 export default function QuantityIncrementer() {
   // stopPropagation() prevents the drawer closing itself whenevr clicking the increment button
-  return <NumberInput onClick={(e) => { e.stopPropagation();}} aria-label="Quantity Input" min={1} max={99} />;
+  return <NumberInput onClick={(e) => { e.stopPropagation();}} aria-label='Quantity Input' min={1} max={99} />;
 }
 
 const blue = {

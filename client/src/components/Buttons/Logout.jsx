@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
-import Auth from "../../utils/auth";
-import { useNavigate } from "react-router-dom";
+import { Button } from '@mui/material';
+import Auth from '../../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 // Reusable Logout button component
 export default function Logout() {
@@ -8,18 +8,18 @@ export default function Logout() {
 
   // Logout button handler
   const handleLogout = () => {
-    navigate("/");
+    navigate('/');
     Auth.logout();
   };
 
   return (
     <Button
       onClick={handleLogout}
-      variant="contained"
+      variant='contained'
       sx={{
-        bgcolor: "secondary.main",
-        color: "primary.main",
-        textTransform: "none",
+        bgcolor: 'secondary.main',
+        color: 'primary.main',
+        textTransform: 'none',
       }}
     >
       Logout
