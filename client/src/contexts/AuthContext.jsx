@@ -11,19 +11,20 @@ export const authReducer = (state, action) => {
     case 'LOGOUT':
       return { user: null };
     default:
-      state;
+      return state;
   }
 };
 
 // custom component to wrap entire root app and provide the state value from context to entire application
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
-    user: null, // when user first loads a website, they're generally not logged in
+    user: null // when user first loads a website, they're generally not logged in
   });
 
   console.log('AuthContext state: ', state)
   
   return (
+    // ...state represents 'user' property from AuthContextProvider. Using spread to account for future additional properties
     <AuthContext.Provider value={{...state, dispatch}}>
         { children }
     </AuthContext.Provider>

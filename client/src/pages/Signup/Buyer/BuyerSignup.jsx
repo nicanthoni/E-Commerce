@@ -14,8 +14,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Auth from '../../../utils/auth';
+import { useSignup } from '../../../hooks/useSignup'; // custom hook 
 
 export default function BuyerSignup() {
+  //invoke custom Signuphook
+  const {signup, stateError, isLoading} = useSignup()
+
   // Method to change location
   const navigate = useNavigate();
 
@@ -27,11 +31,11 @@ export default function BuyerSignup() {
   // On first render, check if user is logged in.If so, send to their profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
-      navigate(`/profile`);
+      navigate('/profile');
     }
   }, []);
 
-  // Initialize State for form fields
+  // Form state
   const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
@@ -40,7 +44,7 @@ export default function BuyerSignup() {
   });
 
   //  Mutation
-  const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
+  // const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
 
   // OnChange, update form state
   const handleChange = (event) => {
@@ -78,15 +82,16 @@ export default function BuyerSignup() {
     }
 
     try {
-      const { data } = await AddUser({
-        variables: { ...formState },
-      });
+      await signup(...formState)
+      // const { data } = await AddUser({
+      //   variables: { ...formState },
+      // });
 
-      Auth.login(data.AddUser.token);
+      // Auth.login(data.AddUser.token);
       setShowSuccessAlert(true);
-      setTimeout(() => {
-        navigate(`/profile`);
-      }, 1500);
+      // setTimeout(() => {
+      //   navigate(`/profile`);
+      // }, 1500);
     } catch (e) {
       setShowErrorAlert(true);
       console.error('AddUser Error:', e);
@@ -128,6 +133,8 @@ export default function BuyerSignup() {
           <ShoppingBasketIcon />
         </Avatar>
         <Typography variant='h5'>Buyer Registration</Typography>
+
+        {/* FORM */}
         <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>

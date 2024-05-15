@@ -26,14 +26,14 @@ export default function Signin() {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // On first render, check if user is logged in.If so, send to their profile page
+  // On first render, check if user is logged in. If so, send to their profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
-      navigate(`/profile`);
+      navigate('/profile');
     }
   }, []);
 
-  // Initialize State for form fields
+  // Form state
   const [formState, setFormState] = useState({
     email: '',
     password: '',

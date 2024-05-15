@@ -8,6 +8,7 @@ import '../src/assets/global.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
 
+
 // Custom Theme - Colors & Font
 const theme = createTheme({
   palette: {
@@ -29,8 +30,6 @@ const theme = createTheme({
   },
 });
 
-// Contexts
-import { AuthContextProvider } from './contexts/AuthContext.jsx';
 
 // Layouts
 import RootLayout from './layouts/RootLayout';
@@ -73,11 +72,9 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <AuthContextProvider>
       <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
       </ThemeProvider>
-    </AuthContextProvider>
   );
 }
 
