@@ -1,5 +1,5 @@
 // RootLayout to hold NavBar, Outlet, and *potentially* Footer component
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../pages/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Auth from "../utils/auth"; // check auth here, vs everywhere else
 import { useEffect, useState } from "react";

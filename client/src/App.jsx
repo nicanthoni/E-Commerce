@@ -4,10 +4,9 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
+import "../src/assets/global.css";
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
-import { useState } from "react";
 
 // Custom Theme - Colors & Font
 const theme = createTheme({
@@ -30,24 +29,24 @@ const theme = createTheme({
   },
 });
 
-// Contexts 
+// Contexts
 import { AuthContextProvider } from "./contexts/AuthContext.jsx";
 
 // Layouts
 import RootLayout from "./layouts/RootLayout";
 
 // Pages
-import Home from "./pages/Home";
-import Explore from "./pages/Explore";
-import SingleProductView from "./pages/SingleProductView";
-import Checkout from "./pages/Buyer/Checkout";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
-import VendorAccount from "./pages/Vendor/VendorAccount";
-import VendorAddItem from "./pages/Vendor/AddItem"; // Just to test adding a new item
-import LoginType from "./pages/LoginType"; // Account type to log in to
-import AccountType from "./pages/AccountType"; // Account type to sign up for
-import Profile from "./pages/ProfileType";
+import Home from "./pages/Home/Home.jsx";
+import Explore from "./pages/Explore/Explore.jsx";
+import SingleProductView from "./pages/Explore/SingleProductView.jsx";
+import Checkout from "./pages/Profile/Buyer/Checkout";
+import Signup from "./pages/Signup/Signup.jsx";
+import Signin from "./pages/Signin/Signin.jsx";
+import VendorAccount from "./pages/Profile/Vendor/VendorAccount";
+import VendorAddItem from "./pages/Profile/Vendor/_tests_/AddItem.jsx"; // Just to test adding a new item
+import LoginType from "./pages/Signin/LoginType.jsx"; // Account type to log in to
+import AccountType from "./pages/Signup/AccountType.jsx"; // Account type to sign up for
+import Profile from "./pages/Profile/ProfileType.jsx";
 import ErrorPage from "./pages/ErrorPage";
 
 // Routes
@@ -73,7 +72,6 @@ const router = createBrowserRouter(
 );
 
 function App() {
-
   return (
     <AuthContextProvider>
       <ThemeProvider theme={theme}>

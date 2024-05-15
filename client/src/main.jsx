@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+import '../src/assets/global.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 
