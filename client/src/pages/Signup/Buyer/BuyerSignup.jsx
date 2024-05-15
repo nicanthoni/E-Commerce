@@ -68,6 +68,10 @@ export default function BuyerSignup() {
       );
     }
 
+    if (!emailRegex.test(formState.email) && formState.password.length < 8) {
+      setErrorMessage("The email address is invalid, and your password must be at least 8 characters long")
+    }
+
     if (errorMessage) {
       setShowErrorAlert(true);
       return;
@@ -117,7 +121,7 @@ export default function BuyerSignup() {
             onClose={handleClearError}
           >
             {errorMessage ||
-              "Registration failed! Be sure all fields are complete, or try a different email."}
+              "Please complete the form, or try a different email address"}
           </Alert>
         )}
         <Avatar sx={{ marginBottom: 3, bgcolor: "primary.main" }}>
