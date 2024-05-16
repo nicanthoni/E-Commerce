@@ -23,14 +23,13 @@ export default function BuyerProfile() {
     if (user) {
       loadUser();
     } 
-  }, [loadUser, user]); // Ensure dependencies are provided
+  }, [loadUser, user]); 
 
   if (error) {
     console.error('GraphQL Error:', error);
-    return <p>Error fetching data</p>;
   }
   if (loading) {
-    return <p>Loading...</p>; // Replace with loading spinner
+    return <p>Loading...</p>; 
   }
   if (!data || !data.user) {
     return <p>No user data found</p>;
