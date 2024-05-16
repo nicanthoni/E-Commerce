@@ -63,7 +63,7 @@ export default function Signin() {
       Auth.login(data.Userlogin.token);
       setShowSuccessAlert(true);
       setTimeout(() => {
-        navigate(`/profile`);
+        navigate('/profile');
       }, 1500);
     } catch (e) {
       setShowErrorAlert(true);

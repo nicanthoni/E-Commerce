@@ -1,8 +1,6 @@
 import Copyright from '../../../components/Footer/Copyright';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
-import { buyer_Signup } from '../../../utils/mutations';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -43,9 +41,6 @@ export default function BuyerSignup() {
     password: '',
   });
 
-  //  Mutation
-  // const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
-
   // OnChange, update form state
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,12 +50,12 @@ export default function BuyerSignup() {
     });
   };
 
-  // On form Submission:
+  // OnSubmit:
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage(''); // Clear previous error message
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailRegex.test(formState.email)) {
       setErrorMessage('Invalid email address');
     }
@@ -82,23 +77,17 @@ export default function BuyerSignup() {
     }
 
     try {
-      await signup(...formState)
-      // const { data } = await AddUser({
-      //   variables: { ...formState },
-      // });
-
-      // Auth.login(data.AddUser.token);
+      console.log('Form state:', formState);
+      await signup(formState)
       setShowSuccessAlert(true);
-      // setTimeout(() => {
-      //   navigate(`/profile`);
-      // }, 1500);
     } catch (e) {
       setShowErrorAlert(true);
-      console.error('AddUser Error:', e);
+      console.error('signup error in BuyerSignup:', e);
     }
   };
+  
 
-  // Clear error message once message is closed (onClose)
+  // Clear error message (onClose)
   const handleClearError = () => {
     setErrorMessage('');
     setShowErrorAlert(false);

@@ -14,13 +14,13 @@ export const useSignup = () => {
     //  Mutation
     const [AddUser, { error, loading, data }] = useMutation(buyer_Signup);
 
-    const signup = async (firstName, lastName, email, password ) => {
+    const signup = async (formState) => {
         setIsLoading(true)
         setStateError(null)
 
         try {
             const { data } = await AddUser({
-            variables: { firstName, lastName, email, password },
+            variables: formState,
             });
     
             Auth.login(data.AddUser.token);
@@ -38,9 +38,9 @@ export const useSignup = () => {
       } catch (e) {
             setStateError(true)
             setIsLoading(false)
-            console.error('AddUser Error:', e);
+            console.error('AddUser error in useSignup hook:', e);
       }
          
     }
-    return { signup, isLoading, error }
+    return { signup, isLoading, stateError }
 }
