@@ -38,7 +38,7 @@ export const useSignup = () => {
       } catch (e) {
             setStateError(true)
             setIsLoading(false)
-            console.error('AddUser error in useSignup hook:', e);
+            console.error('AddUser error in useSignup() hook:', e);
       }
          
     }

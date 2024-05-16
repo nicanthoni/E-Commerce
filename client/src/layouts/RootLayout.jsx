@@ -12,12 +12,12 @@ export default function RootLayout() {
 
   // Set state on render, & if the value of isLoggedIn changes
   useEffect(() => {
-    console.log('Effect triggered');
+    console.log('RootLayout Effect() triggered');
     if (isLoggedIn) {
-      console.log('User logged in');
+      console.log('User loggedIn');
       setAuth(true);
     } else {
-      console.log('User logged out');
+      console.log('User loggedOut');
       setAuth(false);
     }
   }, [isLoggedIn]);

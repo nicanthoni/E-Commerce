@@ -12,13 +12,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Auth from '../../../utils/auth';
-import { useSignup } from '../../../hooks/useSignup'; // custom hook 
+import { useSignup } from '../../../hooks/useSignup'; 
 
 export default function BuyerSignup() {
-  //invoke custom Signuphook
-  const {signup, stateError, isLoading} = useSignup()
 
-  // Method to change location
+  const {signup, stateError, isLoading} = useSignup() // custom hook
   const navigate = useNavigate();
 
   // Error & Alert States
@@ -26,7 +24,7 @@ export default function BuyerSignup() {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // On first render, check if user is logged in.If so, send to their profile page
+  // On render, check if logged in => Send to profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
       navigate('/profile');
@@ -41,7 +39,7 @@ export default function BuyerSignup() {
     password: '',
   });
 
-  // OnChange, update form state
+  // OnChange - update form state
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -50,7 +48,13 @@ export default function BuyerSignup() {
     });
   };
 
-  // OnSubmit:
+    // onClose - clear error message 
+    const handleClearError = () => {
+      setErrorMessage('');
+      setShowErrorAlert(false);
+    };
+
+  // OnSubmit - validation check + run signup() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage(''); // Clear previous error message
@@ -82,16 +86,10 @@ export default function BuyerSignup() {
       setShowSuccessAlert(true);
     } catch (e) {
       setShowErrorAlert(true);
-      console.error('signup error in BuyerSignup:', e);
+      console.error('signup() error in BuyerSignup:', e);
     }
   };
-  
 
-  // Clear error message (onClose)
-  const handleClearError = () => {
-    setErrorMessage('');
-    setShowErrorAlert(false);
-  };
 
   return (
     <Container component='main' maxWidth='xs'>
