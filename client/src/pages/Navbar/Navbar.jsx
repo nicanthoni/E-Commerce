@@ -1,49 +1,48 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge } from "@mui/material";
-import { Container } from "@mui/material";
-import CheckoutMain from "../Checkout/CheckoutDrawer/CheckoutMain";
-import LogoDevIcon from "@mui/icons-material/LogoDev"; // Logo placeholder
-import Auth from "../../utils/auth";
-import Logout from "../../components/Buttons/Logout";
-import GetStarted from "../../components/Buttons/GetStarted";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Badge } from '@mui/material';
+import { Container } from '@mui/material';
+import CheckoutMain from '../Checkout/CheckoutDrawer/CheckoutMain';
+import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
+import LogoutButton from '../../components/Buttons/Logout';
+import GetStarted from '../../components/Buttons/GetStarted';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 // Width of menu drawer
 const drawerWidth = 285;
 
-export default function Navbar({ isAuthenticated }) {
-  // const {user, login, logout} = useContext(AuthContext) // change 'user' to auth once working
-
+export default function Navbar() {
+  const { user }  = useAuthContext() //auth context
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // Nav items array
-  const navItems = ["Home", "Explore", "Support"];
+  const navItems = ['Home', 'Explore', 'Support'];
 
   // Nav item routes
   const routes = {
-    Home: "/",
-    Explore: "/explore/all",
-    Support: "#",
+    Home: '/',
+    Explore: '/explore/all',
+    Support: '#',
   };
 
   // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
-    setShowCart((prevShowCart) => !prevShowCart); // functional update to ensure proper synchronization
+    setShowCart((prevShowCart) => !prevShowCart); // 
   };
 
   // Toggle MENU drawer (mobile)
@@ -51,28 +50,28 @@ export default function Navbar({ isAuthenticated }) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  console.log(isAuthenticated);
+  // console.log('Auth Context: ', user);
 
   // MENU items
   const menuDrawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Box sx={{ bgcolor: "primary.main" }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Box sx={{ bgcolor: 'primary.main' }}>
         <Typography
-          variant="h6"
-          color="#fff"
-          sx={{ my: 2, display: "inline-block" }}
+          variant='h6'
+          color='#fff'
+          sx={{ my: 2, display: 'inline-block' }}
         >
           <LogoDevIcon />
         </Typography>
       </Box>
       <Divider />
-      <List sx={{ display: "inline-block" }}>
+      <List sx={{ display: 'inline-block' }}>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton>
               <NavLink
                 to={routes[item]}
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
                 <ListItemText primary={item} />
               </NavLink>
@@ -80,15 +79,15 @@ export default function Navbar({ isAuthenticated }) {
           </ListItem>
         ))}
         {/* Conditionally render by auth status */}
-        {!isAuthenticated ? (
+        {!user ? (
           <>
-            <ListItem key="SignIn" disablePadding>
+            <ListItem key='SignIn' disablePadding>
               <ListItemButton>
                 <NavLink
-                  to="/signin"
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  to='/signin'
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <ListItemText primary="Sign In" />
+                  <ListItemText primary='Sign In' />
                 </NavLink>
               </ListItemButton>
             </ListItem>
@@ -96,17 +95,17 @@ export default function Navbar({ isAuthenticated }) {
           </>
         ) : (
           <>
-            <ListItem key="Profile" disablePadding>
+            <ListItem key='Profile' disablePadding>
               <ListItemButton>
                 <NavLink
-                  to="/profile"
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  to='/profile'
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <ListItemText primary="Profile" />
+                  <ListItemText primary='Profile' />
                 </NavLink>
               </ListItemButton>
             </ListItem>
-            <Logout />
+            <LogoutButton />
           </>
         )}
       </List>
@@ -114,64 +113,64 @@ export default function Navbar({ isAuthenticated }) {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <AppBar
-        component="nav"
-        sx={{ backgroundColor: "primary", display: "flex" }}
+        component='nav'
+        sx={{ backgroundColor: 'primary', display: 'flex' }}
         elevation={0}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Toolbar disableGutters>
             <IconButton
-              className="menu-icon"
-              aria-label="open drawer"
-              edge="start"
+              className='menu-icon'
+              aria-label='open drawer'
+              edge='start'
               onClick={handleDrawerToggle}
-              sx={{ ml: 3, display: { sm: "none", color: "#fff" } }}
+              sx={{ ml: 3, display: { sm: 'none', color: '#fff' } }}
             >
               <MenuIcon />
             </IconButton>
             <Typography
-              variant="h6"
-              component="div"
+              variant='h6'
+              component='div'
               sx={{
                 flexGrow: 1,
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: { xs: 'center', sm: 'left' },
               }}
             >
-              <NavLink to="/" style={{ textDecoration: "none", color: "#fff" }}>
+              <NavLink to='/' style={{ textDecoration: 'none', color: '#fff' }}>
                 <LogoDevIcon /> AppName
               </NavLink>
             </Typography>
 
             {/* Navbar items - desktop view */}
             <Box
-              className="nav-link-Container"
-              sx={{ display: { xs: "none", sm: "flex" } }}
+              className='nav-link-Container'
+              sx={{ display: { xs: 'none', sm: 'flex' } }}
             >
               {navItems.map((item) => (
                 <Button
                   key={item}
-                  sx={{ color: "#fff", textTransform: "none" }}
+                  sx={{ color: '#fff', textTransform: 'none' }}
                 >
                   <NavLink
                     to={routes[item]}
-                    style={{ textDecoration: "none", color: "inherit" }}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {item}
                   </NavLink>
                 </Button>
               ))}
               {/* Conditionally render by auth status */}
-              {!isAuthenticated ? (
+              {!user ? (
                 <>
                   <Button
-                    key="Signin"
-                    sx={{ color: "#fff", textTransform: "none" }}
+                    key='Signin'
+                    sx={{ color: '#fff', textTransform: 'none' }}
                   >
                     <NavLink
-                      to="/signin"
-                      style={{ textDecoration: "none", color: "inherit" }}
+                      to='/signin'
+                      style={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Sign In
                     </NavLink>
@@ -181,28 +180,28 @@ export default function Navbar({ isAuthenticated }) {
               ) : (
                 <>
                   <Button
-                    key="Profile"
-                    sx={{ color: "#fff", textTransform: "none" }}
+                    key='Profile'
+                    sx={{ color: '#fff', textTransform: 'none' }}
                   >
                     <NavLink
-                      to="/profile"
-                      style={{ textDecoration: "none", color: "inherit" }}
+                      to='/profile'
+                      style={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Profile
                     </NavLink>
                   </Button>
-                  <Logout />
+                  <LogoutButton />
                 </>
               )}
             </Box>
 
             {/* CheckoutMain renders on Cart click */}
-            <Box className="cart-icon" sx={{ ml: 3, mr: 4, cursor: "pointer" }}>
+            <Box className='cart-icon' sx={{ ml: 3, mr: 4, cursor: 'pointer' }}>
               <Badge
                 onClick={toggleShowCart}
                 badgeContent={1}
                 max={10}
-                color="error"
+                color='error'
               >
                 {/* Color for icon controlled in <CheckoutMain/> */}
                 <ShoppingCartIcon />
@@ -215,16 +214,16 @@ export default function Navbar({ isAuthenticated }) {
 
       <nav>
         <Drawer
-          variant="temporary"
+          variant='temporary'
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
               width: drawerWidth,
             },
           }}

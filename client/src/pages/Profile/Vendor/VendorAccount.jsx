@@ -1,4 +1,4 @@
-import VendorProfile from "./Profile/VendorProfile"
+import VendorProfile from './Profile/VendorProfile'
 
 export default function VendorAccount () {
     return (

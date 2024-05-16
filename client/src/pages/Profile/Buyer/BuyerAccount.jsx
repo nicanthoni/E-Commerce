@@ -1,4 +1,4 @@
-import BuyerProfile from "./Profile/ProfileMain";
+import BuyerProfile from './Profile/ProfileMain';
 
 export default function BuyerAccount() {
   return (

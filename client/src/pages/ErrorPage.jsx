@@ -9,9 +9,9 @@ export default function ErrorPage() {
     useEffect(() => {
         // Set a timeout to show the alert after 2 seconds
         const timeoutId = setTimeout(() => {
-            alert("You seem lost. Let's get you home 🙃");
+            alert(`You seem lost. Let's get you home 🙃`);
             
-            // Redirect to the /home after selecting "OK" on alert
+            // Redirect to the /home after selecting 'OK' on alert
             navigate('/');
         }, 1000);
 
@@ -21,12 +21,12 @@ export default function ErrorPage() {
 
     return (
         <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            height="100vh"
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            height='100vh'
         >
-            <img src={ErrorImg} alt="Error" />
+            <img src={ErrorImg} alt='Error' />
         </Box>
     );
 }

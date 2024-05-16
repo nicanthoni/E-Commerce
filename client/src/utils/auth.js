@@ -41,7 +41,7 @@ class AuthService {
   }
   login(idToken) {
     localStorage.setItem('id_token', idToken)
-    // window.location.assign('/'); -> Causing SIGN UP completion to send back to home
+  
   }
   logout() {
     localStorage.removeItem('id_token')

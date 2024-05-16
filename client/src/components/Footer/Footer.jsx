@@ -1,28 +1,28 @@
-import Copyright from "./Copyright";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import Copyright from './Copyright';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 
 export default function Footer() {
   return (
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column',
         }}
       >
         <Box
-          component="footer"
+          component='footer'
           sx={{
             py: 6,
-            mt: "auto",
+            mt: 'auto',
             backgroundColor: '#fff',
           }}
         >
-          <Container maxWidth="xl">
-            <Typography variant="body2" 
-            textAlign={"center"}>
+          <Container maxWidth='xl'>
+            <Typography variant='body2' 
+            textAlign={'center'}>
               My sticky footer can be found here.
             </Typography>
             <Copyright />

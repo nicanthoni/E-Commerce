@@ -1,32 +1,32 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
-import { useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { User } from "../../../../../utils/queries";
-import Auth from "../../../../../utils/auth";
-import TestItem1 from "../../../../../assets/images/bag.jpg";
-import { Rating } from "@mui/material";
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+import { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { User } from '../../../../../utils/queries';
+import Auth from '../../../../../utils/auth';
+import TestItem1 from '../../../../../assets/images/bag.jpg';
+import { Rating } from '@mui/material';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: "background.paper",
-  border: "1px solid #000",
+  bgcolor: 'background.paper',
+  border: '1px solid #000',
   boxShadow: 24,
   p: 4,
-  textAlign: "center",
+  textAlign: 'center',
 };
 
 // Modal for each Review
@@ -56,7 +56,7 @@ export default function ReviewsImgList() {
   }, [loadUser]);
 
   if (error) {
-    console.error("GraphQL Error:", error);
+    console.error('GraphQL Error:', error);
     return <p>Error fetching data</p>;
   }
   if (loading) {
@@ -72,8 +72,8 @@ export default function ReviewsImgList() {
   return (
     <Box>
       <ImageList sx={{}}>
-        <ImageListItem key="Subheader" cols={2}>
-          <ListSubheader component="div">Reviewed Items</ListSubheader>
+        <ImageListItem key='Subheader' cols={2}>
+          <ListSubheader component='div'>Reviewed Items</ListSubheader>
         </ImageListItem>
         {user.ratings.map((rating, index) => (
           <ImageListItem key={rating.id}>
@@ -82,8 +82,8 @@ export default function ReviewsImgList() {
                 srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 src={`${TestItem1}?w=248&fit=crop&auto=format`}
                 alt={rating.item.name}
-                loading="lazy"
-                style={{ width: "100px", height: "auto" }}
+                loading='lazy'
+                style={{ width: '100px', height: 'auto' }}
               />
             </Button>
             <ImageListItemBar
@@ -91,7 +91,7 @@ export default function ReviewsImgList() {
               subtitle={`Rating: ${rating.stars}`}
               actionIcon={
                 <IconButton
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                   aria-label={`info about ${rating.item.name}`}
                 >
                   <InfoIcon />
@@ -101,29 +101,29 @@ export default function ReviewsImgList() {
             <Modal
               open={openModals[index] || false}
               onClose={() => handleCloseModal(index)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
+              aria-labelledby='modal-modal-title'
+              aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
                 <img
                   srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   src={`${TestItem1}?w=248&fit=crop&auto=format`}
                   alt={rating.item.name}
-                  loading="lazy"
-                  style={{ width: "100px", height: "auto" }}
+                  loading='lazy'
+                  style={{ width: '100px', height: 'auto' }}
                 />
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id='modal-modal-title' variant='h6' component='h2'>
                   {rating.item.name}
                 </Typography>
                 <Typography
-                  variant="caption"
-                  id="review-description"
+                  variant='caption'
+                  id='review-description'
                   sx={{ mt: 2 }}
                 >
-                  "{rating.review}"
+                  '{rating.review}'
                 </Typography>
 
-                <Rating name="read-only" value={rating.stars} readOnly />
+                <Rating name='read-only' value={rating.stars} readOnly />
               </Box>
             </Modal>
           </ImageListItem>

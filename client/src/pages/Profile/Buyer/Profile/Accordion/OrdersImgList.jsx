@@ -1,14 +1,14 @@
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
-import { useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { User } from "../../../../../utils/queries";
-import Auth from "../../../../../utils/auth";
-import TestItem1 from "../../../../../assets/images/bag.jpg";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+import { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { User } from '../../../../../utils/queries';
+import Auth from '../../../../../utils/auth';
+import TestItem1 from '../../../../../assets/images/bag.jpg';
 
 export default function OrdersImgList() {
   const id = Auth.getProfile().data._id;
@@ -22,7 +22,7 @@ export default function OrdersImgList() {
   }, [loadUser]);
 
   if (error) {
-    console.error("GraphQL Error:", error);
+    console.error('GraphQL Error:', error);
     return <p>Error fetching data</p>;
   }
   if (loading) {
@@ -37,8 +37,8 @@ export default function OrdersImgList() {
 
   return (
     <ImageList sx={{}}>
-      <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">Orders</ListSubheader>
+      <ImageListItem key='Subheader' cols={2}>
+        <ListSubheader component='div'>Orders</ListSubheader>
       </ImageListItem>
       {user.buyHistory.map((item) => (
         <ImageListItem key={item.id}>
@@ -46,15 +46,15 @@ export default function OrdersImgList() {
             srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
             src={`${TestItem1}?w=248&fit=crop&auto=format`}
             alt={item.item.name}
-            loading="lazy"
-            style={{ width: "100px", height: "auto", alignSelf: "center" }}
+            loading='lazy'
+            style={{ width: '100px', height: 'auto', alignSelf: 'center' }}
           />
           <ImageListItemBar
             title={item.item.name}
             subtitle={item.item.vendor.vendorName}
             actionIcon={
               <IconButton
-                sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                 aria-label={`info about ${item.item.name}`}
               >
                 <InfoIcon />
