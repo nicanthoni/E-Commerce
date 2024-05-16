@@ -3,7 +3,7 @@ import Auth from '../../../../utils/auth';
 import { Vendor } from '../../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
-import Logout from '../../../../components/Buttons/Logout';
+import LogoutButton from '../../../../components/Buttons/Logout';
 
 // Vendor profile
 export default function VendorProfile() {
@@ -62,7 +62,7 @@ export default function VendorProfile() {
       </>
       <br />
       {/* LOGOUT Button */}
-      <Logout />
+      <LogoutButton />
     </Container>
   );
 }

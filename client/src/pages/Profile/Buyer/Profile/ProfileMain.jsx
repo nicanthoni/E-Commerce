@@ -5,7 +5,7 @@ import { User } from '../../../../utils/queries';
 import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
 import NicsAvatar from '../../../../assets/images/MyAvatar-PNG.png';
-import Logout from '../../../../components/Buttons/Logout';
+import LogoutButton from '../../../../components/Buttons/Logout';
 import ProfileAccordions from './Accordion/AccordionMain';
 import Navbar from '../../../Navbar/Navbar';
 
@@ -92,7 +92,7 @@ export default function BuyerProfile() {
         </Grid>
         {/* LOGOUT Button - component */}
         <br />
-        <Logout />
+        <LogoutButton />
       </Container>
     </>
   );

@@ -14,8 +14,13 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Auth from '../../../utils/auth';
 import { useSignup } from '../../../hooks/useSignup'; 
 
-export default function BuyerSignup() {
 
+
+
+
+
+export default function BuyerSignup() {
+  
   const {signup, stateError, isLoading} = useSignup() // custom hook
   const navigate = useNavigate();
 

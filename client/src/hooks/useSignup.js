@@ -22,7 +22,8 @@ export const useSignup = () => {
             const { data } = await AddUser({
             variables: formState,
             });
-    
+            
+            // create new token
             Auth.login(data.AddUser.token);
             
             // update the auth context

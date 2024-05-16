@@ -19,15 +19,13 @@ import { Container } from '@mui/material';
 import CheckoutMain from '../Checkout/CheckoutDrawer/CheckoutMain';
 import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
 import Auth from '../../utils/auth';
-import Logout from '../../components/Buttons/Logout';
+import LogoutButton from '../../components/Buttons/Logout';
 import GetStarted from '../../components/Buttons/GetStarted';
 
 // Width of menu drawer
 const drawerWidth = 285;
 
 export default function Navbar({ isAuthenticated }) {
-  // const {user, login, logout} = useContext(AuthContext) // change 'user' to auth once working
-
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -106,7 +104,7 @@ export default function Navbar({ isAuthenticated }) {
                 </NavLink>
               </ListItemButton>
             </ListItem>
-            <Logout />
+            <LogoutButton />
           </>
         )}
       </List>
@@ -191,7 +189,7 @@ export default function Navbar({ isAuthenticated }) {
                       Profile
                     </NavLink>
                   </Button>
-                  <Logout />
+                  <LogoutButton />
                 </>
               )}
             </Box>
