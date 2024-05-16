@@ -1,10 +1,12 @@
-// RootLayout to hold NavBar, Outlet, and *potentially* Footer component
 import Navbar from '../pages/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-import Auth from '../utils/auth'; // check auth here, vs everywhere else
+import Auth from '../utils/auth'; 
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext'; // custom auth hook
+
 
 export default function RootLayout() {
+  const { user }  = useAuthContext() //auth context
   const [auth, setAuth] = useState(false);
 
   // Store auth status as variable
