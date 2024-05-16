@@ -10,15 +10,17 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-import { buyer_login } from '../../../utils/mutations';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Auth from '../../../utils/auth';
+import { useSignin } from '../../../hooks/useSignin'; 
+
+
 
 export default function Signin() {
-  // Method to change location
+
+  const { signin, stateError, isLoading } = useSignin() // custom Signin() hook
   const navigate = useNavigate();
 
   // Error & Alert States
@@ -26,7 +28,7 @@ export default function Signin() {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // On first render, check if user is logged in. If so, send to their profile page
+  // On render, check if logged in => Send to profile page
   useEffect(() => {
     if (Auth.loggedIn()) {
       navigate('/profile');
@@ -39,10 +41,8 @@ export default function Signin() {
     password: '',
   });
 
-  //  Mutation
-  const [LoginUser, { error, loading, data }] = useMutation(buyer_login);
 
-  // OnChange, update form state
+  // OnChange - update form state
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -51,31 +51,29 @@ export default function Signin() {
     });
   };
 
-  // On form Submission:
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrorMessage('');
-    try {
-      const { data } = await LoginUser({
-        variables: { ...formState },
-      });
-      console.log(data.Userlogin);
-      Auth.login(data.Userlogin.token);
-      setShowSuccessAlert(true);
-      setTimeout(() => {
-        navigate('/profile');
-      }, 1500);
-    } catch (e) {
-      setShowErrorAlert(true);
-      console.error('AddUser Error:', e);
-    }
-  };
-
-  // Clear error message once message is closed (onClose)
+  // onClose - clear error message 
   const handleClearError = () => {
     setErrorMessage('');
     setShowErrorAlert(false);
   };
+
+  // OnSubmit - validation check + run signin() hook
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrorMessage(''); // Clear previous error message
+
+    try {
+      console.log('Signin Form state:', formState);
+      await signin(formState)
+      setShowSuccessAlert(true);
+    } 
+    catch (e) {
+      setShowErrorAlert(true);
+      console.error('signin() error in BuyerSignin:', e);
+    }
+  };
+
+
 
   return (
     <Container component='main' maxWidth='xs'>

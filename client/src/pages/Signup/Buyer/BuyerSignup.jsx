@@ -17,10 +17,8 @@ import { useSignup } from '../../../hooks/useSignup';
 
 
 
-
-
 export default function BuyerSignup() {
-  
+
   const {signup, stateError, isLoading} = useSignup() // custom hook
   const navigate = useNavigate();
 
@@ -86,7 +84,7 @@ export default function BuyerSignup() {
     }
 
     try {
-      console.log('Form state:', formState);
+      console.log('Signup Form state:', formState);
       await signup(formState)
       setShowSuccessAlert(true);
     } catch (e) {
