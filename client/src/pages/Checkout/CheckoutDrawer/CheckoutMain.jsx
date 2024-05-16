@@ -6,12 +6,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import Auth from '../../../utils/auth';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 // adjust drawer width
 const drawerWidth = 285;
 
 // Checkout Drawer Component
 export default function CheckoutMain() {
+  const { user } = useAuthContext()
   const [open, setOpen] = useState(true);
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -86,7 +88,7 @@ export default function CheckoutMain() {
     >
 
       {/* Conditionally render cart items depending on if loggedIn or not */}
-      {Auth.loggedIn() ? (
+      {user ? (
         DrawerItems
       ) : (
         <Stack textAlign='center'>

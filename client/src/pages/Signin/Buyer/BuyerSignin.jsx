@@ -13,13 +13,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Auth from '../../../utils/auth';
 import { useSignin } from '../../../hooks/useSignin'; 
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 
 
 export default function Signin() {
-
+  const { user }  = useAuthContext() //auth context
   const { signin, stateError, isLoading } = useSignin() // custom Signin() hook
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function Signin() {
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {
-    if (Auth.loggedIn()) {
+    if (user) {
       navigate('/profile');
     }
   }, []);

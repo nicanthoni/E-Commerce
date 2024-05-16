@@ -11,14 +11,12 @@ import { Alert } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import Auth from '../../../utils/auth';
 import { useSignup } from '../../../hooks/useSignup'; 
-
-
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 
 export default function BuyerSignup() {
-
+  const { user } = useAuthContext()
   const {signup, stateError, isLoading} = useSignup() // custom hook
   const navigate = useNavigate();
 
@@ -29,7 +27,7 @@ export default function BuyerSignup() {
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {
-    if (Auth.loggedIn()) {
+    if (user) {
       navigate('/profile');
     }
   }, []);

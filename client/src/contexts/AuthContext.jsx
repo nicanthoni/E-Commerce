@@ -23,10 +23,11 @@ export const AuthContextProvider = ({ children }) => {
 
   // When app starts...
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('id_token'))
+    const user = localStorage.getItem('id_token')
 
     // check if their is a user in local storage (loggedin), else dont dispatch 'LOGIN'
     if (user) {
+      console.log('User is logged in')
       dispatch({ type: 'LOGIN', payload: user})
     }
   }, [])

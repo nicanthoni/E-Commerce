@@ -18,14 +18,15 @@ import { Badge } from '@mui/material';
 import { Container } from '@mui/material';
 import CheckoutMain from '../Checkout/CheckoutDrawer/CheckoutMain';
 import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
-import Auth from '../../utils/auth';
 import LogoutButton from '../../components/Buttons/Logout';
 import GetStarted from '../../components/Buttons/GetStarted';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 // Width of menu drawer
 const drawerWidth = 285;
 
-export default function Navbar({ isAuthenticated }) {
+export default function Navbar() {
+  const { user }  = useAuthContext() //auth context
   const [showCart, setShowCart] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -41,7 +42,7 @@ export default function Navbar({ isAuthenticated }) {
 
   // Toggle CHECKOUT drawer
   const toggleShowCart = () => {
-    setShowCart((prevShowCart) => !prevShowCart); // functional update to ensure proper synchronization
+    setShowCart((prevShowCart) => !prevShowCart); // 
   };
 
   // Toggle MENU drawer (mobile)
@@ -49,7 +50,7 @@ export default function Navbar({ isAuthenticated }) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  console.log(isAuthenticated);
+  // console.log('Auth Context: ', user);
 
   // MENU items
   const menuDrawer = (
@@ -78,7 +79,7 @@ export default function Navbar({ isAuthenticated }) {
           </ListItem>
         ))}
         {/* Conditionally render by auth status */}
-        {!isAuthenticated ? (
+        {!user ? (
           <>
             <ListItem key='SignIn' disablePadding>
               <ListItemButton>
@@ -161,7 +162,7 @@ export default function Navbar({ isAuthenticated }) {
                 </Button>
               ))}
               {/* Conditionally render by auth status */}
-              {!isAuthenticated ? (
+              {!user ? (
                 <>
                   <Button
                     key='Signin'
