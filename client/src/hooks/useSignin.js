@@ -11,8 +11,8 @@ export const useSignin = () => {
     const {dispatch} = useAuthContext()
     const navigate = useNavigate()
 
-   //  Mutation
-  const [LoginUser, { error, loading, data }] = useMutation(buyer_login);
+    //  Mutation
+    const [LoginUser, { error, loading, data }] = useMutation(buyer_login);
 
     const signin = async (formState) => {
         setIsLoading(true)
