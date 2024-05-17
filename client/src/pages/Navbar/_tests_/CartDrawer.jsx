@@ -50,13 +50,14 @@ export default function CartDrawer() {
         
         >
         {user ? (
+
         <>
-        <CheckoutMain />
-       </>
+            <CheckoutMain />
+        </>
+
         ) : (
             <>
-            <Stack textAlign='center'>
-
+        <Stack textAlign='center'>
           <Typography variant='h6' sx={{ m: 2 }}>
             <Link onClick={handleDrawerToggle} underline='hover' fontWeight='bold' to='/signin'>
                 Sign in
@@ -68,14 +69,13 @@ export default function CartDrawer() {
           variant='contained'
           color='secondary'
           sx={{ textTransform: 'none', mx: 3 }}
-        >
-          Sign in
-        </Button>
-        
+          >
+            Sign in
+          </Button>
         </Stack>
             </>
-        )
-        }
+        )}
+        
       </Drawer>
     </>
   );
