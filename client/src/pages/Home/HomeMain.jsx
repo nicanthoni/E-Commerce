@@ -1,4 +1,4 @@
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid';
 import { Box, Container } from '@mui/material';
 import HomeInfo from './HomeInfo';
 import HomeLogo from './HomeLogo';

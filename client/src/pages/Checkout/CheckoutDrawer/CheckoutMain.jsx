@@ -1,7 +1,7 @@
 import {Box,  Button, Typography } from '@mui/material';
 import CheckoutOrder from './CheckoutOrder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Grid from '@mui/material/Unstable_Grid2/Grid2';
+import Grid from '@mui/material/Grid';
 
 
 // Layout of items within the Shopping Cart Drawer
