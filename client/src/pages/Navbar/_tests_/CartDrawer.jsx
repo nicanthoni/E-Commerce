@@ -7,9 +7,9 @@ import CheckoutMain from '../../Checkout/CheckoutDrawer/CheckoutMain';
 export default function CartDrawer () {
     const [showCart, setShowCart] = useState(false);
 
-      // Toggle CHECKOUT drawer
+    // Toggle drawer
     const toggleShowCart = () => {
-    setShowCart((prevShowCart) => !prevShowCart); //
+    setShowCart((prevShowCart) => !prevShowCart); 
   };
 
     return (
@@ -24,7 +24,8 @@ export default function CartDrawer () {
                 <ShoppingCartIcon />
               </Badge>
             </Box>
-                {showCart && <CheckoutMain />}
+
+            {showCart && <CheckoutMain />}
         </>
     )
 }
