@@ -82,7 +82,7 @@ export default function MenuDrawer () {
                 <ListItem key='Support' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
                         <NavLink
-                            to='#'
+                            to='/support'
                             style={{ textDecoration: 'none', color: 'inherit' }}
                         >
                             <ListItemText primary='Support' />

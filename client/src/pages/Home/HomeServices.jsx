@@ -37,7 +37,7 @@ export default function HomeServices() {
       <Stack padding={4} alignItems='center'>
         <ContactSupportIcon sx={{ fontSize: 90, color: 'primary.main' }} />
         <Button 
-        variant='contained' href='#'
+        variant='contained' href='/support'
         sx={{ color: 'primary.main' , bgcolor: 'secondary.main', textTransform: 'none' }}
         >
           Support

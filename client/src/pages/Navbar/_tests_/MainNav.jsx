@@ -44,7 +44,7 @@ const {user } = useAuthContext()
                 sx={{ color: '#fff', textTransform: 'none' }}
               >
                 <NavLink
-                  to='#'
+                  to='/support'
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   Support
