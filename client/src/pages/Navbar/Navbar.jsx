@@ -10,7 +10,7 @@ import { Container } from '@mui/material';
 import CheckoutMain from '../Checkout/CheckoutDrawer/CheckoutMain';
 import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
 import MenuDrawer from './_tests_/MenuDrawer'; 
-import MainNav from './_tests_/MainNav';
+import TopNavbar from './_tests_/TopNavbar';
 
 export default function Navbar() {
   const [showCart, setShowCart] = useState(false);
@@ -55,7 +55,7 @@ export default function Navbar() {
 
 
             {/* MAIN NAVBAR */}
-            <MainNav/>
+            <TopNavbar/>
 
 
             {/* CHECKOUT DRAWER */}

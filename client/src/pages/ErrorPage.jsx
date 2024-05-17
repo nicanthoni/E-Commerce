@@ -9,7 +9,7 @@ export default function ErrorPage() {
     useEffect(() => {
         // Set a timeout to show the alert after 2 seconds
         const timeoutId = setTimeout(() => {
-            alert(`You seem lost. Let's get you home 🙃`);
+            alert('You seem lost. Lets get you home 🙃');
             
             // Redirect to the /home after selecting 'OK' on alert
             navigate('/');

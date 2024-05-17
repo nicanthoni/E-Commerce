@@ -105,9 +105,10 @@ export default function MenuDrawer () {
                             </NavLink>
                         </ListItemButton>
                     </ListItem>
-                    <LogoutButton />
+                  <Box onClick={closeDrawer}> 
+                        <LogoutButton  />
+                  </Box>
 
-                
                 </>
             ) : (
                 <>
