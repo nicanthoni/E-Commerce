@@ -15,8 +15,7 @@ import LogoutButton from '../../../components/Buttons/Logout';
 import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
-// Width of menu drawer
-const drawerWidth = 285;
+
 
 export default function MenuDrawer () {
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -134,7 +133,6 @@ export default function MenuDrawer () {
 
     return (
         <>
-            {/* Moved IconButton outside Drawer */}
             <IconButton
                 className='menu-icon'
                 aria-label='open drawer'
@@ -143,7 +141,9 @@ export default function MenuDrawer () {
                 sx={{ ml: 3, display: { sm: 'none', color: '#fff' } }}
             >
                 <MenuIcon />
+
             </IconButton>
+
             {/* Drawer component */}
             <Drawer
                 variant='temporary'
@@ -156,7 +156,7 @@ export default function MenuDrawer () {
                     display: { xs: 'block', sm: 'none' },
                     '& .MuiDrawer-paper': {
                         boxSizing: 'border-box',
-                        width: drawerWidth,
+                        width: 285,
                     },
                 }}
             >

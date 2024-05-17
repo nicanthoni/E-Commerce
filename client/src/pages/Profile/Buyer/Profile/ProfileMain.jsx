@@ -88,9 +88,7 @@ export default function BuyerProfile() {
             <ProfileAccordions />
           </Grid>
         </Grid>
-        {/* LOGOUT Button - component */}
-        <br />
-        <LogoutButton />
+
       </Container>
     </>
   );
