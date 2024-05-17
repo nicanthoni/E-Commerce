@@ -27,12 +27,12 @@ export const AuthContextProvider = ({ children }) => {
 
     // check if their is a user in local storage (loggedin), else dont dispatch 'LOGIN'
     if (user) {
-      console.log('User is logged in')
+      // console.log('User is logged in')
       dispatch({ type: 'LOGIN', payload: user})
     }
   }, [])
 
-  console.log('AuthContext state: ', state)
+  // console.log('AuthContext state: ', state)
   
   return (
     // ...state represents 'user' property from AuthContextProvider. Using spread to account for future additional properties

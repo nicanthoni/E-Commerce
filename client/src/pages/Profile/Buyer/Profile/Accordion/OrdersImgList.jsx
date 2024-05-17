@@ -36,12 +36,12 @@ export default function OrdersImgList() {
   const user = data.user;
 
   return (
-    <ImageList sx={{}}>
+    <ImageList>
       <ImageListItem key='Subheader' cols={2}>
         <ListSubheader component='div'>Orders</ListSubheader>
       </ImageListItem>
-      {user.buyHistory.map((item) => (
-        <ImageListItem key={item.id}>
+      {user.buyHistory.map((item, index) => (
+        <ImageListItem key={index}>
           <img
             srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
             src={`${TestItem1}?w=248&fit=crop&auto=format`}

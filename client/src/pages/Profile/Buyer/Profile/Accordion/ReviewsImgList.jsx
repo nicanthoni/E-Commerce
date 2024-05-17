@@ -71,12 +71,12 @@ export default function ReviewsImgList() {
 
   return (
     <Box>
-      <ImageList sx={{}}>
+      <ImageList>
         <ImageListItem key='Subheader' cols={2}>
           <ListSubheader component='div'>Reviewed Items</ListSubheader>
         </ImageListItem>
         {user.ratings.map((rating, index) => (
-          <ImageListItem key={rating.id}>
+          <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
                 srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}

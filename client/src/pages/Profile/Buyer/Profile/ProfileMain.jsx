@@ -5,7 +5,6 @@ import { User } from '../../../../utils/queries';
 import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
 import NicsAvatar from '../../../../assets/images/MyAvatar-PNG.png';
-import LogoutButton from '../../../../components/Buttons/Logout';
 import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
 

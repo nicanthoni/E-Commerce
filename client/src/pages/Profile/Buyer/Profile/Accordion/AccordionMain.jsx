@@ -55,7 +55,7 @@ if (accountType === 'User') {
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
           id='panel2-header'
-          ListItem
+          
         >
           <Typography>Wishlist</Typography>
         </AccordionSummary>
@@ -79,8 +79,7 @@ if (accountType === 'User') {
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
-          id='panel2-header'
-          ListItem
+          id='panel2-header'          
         >
           <Typography>Cart</Typography>
         </AccordionSummary>
@@ -104,8 +103,7 @@ if (accountType === 'User') {
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
-          id='panel2-header'
-          ListItem
+          id='panel2-header'        
         >
           <Typography>Order History</Typography>
         </AccordionSummary>
@@ -128,8 +126,7 @@ if (accountType === 'User') {
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
-          id='panel2-header'
-          ListItem
+          id='panel2-header'         
         >
           <Typography>Reviews</Typography>
         </AccordionSummary>

@@ -41,12 +41,12 @@ export default function CartImgList() {
   }, 0);
 
   return (
-    <ImageList sx={{}}>
+    <ImageList>
       <ImageListItem key='Subheader' cols={2}>
         <ListSubheader component='div'>Subtotal: ${subtotal} </ListSubheader>
       </ImageListItem>
-      {user.cart.map((item) => (
-        <ImageListItem key={item.id}>
+      {user.cart.map((item, index) => (
+        <ImageListItem key={index}>
           <img
             srcSet={`${TestItem2}?w=248&fit=crop&auto=format&dpr=2 2x`}
             src={`${TestItem2}?w=248&fit=crop&auto=format`}
