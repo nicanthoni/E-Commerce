@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
   return (
+
     <BaseNumberInput
       slots={{
         root: StyledInputRoot,
@@ -25,6 +26,7 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
       {...props}
       ref={ref}
     />
+    
   );
 });
 

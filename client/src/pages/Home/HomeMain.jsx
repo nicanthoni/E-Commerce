@@ -6,7 +6,7 @@ import HomeServices from './HomeServices';
 import HomeTestimonials from './HomeTestimonials';
 import HomeCTA from './HomeCTA';
 import Footer from '../../components/Footer/Footer';
-import Navbar from '../Navbar/Navbar';
+
 
 // Parent Home component
 export default function HomeMain() {

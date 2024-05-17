@@ -37,6 +37,7 @@ import RootLayout from './layouts/RootLayout';
 // Pages
 import Home from './pages/Home/Home.jsx';
 import Explore from './pages/Explore/Explore.jsx';
+import MainSupport from './pages/Support/MainSupport.jsx';
 import SingleProductView from './pages/Explore/SingleProductView.jsx';
 import Checkout from './pages/Profile/Buyer/Checkout';
 import Signup from './pages/Signup/Signup.jsx';
@@ -54,6 +55,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path='/home' element={<Home />} />
+      <Route path='/support' element={<MainSupport />} />
       <Route path='/signup' element={<AccountType />} />
       <Route path='/signin' element={<LoginType />} />
       <Route path='/signup/:userType' element={<Signup />} />
