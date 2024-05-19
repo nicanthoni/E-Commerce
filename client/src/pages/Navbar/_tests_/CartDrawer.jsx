@@ -17,6 +17,7 @@ export default function CartDrawer() {
 
   return (
     <>
+    {/* Icon */}
       <IconButton
         className='menu-icon'
         aria-label='open drawer'
@@ -41,11 +42,12 @@ export default function CartDrawer() {
             keepMounted: true, // Better open performance on mobile
         }}
         sx={{
-            display: { xs: 'block' },
+            display: { xs: 'inline-block' },
             '& .MuiDrawer-paper': {
                 boxSizing: 'border-box',
                 width: 285,
             },
+            textAlign: 'center',
         }}
         
         >
