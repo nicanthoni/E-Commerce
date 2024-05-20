@@ -1,13 +1,13 @@
-import {Typography, AppBar, Box, Toolbar, Container} from '@mui/material';
+import { Typography, AppBar, Box, Toolbar, Container } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
-import MenuDrawer from './_tests_/MenuDrawer'; 
-import TopNavbar from './_tests_/TopNavbar';
-import CartDrawer from './_tests_/CartDrawer';
+import MenuDrawer from './Navigation/MenuDrawer';
+import TopNavbar from './Navigation/TopNavbar';
+import CartDrawer from './CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Navbar() {
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -18,10 +18,8 @@ export default function Navbar() {
       >
         <Container maxWidth='xl'>
           <Toolbar disableGutters>
-
             {/* Menu drawer (mobile) */}
             <MenuDrawer />
-
 
             {/* Logo & Brand Name */}
             <Typography
@@ -32,32 +30,30 @@ export default function Navbar() {
                 textAlign: { xs: 'center', sm: 'left' },
               }}
             >
-              {user ? ( 
-              <NavLink to='/explore/all' style={{ textDecoration: 'none', color: '#fff' }}>
-
-                <LogoDevIcon /> AppName
-
-              </NavLink>
-
+              {user ? (
+                <NavLink
+                  to='/explore/all'
+                  style={{ textDecoration: 'none', color: '#fff' }}
+                >
+                  <LogoDevIcon /> AppName
+                </NavLink>
               ) : (
-              <NavLink to='/' style={{ textDecoration: 'none', color: '#fff' }}>
-
-                <LogoDevIcon /> AppName
-
-              </NavLink>
+                <NavLink
+                  to='/'
+                  style={{ textDecoration: 'none', color: '#fff' }}
+                >
+                  <LogoDevIcon /> AppName
+                </NavLink>
               )}
             </Typography>
 
-
             {/* Main navbar */}
-            <TopNavbar/>
+            <TopNavbar />
 
             {/* Checkout drawer */}
-            <CartDrawer/>
-
+            <CartDrawer />
           </Toolbar>
         </Container>
-
       </AppBar>
     </Box>
   );

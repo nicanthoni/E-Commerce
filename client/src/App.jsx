@@ -49,11 +49,15 @@ import AccountType from './pages/Signup/AccountType.jsx'; // Account type to sig
 import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
 
+// Testing
+import SearchBar from './pages/Navbar/_tests_/Search.jsx';
+
 // Routes
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<Home />} />
+      <Route path='/test' element={<SearchBar />} />
       <Route path='/home' element={<Home />} />
       <Route path='/support' element={<MainSupport />} />
       <Route path='/signup' element={<AccountType />} />
