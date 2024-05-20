@@ -48,7 +48,7 @@ if (accountType === 'User') {
 }
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
       {/* WISHLIST - render opened - eventually a horizontal scroll of imgs*/}
       <Accordion defaultExpanded>
         <AccordionSummary

@@ -17,16 +17,29 @@ const {user } = useAuthContext()
             >
               {/* HOME */}
               <Button key='Home' sx={{ color: '#fff', textTransform: 'none' }}>
+                {user ? (
                 <NavLink
+                  to='/explore/all'
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  Home
+                </NavLink>
+                ) : (
+                  <NavLink
                   to='/'
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   Home
                 </NavLink>
+                )
+              }
               </Button>
 
               {/* EXPLORE */}
-              <Button
+              {user ? (
+                null
+              ) : (
+                <Button
                 key='Explore'
                 sx={{ color: '#fff', textTransform: 'none' }}
               >
@@ -37,51 +50,64 @@ const {user } = useAuthContext()
                   Explore
                 </NavLink>
               </Button>
+              )}
+
+              {/* PROFILE or SIGN IN */}
+              {user ? (
+              <>
+                <Button
+                  key='Profile'
+                  sx={{ color: '#fff', textTransform: 'none' }}
+                >
+                  <NavLink
+                    to='/profile'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    Profile
+                  </NavLink>
+                </Button>
+                {/* <LogoutButton /> */}
+              </>
+              ) : (
+              <>
+                <Button
+                  key='Signin'
+                  sx={{ color: '#fff', textTransform: 'none' }}
+                >
+                  <NavLink
+                    to='/signin'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    Sign In
+                  </NavLink>
+                </Button>
+                <GetStarted />
+              </>
+              )}
 
               {/* SUPPORT */}
-              <Button
-                key='Support'
-                sx={{ color: '#fff', textTransform: 'none' }}
-              >
-                <NavLink
-                  to='/support'
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  Support
-                </NavLink>
-              </Button>
-
               {user ? (
-                <>
-                  <Button
-                    key='Profile'
-                    sx={{ color: '#fff', textTransform: 'none' }}
+                <Button
+                  key='Support'
+                  sx={{ color: '#fff', textTransform: 'none' }}
+                >
+                  <NavLink
+                    to='/support'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
                   >
-                    <NavLink
-                      to='/profile'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      Profile
-                    </NavLink>
-                  </Button>
-                  <LogoutButton />
-                </>
+                    Support
+                  </NavLink>
+                </Button>
               ) : (
-                <>
-                  <Button
-                    key='Signin'
-                    sx={{ color: '#fff', textTransform: 'none' }}
-                  >
-                    <NavLink
-                      to='/signin'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      Sign In
-                    </NavLink>
-                  </Button>
-                  <GetStarted />
-                </>
-              )}
+                null
+            )}
+
+            {/* LOGOUT */}
+            {user ? (
+              <LogoutButton/>
+            ) : (null)}
+
+          
             </Box>
         </>
             

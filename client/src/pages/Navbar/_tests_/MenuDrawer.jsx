@@ -27,10 +27,11 @@ export default function MenuDrawer () {
       
     };
 
-    // onClick - close drawer
+    // Close drawer when any nav button clicked
     const closeDrawer = () => {
       setMobileOpen(false);
     };
+
 
     const menuDrawer = (
         <Box sx={{ textAlign: 'center' }}>
@@ -46,9 +47,7 @@ export default function MenuDrawer () {
                 </Typography>
             </Box>
 
-
             <Divider />
-
 
             {/* DRAWER ITEMS */}
             <List sx={{ display: 'inline-block' }}> 
@@ -56,16 +55,27 @@ export default function MenuDrawer () {
                 {/* HOME */}
                 <ListItem key='Home' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
+                    {user ? (
+                        <NavLink
+                            to='/explore/all'
+                            style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                            <ListItemText primary='Home' />
+                        </NavLink>
+                    ) : (
                         <NavLink
                             to='/'
                             style={{ textDecoration: 'none', color: 'inherit' }}
                         >
                             <ListItemText primary='Home' />
                         </NavLink>
+                    )}
                     </ListItemButton>
                 </ListItem>
 
+
                 {/* EXPLORE */}
+                {user ? (null) : (   
                 <ListItem key='Explore' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
                         <NavLink
@@ -76,8 +86,26 @@ export default function MenuDrawer () {
                         </NavLink>
                     </ListItemButton>
                 </ListItem>
+                )}
 
-                {/* EXPLORE */}
+
+                {/* PROFILE */}
+                {!user ? (null) : (
+                    <ListItem key='Profile' disablePadding>
+                    <ListItemButton onClick={closeDrawer}>
+                        <NavLink
+                            to='/profile'
+                            style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                            <ListItemText primary='Profile' />
+                        </NavLink>
+                    </ListItemButton>
+                </ListItem>
+                )}
+                
+
+                {/* SUPPORT */}
+                {user ? ( 
                 <ListItem key='Support' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
                         <NavLink
@@ -88,22 +116,13 @@ export default function MenuDrawer () {
                         </NavLink>
                     </ListItemButton>
                 </ListItem>
-
-                {/* Conditionally render by users auth status */}
-
-            {user ? (
-                <>
-                  {/* PROFILE */}
-                  <ListItem key='Profile' disablePadding>
-                        <ListItemButton onClick={closeDrawer}>
-                            <NavLink
-                                to='/profile'
-                                style={{ textDecoration: 'none', color: 'inherit' }}
-                            >
-                                <ListItemText primary='Profile' />
-                            </NavLink>
-                        </ListItemButton>
-                    </ListItem>
+                ) : (
+                    null
+                )}
+                
+                {/* SIGN IN + LOGOUT  */} 
+                {user ? (
+                <>                 
                   <Box onClick={closeDrawer}> 
                         <LogoutButton  />
                   </Box>
