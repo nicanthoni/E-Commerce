@@ -157,7 +157,7 @@ export default function MenuDrawer () {
                 aria-label='open drawer'
                 edge='start'
                 onClick={handleDrawerToggle}
-                sx={{  display: { sm: 'none', color: '#fff' } }}
+                sx={{  display: { sm: 'none', color: '#fff' }}}
             >
                 <MenuIcon />
 

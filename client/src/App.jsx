@@ -50,7 +50,7 @@ import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
 
 // Testing
-import SearchBar from './pages/Navbar/_tests_/Search.jsx';
+import SearchBar from './pages/Navbar/Search/Search.jsx';
 
 // Routes
 const router = createBrowserRouter(
