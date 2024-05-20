@@ -11,8 +11,9 @@ const { user } = useAuthContext();
     <>
       <Navbar/>
       <Outlet />
+
       {user &&
-        <BottomNav/>
+      <BottomNav/>
       }
     </>
   );
