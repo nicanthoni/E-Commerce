@@ -53,6 +53,7 @@ const {user } = useAuthContext()
               )}
 
               {/* SUPPORT */}
+              {user ? (
               <Button
                 key='Support'
                 sx={{ color: '#fff', textTransform: 'none' }}
@@ -64,6 +65,10 @@ const {user } = useAuthContext()
                   Support
                 </NavLink>
               </Button>
+              ) : (
+                null
+              )}
+
 
               {user ? (
                 <>

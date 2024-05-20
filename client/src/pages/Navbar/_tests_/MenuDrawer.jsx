@@ -73,7 +73,6 @@ export default function MenuDrawer () {
                     </ListItemButton>
                 </ListItem>
 
-                    
 
                 {/* EXPLORE */}
                 {user ? (null) : (   
@@ -88,6 +87,22 @@ export default function MenuDrawer () {
                     </ListItemButton>
                 </ListItem>
                 )}
+
+
+                {/* PROFILE */}
+                {!user ? (null) : (
+                    <ListItem key='Profile' disablePadding>
+                    <ListItemButton onClick={closeDrawer}>
+                        <NavLink
+                            to='/profile'
+                            style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                            <ListItemText primary='Profile' />
+                        </NavLink>
+                    </ListItemButton>
+                </ListItem>
+                )}
+                
 
                 {/* SUPPORT */}
                 {user ? ( 
