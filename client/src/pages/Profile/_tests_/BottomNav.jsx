@@ -12,12 +12,10 @@ import { NavLink } from 'react-router-dom';
 
 
 export default function BottomNav () {
-    
     const [active, setActive] = useState(0);
   
-
     return (
-        <Box>
+        <Box> 
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
 
                 <BottomNavigation
@@ -26,23 +24,36 @@ export default function BottomNav () {
                     setActive(newActive);
                     }}
                 >
-                    {/* Just these three needed (REMOVE THESE 3 FROM MENU DRAWER WHEN WORKING) */}
 
-                    {/* Home (explore)  */}
-                    <NavLink to="/explore/all">
-                    <BottomNavigationAction showLabel label="Home" icon={<HomeIcon />} /> 
-                    </NavLink>
+                    {/* Home (explore)  */}                 
+                    <BottomNavigationAction
+                    component={NavLink}
+                    to="/explore/all"
+                    label="Home"
+                    icon={<HomeIcon />}
+                    showLabel
+                    />
+                   
 
                     {/* Profile */}
-                    <NavLink to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <BottomNavigationAction showLabel label="Profile" icon={<AccountBoxIcon />} /> 
-                    </NavLink>
+                    <BottomNavigationAction 
+                    component={NavLink}
+                    to='/profile'
+                    label="Profile"
+                    icon={<AccountBoxIcon />} 
+                    showLabel  
+                    /> 
 
                     {/* Cart */}
-                    <NavLink to="/checkout" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <BottomNavigationAction showLabel label="Checkout" icon={<ShoppingCartIcon />} />
-                    </NavLink>
-                
+                    
+                    <BottomNavigationAction 
+                    component={NavLink}
+                    to='/checkout'
+                    label="Checkout" 
+                    icon={<ShoppingCartIcon />} 
+                    showLabel
+                    />
+                   
                 </BottomNavigation>
             </Paper>
       </Box>
