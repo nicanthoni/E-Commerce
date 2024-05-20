@@ -5,7 +5,7 @@ import FilterPrice from './filters/FilterPrice';
 
 export default function Explore() {
   return (
-    <Container maxWidth='xl' sx={{ marginTop: 12 }}>
+    <Container maxWidth='xl' sx={{ marginTop: 18 }}>
       <Grid container className='products-Container'>
         {/* Grid item - Category Filter (Men/Women check boxes) */}
         <>

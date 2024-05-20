@@ -53,7 +53,7 @@ export default function Navbar() {
               </Typography>
 
               {/* SearchBar for non-mobile screens */}
-              {/* {!isMobile && <SearchBar/>} */}
+              {!isMobile && <SearchBar/>}
 
               {/* Main navbar */}
               <TopNavbar />
@@ -65,7 +65,7 @@ export default function Navbar() {
             </Toolbar>
 
             {/* SearchBar for mobile screens */}
-            {/* {isMobile && <SearchBar/>} */}
+            {isMobile && <SearchBar/>}
 
          
         </Container>
