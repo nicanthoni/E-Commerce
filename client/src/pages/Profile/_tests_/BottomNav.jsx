@@ -12,17 +12,15 @@ import { NavLink } from 'react-router-dom';
 
 
 export default function BottomNav () {
+    
     const [active, setActive] = useState(0);
   
-    // React.useEffect(() => {
-    
-    // }, []);
 
     return (
         <Box>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+
                 <BottomNavigation
-                    showLabels
                     value={active}
                     onChange={(event, newActive) => {
                     setActive(newActive);
@@ -32,24 +30,20 @@ export default function BottomNav () {
 
                     {/* Home (explore)  */}
                     <NavLink to="/explore/all">
-                    <BottomNavigationAction  label="Home" icon={<HomeIcon />} /> 
+                    <BottomNavigationAction showLabel label="Home" icon={<HomeIcon />} /> 
                     </NavLink>
 
                     {/* Profile */}
                     <NavLink to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <BottomNavigationAction label="Profile" icon={<AccountBoxIcon />} /> 
+                    <BottomNavigationAction showLabel label="Profile" icon={<AccountBoxIcon />} /> 
                     </NavLink>
 
                     {/* Cart */}
                     <NavLink to="/checkout" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <BottomNavigationAction label="Explore" icon={<ShoppingCartIcon />} />
+                    <BottomNavigationAction showLabel label="Checkout" icon={<ShoppingCartIcon />} />
                     </NavLink>
-
-                    
-
                 
                 </BottomNavigation>
-
             </Paper>
       </Box>
 

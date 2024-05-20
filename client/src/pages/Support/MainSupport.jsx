@@ -2,9 +2,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Stack, Typography } from '@mui/material';
 import EngineeringIcon from '@mui/icons-material/Engineering';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 export default function MainSupport () {
+    const { user } = useAuthContext()
     const navigate = useNavigate();
 
 
@@ -13,13 +15,17 @@ export default function MainSupport () {
         const timeoutId = setTimeout(() => {
             alert('Check back later! 👋');
             
-            // Redirect /home after selecting 'Ok'
-            navigate('/');
+            // Check auth, send to  '/' or '/profile' after selecting 'Ok'
+            if ( user ) {
+                navigate('/Profile')
+            } else {
+            navigate('/');}
+
         }, 1500);
 
         // Cleanup timeout on component unmount
         return () => clearTimeout(timeoutId);
-    }, [navigate]);
+    }, []);
 
 
 

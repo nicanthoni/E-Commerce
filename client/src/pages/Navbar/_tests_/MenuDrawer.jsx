@@ -56,16 +56,28 @@ export default function MenuDrawer () {
                 {/* HOME */}
                 <ListItem key='Home' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
+                    {user ? (
+                        <NavLink
+                            to='/explore/all'
+                            style={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                            <ListItemText primary='Home' />
+                        </NavLink>
+                    ) : (
                         <NavLink
                             to='/'
                             style={{ textDecoration: 'none', color: 'inherit' }}
                         >
                             <ListItemText primary='Home' />
                         </NavLink>
+                    )}
                     </ListItemButton>
                 </ListItem>
 
+                    
+
                 {/* EXPLORE */}
+                {user ? (null) : (   
                 <ListItem key='Explore' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
                         <NavLink
@@ -76,6 +88,7 @@ export default function MenuDrawer () {
                         </NavLink>
                     </ListItemButton>
                 </ListItem>
+                )}
 
                 {/* EXPLORE */}
                 <ListItem key='Support' disablePadding>
