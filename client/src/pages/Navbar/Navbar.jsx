@@ -4,8 +4,10 @@ import LogoDevIcon from '@mui/icons-material/LogoDev'; // Logo placeholder
 import MenuDrawer from './_tests_/MenuDrawer'; 
 import TopNavbar from './_tests_/TopNavbar';
 import CartDrawer from './_tests_/CartDrawer';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Navbar() {
+  const { user } = useAuthContext()
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -30,12 +32,22 @@ export default function Navbar() {
                 textAlign: { xs: 'center', sm: 'left' },
               }}
             >
+              {user ? ( 
+              <NavLink to='/explore/all' style={{ textDecoration: 'none', color: '#fff' }}>
+
+                <LogoDevIcon /> AppName
+
+              </NavLink>
+
+              ) : (
               <NavLink to='/' style={{ textDecoration: 'none', color: '#fff' }}>
 
                 <LogoDevIcon /> AppName
 
               </NavLink>
+              )}
             </Typography>
+
 
             {/* Main navbar */}
             <TopNavbar/>
