@@ -27,10 +27,11 @@ export default function MenuDrawer () {
       
     };
 
-    // onClick - close drawer
+    // Close drawer when any nav button clicked
     const closeDrawer = () => {
       setMobileOpen(false);
     };
+
 
     const menuDrawer = (
         <Box sx={{ textAlign: 'center' }}>
@@ -46,9 +47,7 @@ export default function MenuDrawer () {
                 </Typography>
             </Box>
 
-
             <Divider />
-
 
             {/* DRAWER ITEMS */}
             <List sx={{ display: 'inline-block' }}> 
@@ -90,7 +89,7 @@ export default function MenuDrawer () {
                 </ListItem>
                 )}
 
-                {/* EXPLORE */}
+                {/* SUPPORT */}
                 <ListItem key='Support' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
                         <NavLink
@@ -102,21 +101,10 @@ export default function MenuDrawer () {
                     </ListItemButton>
                 </ListItem>
 
-                {/* Conditionally render by users auth status */}
-
-            {user ? (
-                <>
-                  {/* PROFILE */}
-                  <ListItem key='Profile' disablePadding>
-                        <ListItemButton onClick={closeDrawer}>
-                            <NavLink
-                                to='/profile'
-                                style={{ textDecoration: 'none', color: 'inherit' }}
-                            >
-                                <ListItemText primary='Profile' />
-                            </NavLink>
-                        </ListItemButton>
-                    </ListItem>
+                
+                {/* SIGN IN + LOGOUT  */} 
+                {user ? (
+                <>                 
                   <Box onClick={closeDrawer}> 
                         <LogoutButton  />
                   </Box>
