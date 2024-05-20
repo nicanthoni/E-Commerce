@@ -23,7 +23,7 @@ export default function HomeMain() {
               md={6}
               lg={6}
               className='homeInfo'
-              sx={{ marginTop: { xs: 9, md: 0 } }}
+              sx={{ marginTop: { xs: 18, md: 0 } }}
             >
               <HomeInfo />
             </Grid>

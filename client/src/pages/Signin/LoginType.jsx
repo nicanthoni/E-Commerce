@@ -47,7 +47,7 @@ export default function LoginType() {
       <Grid item xs={12}>
         <Box
           sx={{
-            marginTop: 14,
+            marginTop: 18,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
