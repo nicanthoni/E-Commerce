@@ -52,55 +52,62 @@ const {user } = useAuthContext()
               </Button>
               )}
 
+              {/* PROFILE or SIGN IN */}
+              {user ? (
+              <>
+                <Button
+                  key='Profile'
+                  sx={{ color: '#fff', textTransform: 'none' }}
+                >
+                  <NavLink
+                    to='/profile'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    Profile
+                  </NavLink>
+                </Button>
+                {/* <LogoutButton /> */}
+              </>
+              ) : (
+              <>
+                <Button
+                  key='Signin'
+                  sx={{ color: '#fff', textTransform: 'none' }}
+                >
+                  <NavLink
+                    to='/signin'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    Sign In
+                  </NavLink>
+                </Button>
+                <GetStarted />
+              </>
+              )}
+
               {/* SUPPORT */}
               {user ? (
-              <Button
-                key='Support'
-                sx={{ color: '#fff', textTransform: 'none' }}
-              >
-                <NavLink
-                  to='/support'
-                  style={{ textDecoration: 'none', color: 'inherit' }}
+                <Button
+                  key='Support'
+                  sx={{ color: '#fff', textTransform: 'none' }}
                 >
-                  Support
-                </NavLink>
-              </Button>
+                  <NavLink
+                    to='/support'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    Support
+                  </NavLink>
+                </Button>
               ) : (
                 null
-              )}
+            )}
 
+            {/* LOGOUT */}
+            {user ? (
+              <LogoutButton/>
+            ) : (null)}
 
-              {user ? (
-                <>
-                  <Button
-                    key='Profile'
-                    sx={{ color: '#fff', textTransform: 'none' }}
-                  >
-                    <NavLink
-                      to='/profile'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      Profile
-                    </NavLink>
-                  </Button>
-                  <LogoutButton />
-                </>
-              ) : (
-                <>
-                  <Button
-                    key='Signin'
-                    sx={{ color: '#fff', textTransform: 'none' }}
-                  >
-                    <NavLink
-                      to='/signin'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      Sign In
-                    </NavLink>
-                  </Button>
-                  <GetStarted />
-                </>
-              )}
+          
             </Box>
         </>
             
