@@ -90,6 +90,7 @@ export default function MenuDrawer () {
                 )}
 
                 {/* SUPPORT */}
+                {user ? ( 
                 <ListItem key='Support' disablePadding>
                     <ListItemButton onClick={closeDrawer}>
                         <NavLink
@@ -100,7 +101,9 @@ export default function MenuDrawer () {
                         </NavLink>
                     </ListItemButton>
                 </ListItem>
-
+                ) : (
+                    null
+                )}
                 
                 {/* SIGN IN + LOGOUT  */} 
                 {user ? (
