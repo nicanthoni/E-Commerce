@@ -3,11 +3,10 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import ArchiveIcon from '@mui/icons-material/Archive';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
 import { NavLink } from 'react-router-dom';
 
 
@@ -31,17 +30,22 @@ export default function BottomNav () {
                 >
                     {/* Just these three needed (REMOVE THESE 3 FROM MENU DRAWER WHEN WORKING) */}
 
+                    {/* Home (explore)  */}
                     <NavLink to="/explore/all">
                     <BottomNavigationAction  label="Home" icon={<HomeIcon />} /> 
                     </NavLink>
 
-                    <NavLink to="#" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <BottomNavigationAction label="Explore" icon={<SearchIcon />} />
-                    </NavLink>
-
+                    {/* Profile */}
                     <NavLink to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <BottomNavigationAction label="Profile" icon={<AccountBoxIcon />} /> 
                     </NavLink>
+
+                    {/* Cart */}
+                    <NavLink to="/checkout" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <BottomNavigationAction label="Explore" icon={<ShoppingCartIcon />} />
+                    </NavLink>
+
+                    
 
                 
                 </BottomNavigation>

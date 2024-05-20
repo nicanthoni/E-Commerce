@@ -17,16 +17,29 @@ const {user } = useAuthContext()
             >
               {/* HOME */}
               <Button key='Home' sx={{ color: '#fff', textTransform: 'none' }}>
+                {user ? (
                 <NavLink
+                  to='/explore/all'
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  Home
+                </NavLink>
+                ) : (
+                  <NavLink
                   to='/'
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   Home
                 </NavLink>
+                )
+              }
               </Button>
 
               {/* EXPLORE */}
-              <Button
+              {user ? (
+                null
+              ) : (
+                <Button
                 key='Explore'
                 sx={{ color: '#fff', textTransform: 'none' }}
               >
@@ -37,6 +50,7 @@ const {user } = useAuthContext()
                   Explore
                 </NavLink>
               </Button>
+              )}
 
               {/* SUPPORT */}
               <Button
