@@ -1,26 +1,26 @@
 [
   {
-    'username': 'notamazon',
-    'vendorName': 'NotAmazon',
-    'email': 'notamazon@amazon.com',
-    'password': 'password'
+    "username": "notamazon",
+    "vendorName": "NotAmazon",
+    "email": "notamazon@amazon.com",
+    "password": "password"
   },
   {
-    'username': 'notwalmart',
-    'vendorName': 'NotWalmart',
-    'email': 'notwalmart@walmart.com',
-    'password': 'password'
+    "username": "notwalmart",
+    "vendorName": "NotWalmart",
+    "email": "notwalmart@walmart.com",
+    "password": "password"
   },
   {
-    'username': 'notcosco',
-    'vendorName': 'NotCosco',
-    'email': 'notcosco@cosco.com',
-    'password': 'password'
+    "username": "notcosco",
+    "vendorName": "NotCosco",
+    "email": "notcosco@cosco.com",
+    "password": "password"
   },
   {
-    'username': 'nottarget',
-    'vendorName': 'NotTarget',
-    'email': 'nottarget@target.com',
-    'password': 'password'
+    "username": "nottarget",
+    "vendorName": "NotTarget",
+    "email": "nottarget@target.com",
+    "password": "password"
   }
 ]
