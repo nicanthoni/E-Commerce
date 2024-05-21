@@ -39,7 +39,7 @@ import Home from './pages/Home/Home.jsx';
 import Explore from './pages/Explore/Explore.jsx';
 import MainSupport from './pages/Support/MainSupport.jsx';
 import SingleProductView from './pages/Explore/SingleProductView.jsx';
-import Checkout from './pages/Profile/Buyer/Checkout';
+import Checkout from './pages/Checkout/Checkout.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';
 import VendorAccount from './pages/Profile/Vendor/VendorAccount';
