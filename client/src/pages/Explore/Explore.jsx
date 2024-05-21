@@ -5,6 +5,7 @@ import CategorySelection from './_tests_/Categories';
 
 
 
+
 export default function Explore() {
   return (
     <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 5 }}>
@@ -12,13 +13,15 @@ export default function Explore() {
 
         {/* Categories */}
         <Grid item>
-          {/* <CategorySelection/> */}
+          <CategorySelection/>
         </Grid>
 
+        <br/>
+
         {/* Filters */}
-        <Grid item>
+        {/* <Grid item>
           <Filters />
-        </Grid>
+        </Grid> */}
 
         {/* Products */}
         <Grid item>
