@@ -15,7 +15,7 @@ export default function SearchBar() {
       placeholder="Search Products"
       inputProps={{ 'aria-label': 'search google maps' }}
     />
-    <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+    <IconButton disableRipple type="button" sx={{ p: '10px', bgcolor: 'secondary.main', borderRadius: 1 }} aria-label="search">
       <SearchIcon />
     </IconButton>
   </Paper>

@@ -17,8 +17,8 @@ export default function HomeServices() {
       <Stack padding={4} alignItems='center'>
         <StorefrontIcon sx={{ fontSize: 90, color: 'primary.main' }} />
         <Button 
-        variant='contained' href='signup/buyer'
-        sx={{ color: 'primary.main' , bgcolor: 'secondary.main', textTransform: 'none' }}
+        variant='contained' href='signup/buyer' color='secondary'
+        sx={{ color: 'primary.main', textTransform: 'none' }}
         >
           Shop
         </Button>
@@ -27,8 +27,8 @@ export default function HomeServices() {
       <Stack padding={4} alignItems='center'>
         <AddBusinessIcon sx={{ fontSize: 90, color: 'primary.main' }} />
         <Button 
-        variant='contained' href='/signup/vendor'
-        sx={{ color: 'primary.main' , bgcolor: 'secondary.main', textTransform: 'none' }}
+        variant='contained' href='/signup/vendor' color='secondary'
+        sx={{ color: 'primary.main', textTransform: 'none' }}
         >
           Sell
         </Button>
@@ -37,8 +37,8 @@ export default function HomeServices() {
       <Stack padding={4} alignItems='center'>
         <ContactSupportIcon sx={{ fontSize: 90, color: 'primary.main' }} />
         <Button 
-        variant='contained' href='/support'
-        sx={{ color: 'primary.main' , bgcolor: 'secondary.main', textTransform: 'none' }}
+        variant='contained' href='/support' color='secondary'
+        sx={{ color: 'primary.main', textTransform: 'none' }}
         >
           Support
         </Button>

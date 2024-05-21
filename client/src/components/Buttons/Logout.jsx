@@ -14,8 +14,8 @@ export default function LogoutButton() {
     <Button
       onClick={handleLogout}
       variant='contained'
+      color='secondary'
       sx={{
-        bgcolor: 'secondary.main',
         color: 'primary.main',
         textTransform: 'none',
       }}

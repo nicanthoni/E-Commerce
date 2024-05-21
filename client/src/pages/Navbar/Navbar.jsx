@@ -40,19 +40,19 @@ export default function Navbar() {
                     to='/explore/all'
                     style={{ textDecoration: 'none', color: '#fff' }}
                   >
-                    <LogoDevIcon />E-Commerce
+                    <LogoDevIcon />
                   </NavLink> 
                 ) : (
                   <NavLink
                     to='/'
                     style={{ textDecoration: 'none', color: '#fff' }}
                   >
-                    <LogoDevIcon />E-Commerce
+                    <LogoDevIcon />
                   </NavLink>
                 )}
               </Typography>
 
-              {/* SearchBar for non-mobile screens */}
+              {/* SearchBar for larger screens */}
               {!isMobile && <SearchBar/>}
 
               {/* Main navbar */}
