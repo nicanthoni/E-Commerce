@@ -1,39 +1,13 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Container, Stack, Typography } from '@mui/material';
 import EngineeringIcon from '@mui/icons-material/Engineering';
-import { useAuthContext } from '../../hooks/useAuthContext';
 
 
-export default function MainSupport () {
-    const { user } = useAuthContext()
-    const navigate = useNavigate();
-
-
-    useEffect(() => {
-        // Show alert after 2 second timeout
-        const timeoutId = setTimeout(() => {
-            alert('Check back later! 👋');
-            
-            // Check auth, send to  '/' or '/profile' after selecting 'Ok'
-            if ( user ) {
-                navigate('/Profile')
-            } else {
-            navigate('/');}
-
-        }, 1500);
-
-        // Cleanup timeout on component unmount
-        return () => clearTimeout(timeoutId);
-    }, []);
-
-
-
+export default function MainSupport () {    
 return (
     <Container maxWidth='xl'>
         
         <Stack 
-        my={15}
+        my={18}
         direction='column' 
         alignItems={'center'}
         spacing={2} 
@@ -45,13 +19,12 @@ return (
             />
 
             <Typography variant='h5' fontStyle='italic'>
-                This page is currently undergoing maintenence.
+                The support page is undergoing maintenence.
+            </Typography>
+            <Typography variant='h6' fontStyle='italic'>
+                Check back later!
             </Typography>
 
         </Stack>
-    
     </Container>
-
-)
-
-}
+)}

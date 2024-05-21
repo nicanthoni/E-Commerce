@@ -19,6 +19,7 @@ export default function CartDrawer() {
 
   // Toggle drawer
   const handleDrawerToggle = () => {
+    console.log('User data: ', user)
     setShowCart((prevShowCart) => !prevShowCart);
   };
 
@@ -33,7 +34,7 @@ export default function CartDrawer() {
         sx={{ ml: 3, display: { color: '#fff' } }}
       >
         <Box className='cart-icon' sx={{  cursor: 'pointer' }}>
-          <Badge badgeContent={1} max={10} color='error'>
+          <Badge badgeContent={1} max={20} color='error'>
             <ShoppingCartIcon />
           </Badge>
         </Box>
