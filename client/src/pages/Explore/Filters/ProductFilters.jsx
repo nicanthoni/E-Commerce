@@ -3,10 +3,9 @@ import { Box, Stack, InputLabel, MenuItem, FormControl, Select } from '@mui/mate
 
 
 
-
 export default function Filters() {
-  const [category, setCategory] = useState('Show all');
-  const [price, setPrice] = useState('Show all');
+  const [category, setCategory] = useState('');
+  const [price, setPrice] = useState('');
 
 
   // Set Category Filter
@@ -33,9 +32,9 @@ export default function Filters() {
         label='Category'
         onChange={handleCategoryChange}
       >
-        <MenuItem value={10}>Men</MenuItem>
-        <MenuItem value={20}>Women</MenuItem>
-        <MenuItem value={30}>Show all</MenuItem>
+        <MenuItem value={1}>Men</MenuItem>
+        <MenuItem value={2}>Women</MenuItem>
+        <MenuItem value={3}>Show all</MenuItem>
       </Select>
     </FormControl>
   </Box>
@@ -43,7 +42,7 @@ export default function Filters() {
     {/* Price filter */}
   <Box sx={{ width: 105 }}>
     <FormControl fullWidth size='small' >
-      <InputLabel id='price-filter-select-label'>Sort by Price</InputLabel>
+      <InputLabel id='price-filter-select-label'>Price</InputLabel>
       <Select
         labelId='price-label'
         id='filter-price'
@@ -51,9 +50,9 @@ export default function Filters() {
         label='Price Filter'
         onChange={handlePriceChange}
       >
-        <MenuItem value={10}>Lowest to highest</MenuItem>
-        <MenuItem value={20}>Highest to lowest</MenuItem>
-        <MenuItem value={30}>Show all</MenuItem>
+        <MenuItem value={1}>Lowest to highest</MenuItem>
+        <MenuItem value={2}>Highest to lowest</MenuItem>
+        <MenuItem value={3}>Show all</MenuItem>
       </Select>
     </FormControl>
   </Box>

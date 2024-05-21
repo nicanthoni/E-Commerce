@@ -1,14 +1,22 @@
 import { Grid, Container } from '@mui/material';
 import ProductCard from './Product/ProductCard';
-import Filters from './Filters/Filters';
+import Filters from './Filters/ProductFilters';
+import CategorySelection from './_tests_/Categories';
+
+
 
 export default function Explore() {
   return (
     <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 5 }}>
       <Grid container className='products-Container' justifyContent={'center'}>
 
+        {/* Categories */}
+        <Grid item>
+          {/* <CategorySelection/> */}
+        </Grid>
+
         {/* Filters */}
-        <Grid item direction='column'>
+        <Grid item>
           <Filters />
         </Grid>
 
@@ -16,7 +24,7 @@ export default function Explore() {
         <Grid item>
           <ProductCard />
         </Grid>
-        
+
       </Grid>
     </Container>
   );
