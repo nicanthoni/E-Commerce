@@ -1,13 +1,14 @@
-import { Grid, Container } from "@mui/material";
-import ProductCard from "./Product/ProductCard";
-import Filters from "./Filters/Filters";
+import { Grid, Container } from '@mui/material';
+import ProductCard from './Product/ProductCard';
+import Filters from './Filters/Filters';
 
 export default function Explore() {
   return (
-    <Container maxWidth="xl" sx={{ marginTop: 18 }}>
-      <Grid container className="products-Container" justifyContent={"center"}>
+    <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 5 }}>
+      <Grid container className='products-Container' justifyContent={'center'}>
+
         {/* Filters */}
-        <Grid item direction="column">
+        <Grid item direction='column'>
           <Filters />
         </Grid>
 
@@ -15,6 +16,7 @@ export default function Explore() {
         <Grid item>
           <ProductCard />
         </Grid>
+        
       </Grid>
     </Container>
   );
