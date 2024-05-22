@@ -19,9 +19,9 @@ export default function Explore() {
         <br/>
 
         {/* Filters */}
-        {/* <Grid item>
+        <Grid item marginTop={3}>
           <Filters />
-        </Grid> */}
+        </Grid>
 
         {/* Products */}
         <Grid item>

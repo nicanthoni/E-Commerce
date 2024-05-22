@@ -97,6 +97,7 @@ function CategorySelection() {
         steps={maxSteps}
         position='static'
         activeStep={activeStep}
+        
         nextButton={
           <Button
             size='small'
@@ -111,6 +112,7 @@ function CategorySelection() {
             )}
           </Button>
         }
+
         backButton={
           <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? (
@@ -122,6 +124,7 @@ function CategorySelection() {
           </Button>
         }
       />
+
     </Box>
   );
 }

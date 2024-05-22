@@ -4,13 +4,13 @@ import { Box, Stack, InputLabel, MenuItem, FormControl, Select } from '@mui/mate
 
 
 export default function Filters() {
-  const [category, setCategory] = useState('');
+  const [date, setDate] = useState('');
   const [price, setPrice] = useState('');
 
 
   // Set Category Filter
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
   };
 
   // Set Price Filter
@@ -19,28 +19,30 @@ export default function Filters() {
   };
 
   return (
-  <Stack direction={'row'} spacing={3}>
+  <Stack direction={'row'} spacing={4}>
 
-  {/* Category filter */}
-  <Box sx={{ width: 105 }}>
+
+  {/* Date added filter */}
+  <Box sx={{ width: 108 }}>
     <FormControl fullWidth size='small' >
-      <InputLabel id='category-select-label'>Category</InputLabel>
+      <InputLabel id='category-select-label'>Date added</InputLabel>
       <Select
-        labelId='category-label'
-        id='filter-category'
-        value={category}
-        label='Category'
-        onChange={handleCategoryChange}
+        labelId='date-label'
+        id='filter-date'
+        value={date}
+        label='Date Added'
+        onChange={handleDateChange}
       >
-        <MenuItem value={1}>Men</MenuItem>
-        <MenuItem value={2}>Women</MenuItem>
-        <MenuItem value={3}>Show all</MenuItem>
+        <MenuItem value={1}>Any time</MenuItem>
+        <MenuItem value={2}>Newest</MenuItem>
+        <MenuItem value={3}>Oldest</MenuItem>
       </Select>
     </FormControl>
   </Box>
 
+
     {/* Price filter */}
-  <Box sx={{ width: 105 }}>
+  <Box sx={{ width: 108 }}>
     <FormControl fullWidth size='small' >
       <InputLabel id='price-filter-select-label'>Price</InputLabel>
       <Select
@@ -50,9 +52,9 @@ export default function Filters() {
         label='Price Filter'
         onChange={handlePriceChange}
       >
-        <MenuItem value={1}>Lowest to highest</MenuItem>
-        <MenuItem value={2}>Highest to lowest</MenuItem>
-        <MenuItem value={3}>Show all</MenuItem>
+        <MenuItem value={1}>Show all</MenuItem>
+        <MenuItem value={2}>Lowest to highest</MenuItem>
+        <MenuItem value={3}>Highest to lowest</MenuItem>
       </Select>
     </FormControl>
   </Box>
