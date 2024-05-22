@@ -12,15 +12,14 @@ export default function Filters() {
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
-
   // Set Price Filter
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
   };
 
+
   return (
   <Stack direction={'row'} spacing={4}>
-
 
   {/* Date added filter */}
   <Box sx={{ width: 108 }}>
@@ -39,7 +38,6 @@ export default function Filters() {
       </Select>
     </FormControl>
   </Box>
-
 
     {/* Price filter */}
   <Box sx={{ width: 108 }}>
