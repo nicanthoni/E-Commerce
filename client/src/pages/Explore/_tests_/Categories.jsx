@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Paper, Button } from '@mui/material';
-import MobileStepper from '@mui/material/MobileStepper';
+import { Box, Paper, Button, MobileStepper } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { useMediaQuery } from '@mui/material';
 
+// Categories
 const categories = [
   { id: 1, name: 'Mens Apparel' },
   { id: 2, name: 'Womens Apparel' },
@@ -21,30 +21,37 @@ const categories = [
 
 function CategorySelection() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery hook for mobile/md size 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
   const [activeStep, setActiveStep] = useState(0);
-  const categoriesPerView = 3;
+
+  // Carousel settings
+  const categoriesPerView = isMobile ? 1 : 3; // Adjust categories per view based on mobile
   const maxSteps = Math.ceil(categories.length / categoriesPerView);
 
+  // Next button
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
+  // Back button
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  // Set active
   const handleStepChange = (step) => {
+    console.log('Step: ', step)
     setActiveStep(step);
   };
 
   return (
-    <Box sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden' }}>
+    <Box sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }}>
       <Paper
         square
-        elevation={1}
+        border
+        elevation={0}
         sx={{
-          display: 'flex',
+          
           height: 50,
           pl: 2,
         }}
@@ -55,19 +62,20 @@ function CategorySelection() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        style={{ height: '300px' }} // Restricts the SwipeableViews height
-        containerStyle={{ height: '300px' }} // Ensures container also respects this height
+        style={{ height: '300px' }} 
+        containerStyle={{ height: '300px' }} 
       >
         {Array.from({ length: maxSteps }).map((_, index) => (
-          <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
               <Button
+                color='primary'
+                variant='contained'
                 key={category.id}
                 sx={{
                   height: 255,
-                  display: 'block',
-                  maxWidth: 400,
-                  width: '33%',
+                  width: '90%',
+                  mx: 1,
                   bgcolor: 'primary.main',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -76,7 +84,7 @@ function CategorySelection() {
                   lineHeight: '255px',
                   fontSize: '1.5rem',
                 }}
-                onClick={() => console.log(category.name)}
+                onClick={() => console.log('Category clicked: ', category.name)}
               >
                 {category.name}
               </Button>

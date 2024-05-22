@@ -4,15 +4,15 @@ import Filters from './Filters/ProductFilters';
 import CategorySelection from './_tests_/Categories';
 
 
-
-
 export default function Explore() {
+
+
   return (
     <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 5 }}>
-      <Grid container className='products-Container' justifyContent={'center'}>
+      <Grid container justifyContent={'center'}>
 
         {/* Categories */}
-        <Grid item>
+        <Grid item xs={12}>
           <CategorySelection/>
         </Grid>
 

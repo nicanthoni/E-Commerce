@@ -21,7 +21,7 @@ export default function HomeInfo() {
           }}
           color='#fff'
         >
-          STEP INTO ELEGANCE.
+        Sell Your Passion, Shop the World.
         </Typography>
       </Grid>
       <Grid item>

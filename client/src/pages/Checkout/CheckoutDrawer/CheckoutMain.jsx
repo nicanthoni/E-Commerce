@@ -67,9 +67,9 @@ export default function CheckoutMain() {
 
           <Button
             variant='contained'
+            color='secondary'
             href='/checkout'
             sx={{
-              bgcolor: 'secondary.main',
               color: 'primary.main',
               marginBottom: 2,
               fontWeight: 'bold',
