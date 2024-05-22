@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Paper, Button, MobileStepper } from '@mui/material';
+import { Box, Paper, Button, MobileStepper, Typography } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
@@ -8,8 +8,8 @@ import { useMediaQuery } from '@mui/material';
 
 // Categories
 const categories = [
-  { id: 1, name: 'Mens Apparel' },
-  { id: 2, name: 'Womens Apparel' },
+  { id: 1, name: 'All Products' },
+  { id: 2, name: 'Apparel' },
   { id: 3, name: 'Sports & Outdoors' },
   { id: 4, name: 'Kids' },
   { id: 5, name: 'Baby Care' },
@@ -38,25 +38,21 @@ function CategorySelection() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  // Set active
+  // Set active step (the circle indicating current category section)
   const handleStepChange = (step) => {
-    console.log('Step: ', step)
     setActiveStep(step);
   };
 
   return (
     <Box sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }}>
       <Paper
-        square
-        border
         elevation={0}
-        sx={{
-          
-          height: 50,
-          pl: 2,
-        }}
+        sx={{}}
       />
 
+        <Box marginBottom={2}>
+            <Typography variant='body1'>Browse Categories</Typography>
+        </Box>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -84,7 +80,7 @@ function CategorySelection() {
                   lineHeight: '255px',
                   fontSize: '1.5rem',
                 }}
-                onClick={() => console.log('Category clicked: ', category.name)}
+                onClick={() => console.log('Category: ', category.name)}
               >
                 {category.name}
               </Button>
@@ -97,6 +93,7 @@ function CategorySelection() {
         steps={maxSteps}
         position='static'
         activeStep={activeStep}
+        
         nextButton={
           <Button
             size='small'
@@ -111,6 +108,7 @@ function CategorySelection() {
             )}
           </Button>
         }
+
         backButton={
           <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? (
@@ -122,6 +120,7 @@ function CategorySelection() {
           </Button>
         }
       />
+
     </Box>
   );
 }

@@ -1,4 +1,4 @@
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Typography } from '@mui/material';
 import ProductCard from './Product/ProductCard';
 import Filters from './Filters/ProductFilters';
 import CategorySelection from './_tests_/Categories';
@@ -12,16 +12,16 @@ export default function Explore() {
       <Grid container justifyContent={'center'}>
 
         {/* Categories */}
-        <Grid item xs={12}>
+        <Grid item xs={12} spacing={5} textAlign='center' >
           <CategorySelection/>
         </Grid>
 
         <br/>
 
         {/* Filters */}
-        {/* <Grid item>
+        <Grid item marginTop={3}>
           <Filters />
-        </Grid> */}
+        </Grid>
 
         {/* Products */}
         <Grid item>

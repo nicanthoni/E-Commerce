@@ -3,18 +3,17 @@ import {
   AccordionSummary,
   AccordionDetails,
   Box,
-} from '@mui/material';
-import { Typography, List, ListItem, Link } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { User } from '../../../../../utils/queries';
-import Auth from '../../../../../utils/auth';
-import CartImgList from './CartImgList';
-import WishImglist from './WishlistImgList';
-import OrdersImgList from './OrdersImgList';
-import ReviewsImgList from './ReviewsImgList';
-
+} from "@mui/material";
+import { Typography, List, ListItem, Link } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useEffect } from "react";
+import { useLazyQuery } from "@apollo/client";
+import { User } from "../../../../../utils/queries";
+import Auth from "../../../../../utils/auth";
+import CartImgList from "./CartImgList";
+import WishImglist from "./WishlistImgList";
+import OrdersImgList from "./OrdersImgList";
+import ReviewsImgList from "./ReviewsImgList";
 
 export default function ProfileAccordion() {
   const id = Auth.getProfile().data._id;
@@ -28,7 +27,7 @@ export default function ProfileAccordion() {
   }, [loadUser]);
 
   if (error) {
-    console.error('GraphQL Error:', error);
+    console.error("GraphQL Error:", error);
     return <p>Error fetching data</p>;
   }
   if (loading) {
@@ -39,13 +38,13 @@ export default function ProfileAccordion() {
   }
 
   // Grab data
-const user = data.user;
+  const user = data.user;
 
-// If user is a Buyer ( represented as 'User'), render account type field as 'Shopper' instead
-let accountType = data.user.__typename;
-if (accountType === 'User') {
-  accountType = 'Shopper';
-}
+  // If user is a Buyer ( represented as 'User'), render account type field as 'Shopper' instead
+  let accountType = data.user.__typename;
+  if (accountType === "User") {
+    accountType = "Shopper";
+  }
 
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
@@ -53,22 +52,23 @@ if (accountType === 'User') {
       <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'
-          
+          aria-controls="panel2-content"
+          id="panel2-header"
         >
           <Typography>Wishlist</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {user.wishlist.length > 0 ? (
-            <Typography variant='caption'>
+            <Typography variant="caption">
               {/* IMGs + total price  */}
               <WishImglist />
             </Typography>
           ) : (
-            <Typography variant='caption'>
-              There are 0 items in your wishlist. 
-              Explore items <Link underline='hover' fontWeight='bold' href='/explore/all'>here!</Link>
+            <Typography variant="caption">
+              There are 0 items in your wishlist. Explore items{" "}
+              <Link underline="hover" fontWeight="bold" href="/explore">
+                here!
+              </Link>
             </Typography>
           )}
         </AccordionDetails>
@@ -78,21 +78,23 @@ if (accountType === 'User') {
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'          
+          aria-controls="panel2-content"
+          id="panel2-header"
         >
           <Typography>Cart</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {user.cart.length > 0 ? (
-            <Typography variant='caption'>
+            <Typography variant="caption">
               {/* IMGs + total price  */}
               <CartImgList />
             </Typography>
           ) : (
-            <Typography variant='caption'>
-              There are 0 items in your cart.
-              Explore items <Link underline='hover' fontWeight='bold' href='/explore/all'>here!</Link>
+            <Typography variant="caption">
+              There are 0 items in your cart. Explore items{" "}
+              <Link underline="hover" fontWeight="bold" href="/explore">
+                here!
+              </Link>
             </Typography>
           )}
         </AccordionDetails>
@@ -102,20 +104,22 @@ if (accountType === 'User') {
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'        
+          aria-controls="panel2-content"
+          id="panel2-header"
         >
           <Typography>Order History</Typography>
         </AccordionSummary>
-        <AccordionDetails >
+        <AccordionDetails>
           {user.buyHistory.length > 0 ? (
-            <Typography variant='caption'>
-              <OrdersImgList  />
+            <Typography variant="caption">
+              <OrdersImgList />
             </Typography>
           ) : (
-            <Typography variant='caption'>
-              There have been 0 orders placed from this account.
-              Explore items <Link underline='hover' fontWeight='bold' href='/explore/all'>here!</Link>
+            <Typography variant="caption">
+              There have been 0 orders placed from this account. Explore items{" "}
+              <Link underline="hover" fontWeight="bold" href="/explore">
+                here!
+              </Link>
             </Typography>
           )}
         </AccordionDetails>
@@ -125,19 +129,19 @@ if (accountType === 'User') {
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'         
+          aria-controls="panel2-content"
+          id="panel2-header"
         >
           <Typography>Reviews</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {user.ratings.length > 0 ? (
-            <Typography variant='caption'>
+            <Typography variant="caption">
               {/* Linked, horizonally scrolling, clickable IMG for each item once IMG data avail */}
               <ReviewsImgList />
             </Typography>
           ) : (
-            <Typography variant='caption'>
+            <Typography variant="caption">
               There have been 0 reviews left from this account.
             </Typography>
           )}
@@ -148,13 +152,13 @@ if (accountType === 'User') {
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'
+          aria-controls="panel2-content"
+          id="panel2-header"
         >
           <Typography>Account Details</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{backgroundColor: '#F2F2F2'}}>
-          <Typography variant='caption' >
+        <AccordionDetails sx={{ backgroundColor: "#F2F2F2" }}>
+          <Typography variant="caption">
             <List>
               <ListItem>Account Type: {accountType}</ListItem>
               <ListItem>
