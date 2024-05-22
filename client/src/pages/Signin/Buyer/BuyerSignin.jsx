@@ -63,7 +63,7 @@ export default function Signin() {
     setErrorMessage(''); // Clear previous error message
 
     try {
-      console.log('Signin Form state:', formState);
+      // console.log('Signin Form state:', formState);
       await signin(formState)
       setShowSuccessAlert(true);
     } 

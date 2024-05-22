@@ -40,7 +40,6 @@ function CategorySelection() {
 
   // Set active step (the circle indicating current category section)
   const handleStepChange = (step) => {
-    console.log('Step: ', step)
     setActiveStep(step);
   };
 
@@ -52,7 +51,7 @@ function CategorySelection() {
       />
 
         <Box marginBottom={2}>
-            <Typography variant='body1'>Browse by Category</Typography>
+            <Typography variant='body1'>Browse Categories</Typography>
         </Box>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -81,7 +80,7 @@ function CategorySelection() {
                   lineHeight: '255px',
                   fontSize: '1.5rem',
                 }}
-                onClick={() => console.log('Category clicked: ', category.name)}
+                onClick={() => console.log('Category: ', category.name)}
               >
                 {category.name}
               </Button>

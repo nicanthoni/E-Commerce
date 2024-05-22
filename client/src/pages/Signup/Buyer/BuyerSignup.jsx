@@ -18,12 +18,20 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 export default function BuyerSignup() {
   const { user } = useAuthContext()
   const {signup, stateError, isLoading} = useSignup() // custom hook
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+   // Form state
+   const [formState, setFormState] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {
@@ -32,13 +40,6 @@ export default function BuyerSignup() {
     }
   }, []);
 
-  // Form state
-  const [formState, setFormState] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  });
 
   // OnChange - update form state
   const handleChange = (event) => {

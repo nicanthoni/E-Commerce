@@ -12,7 +12,7 @@ import { Tooltip } from '@mui/material';
 
 export default function ProductCard() {
   return (
-    <Grid container spacing={5} marginTop={4}>
+    <Grid container spacing={5} marginTop={4} marginBottom={3}>
       {Data.map((result, index) => (
         <Grid item xs={12} sm={6} md={4} key={index} align='center'>
           <Card sx={{ maxWidth: 275, padding: '10px' }}>
