@@ -1,4 +1,4 @@
-import { Grid, Container, Typography, Divider } from '@mui/material';
+import { Grid, Container} from '@mui/material';
 import ProductCard from './Product/ProductCard';
 import Filters from './Filters/ProductFilters';
 import CategorySelection from './_tests_/Categories';

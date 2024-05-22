@@ -24,7 +24,7 @@ export default function Filters() {
   {/* Date added filter */}
   <Box sx={{ width: 126 }}>
     <FormControl fullWidth size='small'>
-      <InputLabel>Date added</InputLabel>
+      <InputLabel> Date added </InputLabel>
       <Select
         labelId='date-label'
         id='filter-date'
@@ -42,7 +42,7 @@ export default function Filters() {
     {/* Price filter */}
   <Box sx={{ width: 126 }}>
     <FormControl fullWidth size='small' >
-      <InputLabel>Price</InputLabel>
+      <InputLabel> Price </InputLabel>
       <Select
         labelId='price-label'
         id='filter-price'
