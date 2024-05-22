@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Paper, Button, MobileStepper, Typography } from '@mui/material';
+import { Box, Paper, Button, MobileStepper, Typography, Divider } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
@@ -50,9 +50,13 @@ function CategorySelection() {
         sx={{}}
       />
 
-        <Box marginBottom={2}>
+        <Box marginBottom={1}>
             <Typography variant='body1'>Browse Categories</Typography>
         </Box>
+
+        <Divider variant='middle'/>
+        <br/>
+
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -75,7 +79,7 @@ function CategorySelection() {
                   bgcolor: 'primary.main',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  color: 'secondary.main',
+                  color: '#fffff',
                   textAlign: 'center',
                   lineHeight: '255px',
                   fontSize: '1.5rem',
