@@ -7,7 +7,7 @@ import { CardActionArea, CardActions, Box, Grid } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
-import Data from '../../data/productData.json'; // Sample product data
+import Data from '../../../data/productData.json'; // Sample product data
 import { Tooltip } from '@mui/material';
 
 export default function ProductCard() {

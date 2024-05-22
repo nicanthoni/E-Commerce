@@ -86,10 +86,10 @@ export default function AccountType() {
               <FormHelperText>{helperText}</FormHelperText>
               <Button
                 variant='contained'
+                color='secondary'
                 type='submit'
                 sx={{
                   mt: 2,
-                  bgcolor: 'secondary.main',
                   color: 'primary.main',
                   textTransform: 'none',
                 }}

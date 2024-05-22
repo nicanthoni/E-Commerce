@@ -134,11 +134,11 @@ export default function Signin() {
             type='submit'
             fullWidth
             variant='contained'
+            color='secondary'
             sx={{
               mt: 3,
               mb: 2,
               textTransform: 'none',
-              bgcolor: 'secondary.main',
               color: 'primary.main',
             }}
           >

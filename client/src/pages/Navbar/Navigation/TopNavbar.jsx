@@ -36,9 +36,7 @@ const {user } = useAuthContext()
               </Button>
 
               {/* EXPLORE */}
-              {user ? (
-                null
-              ) : (
+              {user ? (null) : (
                 <Button
                 key='Explore'
                 sx={{ color: '#fff', textTransform: 'none' }}

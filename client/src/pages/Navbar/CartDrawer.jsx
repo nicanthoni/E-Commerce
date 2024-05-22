@@ -19,7 +19,6 @@ export default function CartDrawer() {
 
   // Toggle drawer
   const handleDrawerToggle = () => {
-    console.log('User data: ', user)
     setShowCart((prevShowCart) => !prevShowCart);
   };
 

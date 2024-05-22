@@ -1,10 +1,17 @@
-import { Typography, Box, Button, Container, Stack, Rating } from '@mui/material';
+import {
+  Typography,
+  Box,
+  Button,
+  Container,
+  Stack,
+  Rating,
+} from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import Tooltip from '@mui/material/Tooltip';
 import { useParams } from 'react-router-dom';
-import Data from '../../data/productData.json';
+import Data from '../../../data/productData.json';
 
 // Individual item view
 export default function SingleProduct() {
@@ -52,10 +59,8 @@ export default function SingleProduct() {
           </Box>
 
           {/* RATING data */}
-          <Box
-          sx={{ marginBottom: {xs: 2, md: 0}}}
-          >
-          <Rating name='read-only' value={product.rating} readOnly/>
+          <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
+            <Rating name='read-only' value={product.rating} readOnly />
           </Box>
         </Stack>
 

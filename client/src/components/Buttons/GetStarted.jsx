@@ -8,7 +8,7 @@ export default function GetStarted() {
       variant='contained'
       href='/signup'
       color='secondary'
-      sx={{ color: 'primary', textTransform: 'none' }}
+      sx={{ color: 'primary.main', textTransform: 'none' }}
     >
       Get Started
     </Button>
