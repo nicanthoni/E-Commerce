@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { useParams } from 'react-router-dom';
 import Data from '../../../data/productData.json';
 
-// Individual item view
+// Page that renders when clicking on a single product
 export default function SingleProduct() {
   const { productId } = useParams();
 

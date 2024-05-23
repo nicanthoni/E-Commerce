@@ -13,10 +13,15 @@ import { Tooltip } from '@mui/material';
 export default function ProductCard() {
   return (
     <Grid container spacing={5} marginTop={4} marginBottom={3}>
+
       {Data.map((result, index) => (
+
         <Grid item xs={12} sm={6} md={4} key={index} align='center'>
           <Card sx={{ maxWidth: 275, padding: '10px' }}>
+
+            {/* Clickable area of card */}
             <CardActionArea component={Link} to={`/product/${result.id}`}>
+
               <Box sx={{ height: '100px', width: '100px' }}>
                 <CardMedia
                   component='img'
@@ -31,12 +36,17 @@ export default function ProductCard() {
                 />
               </Box>
 
+
+              {/* Product Card details*/}
               <CardContent align='left'>
+
+                {/* name */}
                 <Typography gutterBottom variant='h5' component='div'>
-                  {/* NAME data */}
                   {result.name}
                 </Typography>
 
+
+                {/* description */}
                 <Typography
                   variant='body2'
                   color='text.secondary'
@@ -49,11 +59,13 @@ export default function ProductCard() {
                     overflow: 'hidden',
                   }}
                 >
-                  {/* DESCRIPTION  data */}
                   {result.description}
                 </Typography>
               </CardContent>
+
             </CardActionArea>
+
+
             <CardActions>
               <Grid container justifyContent='space-between'>
                 <Grid item>
@@ -71,9 +83,13 @@ export default function ProductCard() {
                 </Grid>
               </Grid>
             </CardActions>
+
+
           </Card>
         </Grid>
+
       ))}
+
     </Grid>
   );
 }

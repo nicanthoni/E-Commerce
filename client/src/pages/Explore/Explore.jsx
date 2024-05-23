@@ -8,7 +8,7 @@ export default function Explore() {
 
 
   return (
-    <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 5 }}>
+    <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 4 }}>
       <Grid container justifyContent={'center'}>
 
         {/* Categories */}
