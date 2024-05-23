@@ -44,13 +44,13 @@ function CategorySelection() {
   };
 
   return (
-    <Box sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }}>
+    <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }} >
       <Paper
         elevation={0}
         sx={{}}
       />
 
-        <Box marginBottom={1}>
+        <Box marginBottom={1} textAlign='center' >
             <Typography variant='body1'>Browse Categories</Typography>
         </Box>
 
@@ -92,8 +92,9 @@ function CategorySelection() {
           </Box>
         ))}
       </SwipeableViews>
-
+       
       <MobileStepper
+      
         steps={maxSteps}
         position='static'
         activeStep={activeStep}

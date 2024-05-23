@@ -36,7 +36,7 @@ import RootLayout from './layouts/RootLayout';
 import Home from './pages/Home/Home.jsx';
 import Explore from './pages/Explore/Explore.jsx';
 import MainSupport from './pages/Support/MainSupport.jsx';
-import SingleProductView from './pages/Explore/Product/SingleProductView.jsx';
+import SingleProduct from './pages/Explore/Product/SingleProduct.jsx';
 import Checkout from './pages/Checkout/Checkout.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';
@@ -46,9 +46,10 @@ import LoginType from './pages/Signin/LoginType.jsx'; // Account type to log in 
 import AccountType from './pages/Signup/AccountType.jsx'; // Account type to sign up for
 import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
+import SearchBar from './pages/Navbar/Search/Search.jsx';
 
 // Testing
-import SearchBar from './pages/Navbar/Search/Search.jsx';
+
 
 // Routes
 const router = createBrowserRouter(
@@ -66,7 +67,7 @@ const router = createBrowserRouter(
       <Route path='/profile/vendor/:vendorId' element={<VendorAccount />} />
       <Route path='/explore/:category' element={<Explore />} />
       <Route path='/explore' element={<Explore />} />
-      <Route path='/product/:productId' element={<SingleProductView />} />
+      <Route path='/product/:productId' element={<SingleProduct />} />
       <Route path='/checkout' element={<Checkout />} />
       <Route path='/additem' element={<VendorAddItem />} />
       <Route path='*' element={<ErrorPage />} />
