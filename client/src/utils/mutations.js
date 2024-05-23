@@ -25,6 +25,24 @@ mutation buyerLogin($email: String!, $password: String!) {
 }
 `
 
+export const add_wishlist = gql`
+mutation AddWishlist($itemId: ID!, $userId: ID!) {
+  AddToWishlist(itemId: $itemId, userId: $userId) {
+    item {
+      name
+      _id
+    }
+    user {
+      username
+      wishlist
+    }
+  }
+}
+`
+
+
+
+
 // VENDOR
 export const vendor_Signup = gql`
   mutation vendorSignup($vendorName: String!, $email: String!, $password: String!) {
