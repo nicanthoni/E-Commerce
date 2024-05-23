@@ -5,22 +5,20 @@ import {
   Container,
   Stack,
   Rating,
+  Checkbox,
+  Tooltip
 } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import Tooltip from '@mui/material/Tooltip';
+import {FavoriteBorder, Favorite} from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
-import Data from '../../../data/productData.json';
+import Data from '../../../data/productData.json'; // test data
 
-// Page that renders when clicking on a single product
+
+
 export default function SingleProduct() {
   const { productId } = useParams();
+  const product = Data.find((item) => item.id === parseInt(productId)); // Find product by ID
 
-  // Find the product in the Data array with the matching ID
-  const product = Data.find((item) => item.id === parseInt(productId));
-
-  // If the product with the given ID is not found, display a message
+  // If no product match...
   if (!product) {
     return (
       <Typography variant='h6' textAlign='center' marginTop={15}>
@@ -31,15 +29,19 @@ export default function SingleProduct() {
 
   return (
     <Container maxWidth='md'>
+
+      {/* Parent Stack */}
       <Stack
-        marginTop={20}
         sx={{
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
+          marginTop: { xs: 10, md: 20},
         }}
       >
+        
+        {/* Image & Rating Stack */}
         <Stack alignItems={'center'} gap={2}>
-          {/* IMAGE data */}
+
           <Box
             sx={{
               height: { xs: '200px', md: '400px' },
@@ -54,39 +56,41 @@ export default function SingleProduct() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain',
-              }}
-            />
+              }}/>
           </Box>
 
-          {/* RATING data */}
           <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
             <Rating name='read-only' value={product.rating} readOnly />
           </Box>
+
         </Stack>
 
+        {/* Price, Name, and Description Stack */}
         <Stack
           direction='column'
-          gap={2}
+          gap={1}
           sx={{
             alignItems: { xs: 'center', md: 'flex-start' },
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          {/* PRICE data */}
+          
           <Typography variant='h6' component='div'>
             ${product.price}
           </Typography>
 
-          {/* NAME data */}
+          
           <Typography variant='h5' component='div' fontWeight='bold'>
             {product.name}
           </Typography>
 
-          {/* DESCRIPTION  data */}
+          
           <Typography variant='body1' color='text.secondary'>
             {product.description}
           </Typography>
 
+
+          {/* Button & Wishlist Stack */}
           <Stack direction='row' gap={1}>
             <Button
               variant='contained'
@@ -102,7 +106,9 @@ export default function SingleProduct() {
               <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
             </Tooltip>
           </Stack>
+
         </Stack>
+
       </Stack>
     </Container>
   );
