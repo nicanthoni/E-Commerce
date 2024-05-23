@@ -90,15 +90,15 @@ export default function SingleProduct() {
           <Stack direction='row' gap={1}>
             <Button
               variant='contained'
+              color='secondary'
               sx={{
-                bgcolor: 'secondary.main',
                 color: 'primary.main',
                 textTransform: 'none',
               }}
             >
               Add to cart
             </Button>
-            <Tooltip title='Add to wishlist' placement='right'>
+              <Tooltip title='Add to wishlist' placement='right'>
               <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
             </Tooltip>
           </Stack>
