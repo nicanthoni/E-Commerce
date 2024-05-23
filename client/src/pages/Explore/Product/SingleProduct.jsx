@@ -103,7 +103,7 @@ export default function SingleProduct() {
               Add to cart
             </Button>
               <Tooltip title='Add to wishlist' placement='right'>
-              <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+              <Checkbox color='error' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
             </Tooltip>
           </Stack>
 

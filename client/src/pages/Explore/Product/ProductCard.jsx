@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, Box, Grid, Stack } from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
+import {Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
+import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
+import {FavoriteBorder, Favorite} from '@mui/icons-material';
 import Data from '../../../data/productData.json'; // Sample product data
-import { Tooltip } from '@mui/material';
+
+
 
 export default function ProductCard() {
+
+// OnChange handle wishlist
+const handleWishlistChange = () => {
+  console.log('added to wishlist')
+}
+
   return (
     <Grid container spacing={5} marginTop={4} marginBottom={3}>
       {Data.map((result, index) => (
@@ -27,7 +29,7 @@ export default function ProductCard() {
                   image={result.img} /* IMAGE data */
                   alt='Product Photo'
                   sx={{
-                    borderRadius: '5px',
+                    marginTop: 2,
                     width: '100%',
                     height: '100%',
                     objectFit: 'contain',
@@ -70,6 +72,8 @@ export default function ProductCard() {
                 <Box>
                   <Tooltip title='Add to wishlist' placement='right'>
                   <Checkbox
+                    color='error'
+                    onChange={handleWishlistChange}
                     icon={<FavoriteBorder />}
                     checkedIcon={<Favorite />}
                   />

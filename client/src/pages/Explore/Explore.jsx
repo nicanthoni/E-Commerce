@@ -9,10 +9,12 @@ export default function Explore() {
 
   return (
     <Container maxWidth='xl' sx={{ marginTop: 18, marginBottom: 4 }}>
+
       <Grid container justifyContent={'center'}>
 
+
         {/* Categories */}
-        <Grid item xs={12} spacing={5} textAlign='center' >
+        <Grid item xs={12}>
           <CategorySelection/>
         </Grid>
 
@@ -28,7 +30,9 @@ export default function Explore() {
           <ProductCard />
         </Grid>
 
+
       </Grid>
+
     </Container>
   );
 }
