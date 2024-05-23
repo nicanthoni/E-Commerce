@@ -15,15 +15,15 @@ export default function HomeMain() {
       {/* <Navbar/> */}
       <Box sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth='xl' className='home-main-container'>
-          <Grid container spacing={3} alignItems='center'>
+          
+          <Grid container spacing={4} alignItems='center'>
             {/* Text Section */}
             <Grid
               item
               xs={12}
               md={6}
               lg={6}
-              className='homeInfo'
-              sx={{ marginTop: { xs: 18, md: 0 } }}
+              sx={{ marginTop: { xs: 18, md: 7, lg: 0 } }}
             >
               <HomeInfo />
             </Grid>
@@ -31,14 +31,13 @@ export default function HomeMain() {
             {/* Logo Section */}
             <Grid
               item
-              xs={12}
+              xs={12} 
               md={6}
               lg={6}
-              className='homeLogo'
-              sx={{ padding: { xs: 6, sm: 4, md: 2 } }}
             >
               <HomeLogo />
             </Grid>
+
           </Grid>
         </Container>
       </Box>
