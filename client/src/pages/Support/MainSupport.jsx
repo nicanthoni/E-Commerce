@@ -7,7 +7,7 @@ return (
     <Container maxWidth='xl'>
         
         <Stack 
-        my={18}
+        my={12}
         direction='column' 
         alignItems={'center'}
         spacing={2} 

@@ -41,7 +41,8 @@ export default function BuyerProfile() {
   return (
     <>
       <Container maxWidth='lg'>
-        <Grid container direction='column' marginTop={18}>
+        <Grid container direction='column' marginTop={12}>
+
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
             <Stack direction='column' alignItems='center' spacing={2}>
@@ -86,8 +87,8 @@ export default function BuyerProfile() {
           <Grid item>
             <ProfileAccordions />
           </Grid>
-        </Grid>
 
+        </Grid>
       </Container>
     </>
   );

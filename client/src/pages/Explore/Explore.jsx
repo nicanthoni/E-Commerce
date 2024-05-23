@@ -16,8 +16,7 @@ export default function Explore() {
           <CategorySelection/>
         </Grid>
 
-        <br/>
-
+      
         {/* Filters */}
         <Grid item marginTop={3}>
           <Filters />
