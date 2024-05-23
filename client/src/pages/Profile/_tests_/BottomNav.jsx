@@ -1,20 +1,20 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Paper from "@mui/material/Paper";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import HomeIcon from "@mui/icons-material/Home";
-import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Paper from '@mui/material/Paper';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import HomeIcon from '@mui/icons-material/Home';
+import { NavLink } from 'react-router-dom';
 
 export default function BottomNav() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(1);
 
   return (
     <Box>
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
         elevation={3}
       >
         <BottomNavigation
@@ -26,8 +26,8 @@ export default function BottomNav() {
           {/* Home (explore)  */}
           <BottomNavigationAction
             component={NavLink}
-            to="/explore"
-            label="Home"
+            to='/explore'
+            label='Home'
             icon={<HomeIcon />}
             showLabel
           />
@@ -35,8 +35,8 @@ export default function BottomNav() {
           {/* Profile */}
           <BottomNavigationAction
             component={NavLink}
-            to="/profile"
-            label="Profile"
+            to='/profile'
+            label='Profile'
             icon={<AccountBoxIcon />}
             showLabel
           />
@@ -45,8 +45,8 @@ export default function BottomNav() {
 
           <BottomNavigationAction
             component={NavLink}
-            to="/checkout"
-            label="Checkout"
+            to='/checkout'
+            label='Checkout'
             icon={<ShoppingCartIcon />}
             showLabel
           />
