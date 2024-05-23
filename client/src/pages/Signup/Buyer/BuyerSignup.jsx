@@ -83,7 +83,7 @@ export default function BuyerSignup() {
     }
 
     try {
-      console.log('Signup Form state:', formState);
+      // console.log('Signup Form state:', formState);
       await signup(formState)
       setShowSuccessAlert(true);
     } catch (e) {
