@@ -19,8 +19,3 @@
 a {
   text-decoration: none;
 }
-
-/* ROOT LAYOUT - outlet sits below */
-.root-Navbar {
-  margin-bottom: 55px;
-}

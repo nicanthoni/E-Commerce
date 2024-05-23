@@ -22,9 +22,9 @@ export default function Filters() {
   <Stack direction={'row'} spacing={4}>
 
   {/* Date added filter */}
-  <Box sx={{ width: 108 }}>
-    <FormControl fullWidth size='small' >
-      <InputLabel id='category-select-label'>Date added</InputLabel>
+  <Box sx={{ width: 126 }}>
+    <FormControl fullWidth size='small'>
+      <InputLabel> Date added </InputLabel>
       <Select
         labelId='date-label'
         id='filter-date'
@@ -32,7 +32,7 @@ export default function Filters() {
         label='Date Added'
         onChange={handleDateChange}
       >
-        <MenuItem value={1}>Any time</MenuItem>
+        <MenuItem value={1}>Show all</MenuItem>
         <MenuItem value={2}>Newest</MenuItem>
         <MenuItem value={3}>Oldest</MenuItem>
       </Select>
@@ -40,9 +40,9 @@ export default function Filters() {
   </Box>
 
     {/* Price filter */}
-  <Box sx={{ width: 108 }}>
+  <Box sx={{ width: 126 }}>
     <FormControl fullWidth size='small' >
-      <InputLabel id='price-filter-select-label'>Price</InputLabel>
+      <InputLabel> Price </InputLabel>
       <Select
         labelId='price-label'
         id='filter-price'

@@ -6,70 +6,84 @@ import {
   Container,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
-import { NavLink } from "react-router-dom";
-import LogoDevIcon from "@mui/icons-material/LogoDev"; // Logo placeholder
-import MenuDrawer from "./Navigation/MenuDrawer";
-import TopNavbar from "./Navigation/TopNavbar";
-import CartDrawer from "./CartDrawer";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import SearchBar from "./Search/Search"; // Custom SearchBar component
+} from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import LogoDevIcon from '@mui/icons-material/LogoDev'; 
+import MenuDrawer from './Navigation/MenuDrawer';
+import TopNavbar from './Navigation/TopNavbar';
+import CartDrawer from './CartDrawer';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import SearchBar from './Search/Search'; 
+import { useLocation } from 'react-router-dom';
+
+
 
 export default function Navbar() {
-  const { user } = useAuthContext();
+
+  const { user } = useAuthContext(); // auth 
+
+  const location = useLocation();
+  const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
+
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // mediaQuery hook for mobile/md size
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <AppBar
-        component="nav"
-        sx={{ backgroundColor: "primary", display: "flex" }}
+        component='nav'
+        sx={{ backgroundColor: 'primary', display: 'flex' }}
         elevation={0}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
+
           <Toolbar>
+            
             {/* Menu drawer */}
             <MenuDrawer />
 
             {/* Logo & Brand Name */}
             <Typography
-              variant="h6"
-              component="div"
+              variant='h6'
+              component='div'
               sx={{
                 flexGrow: 1,
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: { xs: 'center', sm: 'left' },
               }}
             >
               {user ? (
                 <NavLink
-                  to="/explore"
-                  style={{ textDecoration: "none", color: "#fff" }}
+                  to='/explore'
+                  style={{ textDecoration: 'none', color: '#fff' }}
                 >
                   <LogoDevIcon />
                 </NavLink>
               ) : (
                 <NavLink
-                  to="/"
-                  style={{ textDecoration: "none", color: "#fff" }}
+                  to='/'
+                  style={{ textDecoration: 'none', color: '#fff' }}
                 >
                   <LogoDevIcon />
                 </NavLink>
               )}
             </Typography>
 
+
             {/* SearchBar for larger screens */}
-            {!isMobile && <SearchBar />}
+            {!isMobile && isExploreRoute && <SearchBar />}
+
 
             {/* Main navbar */}
             <TopNavbar />
+
 
             {/* Checkout drawer */}
             <CartDrawer />
           </Toolbar>
 
           {/* SearchBar for mobile screens */}
-          {isMobile && <SearchBar />}
+          {isMobile && isExploreRoute && <SearchBar />}
+
         </Container>
       </AppBar>
     </Box>
