@@ -10,18 +10,17 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-import { vendor_Login } from '../../../utils/mutations';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Auth from '../../../utils/auth';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useSignin } from '../../../hooks/useSignin';
+import { useVendorSignin } from '../../../hooks/_tests_/useVendorSignin';
+
+
 
 export default function Signin() {
   const { user }  = useAuthContext() //auth context
-  const { signin, stateError, isLoading } = useSignin() // custom Signin() hook
+  const { signin, stateError, isLoading } = useVendorSignin() // custom Signin() hook
   const navigate = useNavigate();
 
   // Error & Alert States
@@ -29,12 +28,14 @@ export default function Signin() {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // On first render, check if user is logged in.If so, send to their profile page
+
+  // On render, check if logged in => Send to profile page
   useEffect(() => {
-    if (Auth.loggedIn()) {
-      navigate(`/profile`);
+    if (user) {
+      navigate('/profile');
     }
   }, []);
+
 
   // Form state
   const [formState, setFormState] = useState({
@@ -42,8 +43,6 @@ export default function Signin() {
     password: '',
   });
 
-  //  Mutation
-  const [VendorLogin, { error, loading, data }] = useMutation(vendor_Login);
 
   // OnChange, update form state
   const handleChange = (event) => {
@@ -54,37 +53,30 @@ export default function Signin() {
     });
   };
 
+
     // onClose - clear error message 
     const handleClearError = () => {
       setErrorMessage('');
       setShowErrorAlert(false);
     };
 
-  // onSubmit:
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setErrorMessage(''); // Clear prev error message
 
-    if (errorMessage) {
-      setShowErrorAlert(true);
-      return;
-    }
 
-    try {
-      const { data } = await VendorLogin({
-        variables: { ...formState },
-      });
-
-      Auth.login(data.Vendorlogin.token);
-      setShowSuccessAlert(true);
-      setTimeout(() => {
-        navigate(`/profile`);
-      }, 1500);
-    } catch (e) {
-      setShowErrorAlert(true);
-      console.error('AddUser Error:', e);
-    }
-  };
+    // OnSubmit - validation check + run signin() hook
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      setErrorMessage(''); // Clear prev error message
+  
+      try {
+        // console.log('Signin Form state:', formState);
+        await signin(formState)
+        setShowSuccessAlert(true);
+      } 
+      catch (e) {
+        setShowErrorAlert(true);
+        console.error('signin() error in BuyerSignin:', e);
+      }
+    };
 
 
   return (
