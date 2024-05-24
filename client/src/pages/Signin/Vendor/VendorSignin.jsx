@@ -16,9 +16,12 @@ import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Auth from '../../../utils/auth';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useSignin } from '../../../hooks/useSignin';
 
 export default function Signin() {
-  // Method to change location
+  const { user }  = useAuthContext() //auth context
+  const { signin, stateError, isLoading } = useSignin() // custom Signin() hook
   const navigate = useNavigate();
 
   // Error & Alert States
@@ -33,7 +36,7 @@ export default function Signin() {
     }
   }, []);
 
-  // Initialize State for form fields
+  // Form state
   const [formState, setFormState] = useState({
     email: '',
     password: '',
@@ -51,10 +54,16 @@ export default function Signin() {
     });
   };
 
-  // On form Submission:
+    // onClose - clear error message 
+    const handleClearError = () => {
+      setErrorMessage('');
+      setShowErrorAlert(false);
+    };
+
+  // onSubmit:
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear previous error message
+    setErrorMessage(''); // Clear prev error message
 
     if (errorMessage) {
       setShowErrorAlert(true);
@@ -77,11 +86,6 @@ export default function Signin() {
     }
   };
 
-  // Clear error message once message is closed (onClose)
-  const handleClearError = () => {
-    setErrorMessage('');
-    setShowErrorAlert(false);
-  };
 
   return (
     <Container component='main' maxWidth='xs'>

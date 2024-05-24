@@ -60,7 +60,7 @@ export default function Signin() {
   // OnSubmit - validation check + run signin() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear previous error message
+    setErrorMessage(''); // Clear prev error message
 
     try {
       // console.log('Signin Form state:', formState);
