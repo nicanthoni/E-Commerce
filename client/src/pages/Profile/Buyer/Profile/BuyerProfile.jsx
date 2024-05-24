@@ -13,8 +13,7 @@ export default function BuyerProfile() {
   const { user } = useAuthContext()
   const id = Auth.getProfile().data._id;
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
+    variables: { userId: id },});
 
   // Auth check 
   useEffect(() => {
@@ -36,7 +35,7 @@ export default function BuyerProfile() {
 
   // User data object
   const userData = data.user;
-  // console.log('User data: ', user);
+  // console.log('Buyer data: ', user);
 
   return (
     <>

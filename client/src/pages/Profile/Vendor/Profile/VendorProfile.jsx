@@ -1,68 +1,127 @@
-import { Typography, Container, Button } from '@mui/material';
+import { Typography, Container, Stack, Grid, Avatar, Divider } from '@mui/material';
 import Auth from '../../../../utils/auth';
 import { Vendor } from '../../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
-import LogoutButton from '../../../../components/Buttons/Logout';
+import { useAuthContext } from '../../../../hooks/useAuthContext';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 
-// Vendor profile
+
+
+
 export default function VendorProfile() {
-  const id = Auth.getProfile().data._id;
-  const [loadUser, { loading, data, error }] = useLazyQuery(Vendor, {
-    variables: { vendorId: id },
-  });
-  // Check if user is logged in
-  if (!Auth.loggedIn()) {
-    // If not logged in, navigate to '/'
-    return null; // Render nothing
-  }
+const { user } = useAuthContext(); 
+const id = Auth.getProfile().data._id;
+const [loadVendor, { loading, data, error }] = useLazyQuery(Vendor, {
+variables: { vendorId: id },});
 
-  useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+// Auth check 
+useEffect(() => {
+  // Call loadVendor only if user is truthy
+  if (user) {
+    loadVendor();
+  
+  } 
+}, [loadVendor, user]); 
 
-  if (error) {
-    console.error('GraphQL Error:', error);
-    return <p>Error fetching data</p>;
-  }
+if (error) {
+  console.error('GraphQL Error:', error);
+}
+if (loading) {
+  return <p>Loading...</p>; 
+}
+if (!data || !data.vendor) {
+  return <p>No vendor data found</p>;
+}
 
-  if (loading) {
-    return <p>Loading...</p>; // Replace with loading spinner
-  }
-  if (!data || !data.vendor) {
-    return <p>No vendor data found</p>;
-  }
-  const vendor = data.vendor;
-  console.log(vendor.sales);
+
+  // Vendor data 
+  const vendorData = data.vendor;
+  // console.log('Vendor data: ', vendorData);
+
   return (
-    <Container maxWidth='xl'>
-      <Typography variant='h6' textAlign='center'>
-        Welcome, {vendor.vendorName}
-      </Typography>
-      <>
-        email: {vendor.email}
-        <br />
-        inventory:{' '}
-        {vendor.inventory &&
-          vendor.inventory.map((inventoryItem) => (
-            <div key={inventoryItem.id}>
-              <p>Name: {inventoryItem.name}</p>
-              <p>Stock: {inventoryItem.inventory}</p>
-            </div>
-          ))}
-        <br />
-        sales:{' '}
-        {vendor.sales &&
-          vendor.sales.map((soldItem) => (
-            <div key={soldItem.id}>
-              <p>name: {soldItem.item.name}</p>
-              <p>sold: {soldItem.sold}</p>
-            </div>
-          ))}
-      </>
-      <br />
-      {/* LOGOUT Button */}
-      <LogoutButton />
+    <>
+    <Container maxWidth='lg'>
+      <Grid container direction='column' marginTop={12}>
+
+        {/* OVERVIEW stats */}
+        <Grid item marginBottom={4}>
+          <Stack direction='column' alignItems='center' spacing={2}>
+
+            <Avatar
+              sx={{ bgcolor: 'primary.main' }}
+              alt={`${vendorData.vendorName}'s Logo`}
+              >
+              <StorefrontIcon/>
+            </Avatar>
+
+            <Typography textAlign='center' variant='h6'>
+              Hi, {vendorData.vendorName} 👋
+            </Typography>
+
+            <Stack
+              direction='row'
+              justifyContent='space-around'
+              alignItems='center'
+              textAlign='center'
+              spacing={4}
+            >
+              <Stack alignItems='center'>
+                <Typography fontWeight='bold' color='secondary.main'>
+                  {vendorData.inventory.length}
+                </Typography>
+                <Typography variant='caption'>Inventory</Typography>
+              </Stack>
+              <Stack alignItems='center'>
+                <Typography fontWeight='bold' color='secondary.main'>
+                  {vendorData.sales.length}
+                </Typography>
+                <Typography variant='caption'>Sales</Typography>
+              </Stack>
+              <Stack alignItems='center'>
+                <Typography fontWeight='bold' color='secondary.main'>
+                  0
+                </Typography>
+                <Typography variant='caption'>Followers</Typography> 
+              </Stack>
+            </Stack>
+
+          </Stack>
+        </Grid>
+
+
+
+
+        <Divider/>
+
+
+        {/* Metrics/Stats to go here */}
+        <Grid item>
+
+            <Stack 
+              my={6}
+              direction='column' 
+              alignItems={'center'}
+              spacing={3} 
+              textAlign='center'>
+
+      
+
+              <Typography variant='subtitle2'>
+                  Vendor profile's are undergoing maintenence. Soon, you will see your businesses performance data here.
+              </Typography>
+
+              <Typography variant='subtitle2' fontStyle='italic'>
+                  Thank you for your patience.
+              </Typography>
+
+            </Stack>
+            
+        </Grid>
+
+      </Grid>
     </Container>
+  </>
   );
 }

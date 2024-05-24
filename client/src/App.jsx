@@ -40,16 +40,14 @@ import SingleProduct from './pages/Explore/Product/SingleProduct.jsx';
 import Checkout from './pages/Checkout/Checkout.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';
-import VendorAccount from './pages/Profile/Vendor/VendorAccount';
-import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx'; // Just to test adding a new item
-import LoginType from './pages/Signin/LoginType.jsx'; // Account type to log in to
-import AccountType from './pages/Signup/AccountType.jsx'; // Account type to sign up for
+import LoginType from './pages/Signin/LoginType.jsx'; // Account type - LOGIN
+import AccountType from './pages/Signup/AccountType.jsx'; // Account type - SIGNUP
 import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
 import SearchBar from './pages/Navbar/Search/Search.jsx';
 
 // Testing
-
+import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx'; 
 
 // Routes
 const router = createBrowserRouter(
@@ -64,7 +62,6 @@ const router = createBrowserRouter(
       <Route path='/signup/:userType' element={<Signup />} />
       <Route path='/signin/:userType' element={<Signin />} />
       <Route path='/profile' element={<Profile />} />
-      <Route path='/profile/vendor/:vendorId' element={<VendorAccount />} />
       <Route path='/explore/:category' element={<Explore />} />
       <Route path='/explore' element={<Explore />} />
       <Route path='/product/:productId' element={<SingleProduct />} />

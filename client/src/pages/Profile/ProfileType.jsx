@@ -1,5 +1,5 @@
-import BuyerProfile from './Buyer/BuyerAccount';
-import VendorProfile from './Vendor/VendorAccount';
+import BuyerProfile from './Buyer/Profile/BuyerProfile';
+import VendorProfile from './Vendor/Profile/VendorProfile';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Auth from '../../utils/auth';
 
