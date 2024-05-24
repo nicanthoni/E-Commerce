@@ -1,6 +1,8 @@
 import { gql } from '@apollo/client'
 
 
+
+
 // BUYER 
 export const buyer_Signup = gql`
   mutation buyerSignup($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
