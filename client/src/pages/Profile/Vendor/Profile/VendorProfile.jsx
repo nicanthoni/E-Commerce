@@ -3,7 +3,6 @@ import Auth from '../../../../utils/auth';
 import { Vendor } from '../../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
-import NicsAvatar from '../../../../assets/images/MyAvatar-PNG.png';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 
@@ -35,9 +34,9 @@ if (!data || !data.vendor) {
 }
 
 
-  // Vendor data object
+  // Vendor data 
   const vendorData = data.vendor;
-  console.log('Vendor data: ', vendorData);
+  // console.log('Vendor data: ', vendorData);
 
   return (
     <>
@@ -47,7 +46,7 @@ if (!data || !data.vendor) {
         {/* OVERVIEW stats */}
         <Grid item marginBottom={4}>
           <Stack direction='column' alignItems='center' spacing={2}>
-            
+
             <Avatar
               sx={{ bgcolor: 'primary.main' }}
               alt={`${vendorData.vendorName}'s Logo`}

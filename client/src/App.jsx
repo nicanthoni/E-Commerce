@@ -64,7 +64,6 @@ const router = createBrowserRouter(
       <Route path='/signup/:userType' element={<Signup />} />
       <Route path='/signin/:userType' element={<Signin />} />
       <Route path='/profile' element={<Profile />} />
-      <Route path='/profile/vendor/:vendorId' element={<VendorAccount />} />
       <Route path='/explore/:category' element={<Explore />} />
       <Route path='/explore' element={<Explore />} />
       <Route path='/product/:productId' element={<SingleProduct />} />
