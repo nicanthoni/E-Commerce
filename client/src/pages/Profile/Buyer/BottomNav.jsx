@@ -7,8 +7,10 @@ import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
 import { NavLink } from 'react-router-dom';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function BottomNav() {
+  const { user } = useAuthContext();
   const [active, setActive] = useState(1);
 
   return (
