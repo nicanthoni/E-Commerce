@@ -27,6 +27,7 @@ export default function Signin() {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {
@@ -34,6 +35,7 @@ export default function Signin() {
       navigate('/profile');
     }
   }, []);
+
 
   // Form state
   const [formState, setFormState] = useState({
@@ -51,16 +53,18 @@ export default function Signin() {
     });
   };
 
+
   // onClose - clear error message 
   const handleClearError = () => {
     setErrorMessage('');
     setShowErrorAlert(false);
   };
 
+
   // OnSubmit - validation check + run signin() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear previous error message
+    setErrorMessage(''); // Clear prev error message
 
     try {
       // console.log('Signin Form state:', formState);
