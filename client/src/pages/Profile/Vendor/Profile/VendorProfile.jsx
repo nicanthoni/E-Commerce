@@ -1,10 +1,12 @@
-import { Typography, Container, Stack, Grid, Avatar } from '@mui/material';
+import { Typography, Container, Stack, Grid, Avatar, Divider } from '@mui/material';
 import Auth from '../../../../utils/auth';
 import { Vendor } from '../../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
 import StorefrontIcon from '@mui/icons-material/Storefront';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+
 
 
 
@@ -88,10 +90,35 @@ if (!data || !data.vendor) {
           </Stack>
         </Grid>
 
-          {/* Metrics/Stats to go here */}
-          <Grid item>
+
+
+
+        <Divider/>
+
+
+        {/* Metrics/Stats to go here */}
+        <Grid item>
+
+            <Stack 
+              my={6}
+              direction='column' 
+              alignItems={'center'}
+              spacing={3} 
+              textAlign='center'>
+
+      
+
+              <Typography variant='subtitle2'>
+                  Vendor profile's are undergoing maintenence. Soon, you will see your businesses performance data here.
+              </Typography>
+
+              <Typography variant='subtitle2' fontStyle='italic'>
+                  Thank you for your patience.
+              </Typography>
+
+            </Stack>
             
-          </Grid>
+        </Grid>
 
       </Grid>
     </Container>
