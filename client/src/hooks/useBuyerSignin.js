@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { buyer_login } from '../utils/mutations';
 import { useAuthContext } from './useAuthContext';
 
-export const useSignin = () => {
+export const useBuyerSignin = () => {
     const [stateError, setStateError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const {dispatch} = useAuthContext()

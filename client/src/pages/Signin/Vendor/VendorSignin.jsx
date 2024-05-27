@@ -14,20 +14,17 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useVendorSignin } from '../../../hooks/_tests_/useVendorSignin';
-
-
+import { useVendorSignin } from '../../../hooks/useVendorSignin';
 
 export default function Signin() {
-  const { user }  = useAuthContext() //auth context
-  const { signin, stateError, isLoading } = useVendorSignin() // custom Signin() hook
+  const { user } = useAuthContext(); //auth context
+  const { signin, stateError, isLoading } = useVendorSignin(); // custom signin hook
   const navigate = useNavigate();
 
   // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {
@@ -36,13 +33,11 @@ export default function Signin() {
     }
   }, []);
 
-
   // Form state
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
-
 
   // OnChange, update form state
   const handleChange = (event) => {
@@ -53,31 +48,26 @@ export default function Signin() {
     });
   };
 
+  // onClose - clear error message
+  const handleClearError = () => {
+    setErrorMessage('');
+    setShowErrorAlert(false);
+  };
 
-    // onClose - clear error message 
-    const handleClearError = () => {
-      setErrorMessage('');
-      setShowErrorAlert(false);
-    };
+  // OnSubmit - validation check + run signin() hook
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrorMessage(''); // Clear prev error message
 
-
-
-    // OnSubmit - validation check + run signin() hook
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      setErrorMessage(''); // Clear prev error message
-  
-      try {
-        // console.log('Signin Form state:', formState);
-        await signin(formState)
-        setShowSuccessAlert(true);
-      } 
-      catch (e) {
-        setShowErrorAlert(true);
-        console.error('signin() error in BuyerSignin:', e);
-      }
-    };
-
+    try {
+      // console.log('Signin Form state:', formState);
+      await signin(formState);
+      setShowSuccessAlert(true);
+    } catch (e) {
+      setShowErrorAlert(true);
+      console.error('signin() error in BuyerSignin:', e);
+    }
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
