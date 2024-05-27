@@ -9,11 +9,11 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 
 export default function LoginType() {
   const navigate = useNavigate();
@@ -62,8 +62,9 @@ export default function LoginType() {
           <form onSubmit={handleSubmit}>
             <FormControl sx={{ m: 3 }} error={error} variant='standard'>
               <RadioGroup
+                sx={{ alignSelf: 'center'}}
                 aria-labelledby='demo-error-radios'
-                name='quiz'
+                name='loginType'
                 value={value}
                 onChange={handleRadioChange}
               >
