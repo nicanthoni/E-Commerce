@@ -1,30 +1,30 @@
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { buyer_login } from '../utils/mutations';
-import { useAuthContext } from './useAuthContext';
+import { vendor_Signup } from '../../utils/mutations';
+import { useAuthContext } from '../useAuthContext';
 
-export const useSignin = () => {
+export const useVendorSignup = () => {
     const [stateError, setStateError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const {dispatch} = useAuthContext()
     const navigate = useNavigate()
 
     //  Mutation
-    const [LoginUser, { error, loading, data }] = useMutation(buyer_login);
+    const [AddVendor, { error, loading, data }] = useMutation(vendor_Signup);
 
-    const signin = async (formState) => {
+    const signup = async (formState) => {
         setIsLoading(true)
         setStateError(null)
 
         try {
-            const { data } = await LoginUser({
+            const { data } = await AddVendor({
             variables: formState,
             });
             
-            // login with users token
-            Auth.login(data.Userlogin.token);
+            // create new token
+            Auth.login(data.AddVendor.token);
             
             // update the auth context
             dispatch({ type: 'LOGIN', payload: data })
@@ -39,9 +39,9 @@ export const useSignin = () => {
       } catch (e) {
             setStateError(true)
             setIsLoading(false)
-            console.error('LoginUser error in useSignin() hook: ', e);
+            console.error('AddUser error in useSignup() hook:', e);
       }
          
     }
-    return { signin, isLoading, stateError }
+    return { signup, isLoading, stateError }
 }

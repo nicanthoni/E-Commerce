@@ -11,37 +11,38 @@ import Container from '@mui/material/Container';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
-import { vendor_Signup } from '../../../utils/mutations';
-import Auth from '../../../utils/auth';
+import { useVendorSignup } from '../../../hooks/Signup/useVendorSignup';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function VendorSignup() {
-  // Method to change location
+  const { user } = useAuthContext();
+  const { signup, stateError, isLoading } = useVendorSignup() // custom hook
   const navigate = useNavigate();
+
 
   // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // On first render, check if user is logged in.If so, send to their profile page
-  useEffect(() => {
-    if (Auth.loggedIn()) {
-      navigate(`/profile`);
-    }
-  }, []);
 
-  // Initialize State for form fields
+  // Form state
   const [formState, setFormState] = useState({
     vendorName: '',
     email: '',
     password: '',
   });
 
-  //  Mutation
-  const [AddVendor, { error, loading, data }] = useMutation(vendor_Signup);
 
-  // OnChange, update form state
+  // On render, check if logged in => Send to profile page
+  useEffect(() => {
+    if (user) {
+      navigate('/profile');
+    }
+  }, []);
+
+
+  // OnChange - update form state
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -50,7 +51,15 @@ export default function VendorSignup() {
     });
   };
 
-  // On form Submission:
+
+  // onClose - clear error message 
+  const handleClearError = () => {
+    setErrorMessage('');
+    setShowErrorAlert(false);
+  };
+
+
+  // OnSubmit - validation check + run signup() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorMessage(''); // Clear previous error message
@@ -77,27 +86,15 @@ export default function VendorSignup() {
     }
 
     try {
-      const { data } = await AddVendor({
-        variables: { ...formState },
-      });
-      console.log('Vendor data structure:', JSON.stringify(data));
-      Auth.login(data.AddVendor.token);
+      // console.log('Signup Form state:', formState);
+      await signup(formState)
       setShowSuccessAlert(true);
-      setTimeout(() => {
-        navigate(`/profile`);
-      }, 1500);
     } catch (e) {
-      console.log('Vendor data structure:', JSON.stringify(data));
       setShowErrorAlert(true);
-      console.error('AddVendor Error:', e);
+      console.error('signup() error in VendorSignup:', e);
     }
   };
 
-  // Clear error message once message is closed (onClose)
-  const handleClearError = () => {
-    setErrorMessage('');
-    setShowErrorAlert(false);
-  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -128,6 +125,8 @@ export default function VendorSignup() {
           <StorefrontIcon />
         </Avatar>
         <Typography variant='h5'>Vendor Registration</Typography>
+
+        {/* FORM */}
         <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

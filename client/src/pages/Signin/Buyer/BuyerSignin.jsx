@@ -13,21 +13,21 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useSignin } from '../../../hooks/useSignin'; 
+import { useBuyerSignin } from '../../../hooks/Signin/useBuyerSignin';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 
 
 export default function Signin() {
   const { user }  = useAuthContext() //auth context
-  const { signin, stateError, isLoading } = useSignin() // custom Signin() hook
+  const { signin, stateError, isLoading } = useBuyerSignin() // custom signin hook
   const navigate = useNavigate();
 
   // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  
+
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {

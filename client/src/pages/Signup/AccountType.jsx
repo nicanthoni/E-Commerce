@@ -15,13 +15,12 @@ import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function AccountType() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
   const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState(
-    'You can have both, but email addresses must be unique'
-  );
+  const [helperText, setHelperText] = useState('');
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -39,7 +38,7 @@ export default function AccountType() {
       setError(false);
       navigate('/signup/vendor');
     } else {
-      setHelperText('Please select an account type.');
+      setHelperText('Please select an account type the create');
       setError(true);
     }
   };
@@ -67,8 +66,9 @@ export default function AccountType() {
                 Hint: Do you intend to sell or purchase items?
               </FormLabel>
               <RadioGroup
+              sx={{ alignSelf: 'center'}}
                 aria-labelledby='demo-error-radios'
-                name='quiz'
+                name='accountType'
                 value={value}
                 onChange={handleRadioChange}
               >

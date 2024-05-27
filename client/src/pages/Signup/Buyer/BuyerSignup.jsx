@@ -11,22 +11,21 @@ import { Alert } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import { useSignup } from '../../../hooks/useSignup'; 
+import { useBuyerSignup } from '../../../hooks/Signup/useBuyerSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
-
 export default function BuyerSignup() {
-  const { user } = useAuthContext()
-  const {signup, stateError, isLoading} = useSignup() // custom hook
-  const navigate = useNavigate()
+  const { user } = useAuthContext();
+  const { signup, stateError, isLoading } = useBuyerSignup(); // custom hook
+  const navigate = useNavigate();
 
   // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-   // Form state
-   const [formState, setFormState] = useState({
+  // Form state
+  const [formState, setFormState] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -40,7 +39,6 @@ export default function BuyerSignup() {
     }
   }, []);
 
-
   // OnChange - update form state
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -50,11 +48,11 @@ export default function BuyerSignup() {
     });
   };
 
-    // onClose - clear error message 
-    const handleClearError = () => {
-      setErrorMessage('');
-      setShowErrorAlert(false);
-    };
+  // onClose - clear error message
+  const handleClearError = () => {
+    setErrorMessage('');
+    setShowErrorAlert(false);
+  };
 
   // OnSubmit - validation check + run signup() hook
   const handleSubmit = async (event) => {
@@ -74,7 +72,9 @@ export default function BuyerSignup() {
     }
 
     if (!emailRegex.test(formState.email) && formState.password.length < 8) {
-      setErrorMessage('The email address is invalid, and your password must be at least 8 characters long')
+      setErrorMessage(
+        'The email address is invalid, and your password must be at least 8 characters long'
+      );
     }
 
     if (errorMessage) {
@@ -84,14 +84,13 @@ export default function BuyerSignup() {
 
     try {
       // console.log('Signup Form state:', formState);
-      await signup(formState)
+      await signup(formState);
       setShowSuccessAlert(true);
     } catch (e) {
       setShowErrorAlert(true);
       console.error('signup() error in BuyerSignup:', e);
     }
   };
-
 
   return (
     <Container component='main' maxWidth='xs'>
