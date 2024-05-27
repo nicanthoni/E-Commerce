@@ -13,7 +13,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useBuyerSignin } from '../../../hooks/useBuyerSignin';
+import { useBuyerSignin } from '../../../hooks/Signin/useBuyerSignin';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 

@@ -1,9 +1,9 @@
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { vendor_Login } from '../utils/mutations';
-import { useAuthContext } from './useAuthContext';
+import { vendor_Login } from '../../utils/mutations';
+import { useAuthContext } from '../useAuthContext';
 
 export const useVendorSignin = () => {
   const [stateError, setStateError] = useState(null);

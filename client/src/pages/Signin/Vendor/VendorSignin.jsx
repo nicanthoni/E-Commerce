@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useVendorSignin } from '../../../hooks/useVendorSignin';
+import { useVendorSignin } from '../../../hooks/Signin/useVendorSignin';
 
 export default function Signin() {
   const { user } = useAuthContext(); //auth context
