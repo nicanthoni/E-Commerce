@@ -11,19 +11,21 @@ import { Alert } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
-import { useSignup } from '../../../hooks/useSignup'; 
+import { useBuyerSignup } from '../../../hooks/useBuyerSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 
 export default function BuyerSignup() {
   const { user } = useAuthContext()
-  const {signup, stateError, isLoading} = useSignup() // custom hook
+  const { signup, stateError, isLoading } = useBuyerSignup() // custom hook
   const navigate = useNavigate()
+
 
   // Error & Alert States
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
 
    // Form state
    const [formState, setFormState] = useState({
@@ -33,6 +35,7 @@ export default function BuyerSignup() {
     password: '',
   });
 
+  
   // On render, check if logged in => Send to profile page
   useEffect(() => {
     if (user) {
