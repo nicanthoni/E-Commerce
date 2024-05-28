@@ -38,6 +38,7 @@ import Explore from './pages/Explore/Explore.jsx';
 import MainSupport from './pages/Support/MainSupport.jsx';
 import SingleProduct from './pages/Explore/Product/SingleProduct.jsx';
 import Checkout from './pages/Checkout/Checkout.jsx';
+import Inbox from './pages/Profile/Inbox/Inbox.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';
 import LoginType from './pages/Signin/LoginType.jsx'; // Account type - LOGIN
@@ -66,6 +67,7 @@ const router = createBrowserRouter(
       <Route path='/explore' element={<Explore />} />
       <Route path='/product/:productId' element={<SingleProduct />} />
       <Route path='/checkout' element={<Checkout />} />
+      <Route path='/inbox' element={<Inbox />} />
       <Route path='/additem' element={<VendorAddItem />} />
       <Route path='*' element={<ErrorPage />} />
     </Route>
