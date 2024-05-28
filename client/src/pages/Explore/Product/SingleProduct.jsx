@@ -6,13 +6,11 @@ import {
   Stack,
   Rating,
   Checkbox,
-  Tooltip
+  Tooltip,
 } from '@mui/material';
-import {FavoriteBorder, Favorite} from '@mui/icons-material';
+import { FavoriteBorder, Favorite, AddShoppingCart } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import Data from '../../../data/productData.json'; // test data
-
-
 
 export default function SingleProduct() {
   const { productId } = useParams();
@@ -28,25 +26,22 @@ export default function SingleProduct() {
   }
 
   // OnChange handle wishlist
-const handleWishlistChange = () => {
-  console.log('added to wishlist')
-}
+  const handleWishlistChange = () => {
+    console.log('added to wishlist');
+  };
 
   return (
     <Container maxWidth='md'>
-
       {/* Parent Stack */}
       <Stack
         sx={{
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
-          marginTop: { xs: 10, md: 20},
+          marginTop: { xs: 10, md: 20 },
         }}
       >
-        
         {/* Image & Rating Stack */}
         <Stack alignItems={'center'} gap={2}>
-
           <Box
             sx={{
               height: { xs: '200px', md: '400px' },
@@ -61,13 +56,13 @@ const handleWishlistChange = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain',
-              }}/>
+              }}
+            />
           </Box>
 
           <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
             <Rating name='read-only' value={product.rating} readOnly />
           </Box>
-
         </Stack>
 
         {/* Price, Name, and Description Stack */}
@@ -79,21 +74,17 @@ const handleWishlistChange = () => {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          
           <Typography variant='h6' component='div'>
             ${product.price}
           </Typography>
 
-          
           <Typography variant='h5' component='div' fontWeight='bold'>
             {product.name}
           </Typography>
 
-          
           <Typography variant='body1' color='text.secondary'>
             {product.description}
           </Typography>
-
 
           {/* Button & Wishlist Stack */}
           <Stack direction='row' gap={1}>
@@ -105,20 +96,18 @@ const handleWishlistChange = () => {
                 textTransform: 'none',
               }}
             >
-              Add to cart
+              <AddShoppingCart /> Add to cart
             </Button>
-              <Tooltip title='Add to wishlist' placement='right'>
-              <Checkbox 
-              onChange={handleWishlistChange}
-              color='error' 
-              icon={<FavoriteBorder />} 
-              checkedIcon={<Favorite />} 
+            <Tooltip title='Add to wishlist' placement='right'>
+              <Checkbox
+                onChange={handleWishlistChange}
+                color='error'
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
               />
             </Tooltip>
           </Stack>
-
         </Stack>
-
       </Stack>
     </Container>
   );

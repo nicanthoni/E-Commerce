@@ -45,7 +45,6 @@ import LoginType from './pages/Signin/LoginType.jsx'; // Account type - LOGIN
 import AccountType from './pages/Signup/AccountType.jsx'; // Account type - SIGNUP
 import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
-import SearchBar from './pages/Navbar/Search/Search.jsx';
 
 // Testing
 import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx'; 
@@ -55,7 +54,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path='/test' element={<SearchBar />} />
+      {/* <Route path='/test' element={<SearchBar />} /> */}
       <Route path='/home' element={<Home />} />
       <Route path='/support' element={<MainSupport />} />
       <Route path='/signup' element={<AccountType />} />
