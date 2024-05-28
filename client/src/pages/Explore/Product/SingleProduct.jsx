@@ -27,6 +27,11 @@ export default function SingleProduct() {
     );
   }
 
+  // OnChange handle wishlist
+const handleWishlistChange = () => {
+  console.log('added to wishlist')
+}
+
   return (
     <Container maxWidth='md'>
 
@@ -103,7 +108,12 @@ export default function SingleProduct() {
               Add to cart
             </Button>
               <Tooltip title='Add to wishlist' placement='right'>
-              <Checkbox color='error' icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+              <Checkbox 
+              onChange={handleWishlistChange}
+              color='error' 
+              icon={<FavoriteBorder />} 
+              checkedIcon={<Favorite />} 
+              />
             </Tooltip>
           </Stack>
 

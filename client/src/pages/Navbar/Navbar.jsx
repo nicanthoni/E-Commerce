@@ -22,15 +22,16 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 
 export default function Navbar() {
   const { user } = useAuthContext(); // auth 
-  let userType = null;
+  let userType = null; // 
   const location = useLocation();
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
 
+  // check & set userType (buyer or vendor)
   if (user) {
-    userType = Auth.getProfile().data.userType; // user type
+    userType = Auth.getProfile().data.userType;
   }
 
 

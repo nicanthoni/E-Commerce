@@ -43,7 +43,7 @@ export default function BottomNav() {
             showLabel
           />
 
-          {/* Cart / Inbox - render depending on user type */}
+          {/* Inbox */}
           <BottomNavigationAction
             component={NavLink}
             to='/inbox'

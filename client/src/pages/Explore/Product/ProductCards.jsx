@@ -3,15 +3,20 @@ import {Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
 import {FavoriteBorder, Favorite} from '@mui/icons-material';
 import Data from '../../../data/productData.json'; // Sample product data
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 
 
 
-export default function ProductCard() {
+export default function ProductCards() {
+const { user } = useAuthContext() // auth
+const { addWishlist, isLoading, stateError } = useWishlist() // custom hook
 
 // OnChange handle wishlist
 const handleWishlistChange = () => {
   console.log('added to wishlist')
 }
+
 
   return (
     <Grid container spacing={5} marginTop={4} marginBottom={3}>

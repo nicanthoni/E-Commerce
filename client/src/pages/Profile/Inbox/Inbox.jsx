@@ -1,4 +1,4 @@
-import { Container, Typography, Stack } from "@mui/material"
+import { Container, Typography, Stack } from '@mui/material'
 import EngineeringIcon from '@mui/icons-material/Engineering';
 
 export default function Inbox () {
