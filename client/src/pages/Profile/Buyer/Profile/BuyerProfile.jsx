@@ -4,9 +4,10 @@ import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../utils/queries';
 import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
-import NicsAvatar from '../../../../assets/images/MyAvatar-PNG.png';
 import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
+// import NicsAvatar from '../../../../assets/images/MyAvatar-PNG.png';
+
 
 
 export default function BuyerProfile() {
@@ -48,8 +49,9 @@ export default function BuyerProfile() {
               <Avatar
                 sx={{ bgcolor: 'primary.main' }}
                 alt={`${userData.firstName}'s Avatar`}
-                src={NicsAvatar}
-              />
+                
+                />
+                  
               <Typography textAlign='center' variant='h6'>
                 Hi, {userData.firstName} {userData.lastName} 👋
               </Typography>
