@@ -2,16 +2,16 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import MailIcon from '@mui/icons-material/Mail';
 import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
 import { NavLink } from 'react-router-dom';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+
 
 export default function BottomNav() {
-  const { user } = useAuthContext();
   const [active, setActive] = useState(1);
+
 
   return (
     <Box>
@@ -43,13 +43,12 @@ export default function BottomNav() {
             showLabel
           />
 
-          {/* Cart */}
-
+          {/* Inbox */}
           <BottomNavigationAction
             component={NavLink}
-            to='/checkout'
-            label='Checkout'
-            icon={<ShoppingCartIcon />}
+            to='/inbox'
+            label='Inbox'
+            icon={<MailIcon />}
             showLabel
           />
         </BottomNavigation>

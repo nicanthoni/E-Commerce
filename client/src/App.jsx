@@ -38,13 +38,13 @@ import Explore from './pages/Explore/Explore.jsx';
 import MainSupport from './pages/Support/MainSupport.jsx';
 import SingleProduct from './pages/Explore/Product/SingleProduct.jsx';
 import Checkout from './pages/Checkout/Checkout.jsx';
+import Inbox from './pages/Profile/Inbox/Inbox.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';
 import LoginType from './pages/Signin/LoginType.jsx'; // Account type - LOGIN
 import AccountType from './pages/Signup/AccountType.jsx'; // Account type - SIGNUP
 import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
-import SearchBar from './pages/Navbar/Search/Search.jsx';
 
 // Testing
 import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx'; 
@@ -54,7 +54,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path='/test' element={<SearchBar />} />
+      {/* <Route path='/test' element={<SearchBar />} /> */}
       <Route path='/home' element={<Home />} />
       <Route path='/support' element={<MainSupport />} />
       <Route path='/signup' element={<AccountType />} />
@@ -66,6 +66,7 @@ const router = createBrowserRouter(
       <Route path='/explore' element={<Explore />} />
       <Route path='/product/:productId' element={<SingleProduct />} />
       <Route path='/checkout' element={<Checkout />} />
+      <Route path='/inbox' element={<Inbox />} />
       <Route path='/additem' element={<VendorAddItem />} />
       <Route path='*' element={<ErrorPage />} />
     </Route>

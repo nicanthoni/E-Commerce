@@ -1,19 +1,19 @@
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import LogoDevIcon from "@mui/icons-material/LogoDev";
-import LogoutButton from "../../../components/Buttons/Logout";
-import GetStarted from "../../../components/Buttons/GetStarted";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import LogoDevIcon from '@mui/icons-material/LogoDev';
+import LogoutButton from '../../../components/Buttons/Logout';
+import GetStarted from '../../../components/Buttons/GetStarted';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function MenuDrawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -30,13 +30,13 @@ export default function MenuDrawer() {
   };
 
   const menuDrawer = (
-    <Box sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: 'center' }}>
       {/* Logo */}
-      <Box sx={{ bgcolor: "primary.main" }}>
+      <Box sx={{ bgcolor: 'primary.main' }}>
         <Typography
-          variant="h6"
-          color="#fff"
-          sx={{ my: 2, display: "inline-block" }}
+          variant='h6'
+          color='#fff'
+          sx={{ my: 2, display: 'inline-block' }}
         >
           <LogoDevIcon />
         </Typography>
@@ -45,73 +45,95 @@ export default function MenuDrawer() {
       <Divider />
 
       {/* DRAWER ITEMS */}
-      <List sx={{ display: "inline-block" }}>
+      <List sx={{ display: 'inline-block' }}>
+
         {/* HOME */}
-        <ListItem key="Home" disablePadding>
+        <ListItem key='Home' disablePadding>
           <ListItemButton onClick={closeDrawer}>
             {user ? (
               <NavLink
-                to="/explore"
-                style={{ textDecoration: "none", color: "inherit" }}
+                to='/explore'
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <ListItemText primary="Home" />
+                <ListItemText primary='Home' />
               </NavLink>
             ) : (
               <NavLink
-                to="/"
-                style={{ textDecoration: "none", color: "inherit" }}
+                to='/'
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <ListItemText primary="Home" />
+                <ListItemText primary='Home' />
               </NavLink>
             )}
           </ListItemButton>
         </ListItem>
 
+
         {/* EXPLORE */}
         {user ? null : (
-          <ListItem key="Explore" disablePadding>
+          <ListItem key='Explore' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <NavLink
-                to="/explore"
-                style={{ textDecoration: "none", color: "inherit" }}
+                to='/explore'
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <ListItemText primary="Explore" />
+                <ListItemText primary='Explore' />
               </NavLink>
             </ListItemButton>
           </ListItem>
         )}
+
 
         {/* PROFILE */}
         {!user ? null : (
-          <ListItem key="Profile" disablePadding>
+          <ListItem key='Profile' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <NavLink
-                to="/profile"
-                style={{ textDecoration: "none", color: "inherit" }}
+                to='/profile'
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <ListItemText primary="Profile" />
+                <ListItemText primary='Profile' />
               </NavLink>
             </ListItemButton>
           </ListItem>
         )}
 
+
+        {/* INBOX */}
+        {!user ? null : (
+          <ListItem key='Inbox' disablePadding>
+          <ListItemButton onClick={closeDrawer}>
+            <NavLink
+              to='/inbox'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <ListItemText primary='Inbox' />
+            </NavLink>
+          </ListItemButton>
+        </ListItem>
+        )}
+
+
         {/* SUPPORT */}
-        {user ? (
-          <ListItem key="Support" disablePadding>
+        {!user ? null : (
+          <ListItem key='Support' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <NavLink
-                to="/support"
-                style={{ textDecoration: "none", color: "inherit" }}
+                to='/support'
+                style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <ListItemText primary="Support" />
+                <ListItemText primary='Support' />
               </NavLink>
             </ListItemButton>
           </ListItem>
-        ) : null}
+        )}
 
-        {/* SIGN IN + LOGOUT  */}
+        
+        {/* SIGN IN / LOGOUT  */}
         {user ? (
           <>
+            <Divider sx={{ marginBottom: 2}}/>
+
             <Box onClick={closeDrawer}>
               <LogoutButton />
             </Box>
@@ -119,16 +141,17 @@ export default function MenuDrawer() {
         ) : (
           <>
             {/* SIGN IN */}
-            <ListItem key="SignIn" disablePadding>
+            <ListItem key='SignIn' disablePadding>
               <ListItemButton onClick={closeDrawer}>
                 <NavLink
-                  to="/signin"
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  to='/signin'
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <ListItemText primary="Sign In" />
+                  <ListItemText primary='Sign In' />
                 </NavLink>
               </ListItemButton>
             </ListItem>
+            <Divider sx={{ marginBottom: 2}}/>
             <GetStarted />
           </>
         )}
@@ -139,27 +162,27 @@ export default function MenuDrawer() {
   return (
     <>
       <IconButton
-        className="menu-icon"
-        aria-label="open drawer"
-        edge="start"
+        className='menu-icon'
+        aria-label='open drawer'
+        edge='start'
         onClick={handleDrawerToggle}
-        sx={{ display: { sm: "none", color: "#fff" } }}
+        sx={{ display: { sm: 'none', color: '#fff' } }}
       >
         <MenuIcon />
       </IconButton>
 
       {/* Drawer component */}
       <Drawer
-        variant="temporary"
+        variant='temporary'
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile
         }}
         sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
+          display: { xs: 'block', sm: 'none' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
             width: 285,
           },
         }}

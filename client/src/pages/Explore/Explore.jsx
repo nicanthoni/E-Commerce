@@ -1,5 +1,5 @@
 import { Grid, Container} from '@mui/material';
-import ProductCard from './Product/ProductCard';
+import ProductCards from './Product/ProductCards';
 import Filters from './Filters/ProductFilters';
 import CategorySelection from './_tests_/Categories';
 
@@ -27,7 +27,7 @@ export default function Explore() {
 
         {/* Products */}
         <Grid item>
-          <ProductCard />
+          <ProductCards />
         </Grid>
 
 
