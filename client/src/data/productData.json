@@ -30,7 +30,7 @@
     "id": 4,
     "name": "Test Product 4",
     "description": "4 Sports & Outdoors Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/brazuca-ball.png",
+    "img": "../src/assets/images/baseball-glove.jpeg",
     "price": 39.95,
     "rating": 5,
     "category": "Sports & Outdoors"
@@ -39,7 +39,7 @@
     "id": 5,
     "name": "Test Product 5",
     "description": "5 Kids Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/kids-toy.png",
+    "img": "../src/assets/images/kids-toy1.png",
     "price": 24.99,
     "rating": 1,
     "category": "Kids"
@@ -48,7 +48,7 @@
     "id": 6,
     "name": "Test Product 6",
     "description": "6 Baby Care Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/baby-care.png",
+    "img": "../src/assets/images/baby-cleaning.png",
     "price": 39.95,
     "rating": null,
     "category": "Baby Care"
@@ -66,7 +66,7 @@
     "id": 8,
     "name": "Test Product 8",
     "description": "8 Home Decor Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/potted-plant.jpg",
+    "img": "../src/assets/images/house-lamp.png",
     "price": 39.95,
     "rating": 3,
     "category": "Home Decor"
@@ -75,7 +75,7 @@
     "id": 9,
     "name": "Test Product 9",
     "description": "9 Home Decor Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/lace-wall.jpg",
+    "img": "../src/assets/images/lace-wall.png",
     "price": 10.98,
     "rating": 1,
     "category": "Home Decor"
@@ -84,7 +84,7 @@
     "id": 10,
     "name": "Test Product 10",
     "description": "10 Art Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/art1.png",
+    "img": "../src/assets/images/art1.jpg",
     "price": 10.98,
     "rating": 1,
     "category": "Art"
@@ -102,7 +102,7 @@
     "id": 12,
     "name": "Test Product 10",
     "description": "12 Gaming Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/gaming-keyboard.jpg",
+    "img": "../src/assets/images/gaming-keyboard.png",
     "price": 10.98,
     "rating": 1,
     "category": "Gaming"
@@ -111,7 +111,7 @@
     "id": 13,
     "name": "Test Product 13",
     "description": "13 Office Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-    "img": "../src/assets/images/office-chair.jpg",
+    "img": "../src/assets/images/office-chair.png",
     "price": 10.98,
     "rating": 1,
     "category": "Office"
