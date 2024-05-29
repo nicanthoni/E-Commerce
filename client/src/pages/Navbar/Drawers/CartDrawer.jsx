@@ -10,8 +10,8 @@ import {
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CheckoutMain from '../Checkout/CheckoutDrawer/CheckoutMain';
-import { useAuthContext } from '../../hooks/useAuthContext';
+import CheckoutMain from '../../Checkout/CheckoutDrawer/CheckoutMain'
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function CartDrawer() {
   const { user } = useAuthContext();
