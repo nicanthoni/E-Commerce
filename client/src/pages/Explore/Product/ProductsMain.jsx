@@ -8,7 +8,8 @@ import ProductFilters from '../Filters/ProductFilters';
 import noCategorySelected from '../../../assets/images/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
-export default function ProductCards({ products }) {
+
+export default function ProductsMain({ products }) {
   const { user } = useAuthContext(); // auth
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
@@ -20,6 +21,7 @@ export default function ProductCards({ products }) {
       console.log('Log in first to add items');
     }
   };
+
 
   return (
     <Grid container spacing={3} marginBottom={6}>
