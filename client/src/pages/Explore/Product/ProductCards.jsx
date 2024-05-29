@@ -34,6 +34,12 @@ export default function ProductCards({ products }) {
             alt="No products" 
             style={{ maxWidth: '100%' }} 
           />
+          {/* Link required without premium sub */}
+            <Link justifyContent={'center'} 
+              fontSize={2} 
+              href='https://storyset.com/data'>
+                People illustrations by Storyset
+            </Link>
         </Grid>
       ) : (
         <>
