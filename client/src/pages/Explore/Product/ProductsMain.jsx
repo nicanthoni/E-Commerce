@@ -5,21 +5,34 @@ import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 import ProductFilters from '../Filters/ProductFilters';
+import { jwtDecode } from 'jwt-decode'; // to decode user token
 import noCategorySelected from '../../../assets/images/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
-export default function ProductCards({ products }) {
-  const { user } = useAuthContext(); // auth
+
+export default function ProductsMain({ products }) {
+  const { user } = useAuthContext(); 
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
-  // OnChange handle wishlist
-  const handleWishlistChange = () => {
+
+  // Decode  JWT to get user details (_id)
+  const decodedUser = user ? jwtDecode(user) : null;
+
+
+  // OnChange - handle wishlist
+  const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
-      console.log('Product added to wishlist!');
+      // console.log(`User ID: ${userId}`);
+      console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
+
+      // custom hook to add to wishlist
+      await addWishlist(itemId, userId);
     } else {
-      console.log('Log in first to add items');
+      console.log('Log in first to add items')
+      return;
     }
   };
+
 
   return (
     <Grid container spacing={3} marginBottom={6}>
@@ -34,6 +47,13 @@ export default function ProductCards({ products }) {
             alt="No products" 
             style={{ maxWidth: '100%' }} 
           />
+          {/* Link required without premium sub */}
+          <Typography variant='caption'>
+            <Link justifyContent='center' 
+                href='https://storyset.com/data'>
+                People illustrations by Storyset
+            </Link>
+          </Typography>
         </Grid>
       ) : (
         <>
@@ -49,7 +69,7 @@ export default function ProductCards({ products }) {
               <Card sx={{ maxWidth: 350, padding: '6px' }}>
                 <Stack direction='row' textAlign='left'>
                   {/* Clickable area of card */}
-                  <CardActionArea component={Link} to={`/product/${result.id}`}>
+                  <CardActionArea component={Link} to={`/product/${result._id}`}>
                     <Box sx={{ height: '150px', width: '150px' }}>
                       <CardMedia
                         component='img'
@@ -101,7 +121,7 @@ export default function ProductCards({ products }) {
                           <Tooltip title='Add to wishlist' placement='right'>
                             <Checkbox
                               color='error'
-                              onChange={handleWishlistChange}
+                              onChange={() => handleWishlistChange(decodedUser ? decodedUser.data._id : null, result._id, result.name)}
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />

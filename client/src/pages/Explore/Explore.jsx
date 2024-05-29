@@ -1,5 +1,5 @@
 import { Grid, Container } from '@mui/material';
-import ProductCards from './Product/ProductCards';
+import Products from './Product/ProductsMain';
 import CategorySelection from './_tests_/Categories';
 import Data from '../../data/productData.json' // sample data
 import { useState } from 'react'; // to keep track of the selected category
@@ -28,9 +28,9 @@ export default function Explore() {
           <CategorySelection onCategoryChange={handleCategoryChange}/>
         </Grid>
        
-        {/* Products - */}
+        {/* Products */}
         <Grid item xs={12} marginTop={4}>
-          <ProductCards products={filteredProducts} />
+          <Products products={filteredProducts} />
         </Grid>
 
 

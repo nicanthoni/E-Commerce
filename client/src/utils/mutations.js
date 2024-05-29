@@ -34,12 +34,37 @@ mutation AddWishlist($itemId: ID!, $userId: ID!) {
     }
     user {
       _id
-      username
-      wishlist
+      email
+      wishlist {
+        item {
+          name
+        }
+      }
     }
   }
 }
 `
+export const delete_wishlist = gql`
+mutation DeleteWishlist($itemId: ID!, $userId: ID!) {
+  DeleteFromWishlist(itemId: $itemId, userId: $userId) {
+    item {
+      name
+      _id
+    }
+    user {
+      _id
+      email
+      wishlist {
+        item {
+          name
+        }
+      }
+    }
+  }
+}
+`
+
+
 
 
 

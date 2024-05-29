@@ -1,7 +1,7 @@
 [
     {
-    "id": 1,
-    "name": "Test Product 1",
+    "_id": 1,
+    "name": "Red Dress",
     "description": "1 Apparel Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/red-dress.png",
     "price": 24.99,
@@ -9,8 +9,8 @@
     "category": "Apparel"
     },
     {
-    "id": 2,
-    "name": "Test Product 2",
+    "_id": 2,
+    "name": "Blue Backpack",
     "description": "2 Apparel Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/bag.jpg",
     "price": 39.95,
@@ -18,8 +18,8 @@
     "category": "Apparel"
     },
     {
-    "id": 3,
-    "name": "Test Product 3",
+    "_id": 3,
+    "name": "Soccer Ball",
     "description": "3 Sports & Outdoors Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/brazuca-ball.png",
     "price": 24.99,
@@ -27,8 +27,8 @@
     "category": "Sports & Outdoors"
     },
     {
-    "id": 4,
-    "name": "Test Product 4",
+    "_id": 4,
+    "name": "Baseball Glove",
     "description": "4 Sports & Outdoors Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/baseball-glove.jpeg",
     "price": 39.95,
@@ -36,8 +36,8 @@
     "category": "Sports & Outdoors"
     },
     {
-    "id": 5,
-    "name": "Test Product 5",
+    "_id": 5,
+    "name": "Toy Car",
     "description": "5 Kids Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/kids-toy1.png",
     "price": 24.99,
@@ -45,8 +45,8 @@
     "category": "Kids"
     },
     {
-    "id": 6,
-    "name": "Test Product 6",
+    "_id": 6,
+    "name": "Baby Soap",
     "description": "6 Baby Care Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/baby-cleaning.png",
     "price": 39.95,
@@ -54,8 +54,8 @@
     "category": "Baby Care"
     },
     {
-    "id": 7,
-    "name": "Test Product 7",
+    "_id": 7,
+    "name": "Baby Wash",
     "description": "7 Baby Care Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/baby-care2.png",
     "price": 24.99,
@@ -63,8 +63,8 @@
     "category": "Baby Care"
     },
     {
-    "id": 8,
-    "name": "Test Product 8",
+    "_id": 8,
+    "name": "Lamp",
     "description": "8 Home Decor Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/house-lamp.png",
     "price": 39.95,
@@ -72,8 +72,8 @@
     "category": "Home Decor"
     },
     {
-    "id": 9,
-    "name": "Test Product 9",
+    "_id": 9,
+    "name": "Wall Lace",
     "description": "9 Home Decor Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/lace-wall.png",
     "price": 10.98,
@@ -81,8 +81,8 @@
     "category": "Home Decor"
     },
     {
-    "id": 10,
-    "name": "Test Product 10",
+    "_id": 10,
+    "name": "Butterfly Art",
     "description": "10 Art Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/art1.jpg",
     "price": 10.98,
@@ -90,8 +90,8 @@
     "category": "Art"
     },
     {
-    "id": 11,
-    "name": "Test Product 10",
+    "_id": 11,
+    "name": "Samurai Art",
     "description": "11 Art Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/art2.png",
     "price": 10.98,
@@ -99,8 +99,8 @@
     "category": "Art"
     },
     {
-    "id": 12,
-    "name": "Test Product 10",
+    "_id": 12,
+    "name": "RGB Keyboard",
     "description": "12 Gaming Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/gaming-keyboard.png",
     "price": 10.98,
@@ -108,8 +108,8 @@
     "category": "Gaming"
     },
     {
-    "id": 13,
-    "name": "Test Product 13",
+    "_id": 13,
+    "name": "Office Chair",
     "description": "13 Office Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/office-chair.png",
     "price": 10.98,
@@ -117,8 +117,8 @@
     "category": "Office"
     },
     {
-    "id": 14,
-    "name": "Test Product 14",
+    "_id": 14,
+    "name": "Blue T-Shirt",
     "description": "14 Apparel Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/sampleProducts/shirt.jpg",
     "price": 39.95,
