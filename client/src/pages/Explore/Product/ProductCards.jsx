@@ -21,7 +21,7 @@ export default function ProductCards() {
   };
 
   return (
-    <Grid container spacing={3} marginTop={4} marginBottom={4}>
+    <Grid container spacing={3} marginTop={4} marginBottom={6}>
       {Data.map((result, index) => (
         // Grid item created for each product
         <Grid item xs={12} sm={6} md={4} key={index} align='center'>

@@ -16,6 +16,7 @@ import CartDrawer from './CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import SearchBar from './Search/Search'; 
 import { useLocation } from 'react-router-dom';
+import AlertsDrawer from './AlertsDrawer';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
@@ -84,10 +85,12 @@ export default function Navbar() {
             <TopNavbar />
 
 
-            {/* Checkout drawer - hide cart if the user is a vendor */}
+            {/* Checkout & Alerts drawers - depending on vendor or not*/}
             {user && userType === 'vendor' ? (
-            <NotificationsIcon/>
-            ) : (<CartDrawer />)}
+            <AlertsDrawer/>
+            ) : (
+            <CartDrawer />
+            )}
   
           </Toolbar>
 

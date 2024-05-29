@@ -18,7 +18,7 @@ export default function Inbox () {
                 />
 
                 <Typography variant='h5' fontStyle='italic'>
-                    The Inbox page is undergoing maintenence.
+                    The inbox page is undergoing maintenence.
                 </Typography>
                 <Typography variant='h6' fontStyle='italic'>
                     Check back later!

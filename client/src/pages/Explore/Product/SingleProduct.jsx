@@ -96,7 +96,7 @@ export default function SingleProduct() {
                 textTransform: 'none',
               }}
             >
-              <AddShoppingCart /> Add to cart
+            Add to cart
             </Button>
             <Tooltip title='Add to wishlist' placement='right'>
               <Checkbox
