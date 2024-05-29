@@ -35,11 +35,12 @@ export default function Navbar() {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', alignContent: 'center',}}>
       <AppBar
         component='nav'
         sx={{ backgroundColor: 'primary', display: 'flex' }}
         elevation={0}
+        
       >
         <Container maxWidth='xl'>
           <Toolbar>
@@ -60,7 +61,7 @@ export default function Navbar() {
                   to='/explore'
                   style={{ textDecoration: 'none', color: '#fff' }}
                 >
-                  <LogoDevIcon />
+                  <LogoDevIcon  />
                 </NavLink>
               ) : (
                 <NavLink
