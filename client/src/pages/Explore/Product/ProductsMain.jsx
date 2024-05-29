@@ -22,8 +22,8 @@ export default function ProductsMain({ products }) {
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
-      console.log(`User ID: ${userId}`);
-      console.log(`Product added to wishlist: ID=${itemId}, Name=${itemName}`);
+      // console.log(`User ID: ${userId}`);
+      console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
 
       // custom hook to add to wishlist
       await addWishlist(itemId, userId);
@@ -48,11 +48,12 @@ export default function ProductsMain({ products }) {
             style={{ maxWidth: '100%' }} 
           />
           {/* Link required without premium sub */}
-            <Link justifyContent={'center'} 
-              fontSize={2} 
-              href='https://storyset.com/data'>
+          <Typography variant='caption'>
+            <Link justifyContent='center' 
+                href='https://storyset.com/data'>
                 People illustrations by Storyset
             </Link>
+          </Typography>
         </Grid>
       ) : (
         <>
