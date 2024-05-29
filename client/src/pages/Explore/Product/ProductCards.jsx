@@ -7,7 +7,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
-export default function ProductCards() {
+export default function ProductCards({ products }) {
   const { user } = useAuthContext(); // auth
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
@@ -22,7 +22,7 @@ export default function ProductCards() {
 
   return (
     <Grid container spacing={3} marginTop={4} marginBottom={6}>
-      {Data.map((result, index) => (
+      {products.map((result, index) => (
         // Grid item created for each product
         <Grid item xs={12} sm={6} md={4} key={index} align='center'>
           <Card sx={{ maxWidth: 350, padding: '6px' }}>
