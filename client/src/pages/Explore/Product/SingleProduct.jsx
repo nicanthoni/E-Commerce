@@ -14,7 +14,7 @@ import Data from '../../../data/productData.json'; // test data
 
 export default function SingleProduct() {
   const { productId } = useParams();
-  const product = Data.find((item) => item.id === parseInt(productId)); // Find product by ID
+  const product = Data.find((item) => item._id === parseInt(productId)); // Find product by ID
 
   // If no product match...
   if (!product) {

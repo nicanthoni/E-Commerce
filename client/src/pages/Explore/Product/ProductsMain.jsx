@@ -68,7 +68,7 @@ export default function ProductsMain({ products }) {
               <Card sx={{ maxWidth: 350, padding: '6px' }}>
                 <Stack direction='row' textAlign='left'>
                   {/* Clickable area of card */}
-                  <CardActionArea component={Link} to={`/product/${result.id}`}>
+                  <CardActionArea component={Link} to={`/product/${result._id}`}>
                     <Box sx={{ height: '150px', width: '150px' }}>
                       <CardMedia
                         component='img'
