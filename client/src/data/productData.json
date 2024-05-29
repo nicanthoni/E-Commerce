@@ -2,73 +2,127 @@
     {
     "id": 1,
     "name": "Test Product 1",
-    "description": "1 Mens Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "1 Apparel Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
     "rating": 4,
-    "category": "mens"
+    "category": "Apparel"
     },
     {
     "id": 2,
     "name": "Test Product 2",
-    "description": "2 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "2 Apparel Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
     "rating": 5,
-    "category": "womens"
+    "category": "Apparel"
     },
     {
     "id": 3,
     "name": "Test Product 3",
-    "description": "3 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "3 Sports & Outdoors Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
     "rating": 3,
-    "category": "womens"
+    "category": "Sports & Outdoors"
     },
     {
     "id": 4,
     "name": "Test Product 4",
-    "description": "4 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "4 Sports & Outdoors Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
     "rating": 5,
-    "category": "womens"
+    "category": "Sports & Outdoors"
     },
     {
     "id": 5,
     "name": "Test Product 5",
-    "description": "5 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "5 Kids Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
     "rating": 1,
-    "category": "mens"
+    "category": "Kids"
     },
     {
     "id": 6,
     "name": "Test Product 6",
-    "description": "6 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "6 Baby Care Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
     "rating": null,
-    "category": "mens"
+    "category": "Baby Care"
     },
     {
     "id": 7,
     "name": "Test Product 7",
-    "description": "7 Womens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "7 Baby Care Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/shirt.jpg",
     "price": 24.99,
     "rating": 5,
-    "category": "womens"
+    "category": "Baby Care"
     },
     {
     "id": 8,
     "name": "Test Product 8",
-    "description": "8 Mens Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "description": "8 Home Decor Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
     "img": "../src/assets/images/bag.jpg",
     "price": 39.95,
     "rating": 3,
-    "category": "mens"
+    "category": "Home Decor"
+    },
+    {
+    "id": 9,
+    "name": "Test Product 9",
+    "description": "9 Home Decor Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "price": 10.98,
+    "rating": 1,
+    "category": "Home Decor"
+    },
+    {
+    "id": 10,
+    "name": "Test Product 10",
+    "description": "10 Art Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "price": 10.98,
+    "rating": 1,
+    "category": "Art"
+    },
+    {
+    "id": 11,
+    "name": "Test Product 10",
+    "description": "11 Art Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "price": 10.98,
+    "rating": 1,
+    "category": "Art"
+    },
+    {
+    "id": 12,
+    "name": "Test Product 10",
+    "description": "12 Gaming Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "price": 10.98,
+    "rating": 1,
+    "category": "Gaming"
+    },
+    {
+    "id": 13,
+    "name": "Test Product 13",
+    "description": "13 Office Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "price": 10.98,
+    "rating": 1,
+    "category": "Office"
+    },
+    {
+    "id": 14,
+    "name": "Test Product 14",
+    "description": "14 Apparel Test Description Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    "img": "../src/assets/images/bag.jpg",
+    "price": 39.95,
+    "rating": 5,
+    "category": "Apparel"
     }
 ]

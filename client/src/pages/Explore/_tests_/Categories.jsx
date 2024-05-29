@@ -25,7 +25,7 @@ function CategorySelection() {
   const [activeStep, setActiveStep] = useState(0);
 
   // Carousel settings
-  const categoriesPerView = isMobile ? 1 : 3; // Adjust categories per view based on mobile
+  const categoriesPerView = isMobile ? 1 : 3; // # of categories shown per view
   const maxSteps = Math.ceil(categories.length / categoriesPerView);
 
   // Next button
@@ -92,9 +92,10 @@ function CategorySelection() {
           </Box>
         ))}
       </SwipeableViews>
+
        
+       {/* Back & Next */}
       <MobileStepper
-      
         steps={maxSteps}
         position='static'
         activeStep={activeStep}
