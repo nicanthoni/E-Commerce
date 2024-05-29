@@ -1,4 +1,4 @@
-import productPhoto from '../../../assets/images/shirt.jpg';
+import productPhoto from '../../../assets/images/sampleProducts/shirt.jpg';
 import { Stack, Box, Typography } from '@mui/material';
 import QuantityIncrementer from './QuantityIncrementer';
 

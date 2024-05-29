@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
 import Auth from '../../../../../utils/auth';
-import TestItem1 from '../../../../../assets/images/bag.jpg';
+import TestItem1 from '../../../../../assets/images/sampleProducts/bag.jpg';
 
 export default function OrdersImgList() {
   const id = Auth.getProfile().data._id;
