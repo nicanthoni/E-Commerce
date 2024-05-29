@@ -19,7 +19,7 @@ export default function Filters() {
 
 
   return (
-  <Stack direction={'row'} spacing={4}>
+  <Stack direction='row' spacing={4} justifyContent='center'>
 
   {/* Date added filter */}
   <Box sx={{ width: 126 }}>

@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
-import Data from '../../../data/productData.json'; // Sample product data
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
+import ProductFilters from '../Filters/ProductFilters';
+import noCategorySelected from '../../../assets/images/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
 export default function ProductCards({ products }) {
@@ -21,78 +22,100 @@ export default function ProductCards({ products }) {
   };
 
   return (
-    <Grid container spacing={3} marginTop={4} marginBottom={6}>
-      {products.map((result, index) => (
-        // Grid item created for each product
-        <Grid item xs={12} sm={6} md={4} key={index} align='center'>
-          <Card sx={{ maxWidth: 350, padding: '6px' }}>
-            <Stack direction='row' textAlign='left'>
-              {/* Clickable area of card */}
-              <CardActionArea component={Link} to={`/product/${result.id}`}>
-                <Box sx={{ height: '150px', width: '150px' }}>
-                  <CardMedia
-                    component='img'
-                    image={result.img} /* IMAGE */
-                    alt='Product Photo'
-                    sx={{
-                      marginTop: 2,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </Box>
-              </CardActionArea>
-
-              {/* Product Info */}
-              <Stack direction='column'>
-                <CardContent>
-                  {/* Product Name */}
-                  <Typography gutterBottom variant='h6'>
-                    {result.name}
-                  </Typography>
-
-                  {/* Product Description */}
-                  <Typography
-                    variant='body2'
-                    color='text.secondary'
-                    sx={{
-                      display: '-webkit-box',
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: 'vertical',
-                      textOverflow: 'ellipsis', // ellipsis + hidden overflow when content exceeds 2 lines length
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {result.description}
-                  </Typography>
-
-                  {/* Price */}
-                  <Typography alignSelf='center' fontWeight={'bold'}>
-                    ${result.price}
-                  </Typography>
-
-                  {/* Button &  Icon */}
-                  <Stack direction='row'>
-                    <AddToCart />
-
-                    <Box>
-                      <Tooltip title='Add to wishlist' placement='right'>
-                        <Checkbox
-                          color='error'
-                          onChange={handleWishlistChange}
-                          icon={<FavoriteBorder />}
-                          checkedIcon={<Favorite />}
-                        />
-                      </Tooltip>
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Stack>
-            </Stack>
-          </Card>
+    <Grid container spacing={3} marginBottom={6}>
+      {/* If no selected categories, render message, else map through each product... */}
+      {!products || products.length === 0 ? (
+        <Grid item xs={12} textAlign='center'>
+          <Typography variant='h6'>
+            Select a category to view products
+          </Typography>
+          <img 
+            src={noCategorySelected} 
+            alt="No products" 
+            style={{ maxWidth: '100%' }} 
+          />
         </Grid>
-      ))}
+      ) : (
+        <>
+          {/* Product Filters */}
+          <Grid item xs={12} marginY={1}>
+            <ProductFilters />
+          </Grid>
+        
+          {/* Product Map and create card */}
+          {products.map((result, index) => (
+            // Grid item created for each product
+            <Grid item xs={12} sm={6} md={4} key={index} align='center'>
+              <Card sx={{ maxWidth: 350, padding: '6px' }}>
+                <Stack direction='row' textAlign='left'>
+                  {/* Clickable area of card */}
+                  <CardActionArea component={Link} to={`/product/${result.id}`}>
+                    <Box sx={{ height: '150px', width: '150px' }}>
+                      <CardMedia
+                        component='img'
+                        image={result.img} /* IMAGE */
+                        alt='Product Photo'
+                        sx={{
+                          marginTop: 2,
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'contain',
+                        }}
+                      />
+                    </Box>
+                  </CardActionArea>
+
+                  {/* Product Info */}
+                  <Stack direction='column'>
+                    <CardContent>
+                      {/* Product Name */}
+                      <Typography gutterBottom variant='h6'>
+                        {result.name}
+                      </Typography>
+
+                      {/* Product Description */}
+                      <Typography
+                        variant='body2'
+                        color='text.secondary'
+                        sx={{
+                          display: '-webkit-box',
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: 'vertical',
+                          textOverflow: 'ellipsis', // ellipsis + hidden overflow when content exceeds 2 lines length
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {result.description}
+                      </Typography>
+
+                      {/* Price */}
+                      <Typography alignSelf='center' fontWeight={'bold'}>
+                        ${result.price}
+                      </Typography>
+
+                      {/* Button &  Icon */}
+                      <Stack direction='row'>
+                        <AddToCart />
+
+                        <Box>
+                          <Tooltip title='Add to wishlist' placement='right'>
+                            <Checkbox
+                              color='error'
+                              onChange={handleWishlistChange}
+                              icon={<FavoriteBorder />}
+                              checkedIcon={<Favorite />}
+                            />
+                          </Tooltip>
+                        </Box>
+                      </Stack>
+                    </CardContent>
+                  </Stack>
+                </Stack>
+              </Card>
+            </Grid>
+          ))}
+        </>
+      )}
     </Grid>
   );
 }
