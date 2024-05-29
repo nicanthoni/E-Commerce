@@ -20,6 +20,7 @@
   "dependencies": {
     "@apollo/client": "^3.9.10",
     "install": "^0.13.0",
+    "jwt-decode": "^4.0.0",
     "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-utils": "^0.14.0"
   }

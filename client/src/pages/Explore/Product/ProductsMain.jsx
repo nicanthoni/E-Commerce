@@ -5,20 +5,31 @@ import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 import ProductFilters from '../Filters/ProductFilters';
+import { jwtDecode } from 'jwt-decode'; // to decode user token
 import noCategorySelected from '../../../assets/images/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
 
 export default function ProductsMain({ products }) {
-  const { user } = useAuthContext(); // auth
+  const { user } = useAuthContext(); 
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
-  // OnChange handle wishlist
-  const handleWishlistChange = () => {
+
+  // Decode  JWT to get user details (_id)
+  const decodedUser = user ? jwtDecode(user) : null;
+
+
+  // OnChange - handle wishlist
+  const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
-      console.log('Product added to wishlist!');
+      console.log(`User ID: ${userId}`);
+      console.log(`Product added to wishlist: ID=${itemId}, Name=${itemName}`);
+
+      // custom hook to add to wishlist
+      await addWishlist(itemId, userId);
     } else {
-      console.log('Log in first to add items');
+      console.log('Log in first to add items')
+      return;
     }
   };
 
@@ -109,7 +120,7 @@ export default function ProductsMain({ products }) {
                           <Tooltip title='Add to wishlist' placement='right'>
                             <Checkbox
                               color='error'
-                              onChange={handleWishlistChange}
+                              onChange={() => handleWishlistChange(decodedUser ? decodedUser.data._id : null, result._id, result.name)}
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />

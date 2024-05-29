@@ -34,8 +34,12 @@ mutation AddWishlist($itemId: ID!, $userId: ID!) {
     }
     user {
       _id
-      username
-      wishlist
+      email
+      wishlist {
+        item {
+          name
+        }
+      }
     }
   }
 }
