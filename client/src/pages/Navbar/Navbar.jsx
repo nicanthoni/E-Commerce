@@ -9,21 +9,20 @@ import {
 } from '@mui/material';
 import Auth from '../../utils/auth';
 import { NavLink } from 'react-router-dom';
-import LogoDevIcon from '@mui/icons-material/LogoDev'; 
+import LogoDevIcon from '@mui/icons-material/LogoDev';
 import MenuDrawer from './Navigation/MenuDrawer';
 import TopNavbar from './Navigation/TopNavbar';
-import CartDrawer from './CartDrawer';
+import CartDrawer from './Drawers/CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import SearchBar from './Search/Search'; 
+import SearchBar from './Search/Search';
 import { useLocation } from 'react-router-dom';
-import AlertsDrawer from './AlertsDrawer';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import AlertsDrawer from './Drawers/AlertsDrawer';
 
 
 
 export default function Navbar() {
-  const { user } = useAuthContext(); // auth 
-  let userType = null; // 
+  const { user } = useAuthContext(); // auth
+  let userType = null; //
   const location = useLocation();
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
 
@@ -35,18 +34,16 @@ export default function Navbar() {
     userType = Auth.getProfile().data.userType;
   }
 
-
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', alignContent: 'center',}}>
       <AppBar
         component='nav'
         sx={{ backgroundColor: 'primary', display: 'flex' }}
         elevation={0}
+        
       >
         <Container maxWidth='xl'>
-
           <Toolbar>
-            
             {/* Menu drawer */}
             <MenuDrawer />
 
@@ -64,7 +61,7 @@ export default function Navbar() {
                   to='/explore'
                   style={{ textDecoration: 'none', color: '#fff' }}
                 >
-                  <LogoDevIcon />
+                  <LogoDevIcon  />
                 </NavLink>
               ) : (
                 <NavLink
@@ -76,27 +73,18 @@ export default function Navbar() {
               )}
             </Typography>
 
-
             {/* SearchBar for larger screens */}
             {!isMobile && isExploreRoute && <SearchBar />}
-
 
             {/* Main navbar */}
             <TopNavbar />
 
-
             {/* Checkout & Alerts drawers - depending on vendor or not*/}
-            {user && userType === 'vendor' ? (
-            <AlertsDrawer/>
-            ) : (
-            <CartDrawer />
-            )}
-  
+            {user && userType === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
           </Toolbar>
 
           {/* SearchBar for mobile screens */}
           {isMobile && isExploreRoute && <SearchBar />}
-
         </Container>
       </AppBar>
     </Box>

@@ -19,13 +19,13 @@ const categories = [
   { id: 9, name: 'Office' },
 ];
 
-function CategorySelection() {
+function CategorySelection({ onCategoryChange }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
   const [activeStep, setActiveStep] = useState(0);
 
   // Carousel settings
-  const categoriesPerView = isMobile ? 1 : 3; // Adjust categories per view based on mobile
+  const categoriesPerView = isMobile ? 1 : 3; // # of categories shown per view
   const maxSteps = Math.ceil(categories.length / categoriesPerView);
 
   // Next button
@@ -84,7 +84,7 @@ function CategorySelection() {
                   lineHeight: '255px',
                   fontSize: '1.5rem',
                 }}
-                onClick={() => console.log('Category: ', category.name)}
+                onClick={() => onCategoryChange(category.name)}
               >
                 {category.name}
               </Button>
@@ -92,9 +92,10 @@ function CategorySelection() {
           </Box>
         ))}
       </SwipeableViews>
+
        
+       {/* Back & Next */}
       <MobileStepper
-      
         steps={maxSteps}
         position='static'
         activeStep={activeStep}
