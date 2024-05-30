@@ -34,12 +34,13 @@ export default function CartImgList() {
 
   // Grab data
   const user = data.user;
-  console.log('User Cart: ', user.cart)
+  // console.log('User Cart: ', user.cart)
 
   // Calculate cart subtotal
   const subtotal = user.cart.reduce((total, item) => {
     return total + item.item.price;
   }, 0);
+  
 
   return (
     <ImageList>

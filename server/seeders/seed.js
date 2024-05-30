@@ -19,7 +19,7 @@ db.once("open", async () => {
       description: "Its just a red ball",
       category: 1,
       vendor: vendors[0],
-      img: "../../client/src/assets/images/seededItems/red-ball.png", 
+      img: "/images/seededItems/red-ball.png", // public URL so can be server statically 
       inventory: 15,
     });
     const item2 = await Item.create({
@@ -28,7 +28,7 @@ db.once("open", async () => {
       description: "Its just a blue ball",
       category: 1,
       vendor: vendors[0],
-      img: "../../client/src/assets/images/seededItems/blue-ball.png", 
+      img: "/images/seededItems/blue-ball.png", // public URL so can be server statically 
       inventory: 10,
     });
     vendors[0].inventory.push(item1._id);
@@ -59,7 +59,7 @@ db.once("open", async () => {
       description: "Its just a oshawott plush",
       category: 2,
       vendor: vendors[2],
-      img: "../../client/src/assets/images/seededItems/oshawott-plush.png",
+      img: "/images/seededItems/oshawott-plush.png", // public URL so can be server statically 
       inventory: 15,
     });
     const item6 = await Item.create({
@@ -68,7 +68,7 @@ db.once("open", async () => {
       description: "A big oshawott plush",
       category: 2,
       vendor: vendors[2],
-      img: "../../client/src/assets/images/seededItems/big-oshawott-plush.jpg",
+      img: "/images/seededItems/big-oshawott-plush.jpg", // public URL so can be server statically 
       inventory: 10,
     });
     vendors[2].inventory.push(item5._id);
@@ -79,7 +79,7 @@ db.once("open", async () => {
       description: "Please dont open",
       category: 10,
       vendor: vendors[3],
-      img: "../../client/src/assets/images/seededItems/radioactive-material.png",
+      img: "/images/seededItems/radioactive-material.png", // public URL so can be server statically 
       inventory: 15,
     });
     const item8 = await Item.create({
@@ -88,7 +88,7 @@ db.once("open", async () => {
       description: "we counted 1000 bees to get the name right",
       category: 3,
       vendor: vendors[3],
-      img: "../../client/src/assets/images/seededItems/box-of-bees.png",
+      img: "/images/seededItems/box-of-bees.png", // public URL so can be server statically 
       inventory: 10,
     });
     vendors[3].inventory.push(item7._id);

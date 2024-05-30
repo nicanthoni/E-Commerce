@@ -34,6 +34,7 @@ export default function OrdersImgList() {
 
   // Grab data
   const user = data.user;
+  console.log('User Order history: ', user.buyHistory)
 
   return (
     <ImageList>
@@ -43,8 +44,8 @@ export default function OrdersImgList() {
       {user.buyHistory.map((item, index) => (
         <ImageListItem key={index}>
           <img
-            srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${TestItem1}?w=248&fit=crop&auto=format`}
+            srcSet={item.item.img}
+            src={item.item.img}
             alt={item.item.name}
             loading='lazy'
             style={{ width: '100px', height: 'auto', alignSelf: 'center' }}
