@@ -1,8 +1,8 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 // Buyer
 export const User = gql`
-query UserQuery($userId: ID!) {
+  query UserQuery($userId: ID!) {
     user(id: $userId) {
       firstName
       lastName
@@ -11,6 +11,8 @@ query UserQuery($userId: ID!) {
         item {
           name
           price
+          img
+          description
           vendor {
             vendorName
           }
@@ -19,6 +21,8 @@ query UserQuery($userId: ID!) {
       }
       wishlist {
         item {
+          img
+          description
           name
           price
           vendor {
@@ -30,6 +34,7 @@ query UserQuery($userId: ID!) {
         item {
           name
           price
+          img
           vendor {
             vendorName
           }
@@ -39,6 +44,8 @@ query UserQuery($userId: ID!) {
       ratings {
         item {
           name
+          img
+          description
         }
         review
         stars
@@ -46,11 +53,11 @@ query UserQuery($userId: ID!) {
       }
     }
   }
-`
+`;
 
 // Vendor
 export const Vendor = gql`
-query VendorQuery($vendorId: ID!) {
+  query VendorQuery($vendorId: ID!) {
     vendor(id: $vendorId) {
       vendorName
       email
@@ -66,4 +73,4 @@ query VendorQuery($vendorId: ID!) {
       }
     }
   }
-`
+`;

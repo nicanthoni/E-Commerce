@@ -6,14 +6,12 @@ import Modal from '@mui/material/Modal';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
 import Auth from '../../../../../utils/auth';
-import TestItem1 from '../../../../../assets/images/sampleProducts/bag.jpg';
 import { Rating } from '@mui/material';
 
 const style = {
@@ -68,6 +66,8 @@ export default function WishImglist() {
 
   // Grab data
   const user = data.user;
+  console.log('Users wishlist: ', user.wishlist )
+
 
   return (
     <Box>
@@ -76,8 +76,8 @@ export default function WishImglist() {
           <ImageListItem key={item.id}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
-                srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${TestItem1}?w=248&fit=crop&auto=format`}
+                srcSet={item.item.img}
+                src={item.item.img}
                 alt={item.item.name}
                 loading='lazy'
                 style={{ width: '100px', height: 'auto' }}
@@ -103,8 +103,8 @@ export default function WishImglist() {
             >
               <Box sx={style}>
                 <img
-                  srcSet={`${TestItem1}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  src={`${TestItem1}?w=248&fit=crop&auto=format`}
+                  srcSet={item.item.img}
+                  src={item.item.img}
                   alt={item.item.name}
                   loading='lazy'
                   style={{ width: '100px', height: 'auto' }}
