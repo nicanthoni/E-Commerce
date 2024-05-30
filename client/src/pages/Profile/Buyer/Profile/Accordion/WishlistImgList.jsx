@@ -69,6 +69,7 @@ export default function WishImglist() {
   // Grab data
   const user = data.user;
 
+
   return (
     <Box>
       <ImageList sx={{}}>

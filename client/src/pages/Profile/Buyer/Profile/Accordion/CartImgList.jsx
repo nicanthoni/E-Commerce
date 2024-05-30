@@ -34,6 +34,7 @@ export default function CartImgList() {
 
   // Grab data
   const user = data.user;
+  console.log('User Cart: ', user.cart)
 
   // Calculate cart subtotal
   const subtotal = user.cart.reduce((total, item) => {
@@ -48,8 +49,8 @@ export default function CartImgList() {
       {user.cart.map((item, index) => (
         <ImageListItem key={index}>
           <img
-            srcSet={`${TestItem2}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${TestItem2}?w=248&fit=crop&auto=format`}
+            srcSet={item.item.img}
+            src={item.item.img}
             alt={item.item.name}
             loading='lazy'
             style={{ width: '100px', height: 'auto', alignSelf: 'center' }}

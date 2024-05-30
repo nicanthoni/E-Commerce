@@ -53,7 +53,7 @@ export default function BuyerProfile() {
                 />
                   
               <Typography textAlign='center' variant='h6'>
-                Hi, {userData.firstName} {userData.lastName} 👋
+                Hi there, {userData.firstName}👋
               </Typography>
               <Stack
                 direction='row'
