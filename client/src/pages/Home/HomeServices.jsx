@@ -1,14 +1,14 @@
 import StorefrontIcon from '@mui/icons-material/Storefront'; // Discover products icon
 import AddBusinessIcon from '@mui/icons-material/AddBusiness'; // Become vendor icon
 import ContactSupportIcon from '@mui/icons-material/ContactSupport'; // Support icon
-import { Box, Stack, Typography, Button } from '@mui/material';
+import {  Stack, Button } from '@mui/material';
 
 export default function HomeServices() {
   return (
     <Stack
       direction='row'
-      justifyContent={'space-around'}
-      alignItems={'center'}
+      justifyContent='space-around'
+      alignItems='center'
       // On small screens, change direction to column
       sx={{
         flexDirection: { xs: 'column', sm: 'row' },

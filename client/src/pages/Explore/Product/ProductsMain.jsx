@@ -6,7 +6,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 import ProductFilters from '../Filters/ProductFilters';
 import { jwtDecode } from 'jwt-decode'; // to decode user token
-import noCategorySelected from '../../../assets/images/no-products.svg';
+import noCategorySelected from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
 
@@ -15,19 +15,22 @@ export default function ProductsMain({ products }) {
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
 
-  // Decode  JWT to get user details (_id)
+  // Decode JWT to get userId (_id)
   const decodedUser = user ? jwtDecode(user) : null;
 
 
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
+
       // console.log(`User ID: ${userId}`);
       console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
 
       // custom hook to add to wishlist
       await addWishlist(itemId, userId);
+
     } else {
+
       console.log('Log in first to add items')
       return;
     }
@@ -49,7 +52,7 @@ export default function ProductsMain({ products }) {
           />
           {/* Link required without premium sub */}
           <Typography variant='caption'>
-            <Link justifyContent='center' 
+            <Link
                 href='https://storyset.com/data'>
                 People illustrations by Storyset
             </Link>

@@ -14,7 +14,7 @@ const [DeleteFromWishlist, { error: removeError, loading: removeLoading, data: r
 
 
 
-// ADD to wishlist
+// ADD item to wishlist
 const addWishlist = async (itemId, userId) => {
     setIsLoading(true)
     setStateError(null)
@@ -34,7 +34,7 @@ const addWishlist = async (itemId, userId) => {
         
 };
 
- // DELETE from wishlist
+ // DELETE item from wishlist
  const deleteWishlist = async (itemId, userId) => {
     setIsLoading(true);
     setStateError(null);
