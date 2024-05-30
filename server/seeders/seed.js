@@ -4,6 +4,8 @@ const userSeeds = require('./userSeeds.json')
 const vendorSeeds = require('./vendorSeeds.json')
 const cleanDB = require('./cleanDB')
 
+
+
 db.once('open', async () => {
   try {
     await cleanDB('User', 'users')
@@ -13,73 +15,81 @@ db.once('open', async () => {
     const users = await User.create(userSeeds)
     const vendors = await Vendor.create(vendorSeeds)
     const item1 = await Item.create({
-      name: 'red ball',
+      name: 'Red ball',
       price: 1.99,
       description: 'Its just a red ball',
       category: 1,
       vendor: vendors[0],
+      img: '../../client/src/assets/images/seededItems/red-ball.png',
       inventory: 15
     })
     const item2 = await Item.create({
-      name: 'blue ball',
+      name: 'Blue ball',
       price: 1.99,
       description: 'Its just a blue ball',
       category: 1,
       vendor: vendors[0],
+      img: '../../client/src/assets/images/seededItems/blue-ball.png',
       inventory: 10
     })
     vendors[0].inventory.push(item1._id)
     vendors[0].inventory.push(item2._id)
     const item3 = await Item.create({
-      name: 'otter plush',
+      name: 'Otter plush',
       price: 5.99,
-      description: 'an otter plush, very fluffy',
+      description: 'An otter plush, very fluffy',
       category: 2,
       vendor: vendors[1],
+      img: '../../client/src/assets/images/seededItems/otter-plush.png',
       inventory: 15
     })
     const item4 = await Item.create({
-      name: 'big otter plush',
+      name: 'Big otter plush',
       price: 10.99,
-      description: 'a big otter plsuh, very large',
+      description: 'A big otter plsuh, very large',
       category: 2,
       vendor: vendors[1],
+      img: '../../client/src/assets/images/seededItems/big-otter-plush.jpg',
       inventory: 10
     })
     vendors[1].inventory.push(item3._id)
     vendors[1].inventory.push(item4._id)
     const item5 = await Item.create({
-      name: 'oshawott plush',
+      name: 'Oshawott plush',
       price: 10.99,
       description: 'Its just a oshawott plush',
       category: 2,
       vendor: vendors[2],
+      img: '../../client/src/assets/images/seededItems/oshawott-plush.png',
       inventory: 15
     })
     const item6 = await Item.create({
-      name: 'big oshawott plush',
+      name: 'Big oshawott plush',
       price: 20.99,
-      description: 'big oshawott plush',
+      description: 'A big oshawott plush',
       category: 2,
       vendor: vendors[2],
+      img: '../../client/src/assets/images/seededItems/big-oshawott-plush.jpg',
       inventory: 10
     })
     vendors[2].inventory.push(item5._id)
     vendors[2].inventory.push(item6._id)
     const item7 = await Item.create({
-      name: 'def not radioactive material',
+      name: 'Not radioactive material',
       price: 10000,
-      description: 'please dont open',
+      description: 'Please dont open',
       category: 10,
       vendor: vendors[3],
+      img: '../../client/src/assets/images/seededItems/radioactive-material.png',
       inventory: 15
     })
     const item8 = await Item.create({
-      name: 'a box of 1000 bees',
+      name: 'Box of 1000 bees',
       price: 100,
       description: 'we counted 1000 bees to get the name right',
       category: 3,
       vendor: vendors[3],
+      img: '../../client/src/assets/images/seededItems/box-of-bees.png',
       inventory: 10
     })
     vendors[3].inventory.push(item7._id)
