@@ -13,7 +13,6 @@ export const User = gql`
           price
           img
           description
-          # ratings
           vendor {
             vendorName
           }
@@ -22,6 +21,8 @@ export const User = gql`
       }
       wishlist {
         item {
+          img
+          description
           name
           price
           vendor {
@@ -43,6 +44,8 @@ export const User = gql`
       ratings {
         item {
           name
+          img
+          description
         }
         review
         stars

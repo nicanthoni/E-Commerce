@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
 import Auth from '../../../../../utils/auth';
-import TestItem1 from '../../../../../assets/images/sampleProducts/bag.jpg';
+
 
 export default function OrdersImgList() {
   const id = Auth.getProfile().data._id;
@@ -34,7 +34,7 @@ export default function OrdersImgList() {
 
   // Grab data
   const user = data.user;
-  console.log('User Order history: ', user.buyHistory)
+  // console.log('User Order history: ', user.buyHistory)
 
   return (
     <ImageList>
