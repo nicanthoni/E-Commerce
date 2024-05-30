@@ -1,11 +1,45 @@
-import productPhoto from '../../../assets/images/sampleProducts/shirt.jpg';
+
 import { Stack, Box, Typography } from '@mui/material';
+import Auth from '../../../utils/auth';
+import { User } from '../../../utils/queries';
+import { useLazyQuery } from '@apollo/client';
+import { useEffect } from 'react';
 import QuantityIncrementer from './QuantityIncrementer';
 
 // ORDER SUMMARY
-export default function CheckoutOrder() {
+export default function CheckoutOrder({ subtotal }) {
+  const id = Auth.getProfile().data._id;
+  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
+    variables: { userId: id },
+  });
+
+// Run loadUser 1x when component renders
+useEffect(() => {
+  loadUser();
+}, [loadUser]);
+
+if (error) {
+  console.error('GraphQL Error:', error);
+  return <p>Error fetching data</p>;
+}
+if (loading) {
+  return <p>Loading...</p>; 
+}
+if (!data || !data.user) {
+  return <p>No user data found</p>;
+}
+
+// Grab data
+const user = data.user;
+// console.log('User Cart: ', user.cart)
+
+
   return (
+
+    <>
+    {user.cart.map((item, index) => (
     <Stack
+      key={index}
       borderBottom='inset'
       direction='row'
       gap={1}
@@ -15,7 +49,7 @@ export default function CheckoutOrder() {
       {/* Product img */}
       <Box sx={{ height: '100px', width: '100px' }}>
         <img
-          src={productPhoto}
+          src={item.item.img}
           alt='Product'
           style={{
             width: '100%',
@@ -50,7 +84,7 @@ export default function CheckoutOrder() {
             fontWeight={'bolder'}
             sx={{ fontSize: 14}}
           >
-            $0
+            ${item.item.price}
           </Typography>
         </Stack>
 
@@ -58,5 +92,7 @@ export default function CheckoutOrder() {
           <QuantityIncrementer/>
       </Stack>
     </Stack>
+  ))}
+  </>
   );
 }

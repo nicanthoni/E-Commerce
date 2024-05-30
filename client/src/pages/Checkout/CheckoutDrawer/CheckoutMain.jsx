@@ -2,9 +2,46 @@ import { Box, Button, Typography } from '@mui/material';
 import CheckoutOrder from './CheckoutOrder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Grid from '@mui/material/Grid';
+import Auth from '../../../utils/auth';
+import { User } from '../../../utils/queries';
+import { useLazyQuery } from '@apollo/client';
+import { useEffect } from 'react';
+
 
 // Layout of items within the Shopping Cart Drawer
 export default function CheckoutMain() {
+
+  const id = Auth.getProfile().data._id;
+  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
+    variables: { userId: id },
+  });
+
+// Run loadUser 1x when component renders - re-run loadUser if it changes
+useEffect(() => {
+  loadUser();
+}, [loadUser]);
+
+if (error) {
+  console.error('GraphQL Error:', error);
+  return <p>Error fetching data</p>;
+}
+if (loading) {
+  return <p>Loading...</p>; 
+}
+if (!data || !data.user) {
+  return <p>No user data found</p>;
+}
+
+// Grab data
+const user = data.user;
+
+// Calculate cart subtotal 
+// - could this be done in CheckoutOrder child and passed here as prop?
+const subtotal = user.cart.reduce((total, item) => {
+  return total + item.item.price;
+}, 0);
+
+  
   return (
     <Grid
       container
@@ -48,10 +85,9 @@ export default function CheckoutMain() {
         }}
       >
         <CheckoutOrder />
-
       </Grid>
 
-      {/* Checkout btn & Total price */}
+      {/* Checkout & Subtotal */}
       <Grid
         item
         sx={{
@@ -62,7 +98,7 @@ export default function CheckoutMain() {
       >
         <Box>
           <Typography padding={1} fontWeight='bold' color='#fff'>
-            Subtotal: $0
+            Subtotal: ${subtotal}
           </Typography>
 
           <Button
@@ -80,6 +116,8 @@ export default function CheckoutMain() {
           </Button>
         </Box>
       </Grid>
+
+
     </Grid>
   );
 }

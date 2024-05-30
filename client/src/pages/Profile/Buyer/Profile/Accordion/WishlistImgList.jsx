@@ -66,7 +66,7 @@ export default function WishImglist() {
 
   // Grab data
   const user = data.user;
-  console.log('Users wishlist: ', user.wishlist )
+  // console.log('Users wishlist: ', user.wishlist )
 
 
   return (
