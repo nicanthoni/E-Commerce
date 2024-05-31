@@ -47,14 +47,15 @@ import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
 
 // Testing
-import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx'; 
+import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx';
+import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
 
 // Routes
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<Home />} />
-      {/* <Route path='/test' element={<SearchBar />} /> */}
+      <Route path='/dash' element={<VendorDashboard />} />
       <Route path='/home' element={<Home />} />
       <Route path='/support' element={<MainSupport />} />
       <Route path='/signup' element={<AccountType />} />

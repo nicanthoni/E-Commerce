@@ -21,8 +21,8 @@ import AlertsDrawer from './Drawers/AlertsDrawer';
 
 
 export default function Navbar() {
-  const { user } = useAuthContext(); // auth
-  let userType = null; //
+  const { user } = useAuthContext();
+  let userType = null; 
   const location = useLocation();
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
 
