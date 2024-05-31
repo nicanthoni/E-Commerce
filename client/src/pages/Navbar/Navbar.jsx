@@ -21,18 +21,13 @@ import AlertsDrawer from './Drawers/AlertsDrawer';
 
 
 export default function Navbar() {
-  const { user } = useAuthContext();
-  let userType = null; 
+  const { user, type } = useAuthContext();
   const location = useLocation();
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
 
-  // check & set userType (buyer or vendor)
-  if (user) {
-    userType = Auth.getProfile().data.userType;
-  }
 
   return (
     <Box sx={{ display: 'flex', alignContent: 'center',}}>
@@ -80,7 +75,7 @@ export default function Navbar() {
             <TopNavbar />
 
             {/* Checkout & Alerts drawers - depending on vendor or not*/}
-            {user && userType === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
+            {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
           </Toolbar>
 
           {/* SearchBar for mobile screens */}
