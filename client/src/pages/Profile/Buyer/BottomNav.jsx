@@ -34,7 +34,7 @@ export default function BottomNav() {
           <BottomNavigationAction
             component={NavLink}
             to='/dash'
-            label='Dash'
+            label='Dashboard'
             icon={<InsightsIcon />}
             showLabel
           />

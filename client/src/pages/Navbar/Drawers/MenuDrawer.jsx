@@ -17,7 +17,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function MenuDrawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user } = useAuthContext();
+  const { user, type} = useAuthContext();
 
   // Toggle drawer
   const handleDrawerToggle = () => {
@@ -47,27 +47,49 @@ export default function MenuDrawer() {
       {/* DRAWER ITEMS */}
       <List sx={{ display: 'inline-block' }}>
 
+
         {/* HOME */}
-        <ListItem key='Home' disablePadding>
-          <ListItemButton onClick={closeDrawer}>
-            {user ? (
+        {user && type === 'vendor' ? (
+          null
+        ) : user && type === 'buyer' ? (
+          <ListItem key='Home' disablePadding>
+            <ListItemButton onClick={closeDrawer}>
               <NavLink
                 to='/explore'
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
                 <ListItemText primary='Home' />
               </NavLink>
-            ) : (
+            </ListItemButton>
+          </ListItem>
+        ) : (
+          <ListItem key='Home' disablePadding>
+            <ListItemButton onClick={closeDrawer}>
               <NavLink
                 to='/'
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
                 <ListItemText primary='Home' />
               </NavLink>
-            )}
+            </ListItemButton>
+          </ListItem>
+        )
+      }
+       
+      {/* DASHBOARD */}
+        {user && type === 'vendor' ? (
+          <ListItem key='Dashboard' disablePadding>
+          <ListItemButton onClick={closeDrawer}>
+            <NavLink
+              to='/dash'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <ListItemText primary='Dashboard' />
+            </NavLink>
           </ListItemButton>
         </ListItem>
-
+        ) : (null)}
+        
 
         {/* EXPLORE */}
         {user ? null : (

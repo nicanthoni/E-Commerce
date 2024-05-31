@@ -50,12 +50,19 @@ export default function Navbar() {
                 textAlign: { xs: 'center', sm: 'left' },
               }}
             >
-              {user ? (
+              {user && type === 'buyer' ? (
                 <NavLink
                   to='/explore'
                   style={{ textDecoration: 'none', color: '#fff' }}
                 >
                   <LogoDevIcon  />
+                </NavLink>
+              ) : user && type === 'vendor' ? (
+                <NavLink
+                  to='/dash'
+                  style={{ textDecoration: 'none', color: '#fff' }}
+                >
+                  <LogoDevIcon />
                 </NavLink>
               ) : (
                 <NavLink
