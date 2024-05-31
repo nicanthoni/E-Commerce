@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Auth from '../../utils/auth';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import MenuDrawer from './Drawers/MenuDrawer';

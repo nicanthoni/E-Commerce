@@ -7,11 +7,11 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
-import Auth from '../../../../../utils/auth';
+import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
 
 export default function OrdersImgList() {
-  const id = Auth.getProfile().data._id;
+  const { id } = useAuthContext()
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });

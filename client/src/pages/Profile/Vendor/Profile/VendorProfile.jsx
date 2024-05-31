@@ -1,5 +1,4 @@
 import { Typography, Container, Stack, Grid, Avatar, Divider } from '@mui/material';
-import Auth from '../../../../utils/auth';
 import { Vendor } from '../../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
@@ -9,17 +8,15 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 
 
 export default function VendorProfile() {
-const { user } = useAuthContext(); 
-const id = Auth.getProfile().data._id;
+const { user, id } = useAuthContext(); 
 const [loadVendor, { loading, data, error }] = useLazyQuery(Vendor, {
 variables: { vendorId: id },});
 
+
 // Auth check 
 useEffect(() => {
-  // Call loadVendor only if user is truthy
   if (user) {
     loadVendor();
-  
   } 
 }, [loadVendor, user]); 
 
@@ -32,7 +29,6 @@ if (loading) {
 if (!data || !data.vendor) {
   return <p>No vendor data found</p>;
 }
-
 
   // Vendor data 
   const vendorData = data.vendor;

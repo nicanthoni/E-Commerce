@@ -11,8 +11,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
-import Auth from '../../../../../utils/auth';
-import { Rating } from '@mui/material';
+import { useAuthContext } from '../../../../../hooks/useAuthContext';
+
+
 
 const style = {
   position: 'absolute',
@@ -29,6 +30,7 @@ const style = {
 
 // Modal for each wishlist item
 export default function WishImglist() {
+  const { id } = useAuthContext()
   const [openModals, setOpenModals] = useState([]);
 
   const handleOpenModal = (index) => {
@@ -43,7 +45,6 @@ export default function WishImglist() {
     setOpenModals(newOpenModals);
   };
 
-  const id = Auth.getProfile().data._id;
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });

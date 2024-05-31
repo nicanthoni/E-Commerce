@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import CheckoutOrder from './CheckoutOrder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Grid from '@mui/material/Grid';
-import Auth from '../../../utils/auth';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import { User } from '../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
@@ -10,8 +10,7 @@ import { useEffect } from 'react';
 
 // Layout of items within the Shopping Cart Drawer
 export default function CheckoutMain() {
-
-  const id = Auth.getProfile().data._id;
+  const { id } = useAuthContext()
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });

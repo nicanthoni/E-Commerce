@@ -5,47 +5,22 @@ import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 import ProductFilters from '../Filters/ProductFilters';
-import { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // to decode user token
 import noCategorySelected from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
 
+
 export default function ProductsMain({ products }) {
-  const { user } = useAuthContext(); 
-  const [decodedUser, setDecodedUser] = useState(null);
+  const { user, id } = useAuthContext(); 
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
-
-
-  // If user is auth & of type 'User' (buyer).. decode the JWT to get the userId (_id)
-  useEffect(() => {
-    if (user && user.Userlogin && user.Userlogin.user && user.Userlogin.user.__typename === 'User') {
-      try {
-        const token = typeof user === 'string' ? user : user.Userlogin?.token; // If user is a string, its the token. If not, get token through user.Userlogin?.token
-        if (token) {
-          setDecodedUser(jwtDecode(token)); // decode the token
-        } else {
-          console.log('No valid user (buyer) token found');
-          setDecodedUser(null);
-        }
-      } catch (error) {
-        console.log('Failed to decode token: ', error);
-        setDecodedUser(null);
-      }
-    } else {
-      setDecodedUser(null); // if user is not logged in or of type 'User' (buyer), set state to null
-    }
-  }, [user]);
-
-
+  
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
       // console.log(`User ID: ${userId}`);
-      console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
-      // custom hook to add to wishlist
-      await addWishlist(itemId, userId);
+      // console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
+      await addWishlist(itemId, userId); // custom hook to add to wishlist
     } else {
       console.log('Log in first to add items')
       return;
@@ -142,7 +117,7 @@ export default function ProductsMain({ products }) {
                             <Checkbox
                               color='error'
                               // If theres a decodedUser....
-                              onChange={() => handleWishlistChange(decodedUser ? decodedUser.data._id : null, result._id, result.name)}
+                              onChange={() => handleWishlistChange(id, result._id, result.name)}
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
