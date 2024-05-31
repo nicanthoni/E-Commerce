@@ -12,7 +12,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
-import Auth from '../../../../../utils/auth';
+import { useAuthContext } from '../../../../../hooks/useAuthContext';
 import { Rating } from '@mui/material';
 
 const style = {
@@ -30,6 +30,7 @@ const style = {
 
 // Modal for each Review
 export default function ReviewsImgList() {
+  const { id } = useAuthContext()
   const [openModals, setOpenModals] = useState([]);
 
   const handleOpenModal = (index) => {
@@ -44,7 +45,6 @@ export default function ReviewsImgList() {
     setOpenModals(newOpenModals);
   };
 
-  const id = Auth.getProfile().data._id;
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });

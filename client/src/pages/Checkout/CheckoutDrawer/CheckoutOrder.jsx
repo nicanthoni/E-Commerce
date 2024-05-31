@@ -1,14 +1,15 @@
 
 import { Stack, Box, Typography } from '@mui/material';
-import Auth from '../../../utils/auth';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 import { User } from '../../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import QuantityIncrementer from './QuantityIncrementer';
 
-// ORDER SUMMARY
-export default function CheckoutOrder({ subtotal }) {
-  const id = Auth.getProfile().data._id;
+
+
+export default function CheckoutOrder() {
+  const { id } = useAuthContext()
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });
@@ -32,7 +33,6 @@ if (!data || !data.user) {
 // Grab data
 const user = data.user;
 // console.log('User Cart: ', user.cart)
-
 
   return (
 

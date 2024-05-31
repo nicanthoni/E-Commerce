@@ -7,9 +7,12 @@ import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
 import { NavLink } from 'react-router-dom';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+import InsightsIcon from '@mui/icons-material/Insights';
 
 
 export default function BottomNav() {
+  const { user, type } = useAuthContext()
   const [active, setActive] = useState(1);
 
 
@@ -25,7 +28,17 @@ export default function BottomNav() {
             setActive(newActive);
           }}
         >
-          {/* Home (explore)  */}
+
+          {/* Home OR Dashboard (buyer vs vendor)*/}
+          {user && type === 'vendor' ? (
+          <BottomNavigationAction
+            component={NavLink}
+            to='/dash'
+            label='Dash'
+            icon={<InsightsIcon />}
+            showLabel
+          />
+          ) : (
           <BottomNavigationAction
             component={NavLink}
             to='/explore'
@@ -33,7 +46,9 @@ export default function BottomNav() {
             icon={<HomeIcon />}
             showLabel
           />
+          )}
 
+          
           {/* Profile */}
           <BottomNavigationAction
             component={NavLink}

@@ -1,18 +1,15 @@
 import { Typography, Container } from '@mui/material';
-import Auth from '../../../../utils/auth';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../utils/queries';
 import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
 import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
-// import NicsAvatar from '../../../../assets/images/MyAvatar-PNG.png';
 
 
 
 export default function BuyerProfile() {
-  const { user } = useAuthContext()
-  const id = Auth.getProfile().data._id;
+  const { user, id } = useAuthContext()
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },});
 

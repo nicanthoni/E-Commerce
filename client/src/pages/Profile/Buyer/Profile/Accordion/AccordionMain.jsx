@@ -9,14 +9,16 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
-import Auth from '../../../../../utils/auth';
+import { useAuthContext } from '../../../../../hooks/useAuthContext';
 import CartImgList from './CartImgList';
 import WishImglist from './WishlistImgList';
 import OrdersImgList from './OrdersImgList';
 import ReviewsImgList from './ReviewsImgList';
 
+
+
 export default function ProfileAccordion() {
-  const id = Auth.getProfile().data._id;
+  const { id, type } = useAuthContext()
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });
@@ -39,12 +41,6 @@ export default function ProfileAccordion() {
 
   // Grab data
   const user = data.user;
-
-  // If user is a Buyer ( represented as 'User'), render account type field as 'Shopper' instead
-  let accountType = data.user.__typename;
-  if (accountType === 'User') {
-    accountType = 'Shopper';
-  }
 
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
@@ -158,7 +154,7 @@ export default function ProfileAccordion() {
         <AccordionDetails sx={{ backgroundColor: '#F2F2F2' }}>
           <Typography variant='caption'>
             <List>
-              <ListItem>Account Type: {accountType}</ListItem>
+              <ListItem>Account Type: {type}</ListItem>
               <ListItem>
                 Name: {user.firstName} {user.lastName}
               </ListItem>
