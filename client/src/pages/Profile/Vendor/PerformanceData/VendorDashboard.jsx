@@ -3,11 +3,9 @@ import {
   Container,
   Stack,
   Grid,
-  Avatar,
   Divider,
 } from '@mui/material';
 import InsightsIcon from '@mui/icons-material/Insights';
-import EngineeringIcon from '@mui/icons-material/Engineering';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useAuthContext } from '../../../../hooks/useAuthContext';

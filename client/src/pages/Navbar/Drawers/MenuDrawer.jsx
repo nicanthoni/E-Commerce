@@ -17,10 +17,11 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function MenuDrawer() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user } = useAuthContext();
+  const { user, userType } = useAuthContext();
 
   // Toggle drawer
   const handleDrawerToggle = () => {
+    console.log('UserType : ', userType)
     setMobileOpen((prevState) => !prevState);
   };
 

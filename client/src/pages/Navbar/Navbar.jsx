@@ -10,7 +10,7 @@ import {
 import Auth from '../../utils/auth';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import MenuDrawer from './Navigation/MenuDrawer';
+import MenuDrawer from './Drawers/MenuDrawer';
 import TopNavbar from './Navigation/TopNavbar';
 import CartDrawer from './Drawers/CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
