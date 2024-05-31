@@ -5,13 +5,13 @@ import { createContext, useReducer, useEffect } from 'react';
 export const AuthContext = createContext(); 
 
 
-// Reducer - on Login, return {user} token and {type} for quick access to type of authenticated user
+// Reducer - on Login, return {user} token, user {type}, and user {id} for quicker access
 export const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { user: action.payload, type: Auth.getProfile().data.userType}
+      return { user: action.payload, type: Auth.getProfile().data.userType, id: Auth.getProfile().data._id}
     case 'LOGOUT':
-      return { user: null, type: null };
+      return { user: null, type: null, id: null };
     default:
       return state;
   }
@@ -21,7 +21,8 @@ export const authReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null, 
-    type: null
+    type: null,
+    id: null
   });
 
   // When app starts...
