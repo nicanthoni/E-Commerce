@@ -77,7 +77,7 @@ export default function MenuDrawer() {
       }
        
       {/* DASHBOARD */}
-      {user && type === 'vendor' ? (
+        {user && type === 'vendor' ? (
           <ListItem key='Dashboard' disablePadding>
           <ListItemButton onClick={closeDrawer}>
             <NavLink
@@ -88,7 +88,8 @@ export default function MenuDrawer() {
             </NavLink>
           </ListItemButton>
         </ListItem>
-      ) : (null)}
+        ) : (null)}
+        
 
         {/* EXPLORE */}
         {user ? null : (

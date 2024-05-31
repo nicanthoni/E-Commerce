@@ -6,7 +6,7 @@ import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function MainNav() {
-  const { user } = useAuthContext();
+  const { user, type } = useAuthContext();
 
   return (
     <>
@@ -16,25 +16,41 @@ export default function MainNav() {
         sx={{ display: { xs: 'none', sm: 'flex' } }}
       >
 
-
         {/* HOME */}
+        {user && type ==='vendor' ? (
+          null
+        ) : user && type==='buyer' ? (
         <Button key='Home' sx={{ color: '#fff', textTransform: 'none' }}>
-          {user ? (
             <NavLink
               to='/explore'
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
               Home
             </NavLink>
-          ) : (
-            <NavLink
+        </Button>
+        ) : (
+          <Button key='Home' sx={{ color: '#fff', textTransform: 'none' }}>
+          <NavLink
               to='/'
               style={{ textDecoration: 'none', color: 'inherit' }}
-            >
+              >
               Home
-            </NavLink>
-          )}
+              </NavLink>
+          </Button>
+        )}
+
+
+        {/* DASHBOARD */}
+        {user && type ==='vendor' ? (
+          <Button key='Dashboard' sx={{ color: '#fff', textTransform: 'none' }}>
+          <NavLink
+            to='/dash'
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            Dashboard
+          </NavLink>
         </Button>
+        ) : (null)}
 
 
         {/* EXPLORE */}
