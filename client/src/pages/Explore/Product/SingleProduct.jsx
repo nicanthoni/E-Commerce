@@ -13,6 +13,8 @@ import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { IndividualProduct } from '../../../utils/queries';
+import { useWishlist } from '../../../hooks/_tests_/useWishlist';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 
 export default function SingleProduct() {

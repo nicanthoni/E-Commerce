@@ -4,6 +4,7 @@ import { Typography, Box, Grid, Stack, Checkbox, Tooltip, Button } from '@mui/ma
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
+import { useState } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
@@ -12,13 +13,15 @@ import AddToCart from '../../../components/Buttons/AddToCart';
 
 export default function ProductsMain({ products }) {
   const { user, id } = useAuthContext(); 
-  const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(); // custom hook
+  const [wishlistState,  setWishlistState] = useState({})
 
 
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
-      console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
+      // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
+      console.log(user, user)
       await addWishlist(itemId, userId); // custom hook to add to wishlist
     } else {
       console.log('Log in first to add items')

@@ -78,11 +78,11 @@ export const Vendor = gql`
   }
 `;
 
+
 ////////////////////////////////////////
 
-// PRODUCTS
 
-// Products (filter by cat | cat !NOT required)
+// Products 
 export const Products = gql`
 query ProductsQuery($category: String) {
   filterItems(category: $category) {
@@ -105,6 +105,7 @@ query ProductsQuery($category: String) {
 }
 `;
 
+// Single product
 export const IndividualProduct = gql`
 query SingleProductQuery($id: ID!) {
   item(id: $id) {
@@ -118,6 +119,16 @@ query SingleProductQuery($id: ID!) {
     img
     ratings {
       stars
+    }
+  }
+}
+`
+// Wishlist
+export const UserWishlist = gql`
+query UserWishlist($id: ID!) {
+  wishlist(id: $id) {
+    wishlist {
+      item
     }
   }
 }
