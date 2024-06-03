@@ -83,7 +83,7 @@ export const Vendor = gql`
 
 // Products (filter by cat | cat !NOT required)
 export const Products = gql`
-query productsQuery($category: Int) {
+query productsQuery($category: String) {
   products(category: $category) {
     name
     price

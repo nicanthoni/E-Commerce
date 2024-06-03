@@ -1,5 +1,5 @@
 import { Grid, Container } from '@mui/material';
-import Products from './Product/ProductsMain';
+import ProductsMain from './Product/ProductsMain';
 import CategorySelection from './Filters/Categories';
 import { useLazyQuery } from '@apollo/client';
 import { Products } from '../../utils/queries';
@@ -32,7 +32,7 @@ export default function Explore() {
        
         {/* Products */}
         <Grid item xs={12} marginTop={4}>
-          <Products products={filteredProducts} />
+          <ProductsMain products={filteredProducts} />
         </Grid>
 
 
