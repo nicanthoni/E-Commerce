@@ -1,6 +1,7 @@
 import { Grid, Container } from '@mui/material';
 import ProductsMain from './Product/ProductsMain';
 import CategorySelection from './Filters/Categories';
+import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { Products } from '../../utils/queries';
 import Data from '../../data/productData.json' // sample data
@@ -9,15 +10,43 @@ import { useState } from 'react'; // to keep track of the selected category
 
 export default function Explore() {
   const [selectedCategory, setSelectedCategory] = useState(''); // Manage state of selected Category
+  const [loadProducts, {loading, data, error}] = useLazyQuery(Products, {
+    variables: {category: selectedCategory}
+  })
+
+
+  // useEffect - Load products if category is selected
+  useEffect(() => {
+    loadProducts();
+}, [loadProducts])
+
+
+if (error) {
+  console.error('GraphQL Error:', error);
+  return <p>Error fetching data</p>;
+}
+if (loading) {
+  return <p>Loading...</p>; 
+}
+if (!data) {
+  return <p>No product data found</p>;
+}
+
 
   // Callback to update the selected category
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
 
-  // Filter products by selected category
-  const filteredProducts = selectedCategory === 'All Products'? Data
-    : Data.filter(product => product.category === selectedCategory);
+
+  // SAMPLE DATA - Filter products by selected category 
+  // const filteredProducts = selectedCategory === 'All Products'? Data
+  //   : Data.filter(product => product.category === selectedCategory);
+
+
+  // REAL DATA - 
+  const productData = data ? data.filterItems : []; // Check if data is not undefined
+  console.log(`${selectedCategory} items: `, productData);
 
 
   return (
@@ -32,7 +61,7 @@ export default function Explore() {
        
         {/* Products */}
         <Grid item xs={12} marginTop={4}>
-          <ProductsMain products={filteredProducts} />
+          <ProductsMain products={productData} />
         </Grid>
 
 

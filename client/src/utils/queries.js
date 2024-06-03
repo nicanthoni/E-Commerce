@@ -80,11 +80,13 @@ export const Vendor = gql`
 
 ////////////////////////////////////////
 
+// PRODUCTS
 
 // Products (filter by cat | cat !NOT required)
 export const Products = gql`
-query productsQuery($category: String) {
-  products(category: $category) {
+query ProductsQuery($category: String) {
+  filterItems(category: $category) {
+    _id
     name
     price
     description
@@ -102,3 +104,21 @@ query productsQuery($category: String) {
   }
 }
 `;
+
+export const IndividualProduct = gql`
+query SingleProductQuery($id: ID!) {
+  item(id: $id) {
+    name
+    price
+    description
+    category
+    vendor {
+      vendorName
+    }
+    img
+    ratings {
+      stars
+    }
+  }
+}
+`

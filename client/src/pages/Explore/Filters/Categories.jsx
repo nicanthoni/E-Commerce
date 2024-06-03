@@ -44,6 +44,7 @@ function CategorySelection({ onCategoryChange }) {
     setActiveStep(step);
   };
 
+  
   return (
     <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }} >
       <Paper

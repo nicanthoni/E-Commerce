@@ -18,8 +18,7 @@ export default function ProductsMain({ products }) {
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
-      // console.log(`User ID: ${userId}`);
-      // console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
+      // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
       await addWishlist(itemId, userId); // custom hook to add to wishlist
     } else {
       console.log('Log in first to add items')

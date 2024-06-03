@@ -1,4 +1,3 @@
-
 import { Stack, Box, Typography } from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { User } from '../../../utils/queries';
@@ -13,6 +12,7 @@ export default function CheckoutOrder() {
   const [loadUser, { loading, data, error }] = useLazyQuery(User, {
     variables: { userId: id },
   });
+
 
 // Run loadUser 1x when component renders
 useEffect(() => {
@@ -30,9 +30,11 @@ if (!data || !data.user) {
   return <p>No user data found</p>;
 }
 
+
 // Grab data
 const user = data.user;
 // console.log('User Cart: ', user.cart)
+
 
   return (
 
