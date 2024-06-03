@@ -16,6 +16,7 @@ export default function MainNav() {
         sx={{ display: { xs: 'none', sm: 'flex' } }}
       >
 
+
         {/* HOME */}
         {user && type ==='vendor' ? (
           null

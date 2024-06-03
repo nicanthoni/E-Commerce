@@ -27,7 +27,6 @@ export default function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
 
-
   return (
     <Box sx={{ display: 'flex', alignContent: 'center',}}>
       <AppBar
@@ -82,10 +81,11 @@ export default function Navbar() {
 
             {/* Checkout & Alerts drawers - depending on vendor or not*/}
             {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
-          </Toolbar>
+            </Toolbar>
 
-          {/* SearchBar for mobile screens */}
-          {isMobile && isExploreRoute && <SearchBar />}
+            {/* SearchBar for mobile screens */}
+            {isMobile && isExploreRoute && <SearchBar />}
+
         </Container>
       </AppBar>
     </Box>

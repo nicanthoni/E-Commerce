@@ -1,6 +1,8 @@
 import { Grid, Container } from '@mui/material';
 import Products from './Product/ProductsMain';
-import CategorySelection from './_tests_/Categories';
+import CategorySelection from './Filters/Categories';
+import { useLazyQuery } from '@apollo/client';
+import { Products } from '../../utils/queries';
 import Data from '../../data/productData.json' // sample data
 import { useState } from 'react'; // to keep track of the selected category
 

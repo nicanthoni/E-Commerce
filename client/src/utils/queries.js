@@ -55,6 +55,9 @@ export const User = gql`
   }
 `;
 
+////////////////////////////////////////
+
+
 // Vendor
 export const Vendor = gql`
   query VendorQuery($vendorId: ID!) {
@@ -73,4 +76,29 @@ export const Vendor = gql`
       }
     }
   }
+`;
+
+////////////////////////////////////////
+
+
+// Products (filter by cat | cat !NOT required)
+export const Products = gql`
+query productsQuery($category: Int) {
+  products(category: $category) {
+    name
+    price
+    description
+    category
+    vendor {
+      vendorName
+    }
+    inventory
+    img
+    ratings {
+      stars
+      review
+    }
+    inCart
+  }
+}
 `;

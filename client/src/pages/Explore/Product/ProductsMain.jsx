@@ -5,7 +5,7 @@ import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
 import ProductFilters from '../Filters/ProductFilters';
-import noCategorySelected from '../../../assets/images/brand/no-products.svg';
+import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
 
@@ -14,7 +14,7 @@ export default function ProductsMain({ products }) {
   const { user, id } = useAuthContext(); 
   const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
 
-  
+
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
@@ -37,7 +37,7 @@ export default function ProductsMain({ products }) {
             Select a category to view products
           </Typography>
           <img 
-            src={noCategorySelected} 
+            src={placeholder} 
             alt='No products' 
             style={{ maxWidth: '100%' }} 
           />
