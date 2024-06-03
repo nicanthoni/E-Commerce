@@ -17,6 +17,7 @@ const categories = [
   { id: 7, name: 'Art' },
   { id: 8, name: 'Gaming' },
   { id: 9, name: 'Office' },
+  { id: 10, name: 'Miscellaneous' },
 ];
 
 function CategorySelection({ onCategoryChange }) {
@@ -43,6 +44,7 @@ function CategorySelection({ onCategoryChange }) {
     setActiveStep(step);
   };
 
+  
   return (
     <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }} >
       <Paper

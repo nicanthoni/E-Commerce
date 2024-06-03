@@ -55,6 +55,9 @@ export const User = gql`
   }
 `;
 
+////////////////////////////////////////
+
+
 // Vendor
 export const Vendor = gql`
   query VendorQuery($vendorId: ID!) {
@@ -74,3 +77,59 @@ export const Vendor = gql`
     }
   }
 `;
+
+
+////////////////////////////////////////
+
+
+// Products 
+export const Products = gql`
+query ProductsQuery($category: String) {
+  filterItems(category: $category) {
+    _id
+    name
+    price
+    description
+    category
+    vendor {
+      vendorName
+    }
+    inventory
+    img
+    ratings {
+      stars
+      review
+    }
+    inCart
+  }
+}
+`;
+
+// Single product
+export const IndividualProduct = gql`
+query SingleProductQuery($id: ID!) {
+  item(id: $id) {
+    name
+    price
+    description
+    category
+    vendor {
+      vendorName
+    }
+    img
+    ratings {
+      stars
+    }
+  }
+}
+`
+// Wishlist
+export const UserWishlist = gql`
+query UserWishlist($id: ID!) {
+  wishlist(id: $id) {
+    wishlist {
+      item
+    }
+  }
+}
+`

@@ -27,46 +27,17 @@ mutation buyerLogin($email: String!, $password: String!) {
 
 export const add_wishlist = gql`
 mutation AddWishlist($itemId: ID!, $userId: ID!) {
-  AddToWishlist(itemId: $itemId, userId: $userId) {
-    item {
-      name
-      _id
-    }
-    user {
-      _id
-      email
-      wishlist {
-        item {
-          name
-        }
-      }
-    }
-  }
+  AddToWishlist(itemId: $itemId, userId: $userId) 
 }
 `
 export const delete_wishlist = gql`
 mutation DeleteWishlist($itemId: ID!, $userId: ID!) {
-  DeleteFromWishlist(itemId: $itemId, userId: $userId) {
-    item {
-      name
-      _id
-    }
-    user {
-      _id
-      email
-      wishlist {
-        item {
-          name
-        }
-      }
-    }
-  }
+  DeleteFromWishlist(itemId: $itemId, userId: $userId) 
 }
 `
 
 
-
-
+///////////////////////////////////////////
 
 
 // VENDOR

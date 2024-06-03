@@ -1,25 +1,27 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
-import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
+import { Typography, Box, Grid, Stack, Checkbox, Tooltip, Button } from '@mui/material';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
+import { useState } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
-import noCategorySelected from '../../../assets/images/brand/no-products.svg';
+import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 
 
 
 export default function ProductsMain({ products }) {
   const { user, id } = useAuthContext(); 
-  const { addWishlist, isLoading, stateError } = useWishlist(); // custom hook
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(); // custom hook
+  const [wishlistState,  setWishlistState] = useState({})
 
-  
+
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
-      // console.log(`User ID: ${userId}`);
-      // console.log(`Product added to users wishlist: itemId=${itemId}, Name=${itemName}`);
+      // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
+      console.log(user, user)
       await addWishlist(itemId, userId); // custom hook to add to wishlist
     } else {
       console.log('Log in first to add items')
@@ -30,14 +32,15 @@ export default function ProductsMain({ products }) {
 
   return (
     <Grid container spacing={3} marginBottom={6}>
+      
       {/* If no selected categories, render message, else map through each product... */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
           <Typography variant='h6'>
-            Select a category to view products
+            No items in stock for this category. Select a different one!
           </Typography>
           <img 
-            src={noCategorySelected} 
+            src={placeholder} 
             alt='No products' 
             style={{ maxWidth: '100%' }} 
           />
@@ -51,6 +54,7 @@ export default function ProductsMain({ products }) {
         </Grid>
       ) : (
         <>
+
           {/* Product Filters */}
           <Grid item xs={12} marginY={1}>
             <ProductFilters />
@@ -60,41 +64,43 @@ export default function ProductsMain({ products }) {
           {products.map((result, index) => (
             // Grid item created for each product
             <Grid item xs={12} sm={6} md={4} key={index} align='center'>
-              <Card sx={{ maxWidth: 350, padding: '6px' }}>
-                <Stack direction='row' textAlign='left'>
+              <Card sx={{ maxWidth: 400 }}>
+                <Stack direction='row' justifyContent='center' alignItems='center'>
                   {/* Clickable area of card */}
-                  <CardActionArea component={Link} to={`/product/${result._id}`}>
-                    <Box sx={{ height: '150px', width: '150px' }}>
+                  <CardActionArea 
+                  component={Link} 
+                  to={`/product/${result._id}`}
+                  sx={{ width: 200, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                  >
                       <CardMedia
                         component='img'
-                        image={result.img} /* IMAGE */
-                        alt='Product Photo'
+                        image={result.img} 
+                        alt={`Photo of a ${result.name}`}
                         sx={{
-                          marginTop: 2,
-                          width: '100%',
-                          height: '100%',
+                          width: 150,
+                          height: 150,
                           objectFit: 'contain',
                         }}
                       />
-                    </Box>
                   </CardActionArea>
 
                   {/* Product Info */}
-                  <Stack direction='column'>
+                  <Stack direction='column' width='50%'>
                     <CardContent>
 
                       {/* Product Name */}
-                      <Typography gutterBottom variant='h6'>
+                      <Typography fontWeight='bold' textAlign='left'>
                         {result.name}
                       </Typography>
 
                       {/* Product Description */}
                       <Typography
                         variant='body2'
+                        textAlign='left'
                         color='text.secondary'
                         sx={{
                           display: '-webkit-box',
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 1,
                           WebkitBoxOrient: 'vertical',
                           textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
                           overflow: 'hidden',
@@ -104,13 +110,13 @@ export default function ProductsMain({ products }) {
                       </Typography>
 
                       {/* Product Price */}
-                      <Typography alignSelf='center' fontWeight={'bold'}>
+                      <Typography  textAlign='left' fontWeight={'bold'}>
                         ${result.price}
                       </Typography>
 
                       {/* Button &  Icon */}
-                      <Stack direction='row'>
-                        <AddToCart />
+                      <Stack direction='row' flexWrap='wrap'>
+                        <AddToCart/>
 
                         <Box>
                           <Tooltip title='Add to wishlist' placement='right'>

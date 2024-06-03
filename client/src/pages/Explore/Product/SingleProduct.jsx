@@ -8,21 +8,35 @@ import {
   Checkbox,
   Tooltip,
 } from '@mui/material';
-import { FavoriteBorder, Favorite, AddShoppingCart } from '@mui/icons-material';
+import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
-import Data from '../../../data/productData.json'; // test data
+import { useLazyQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { IndividualProduct } from '../../../utils/queries';
+import { useWishlist } from '../../../hooks/_tests_/useWishlist';
+import { useAuthContext } from '../../../hooks/useAuthContext';
+
 
 export default function SingleProduct() {
   const { productId } = useParams();
-  const product = Data.find((item) => item._id === parseInt(productId)); // Find product by ID
+  const [loadProduct, {loading, data, error}] = useLazyQuery(IndividualProduct, {
+    variables: { id: productId }
+  })
 
-  // If no product match...
-  if (!product) {
-    return (
-      <Typography variant='h6' textAlign='center' marginTop={15}>
-        Product not found 🤔
-      </Typography>
-    );
+  useEffect(() => {
+    loadProduct();
+  }, [loadProduct])
+
+
+  if (error) {
+    console.error('GraphQL Error:', error);
+    return <Typography variant='h6' textAlign='center' marginTop={15}>Error fetching data...</Typography>; 
+  }
+  if (loading) {
+    return <Typography variant='h6' textAlign='center' marginTop={15}>Loading...</Typography>; 
+  }
+  if (!data) {
+    return <Typography variant='h6' textAlign='center' marginTop={15}>Product not found 🤔</Typography>
   }
 
   // OnChange handle wishlist
@@ -50,7 +64,7 @@ export default function SingleProduct() {
             }}
           >
             <img
-              src={product.img}
+              src={data.item.img}
               alt='Product Photo'
               style={{
                 width: '100%',
@@ -61,7 +75,7 @@ export default function SingleProduct() {
           </Box>
 
           <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
-            <Rating name='read-only' value={product.rating} readOnly />
+            <Rating name='read-only' value={data.item.rating} readOnly />
           </Box>
         </Stack>
 
@@ -75,15 +89,15 @@ export default function SingleProduct() {
           }}
         >
           <Typography variant='h6' component='div'>
-            ${product.price}
+            ${data.item.price}
           </Typography>
 
           <Typography variant='h5' component='div' fontWeight='bold'>
-            {product.name}
+            {data.item.name}
           </Typography>
 
           <Typography variant='body1' color='text.secondary'>
-            {product.description}
+            {data.item.description}
           </Typography>
 
           {/* Button & Wishlist Stack */}
