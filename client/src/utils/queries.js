@@ -21,6 +21,7 @@ export const User = gql`
       }
       wishlist {
         item {
+          _id
           img
           description
           name

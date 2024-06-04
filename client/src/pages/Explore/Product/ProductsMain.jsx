@@ -1,38 +1,74 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
-import { Typography, Box, Grid, Stack, Checkbox, Tooltip, Button } from '@mui/material';
+import { Typography, Box, Grid, Stack, Checkbox, Alert, AlertTitle, Fade, Tooltip } from '@mui/material';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useEffect } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
+import { useLazyQuery } from '@apollo/client';
+import { User } from '../../../utils/queries';
 
 
 
 export default function ProductsMain({ products }) {
   const { user, id } = useAuthContext(); 
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(); // custom hook
-  const [wishlistState,  setWishlistState] = useState({})
+  const [loadWishlist, { loading, data, error }] = useLazyQuery(User, {
+    variables: { userId: id },
+  });
+
+    // Error & Alert States
+    const [clickedItemId, setClickedItemId] = useState(null);// store itemId clicked item to be able to assign alert to specific item
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showWarningAlert, setShowWarningAlert] = useState(false);
+
+  // const [wishlistState,  setWishlistState] = useState({})
+
+  useEffect(() => {
+    loadWishlist();
+    console.log('User data: ', data)
+  }, [])
+
+   // onClose - clear error message
+   const handleClearError = () => {
+    setShowErrorAlert(false);
+    setClickedItemId(null);
+  };
 
 
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
+      try {
       // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
-      console.log(user, user)
       await addWishlist(itemId, userId); // custom hook to add to wishlist
-    } else {
-      console.log('Log in first to add items')
-      return;
+      setShowSuccessAlert(true)
+      setClickedItemId(itemId); // Set item ID
+    } catch (e) {
+      console.log(' addWishlist() Error: ', e);
+      setShowErrorAlert(true)
+      setClickedItemId(itemId); // Set item ID
     }
-  };
+  } else {
+      console.log('Log in first to add items');
+      setShowWarningAlert(true);
+      setClickedItemId(itemId); // Set item ID
+      return;
+  }
+}
+
 
 
   return (
+    
     <Grid container spacing={3} marginBottom={6}>
-      
+
+    
       {/* If no selected categories, render message, else map through each product... */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -54,7 +90,6 @@ export default function ProductsMain({ products }) {
         </Grid>
       ) : (
         <>
-
           {/* Product Filters */}
           <Grid item xs={12} marginY={1}>
             <ProductFilters />
@@ -62,8 +97,12 @@ export default function ProductsMain({ products }) {
         
           {/* Product Map and create card */}
           {products.map((result, index) => (
-            // Grid item created for each product
+
+            // Grid item/card created for each product
             <Grid item xs={12} sm={6} md={4} key={index} align='center'>
+
+         
+              
               <Card sx={{ maxWidth: 400 }}>
                 <Stack direction='row' justifyContent='center' alignItems='center'>
                   {/* Clickable area of card */}
@@ -130,14 +169,42 @@ export default function ProductsMain({ products }) {
                           </Tooltip>
                         </Box>
                       </Stack>
-                    </CardContent>
-                  </Stack>
+                    </CardContent>                
+                  </Stack>                 
                 </Stack>
+
+              {/* ALERTS for the specific item */}
+              {clickedItemId === result._id && (
+                <>
+                  {showSuccessAlert && (
+                    <Alert onClose={handleClearError} 
+                    severity='success' 
+                    sx={{ width: '60%', mb: 2 }}>
+                      Added to wishlist.
+                    </Alert>
+                  )}
+                  {showErrorAlert && (
+                    <Alert onClose={handleClearError}
+                      severity='error'
+                      sx={{ width: '60%', mb: 2 }}
+                    >
+                      Error adding this item to your wishlist.
+                    </Alert>
+                  )}
+                   {showWarningAlert && (
+                    <Alert onClose={handleClearError} 
+                    severity='warning' 
+                    sx={{ width: '60%', mb: 2 }}>
+                      Sign in first.
+                    </Alert>
+                  )}
+                  </> 
+                  )}
               </Card>
             </Grid>
           ))}
         </>
       )}
     </Grid>
-  );
-}
+  )};
+
