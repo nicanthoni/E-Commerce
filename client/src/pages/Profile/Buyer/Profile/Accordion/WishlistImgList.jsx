@@ -1,37 +1,27 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
+import { Box, Stack, Button, Typography, Modal, Alert } from '@mui/material';
+import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
+import { useWishlist } from '../../../../../hooks/_tests_/useWishlist';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
-
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  boxShadow: 24,
-  p: 4,
-  textAlign: 'center',
-};
-
-// Modal for each wishlist item
 export default function WishImglist() {
-  const { id } = useAuthContext()
+  const { id } = useAuthContext();
   const [openModals, setOpenModals] = useState([]);
+  const [alert, setAlert] = useState({});
+  const [showButton, setShowButton] = useState({});
+  const [loadUser, { loading, data, error, refetch }] = useLazyQuery(User, {
+    variables: { userId: id },
+  });
+  const { deleteWishlist, isLoading, stateError } = useWishlist(refetch);
+
+  // Run loadUser when component renders - re-run if loadUser changes
+  useEffect(() => {
+    loadUser();
+  }, [alert]);
 
   const handleOpenModal = (index) => {
     const newOpenModals = [...openModals];
@@ -45,14 +35,23 @@ export default function WishImglist() {
     setOpenModals(newOpenModals);
   };
 
-  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
+  
+  // OnClick - remove item from wishlist
+  const removeFromWishlist = async (userId, itemId) => {
+    try {
+      await deleteWishlist(itemId, userId);
+      // console.log(`Item ${itemId} removed from User ${userId}s wishlist`);
 
-  // Run loadUser 1x when component renders - re-run loadUser if it changes
-  useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+      setShowButton((prev) => ({ ...prev, [itemId]: false }));
+      setAlert((prev) => ({ ...prev, [itemId]: true }));
+
+      setTimeout(() => {
+        setAlert((prev) => ({ ...prev, [itemId]: false }));
+      }, 2500);
+    } catch (e) {
+      console.log('Error: ', e);
+    }
+  };
 
   if (error) {
     console.error('GraphQL Error:', error);
@@ -67,8 +66,7 @@ export default function WishImglist() {
 
   // Grab data
   const user = data.user;
-  // console.log('Users wishlist: ', user.wishlist )
-
+  // console.log('Users wishlist: ', user.wishlist );
 
   return (
     <Box>
@@ -85,24 +83,37 @@ export default function WishImglist() {
               />
             </Button>
             <ImageListItemBar
+              onClick={() => handleOpenModal(index)}
               title={item.item.name}
-              subtitle={item.item.price}
+              subtitle={`$${item.item.price}`}
               actionIcon={
                 <IconButton
                   sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                   aria-label={`info about ${item.item.name}`}
+                  onClick={() => handleOpenModal(index)}
                 >
                   <InfoIcon />
                 </IconButton>
               }
             />
+
+            {/* Modal */}
             <Modal
               open={openModals[index] || false}
               onClose={() => handleCloseModal(index)}
               aria-labelledby='modal-modal-title'
               aria-describedby='modal-modal-description'
+              sx={{ alignContent: 'center', justifySelf: 'center' }}
             >
-              <Box sx={style}>
+              {/* Modal's Contents */}
+              <Stack
+                alignItems='center'
+                width={400}
+                bgcolor='background.paper'
+                padding={4}
+                boxShadow={24}
+                gap={1}
+              >
                 <img
                   srcSet={item.item.img}
                   src={item.item.img}
@@ -110,23 +121,38 @@ export default function WishImglist() {
                   loading='lazy'
                   style={{ width: '100px', height: 'auto' }}
                 />
-                <Typography id='modal-modal-title' variant='h6' component='h2'>
+
+                <Typography id='modal-modal-title' fontWeight='bold'>
                   {item.item.name}
                 </Typography>
-                <Typography
-                  id='item-price'
-                  sx={{ mt: 2 }}
-                >
-                  {item.item.price}
+
+                <Typography>${item.item.price}</Typography>
+
+                <Typography variant='caption'>
+                  '{item.item.description}'
                 </Typography>
-                <Typography
-                variant='caption'
-                  id='item-price'
-                  sx={{ mt: 2 }}
-                >
-                  '{item.item.descroption}'
-                </Typography>
-              </Box>
+
+                {/* Button & Alert */}
+                {showButton[item.item._id] !== false && (
+                  <Button
+                    onClick={() => removeFromWishlist(id, item.item._id)}
+                    variant='contained'
+                    color='secondary'
+                    sx={{
+                      color: 'primary.main',
+                      textTransform: 'none',
+                    }}
+                  >
+                    Remove from Wishlist
+                  </Button>
+                )}
+
+                {alert[item.item._id] && (
+                  <Alert severity='success' sx={{ width: '70%', mb: 2 }}>
+                    Removed from wishlist.
+                  </Alert>
+                )}
+              </Stack>
             </Modal>
           </ImageListItem>
         ))}

@@ -12,12 +12,14 @@ export const authReducer = (state, action) => {
       return { 
         user: action.payload, 
         type: Auth.getProfile().data.userType, 
-        id: Auth.getProfile().data._id}
+        id: Auth.getProfile().data._id
+      }
     case 'LOGOUT':
       return { 
         user: null, 
         type: null, 
-        id: null };
+        id: null 
+      };
     default:
       return state;
   }
@@ -43,7 +45,8 @@ export const AuthContextProvider = ({ children }) => {
   
   // console.log('AuthContext state: ', state)
   return (
-    // ...state represents 'user' property from AuthContextProvider. Using spread to account for future additional properties
+    // ...state represents 'user' property from AuthContextProvider
+    // Using spread to account for future additional properties
     <AuthContext.Provider value={{...state, dispatch}}>
         { children }
     </AuthContext.Provider>
