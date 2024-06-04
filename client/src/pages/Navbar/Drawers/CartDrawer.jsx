@@ -10,7 +10,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 
 
 export default function CartDrawer() {
-  let itemsInCart;
+  let itemsInCart = 0;
   const { user, id } = useAuthContext();
   const [showCart, setShowCart] = useState(false);
   const [loadCart, { loading, data, error, refetch }] = useLazyQuery(User, {
@@ -29,11 +29,9 @@ export default function CartDrawer() {
 
 
 // Set 'count' for number of items in cart
-if (data) {
+if (data && data.user && data.user.cart) {
   itemsInCart = data.user.cart.length
-} else {
-  itemsInCart = 0;
-}
+} 
 
   return (
     <>
