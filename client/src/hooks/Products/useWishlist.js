@@ -13,7 +13,6 @@ const [AddToWishlist, {  error: addError, loading: addLoading, data: addData }] 
 const [DeleteFromWishlist, { error: removeError, loading: removeLoading, data: removeData }] = useMutation(delete_wishlist);
 
 
-
 // ADD item to wishlist
 const addWishlist = async (itemId, userId) => {
     setIsLoading(true)
@@ -25,9 +24,7 @@ const addWishlist = async (itemId, userId) => {
         });
 
         setIsLoading(false)
-        setTimeout(() => {
-            refetch(); // Re-fetch data after successful mutation
-          }, 2500);
+        refetch(); // Re-fetch data after successful mutation
 
     } catch (e) {
         setStateError(true)
@@ -50,7 +47,7 @@ const addWishlist = async (itemId, userId) => {
       setIsLoading(false);
       setTimeout(() => {
         refetch(); // Re-fetch data after successful mutation
-      }, 2500);
+      }, 1900);
       
 
     } catch (e) {
