@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { Box, Stack, Button, Typography, Modal, Alert } from '@mui/material';
-import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../../utils/queries';
-import { useWishlist } from '../../../../../hooks/_tests_/useWishlist';
+import { useWishlist } from '../../../../../hooks/Products/useWishlist';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
 export default function WishImglist() {
@@ -35,19 +40,18 @@ export default function WishImglist() {
     setOpenModals(newOpenModals);
   };
 
-  
   // OnClick - remove item from wishlist
-  const removeFromWishlist = async (userId, itemId) => {
+  const removeFromWishlist = async (userId, itemId, index) => {
     try {
       await deleteWishlist(itemId, userId);
       // console.log(`Item ${itemId} removed from User ${userId}s wishlist`);
 
       setShowButton((prev) => ({ ...prev, [itemId]: false }));
       setAlert((prev) => ({ ...prev, [itemId]: true }));
-
       setTimeout(() => {
         setAlert((prev) => ({ ...prev, [itemId]: false }));
-      }, 2500);
+        handleCloseModal(index);
+      }, 1800);
     } catch (e) {
       console.log('Error: ', e);
     }
@@ -70,9 +74,9 @@ export default function WishImglist() {
 
   return (
     <Box>
-      <ImageList sx={{}}>
+      <ImageList>
         {user.wishlist.map((item, index) => (
-          <ImageListItem key={item.id}>
+          <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
                 srcSet={item.item.img}
@@ -129,13 +133,13 @@ export default function WishImglist() {
                 <Typography>${item.item.price}</Typography>
 
                 <Typography variant='caption'>
-                  '{item.item.description}'
+                  {item.item.description}
                 </Typography>
 
                 {/* Button & Alert */}
                 {showButton[item.item._id] !== false && (
                   <Button
-                    onClick={() => removeFromWishlist(id, item.item._id)}
+                    onClick={() => removeFromWishlist(id, item.item._id, index)}
                     variant='contained'
                     color='secondary'
                     sx={{

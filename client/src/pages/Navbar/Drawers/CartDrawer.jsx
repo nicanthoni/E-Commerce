@@ -1,26 +1,37 @@
-import {
-  Box,
-  Badge,
-  IconButton,
-  Drawer,
-  Stack,
-  Typography,
-  Button,
-} from '@mui/material';
+import { Box, Badge, IconButton, Drawer, Stack, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CheckoutMain from '../../Checkout/CheckoutDrawer/CheckoutMain'
+import { useLazyQuery } from '@apollo/client';
+import { User } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
+
+
 export default function CartDrawer() {
-  const { user } = useAuthContext();
+  let itemsInCart = 0;
+  const { user, id } = useAuthContext();
   const [showCart, setShowCart] = useState(false);
+  const [loadCart, { loading, data, error, refetch }] = useLazyQuery(User, {
+      variables: { userId: id}
+  });
 
   // Toggle drawer
   const handleDrawerToggle = () => {
     setShowCart((prevShowCart) => !prevShowCart);
   };
+
+  // Load users data
+  useEffect(() => {
+    loadCart();
+  }, [loadCart])
+
+
+// Set 'count' for number of items in cart
+if (data && data.user && data.user.cart) {
+  itemsInCart = data.user.cart.length
+} 
 
   return (
     <>
@@ -33,7 +44,7 @@ export default function CartDrawer() {
         sx={{ ml:{xs: 0, md: 2}, display: { color: '#fff' } }}
       >
         <Box className='cart-icon' sx={{  cursor: 'pointer' }}>
-          <Badge badgeContent={1} max={20} color='error'>
+          <Badge badgeContent={itemsInCart} max={20} color='error'>
             <ShoppingCartIcon />
           </Badge>
         </Box>
