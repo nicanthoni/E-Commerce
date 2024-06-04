@@ -4,7 +4,7 @@ import { Typography, Box, Grid, Stack, Checkbox, Alert, AlertTitle, Fade, Toolti
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/_tests_/useWishlist';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
@@ -16,29 +16,26 @@ import { User } from '../../../utils/queries';
 
 export default function ProductsMain({ products }) {
   const { user, id } = useAuthContext(); 
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(); // custom hook
-  const [loadWishlist, { loading, data, error }] = useLazyQuery(User, {
+  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
     variables: { userId: id },
   });
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch); 
 
     // Error & Alert States
-    const [clickedItemId, setClickedItemId] = useState(null);// store itemId clicked item to be able to assign alert to specific item
+    const [clickedItemId, setClickedItemId] = useState(null);// store itemId - assign alert to specific item
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [showWarningAlert, setShowWarningAlert] = useState(false);
 
   // const [wishlistState,  setWishlistState] = useState({})
 
+
+  // check a users wishlist for any items with ids that match items in their wishlist
+  // => set the wishlist icon as active
   useEffect(() => {
     loadWishlist();
-    console.log('User data: ', data)
+    // console.log('User data: ', data)
   }, [])
-
-   // onClose - clear error message
-   const handleClearError = () => {
-    setShowErrorAlert(false);
-    setClickedItemId(null);
-  };
 
 
   // OnChange - handle wishlist
@@ -49,15 +46,24 @@ export default function ProductsMain({ products }) {
       await addWishlist(itemId, userId); // custom hook to add to wishlist
       setShowSuccessAlert(true)
       setClickedItemId(itemId); // Set item ID
+      setTimeout(() => {
+        setShowSuccessAlert(false)
+        }, 2500);
+
     } catch (e) {
       console.log(' addWishlist() Error: ', e);
       setShowErrorAlert(true)
       setClickedItemId(itemId); // Set item ID
+      setTimeout(() => {
+        setShowErrorAlert(false)
+        }, 2500);
     }
   } else {
-      console.log('Log in first to add items');
       setShowWarningAlert(true);
       setClickedItemId(itemId); // Set item ID
+      setTimeout(() => {
+        setShowWarningAlert(false)
+        }, 2500);
       return;
   }
 }
@@ -177,14 +183,14 @@ export default function ProductsMain({ products }) {
               {clickedItemId === result._id && (
                 <>
                   {showSuccessAlert && (
-                    <Alert onClose={handleClearError} 
+                    <Alert
                     severity='success' 
                     sx={{ width: '60%', mb: 2 }}>
                       Added to wishlist.
                     </Alert>
                   )}
                   {showErrorAlert && (
-                    <Alert onClose={handleClearError}
+                    <Alert
                       severity='error'
                       sx={{ width: '60%', mb: 2 }}
                     >
@@ -192,7 +198,7 @@ export default function ProductsMain({ products }) {
                     </Alert>
                   )}
                    {showWarningAlert && (
-                    <Alert onClose={handleClearError} 
+                    <Alert
                     severity='warning' 
                     sx={{ width: '60%', mb: 2 }}>
                       Sign in first.

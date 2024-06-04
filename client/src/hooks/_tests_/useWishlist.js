@@ -4,7 +4,7 @@ import { add_wishlist } from '../../utils/mutations';
 import { delete_wishlist } from '../../utils/mutations';
 
 
-export const useWishlist = () => {
+export const useWishlist = (refetch) => {
 const [stateError, setStateError] = useState(null)
 const [isLoading, setIsLoading] = useState(null)
 
@@ -25,6 +25,9 @@ const addWishlist = async (itemId, userId) => {
         });
 
         setIsLoading(false)
+        setTimeout(() => {
+            refetch(); // Re-fetch data after successful mutation
+          }, 2500);
 
     } catch (e) {
         setStateError(true)
@@ -45,6 +48,10 @@ const addWishlist = async (itemId, userId) => {
       });
 
       setIsLoading(false);
+      setTimeout(() => {
+        refetch(); // Re-fetch data after successful mutation
+      }, 2500);
+      
 
     } catch (e) {
       setStateError(true);
