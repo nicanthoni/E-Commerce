@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
-import { Typography, Box, Grid, Stack, Checkbox, Alert, Tooltip } from '@mui/material';
+import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
@@ -14,17 +14,19 @@ import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 
-export default function ProductsMain({ products }) {
-  const { user, id } = useAuthContext();
-  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
-  const { addWishlist, deleteWishlist, isLoading, stateError } =
-    useWishlist(refetch);
 
-  // Error & Alert States
-  const [clickedItemId, setClickedItemId] = useState(null); // store itemId - assign alert to specific item
-  // Wishlist Alert States
+export default function ProductsMain({ products, wishlistedItems }) {
+  const { user, id } = useAuthContext();
+  const [inWishlist , setInWishlist] = useState([]); // set to true if item in users wishlist
+
+  //loadWishlist - query the user by Id
+  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
+    variables: { userId: id },});
+
+  // Hook - add/remove wishlisted item
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
+
+  // Wishlist Alerts
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
@@ -35,6 +37,14 @@ export default function ProductsMain({ products }) {
     loadWishlist();
   }, [loadWishlist]);
 
+
+  useEffect(() => {
+    if (wishlistedItems) {
+      setInWishlist(wishlistedItems); // Set the wishlisted items array
+    }
+  }, [wishlistedItems]);
+  
+
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
@@ -42,21 +52,21 @@ export default function ProductsMain({ products }) {
         // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
         await addWishlist(itemId, userId); // custom hook to add to wishlist
         setSuccessAlertVisible(true);
-        setClickedItemId(itemId); // Set item ID
+        setInWishlist(true)
         setTimeout(() => {
           setSuccessAlertVisible(false);
         }, 2500);
       } catch (e) {
         console.log(' addWishlist() Error: ', e);
         setErrorAlertVisible(true);
-        setClickedItemId(itemId); // Set item ID
+    
         setTimeout(() => {
           setErrorAlertVisible(false);
         }, 2500);
       }
     } else {
       setWarningAlertVisible(true);
-      setClickedItemId(itemId); // Set item ID
+  
       setTimeout(() => {
         setWarningAlertVisible(false);
       }, 2500);
@@ -71,7 +81,7 @@ export default function ProductsMain({ products }) {
     <WishlistWarning visible={warningAlertVisible} /> 
     <WishlistSuccess visible={successAlertVisible}/>
     <WishlistError visible={errorAlertVisible}/>
-    
+
 
       {/* If no products in selected categor, render message, else map */}
       {!products || products.length === 0 ? (
@@ -169,7 +179,7 @@ export default function ProductsMain({ products }) {
                           <Tooltip title='Add to wishlist' placement='right'>
                             <Checkbox
                               color='error'
-                              // If theres a decodedUser....
+                              checked={inWishlist.includes(result._id)} // Check if result._id exists in inWishlist array
                               onChange={() =>
                                 handleWishlistChange(
                                   id,

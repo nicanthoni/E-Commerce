@@ -1,46 +1,70 @@
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Typography } from '@mui/material';
 import ProductsMain from './Product/ProductsMain';
 import CategorySelection from './Filters/Categories';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { Products } from '../../utils/queries';
-import { useState } from 'react'; // to keep track of the selected category
+import { Products, Wishlist } from '../../utils/queries';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 export default function Explore() {
+  const { user, id } = useAuthContext()
   const [selectedCategory, setSelectedCategory] = useState(''); // Manage state of selected Category
-  const [loadProducts, {loading, data, error}] = useLazyQuery(Products, {
+
+  // Load Products
+  const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError}] = useLazyQuery(Products, {
     variables: {category: selectedCategory}
   })
 
+  // Load Users Wishlist
+  const [loadWishlist, {loading: loadingWishlist, data: wishlistData, error: wishlistError}] = useLazyQuery(Wishlist, {
+    variables: {id: id}
+  })
 
-    // useEffect - Load products if category is selected
-    useEffect(() => {
-      loadProducts();
-  }, [loadProducts])
+   // Load Products - trigger when selectedCategory changes
+   useEffect(() => {
+    loadProducts();
+  }, [loadProducts]); 
 
 
-  if (error) {
-    console.error('GraphQL Error:', error);
-    return <p>Error fetching data</p>;
+    // Load Wishlist - Trigger when user changes
+  useEffect(() => {
+    if (user) {
+      loadWishlist();
+    }
+  }, [user, loadWishlist]); 
+
+
+  if (productsError) {
+    console.error('GraphQL Products Error:', productsError);
+    return <Typography>Error fetching product data</Typography>;
   }
-  if (loading) {
-    return <p>Loading...</p>; 
-  }
-  if (!data) {
-    return <p>No product data found</p>;
+
+  if (wishlistError) {
+    console.error('GraphQL Wishlist Error:', wishlistError);
+    return <Typography>Error fetching wishlist data</Typography>;
   }
 
+  if (loadingProducts || loadingWishlist) {
+    return <Typography>Loading...</Typography>;
+  }
+
+  if (!productsData) {
+    return <Typography>No product data found</Typography>;
+  }
 
   // Callback to update the selected category
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
 
-
-  // Grab data
-  const productData = data ? data.filterItems : []; 
+  // Grab Product data
+  const products = productsData ? productsData.filterItems : []; 
   // console.log(`${selectedCategory} items: `, productData);
+
+   // Grab wishlistedItems data (boolean)
+   const wishlistedItems = wishlistData;
+  //  console.log('Wishlist Data:', wishlistedItems);
 
 
   return (
@@ -55,7 +79,7 @@ export default function Explore() {
        
         {/* Products */}
         <Grid item xs={12} marginTop={4}>
-          <ProductsMain products={productData} />
+          <ProductsMain products={products} wishlistedItems={wishlistedItems}/>
         </Grid>
 
 

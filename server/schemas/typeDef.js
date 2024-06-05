@@ -63,7 +63,7 @@ const typeDefs = `
         item(id: ID!): Item
         findItems(id: ID!): [Item]
         filterItems(category: String): [Item] 
-        wishlist(id: ID!): User
+        usersWishlist(id: ID!): [ID]
     }
     type Mutation {
         AddUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth

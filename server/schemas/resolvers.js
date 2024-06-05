@@ -62,6 +62,19 @@ const resolvers = {
         throw new Error(e)
       }
     },
+    usersWishlist: async (parent, { id }) => {
+      try {
+        console.log(`Checking for products in ${id}'s wishlist`);
+        // Find the user and populate the wishlist items
+        const user = await User.findById(id).populate('wishlist.item');
+        // Extract the wishlisted item IDs
+        const wishlistedItemIds = user.wishlist.map(wish => wish.item._id.toString());
+        return wishlistedItemIds;
+      } catch (error) {
+        console.error('Error checking users wishlist:', error);
+        throw new Error('Error checking wishlisted items');
+      }
+    },
   },
   Mutation: {
     AddUser: async (parent, { firstName, lastName, email, password }) => {

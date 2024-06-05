@@ -124,13 +124,9 @@ query SingleProductQuery($id: ID!) {
   }
 }
 `
-// Wishlist
-export const UserWishlist = gql`
-query UserWishlist($id: ID!) {
-  wishlist(id: $id) {
-    wishlist {
-      item
-    }
+// Wishlist - returns array of product IDs in users wishlist
+export const Wishlist = gql`
+  query UserWishlist($id: ID!) {
+    usersWishlist(id: $id)
   }
-}
-`
+`;
