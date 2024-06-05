@@ -8,7 +8,7 @@ const resolvers = {
     },
     user: async (parent, { id }, context) => {
       console.log('User ID:', id)
-      console.log(context)
+      // console.log(context)
       const user = await User.findById(id).populate({
         path: 'cart.item',
         populate: { path: 'vendor' }
@@ -42,7 +42,39 @@ const resolvers = {
       } catch (e) {
         throw new Error(e)
       }
-    }
+    },
+    filterItems: async (parent, { category }) => {
+      try {
+        if (category && category !== 'All Products') { // If a category FILTER is selected, fetch by category
+        console.log(`Fetching products from: ${category}`);
+        const filteredProducts = await Item.find({ category });
+        return filteredProducts;
+        } else if (category == 'All Products') { // If all products is chosen, show all Items data
+          const allProducts = await Item.find({});
+          return allProducts;
+        }
+        else { // If NO selection made, fetch all items from db
+          console.log('Fetching ALL products from db')
+          const allProducts = await Item.find({});
+          return allProducts;
+        }
+      } catch (e) {
+        throw new Error(e)
+      }
+    },
+    usersWishlist: async (parent, { id }) => {
+      try {
+        console.log(`Checking for products in ${id}'s wishlist`);
+        // Find the user and populate the wishlist items
+        const user = await User.findById(id).populate('wishlist.item');
+        // Extract the wishlisted item IDs
+        const wishlistedItemIds = user.wishlist.map(wish => wish.item._id.toString());
+        return wishlistedItemIds;
+      } catch (error) {
+        console.error('Error checking users wishlist:', error);
+        throw new Error('Error checking wishlisted items');
+      }
+    },
   },
   Mutation: {
     AddUser: async (parent, { firstName, lastName, email, password }) => {

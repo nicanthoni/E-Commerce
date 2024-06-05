@@ -1,4 +1,4 @@
-import { Typography, Box, Button, Container, Stack, Rating, Checkbox, Tooltip, Alert } from '@mui/material';
+import { Typography, Box, Button, Container, Stack, Rating, Checkbox, Tooltip } from '@mui/material';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -7,36 +7,39 @@ import { IndividualProduct } from '../../../utils/queries';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { User } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning'; 
+import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
+import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
+
 
 export default function SingleProduct() {
   const { user, id } = useAuthContext();
   const { productId } = useParams();
 
-  // Load Product
-  const [loadProduct, { loading: productLoading, data: productData, error: productError }] = useLazyQuery(
-    IndividualProduct,
-    { variables: { id: productId } 
-  });
+  // Query - Load Product
+  const [
+    loadProduct,
+    { loading: productLoading, data: productData, error: productError },
+  ] = useLazyQuery(IndividualProduct, { variables: { id: productId } });
 
-  // Load Wishlist
-  const [loadWishlist, { loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch }] = useLazyQuery(User,
-    { variables: { userId: id }, 
-  });
+  // Query - Load Wishlist
+  const [loadWishlist, {loading: wishlistLoading, data: wishlistData,error: wishlistError, refetch,},] = useLazyQuery(User, 
+  { variables: { userId: id } });
 
+  // Hook
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
 
-
-  // Error & Alert States
-  const [clickedItemId, setClickedItemId] = useState(null); // store itemId - assign alert
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [showWarningAlert, setShowWarningAlert] = useState(false);
+  // Wishlist Alert States
+  const [successAlertVisible, setSuccessAlertVisible] = useState(false);
+  const [warningAlertVisible, setWarningAlertVisible] = useState(false);
+  const [errorAlertVisible, setErrorAlertVisible] = useState(false);
 
 
   // Load product data
   useEffect(() => {
     loadProduct();
   }, [loadProduct]);
+
 
   if (productError) {
     console.error('GraphQL Error:', productError);
@@ -61,36 +64,36 @@ export default function SingleProduct() {
     );
   }
 
+
   // OnChange handle wishlist
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
-        await addWishlist(itemId, userId); // custom hook to add to wishlist
-        setShowSuccessAlert(true);
-        setClickedItemId(itemId); // Set item ID
+        await addWishlist(itemId, userId); // hook to add to wishlist
+        setSuccessAlertVisible(true);
         setTimeout(() => {
-          setShowSuccessAlert(false);
+          setSuccessAlertVisible(false);
         }, 2500);
       } catch (e) {
         console.log(' addWishlist() Error: ', e);
-        setShowErrorAlert(true);
-        setClickedItemId(itemId); // Set item ID
+        setErrorAlertVisible(true);
         setTimeout(() => {
-          setShowErrorAlert(false);
+          setErrorAlertVisible(false);
         }, 2500);
       }
     } else {
-      setShowWarningAlert(true);
-      setClickedItemId(itemId); // Set item ID
+      setWarningAlertVisible(true);
       setTimeout(() => {
-        setShowWarningAlert(false);
+        setWarningAlertVisible(false);
       }, 2500);
       return;
     }
   };
 
+
   return (
     <Container maxWidth='md'>
+
       {/* Parent Stack */}
       <Stack
         sx={{
@@ -99,6 +102,13 @@ export default function SingleProduct() {
           marginTop: { xs: 10, md: 20 },
         }}
       >
+
+        {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
+        <WishlistWarning visible={warningAlertVisible} /> 
+        <WishlistSuccess visible={successAlertVisible}/>
+        <WishlistError visible={errorAlertVisible}/>
+
+
         {/* Image & Rating Stack */}
         <Stack alignItems={'center'} gap={2}>
           <Box
@@ -159,11 +169,7 @@ export default function SingleProduct() {
             </Button>
             <Tooltip title='Add to wishlist' placement='right'>
               <Checkbox
-                onChange={() =>
-                  handleWishlistChange(
-                    id,
-                    productId,
-                  )}
+                onChange={() => handleWishlistChange(id, productId)}
                 color='error'
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite />}
@@ -171,28 +177,6 @@ export default function SingleProduct() {
             </Tooltip>
           </Stack>
 
-            {/* ALERTS  */}
-
-            {/* Wishlist alerts */}
-            {clickedItemId === productId && (
-                  <>
-                    {showSuccessAlert && (
-                      <Alert severity='success' sx={{ width: '100%', mb: 2 }}>
-                        Added to wishlist.
-                      </Alert>
-                    )}
-                    {showErrorAlert && (
-                      <Alert severity='error' sx={{ width: '100%', mb: 2 }}>
-                        Error adding this item to your wishlist.
-                      </Alert>
-                    )}
-                    {showWarningAlert && (
-                      <Alert severity='warning' sx={{ width: '100%', mb: 2 }}>
-                        Sign in first.
-                      </Alert>
-                    )}
-                  </>
-                )}
         </Stack>
       </Stack>
     </Container>
