@@ -65,7 +65,7 @@ export default function Explore() {
 
    // Grab wishlistedItems data (boolean)
    const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
-   console.log('Wishlist Data:', wishlistedItems);
+  //  console.log('Wishlist Data:', wishlistedItems);
 
 
   return (

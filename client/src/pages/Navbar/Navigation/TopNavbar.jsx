@@ -21,12 +21,12 @@ export default function MainNav() {
         {user && type ==='vendor' ? (
           null
         ) : user && type==='buyer' ? (
-        <Button key='Home' sx={{ color: '#fff', textTransform: 'none' }}>
+        <Button key='Shop' sx={{ color: '#fff', textTransform: 'none' }}>
             <NavLink
               to='/explore'
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              Home
+              Shop
             </NavLink>
         </Button>
         ) : (
