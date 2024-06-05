@@ -10,23 +10,24 @@ import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../utils/queries';
-
-
+import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
+import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning';
+import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 
 export default function ProductsMain({ products }) {
   const { user, id } = useAuthContext();
-  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, 
-    {variables: { userId: id },
+  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
+    variables: { userId: id },
   });
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
-
+  const { addWishlist, deleteWishlist, isLoading, stateError } =
+    useWishlist(refetch);
 
   // Error & Alert States
   const [clickedItemId, setClickedItemId] = useState(null); // store itemId - assign alert to specific item
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [showWarningAlert, setShowWarningAlert] = useState(false);
-
+  // Wishlist Alert States
+  const [successAlertVisible, setSuccessAlertVisible] = useState(false);
+  const [warningAlertVisible, setWarningAlertVisible] = useState(false);
+  const [errorAlertVisible, setErrorAlertVisible] = useState(false);
 
   // TODO: check users wishlist for items w iDs matching items iDs from product db
   // => set the wishlist icon as active
@@ -34,40 +35,45 @@ export default function ProductsMain({ products }) {
     loadWishlist();
   }, [loadWishlist]);
 
-
   // OnChange - handle wishlist
   const handleWishlistChange = async (userId, itemId, itemName) => {
     if (user) {
       try {
         // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
         await addWishlist(itemId, userId); // custom hook to add to wishlist
-        setShowSuccessAlert(true);
+        setSuccessAlertVisible(true);
         setClickedItemId(itemId); // Set item ID
         setTimeout(() => {
-          setShowSuccessAlert(false);
+          setSuccessAlertVisible(false);
         }, 2500);
       } catch (e) {
         console.log(' addWishlist() Error: ', e);
-        setShowErrorAlert(true);
+        setErrorAlertVisible(true);
         setClickedItemId(itemId); // Set item ID
         setTimeout(() => {
-          setShowErrorAlert(false);
+          setErrorAlertVisible(false);
         }, 2500);
       }
     } else {
-      setShowWarningAlert(true);
+      setWarningAlertVisible(true);
       setClickedItemId(itemId); // Set item ID
       setTimeout(() => {
-        setShowWarningAlert(false);
+        setWarningAlertVisible(false);
       }, 2500);
       return;
     }
   };
 
-
   return (
     <Grid container spacing={3} marginBottom={6}>
-      {/* If no selected categories, render message, else map through each product... */}
+
+    {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
+    <WishlistWarning visible={warningAlertVisible} /> 
+    <WishlistSuccess visible={successAlertVisible}/>
+    <WishlistError visible={errorAlertVisible}/>
+    
+
+      {/* If no products in selected categor, render message, else map */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
           <Typography variant='h6'>
@@ -181,26 +187,7 @@ export default function ProductsMain({ products }) {
                   </Stack>
                 </Stack>
 
-                {/* ALERTS for the specific item */}
-                {clickedItemId === result._id && (
-                  <>
-                    {showSuccessAlert && (
-                      <Alert severity='success' sx={{ width: '60%', mb: 2 }}>
-                        Added to wishlist.
-                      </Alert>
-                    )}
-                    {showErrorAlert && (
-                      <Alert severity='error' sx={{ width: '60%', mb: 2 }}>
-                        Error adding this item to your wishlist.
-                      </Alert>
-                    )}
-                    {showWarningAlert && (
-                      <Alert severity='warning' sx={{ width: '60%', mb: 2 }}>
-                        Sign in first.
-                      </Alert>
-                    )}
-                  </>
-                )}
+      
               </Card>
             </Grid>
           ))}

@@ -15,7 +15,7 @@ const itemSchema = new mongoose.Schema({
         maxlength: 2000
     },
     category: {
-        type: Number,
+        type: String,
         required: true
     },
     vendor: {

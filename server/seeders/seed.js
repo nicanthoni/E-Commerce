@@ -17,7 +17,7 @@ db.once("open", async () => {
       name: "Red ball",
       price: 1.99,
       description: "Its just a red ball",
-      category: 1,
+      category: 'Sports & Outdoors',
       vendor: vendors[0],
       img: "/images/seededItems/red-ball.png", // public URL so can be server statically 
       inventory: 15,
@@ -26,7 +26,7 @@ db.once("open", async () => {
       name: "Blue ball",
       price: 1.99,
       description: "Its just a blue ball",
-      category: 1,
+      category: 'Sports & Outdoors',
       vendor: vendors[0],
       img: "/images/seededItems/blue-ball.png", // public URL so can be server statically 
       inventory: 10,
@@ -37,7 +37,7 @@ db.once("open", async () => {
       name: "Otter plush",
       price: 5.99,
       description: "An otter plush, very fluffy",
-      category: 2,
+      category: 'Kids',
       vendor: vendors[1],
       img: '/images/seededItems/otter-plush.png', // public URL so can be server statically 
       inventory: 15,
@@ -46,7 +46,7 @@ db.once("open", async () => {
       name: "Big otter plush",
       price: 10.99,
       description: "A big otter plsuh, very large",
-      category: 2,
+      category: 'Kids',
       vendor: vendors[1],
       img: '/images/seededItems/bigger-otter-plush.jpg', // public URL so can be server statically 
       inventory: 10,
@@ -57,7 +57,7 @@ db.once("open", async () => {
       name: "Oshawott plush",
       price: 10.99,
       description: "Its just a oshawott plush",
-      category: 2,
+      category: 'Kids',
       vendor: vendors[2],
       img: "/images/seededItems/oshawott-plush.png", // public URL so can be server statically 
       inventory: 15,
@@ -66,7 +66,7 @@ db.once("open", async () => {
       name: "Big oshawott plush",
       price: 20.99,
       description: "A big oshawott plush",
-      category: 2,
+      category: 'Kids',
       vendor: vendors[2],
       img: "/images/seededItems/big-oshawott-plush.jpg", // public URL so can be server statically 
       inventory: 10,
@@ -77,7 +77,7 @@ db.once("open", async () => {
       name: "Not radioactive material",
       price: 10000,
       description: "Please dont open",
-      category: 10,
+      category: 'Miscellaneous',
       vendor: vendors[3],
       img: "/images/seededItems/radioactive-material.png", // public URL so can be server statically 
       inventory: 15,
@@ -86,13 +86,93 @@ db.once("open", async () => {
       name: "Box of 1000 bees",
       price: 100,
       description: "we counted 1000 bees to get the name right",
-      category: 3,
+      category: 'Miscellaneous',
       vendor: vendors[3],
       img: "/images/seededItems/box-of-bees.png", // public URL so can be server statically 
       inventory: 10,
     });
+    const item9 = await Item.create({
+      name: "Red Dress",
+      price: 49.99,
+      description: "A beautiful red dress, perfect for any occasion",
+      category: 'Apparel',
+      vendor: vendors[3],
+      img: "/images/seededItems/red-dress.png", // public URL so can be server statically 
+      inventory: 5,
+    });
+    const item10 = await Item.create({
+      name: "Butterfly Painting",
+      price: 19.99,
+      description: "A beautiful art piece. 1 of 3",
+      category: 'Art',
+      vendor: vendors[2],
+      img: "/images/seededItems/art1.jpg", // public URL so can be server statically 
+      inventory: 3,
+    });
+    const item11 = await Item.create({
+      name: "Samurai Painting",
+      price: 39.99,
+      description: "Rare art piece. 1 of 5",
+      category: 'Art',
+      vendor: vendors[1],
+      img: "/images/seededItems/art2.png", // public URL so can be server statically 
+      inventory: 5,
+    });
+    const item12 = await Item.create({
+      name: "Baseball Glove",
+      price: 89.99,
+      description: "Kangaroo leather baseball glove",
+      category: 'Sports & Outdoors',
+      vendor: vendors[1],
+      img: "/images/seededItems/baseball-glove.jpeg", // public URL so can be server statically 
+      inventory: 5,
+    });
+    const item13 = await Item.create({
+      name: "Gaming Keyboard",
+      price: 119.99,
+      description: "An awesome RGB keyboard. You'll instantly be recruited by Optic",
+      category: 'Gaming',
+      vendor: vendors[0],
+      img: "/images/seededItems/gaming-keyboard.png", // public URL so can be server statically 
+      inventory: 7,
+    });
+    const item14 = await Item.create({
+      name: "Baby Care",
+      price: 39.99,
+      description: "Your baby is guranteed to never cry again",
+      category: 'Baby Care',
+      vendor: vendors[3],
+      img: "/images/seededItems/baby-cleaning.png", // public URL so can be server statically 
+      inventory: 10,
+    });
+    const item15 = await Item.create({
+      name: "Office Chair",
+      price: 69.99,
+      description: "Your back will thank you",
+      category: 'Office',
+      vendor: vendors[2],
+      img: "/images/seededItems/office-chair.png", // public URL so can be server statically 
+      inventory: 9,
+    });
+    const item16 = await Item.create({
+      name: "Lamp",
+      price: 14.99,
+      description: "Greatest lamp to ever do lamp things",
+      category: 'Home Decor',
+      vendor: vendors[1],
+      img: "/images/seededItems/house-lamp.png", // public URL so can be server statically 
+      inventory: 20,
+    });
     vendors[3].inventory.push(item7._id);
     vendors[3].inventory.push(item8._id);
+    vendors[3].inventory.push(item9._id);
+    vendors[2].inventory.push(item10._id);
+    vendors[1].inventory.push(item11._id);
+    vendors[1].inventory.push(item12._id);
+    vendors[0].inventory.push(item13._id);
+    vendors[3].inventory.push(item14._id);
+    vendors[2].inventory.push(item15._id);
+    vendors[1].inventory.push(item16._id);
     users[0].cart.push({ item: item1._id, quantity: 2 });
     item1.inCart += 2;
     users[0].cart.push({ item: item2._id, quantity: 1 });
@@ -109,6 +189,22 @@ db.once("open", async () => {
     item7.inCart += 2;
     users[3].cart.push({ item: item8._id, quantity: 10 });
     item8.inCart += 10;
+    users[3].cart.push({ item: item9._id, quantity: 3 });
+    item9.inCart += 3;
+    users[0].cart.push({ item: item10._id, quantity: 1 });
+    item10.inCart += 1;
+    users[1].cart.push({ item: item11._id, quantity: 1 });
+    item11.inCart += 1;
+    users[2].cart.push({ item: item12._id, quantity: 1 });
+    item12.inCart += 1;
+    users[0].cart.push({ item: item13._id, quantity: 1 });
+    item13.inCart += 1;
+    users[0].cart.push({ item: item14._id, quantity: 1 });
+    item14.inCart += 1;
+    users[1].cart.push({ item: item15._id, quantity: 1 });
+    item15.inCart += 1;
+    users[2].cart.push({ item: item16._id, quantity: 1 });
+    item16.inCart += 1;
     const rating1 = await Rating.create({
       user: users[0]._id,
       item: item3._id,
@@ -158,6 +254,14 @@ db.once("open", async () => {
     await item6.save();
     await item7.save();
     await item8.save();
+    await item9.save();
+    await item10.save();
+    await item11.save();
+    await item12.save();
+    await item13.save();
+    await item14.save();
+    await item15.save();
+    await item16.save();
     await Promise.all(vendors.map((vendor) => vendor.save()));
     await Promise.all(users.map((user) => user.save()));
   } catch (err) {

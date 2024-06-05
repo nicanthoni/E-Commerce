@@ -35,7 +35,7 @@ const typeDefs = `
         name: String
         price: Float
         description: String
-        category: Int
+        category: String
         vendor: Vendor
         inventory: Int
         img: String
@@ -62,6 +62,8 @@ const typeDefs = `
         vendor(id: ID!): Vendor
         item(id: ID!): Item
         findItems(id: ID!): [Item]
+        filterItems(category: String): [Item] 
+        wishlist(id: ID!): User
     }
     type Mutation {
         AddUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
@@ -70,7 +72,7 @@ const typeDefs = `
         AddVendor(vendorName: String!, email: String!, password: String!): Auth
         DeleteVendor(userId: ID!): String
         Vendorlogin(email: String!, password: String!): Auth
-        CreateItem(name: String!, price: Int!, category: Int!, vendor: ID!, inventory: Int, img: String): Item
+        CreateItem(name: String!, price: Int!, category: String!, vendor: ID!, inventory: Int, img: String): Item
         DeleteItem(itemId: ID!, vendorId: ID!): String
         AddToCart(itemId: ID!, userId: ID!): String
         DeleteFromCart(itemId: ID!, userId: ID!): String

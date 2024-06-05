@@ -8,7 +8,7 @@ const resolvers = {
     },
     user: async (parent, { id }, context) => {
       console.log('User ID:', id)
-      console.log(context)
+      // console.log(context)
       const user = await User.findById(id).populate({
         path: 'cart.item',
         populate: { path: 'vendor' }
@@ -42,7 +42,26 @@ const resolvers = {
       } catch (e) {
         throw new Error(e)
       }
-    }
+    },
+    filterItems: async (parent, { category }) => {
+      try {
+        if (category && category !== 'All Products') { // If a category FILTER is selected, fetch by category
+        console.log(`Fetching products from: ${category}`);
+        const filteredProducts = await Item.find({ category });
+        return filteredProducts;
+        } else if (category == 'All Products') { // If all products is chosen, show all Items data
+          const allProducts = await Item.find({});
+          return allProducts;
+        }
+        else { // If NO selection made, fetch all items from db
+          console.log('Fetching ALL products from db')
+          const allProducts = await Item.find({});
+          return allProducts;
+        }
+      } catch (e) {
+        throw new Error(e)
+      }
+    },
   },
   Mutation: {
     AddUser: async (parent, { firstName, lastName, email, password }) => {
