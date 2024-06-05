@@ -27,8 +27,7 @@ export default function SingleProduct() {
   { variables: { userId: id } });
 
   // Hook
-  const { addWishlist, deleteWishlist, isLoading, stateError } =
-    useWishlist(refetch);
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
 
   // Wishlist Alert States
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
@@ -94,7 +93,7 @@ export default function SingleProduct() {
 
   return (
     <Container maxWidth='md'>
-      
+
       {/* Parent Stack */}
       <Stack
         sx={{

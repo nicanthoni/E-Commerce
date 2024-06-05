@@ -15,11 +15,11 @@ import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 
 
-export default function ProductsMain({ products, wishlistedItems }) {
+export default function ProductsMain({ products, wishlistedItems, refetchProducts }) {
   const { user, id } = useAuthContext();
-  const [inWishlist , setInWishlist] = useState([]); // set to true if item in users wishlist
+  const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
 
-  //loadWishlist - query the user by Id
+  // loadWishlist - query the user by id
   const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
     variables: { userId: id },});
 
@@ -35,43 +35,50 @@ export default function ProductsMain({ products, wishlistedItems }) {
   // => set the wishlist icon as active
   useEffect(() => {
     loadWishlist();
-  }, [loadWishlist]);
+  }, [loadWishlist, user]);
 
 
   useEffect(() => {
-    if (wishlistedItems) {
-      setInWishlist(wishlistedItems); // Set the wishlisted items array
+    if (Array.isArray(wishlistedItems)) {
+      const wishlistMap = {};
+      wishlistedItems.forEach((itemId) => {
+        wishlistMap[itemId] = true;
+      });
+      setInWishlist(wishlistMap);
     }
   }, [wishlistedItems]);
   
 
   // OnChange - handle wishlist
-  const handleWishlistChange = async (userId, itemId, itemName) => {
+  const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
-        // console.log(`Product added to user ${userId} wishlist: itemId=${itemId}, Name=${itemName}`);
         await addWishlist(itemId, userId); // custom hook to add to wishlist
         setSuccessAlertVisible(true);
-        setInWishlist(true)
+        setInWishlist((prev) => ({ ...prev, [itemId]: true }));
+        // refetchProducts(); // Refetch products after adding to wishlist
         setTimeout(() => {
           setSuccessAlertVisible(false);
         }, 2500);
+        
       } catch (e) {
         console.log(' addWishlist() Error: ', e);
         setErrorAlertVisible(true);
-    
         setTimeout(() => {
           setErrorAlertVisible(false);
         }, 2500);
+        // refetchProducts(); // Refetch products after error
       }
     } else {
       setWarningAlertVisible(true);
-  
       setTimeout(() => {
         setWarningAlertVisible(false);
       }, 2500);
+      // refetchProducts(); // Refetch products after adding to wishlist
       return;
     }
+    // Refetch products after adding to wishlist & updating states
+  refetchProducts();
   };
 
   return (
@@ -179,14 +186,9 @@ export default function ProductsMain({ products, wishlistedItems }) {
                           <Tooltip title='Add to wishlist' placement='right'>
                             <Checkbox
                               color='error'
-                              checked={inWishlist.includes(result._id)} // Check if result._id exists in inWishlist array
+                              checked={inWishlist[result._id] || false} // Check if result._id exists in inWishlist array
                               onChange={() =>
-                                handleWishlistChange(
-                                  id,
-                                  result._id,
-                                  result.name
-                                )
-                              }
+                                handleWishlistChange(id, result._id)}
                               icon={<FavoriteBorder />}
                               checkedIcon={<Favorite />}
                             />
@@ -196,8 +198,6 @@ export default function ProductsMain({ products, wishlistedItems }) {
                     </CardContent>
                   </Stack>
                 </Stack>
-
-      
               </Card>
             </Grid>
           ))}

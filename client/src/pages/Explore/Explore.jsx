@@ -11,12 +11,12 @@ export default function Explore() {
   const { user, id } = useAuthContext()
   const [selectedCategory, setSelectedCategory] = useState(''); // Manage state of selected Category
 
-  // Load Products
-  const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError}] = useLazyQuery(Products, {
+  // Load Products - pass refetch to child, so this query reruns when its added to wishlist/cart
+  const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError, refetch: refetchProducts}] = useLazyQuery(Products, {
     variables: {category: selectedCategory}
   })
 
-  // Load Users Wishlist
+  // Load array of productIds (all items in users' wishlist)
   const [loadWishlist, {loading: loadingWishlist, data: wishlistData, error: wishlistError}] = useLazyQuery(Wishlist, {
     variables: {id: id}
   })
@@ -33,6 +33,7 @@ export default function Explore() {
       loadWishlist();
     }
   }, [user, loadWishlist]); 
+  
 
 
   if (productsError) {
@@ -63,8 +64,8 @@ export default function Explore() {
   // console.log(`${selectedCategory} items: `, productData);
 
    // Grab wishlistedItems data (boolean)
-   const wishlistedItems = wishlistData;
-  //  console.log('Wishlist Data:', wishlistedItems);
+   const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
+   console.log('Wishlist Data:', wishlistedItems);
 
 
   return (
@@ -79,7 +80,7 @@ export default function Explore() {
        
         {/* Products */}
         <Grid item xs={12} marginTop={4}>
-          <ProductsMain products={products} wishlistedItems={wishlistedItems}/>
+          <ProductsMain products={products} wishlistedItems={wishlistedItems} refetchProducts={refetchProducts}/>
         </Grid>
 
 
