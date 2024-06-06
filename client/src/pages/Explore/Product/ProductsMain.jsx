@@ -19,26 +19,13 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
   const { user, id } = useAuthContext();
   const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
 
-  // Query loadWishlist - query the user by id
-  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
-    variables: { userId: id }});
-
   // Hook - add/remove wishlist item
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist();
 
   // Wishlist Alerts
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
-
-
-  // Load Wishlist - Trigger when user changes
-  useEffect(() => {
-    if (user) {
-      loadWishlist();
-    }
-  }, [loadWishlist, user]);
-
 
   // if wishlistedItems is an array of Ids, for each Id, create an object that is truthy
   // Run on initial render, and if wishlistedItems changes
@@ -53,7 +40,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
   }, [wishlistedItems]);
   
 
-  // OnChange - handle wishlist
+  // OnChange - Refetch (loadWishlist()) from parent updating items wishlist state
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
@@ -78,7 +65,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
       }, 2500);
       return;
     }
-    refetchWishlist();  // Refetch (loadWishlist()) after adding to wishlist & updating states
+    refetchWishlist();  
   };
 
 

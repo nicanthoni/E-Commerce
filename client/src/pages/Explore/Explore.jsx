@@ -9,14 +9,14 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Explore() {
   const { user, id } = useAuthContext()
-  const [selectedCategory, setSelectedCategory] = useState(''); // Manage state of selected Category
+  const [selectedCategory, setSelectedCategory] = useState(''); // state of selected Category
 
-  // Load Products - pass refetch to child, so this query reruns when its added to wishlist/cart
+  // Load Products  - filter loaded products by selected category
   const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError }] = useLazyQuery(Products, {
     variables: {category: selectedCategory}
   })
 
-  // Load array of productIds (all items in users' wishlist)
+  // Load Wishlist - array of productIds (all items in users' wishlist). refetch whenever item is added/removed from wishlist
   const [loadWishlist, {loading: loadingWishlist, data: wishlistData, error: wishlistError, refetch: refetchWishlist}] = useLazyQuery(Wishlist, {
     variables: {id: id}
   })

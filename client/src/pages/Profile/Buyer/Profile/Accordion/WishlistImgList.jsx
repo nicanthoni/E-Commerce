@@ -13,7 +13,7 @@ import { User } from '../../../../../utils/queries';
 import { useWishlist } from '../../../../../hooks/Products/useWishlist';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
-export default function WishImglist() {
+export default function WishImglist () {
   const { id } = useAuthContext();
   const [openModals, setOpenModals] = useState([]);
   const [alert, setAlert] = useState({});
