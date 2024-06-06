@@ -13,8 +13,6 @@ export default function BuyerProfile() {
   const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
     variables: { userId: id },});
 
-
-    
   useEffect(() => {
     // Call loadUser only if user is truthy
     if (user) {
@@ -31,6 +29,7 @@ export default function BuyerProfile() {
   if (!data || !data.user) {
     return <p>No user data found</p>;
   }
+
 
   // User data object
   const userData = data.user;

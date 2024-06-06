@@ -1,37 +1,12 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
+import {Box, Button, IconButton, Typography, Modal, Rating} from '@mui/material';
+import {ImageList, ImageListItem, ImageListItemBar, ListSubheader} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { User } from '../../../../../utils/queries';
-import { useAuthContext } from '../../../../../hooks/useAuthContext';
-import { Rating } from '@mui/material';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  boxShadow: 24,
-  p: 4,
-  textAlign: 'center',
-};
 
-// Modal for each Review
-export default function ReviewsImgList() {
-  const { id } = useAuthContext()
+export default function ReviewsImgList({ refetchUserData, loadUser, userData }) {
   const [openModals, setOpenModals] = useState([]);
+
 
   const handleOpenModal = (index) => {
     const newOpenModals = [...openModals];
@@ -45,37 +20,13 @@ export default function ReviewsImgList() {
     setOpenModals(newOpenModals);
   };
 
-  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
-
-  // Run loadUser 1x when component renders - re-run loadUser if it changes
-  useEffect(() => {
-    loadUser();
-  }, [loadUser]);
-
-  if (error) {
-    console.error('GraphQL Error:', error);
-    return <p>Error fetching data</p>;
-  }
-  if (loading) {
-    return <p>Loading...</p>; // Replace with loading spinner
-  }
-  if (!data || !data.user) {
-    return <p>No user data found</p>;
-  }
-
-  // Grab data
-  const user = data.user;
-  // console.log('Users item reviews: ', user.ratings )
-
   return (
     <Box>
       <ImageList>
         <ImageListItem key='Subheader' cols={2}>
           <ListSubheader component='div'>Reviewed Items</ListSubheader>
         </ImageListItem>
-        {user.ratings.map((rating, index) => (
+        {userData.ratings.map((rating, index) => (
           <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
@@ -98,13 +49,25 @@ export default function ReviewsImgList() {
                 </IconButton>
               }
             />
+
+            {/* Modal for each Review */}
             <Modal
               open={openModals[index] || false}
               onClose={() => handleCloseModal(index)}
               aria-labelledby='modal-modal-title'
               aria-describedby='modal-modal-description'
             >
-              <Box sx={style}>
+              <Box sx={{position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 400,
+                bgcolor: 'background.paper',
+                border: '1px solid #000',
+                boxShadow: 24,
+                p: 4,
+                textAlign: 'center'
+                }}>
                 <img
                   srcSet={rating.item.img}
                   src={rating.item.img}

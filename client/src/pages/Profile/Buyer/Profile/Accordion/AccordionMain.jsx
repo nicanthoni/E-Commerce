@@ -41,7 +41,9 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.wishlist.length > 0 ? (
             <Typography variant='caption'>
-              <WishImglist />
+
+              <WishImglist refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -66,7 +68,9 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.cart.length > 0 ? (
             <Typography variant='caption'>
-              <CartImgList />
+
+              <CartImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -91,7 +95,9 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.buyHistory.length > 0 ? (
             <Typography variant='caption'>
-              <OrdersImgList />
+
+              <OrdersImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -116,7 +122,9 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.ratings.length > 0 ? (
             <Typography variant='caption'>
-              <ReviewsImgList />
+
+              <ReviewsImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
