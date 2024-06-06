@@ -12,7 +12,7 @@ const [AddToWishlist, {  error: addError, loading: addLoading, data: addData }] 
 const [DeleteFromWishlist, { error: removeError, loading: removeLoading, data: removeData }] = useMutation(delete_wishlist);
 
 
-// ADD item to wishlist
+// ADD to wishlist
 const addWishlist = async (itemId, userId) => {
     setIsLoading(true)
     setStateError(null)
@@ -33,7 +33,7 @@ const addWishlist = async (itemId, userId) => {
         
 };
 
- // DELETE item from wishlist
+ // DELETE from wishlist
  const deleteWishlist = async (itemId, userId) => {
     setIsLoading(true);
     setStateError(null);
