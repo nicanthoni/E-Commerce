@@ -80,7 +80,12 @@ export default function Explore() {
 
         {/* Categories */}
         <Grid item xs={12}>
-          <CategorySelection onCategoryChange={handleCategoryChange} activeStep={activeStep} onStepChange={handleStepChange}/>
+          <CategorySelection 
+          onCategoryChange={handleCategoryChange} 
+          activeStep={activeStep} 
+          onStepChange={handleStepChange}
+          selectedCategory={selectedCategory}
+          />
         </Grid>
        
         {/* Products */}

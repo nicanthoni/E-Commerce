@@ -19,10 +19,9 @@ const categories = [
   { id: 9, name: 'Office' },
 ];
 
-function CategorySelection({ onCategoryChange, activeStep, onStepChange }) {
+function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onStepChange }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
-  // const [activeStep, setActiveStep] = useState(0);
 
   // Carousel settings
   const categoriesPerView = isMobile ? 1 : 3; // # of categories shown per view
@@ -65,14 +64,14 @@ function CategorySelection({ onCategoryChange, activeStep, onStepChange }) {
           <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
               <Button
-                color='primary'
+                color={selectedCategory === category.name ? 'secondary' : 'primary'}
                 variant='contained'
                 key={category.id}
                 sx={{
                   height: 255,
                   width: '90%',
                   mx: 1,
-                  bgcolor: 'primary.main',
+                  bgcolor: selectedCategory === category.name ? 'secondary.main' : 'primary.main',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   color: '#fffff',
