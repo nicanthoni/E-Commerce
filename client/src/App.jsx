@@ -37,7 +37,7 @@ import Home from './pages/Home/Home.jsx';
 import Explore from './pages/Explore/Explore.jsx';
 import MainSupport from './pages/Support/MainSupport.jsx';
 import SingleProduct from './pages/Explore/Product/SingleProduct.jsx';
-import Checkout from './pages/Checkout/Checkout.jsx';
+import Checkout from './pages/Checkout/_tests_/Checkout.jsx';
 import Inbox from './pages/Profile/Inbox/Inbox.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';

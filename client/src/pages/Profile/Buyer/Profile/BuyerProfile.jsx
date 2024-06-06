@@ -24,10 +24,10 @@ export default function BuyerProfile() {
     console.error('GraphQL Error:', error);
   }
   if (loading) {
-    return <p>Loading...</p>; 
+    return <Typography>Loading...</Typography>; 
   }
   if (!data || !data.user) {
-    return <p>No user data found</p>;
+    return <Typography>No user data found</Typography>;
   }
 
 

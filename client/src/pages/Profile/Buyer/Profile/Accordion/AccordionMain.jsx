@@ -1,14 +1,7 @@
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-} from '@mui/material';
+import {Accordion, AccordionSummary, AccordionDetails, Box,} from '@mui/material';
 import { Typography, List, ListItem, Link } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
-import { User } from '../../../../../utils/queries';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 import CartImgList from './CartImgList';
 import WishImglist from './WishlistImgList';
@@ -18,13 +11,12 @@ import ReviewsImgList from './ReviewsImgList';
 
 
 export default function ProfileAccordion( {refetchUserData, loadUser, userData} ) {
-  const { id, type } = useAuthContext()
+  const { type } = useAuthContext()
  
-  // Run loadUser 1x when component renders - re-run loadUser if it changes
+  // refetchUserData() when component renders - re-run loadUser if it changes
   useEffect(() => {
     refetchUserData();
   }, [loadUser]);
-
 
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>

@@ -1,45 +1,19 @@
 import { Stack, Box, Typography } from '@mui/material';
-import { useAuthContext } from '../../../hooks/useAuthContext';
-import { User } from '../../../utils/queries';
-import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import QuantityIncrementer from './QuantityIncrementer';
 
 
-
-export default function CheckoutOrder() {
-  const { id } = useAuthContext()
-  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
-
+export default function CheckoutOrder( { refetchUserData, userData, loadUser } ) {
 
 // Run loadUser 1x when component renders
-useEffect(() => {
-  loadUser();
-}, [loadUser]);
-
-if (error) {
-  console.error('GraphQL Error:', error);
-  return <p>Error fetching data</p>;
-}
-if (loading) {
-  return <p>Loading...</p>; 
-}
-if (!data || !data.user) {
-  return <p>No user data found</p>;
-}
-
-
-// Grab data
-const user = data.user;
-// console.log('User Cart: ', user.cart)
+// useEffect(() => {
+//   refetchUserData();
+// }, [loadUser]);
 
 
   return (
-
     <>
-    {user.cart.map((item, index) => (
+    {userData.cart.map((item, index) => (
     <Stack
       key={index}
       borderBottom='inset'
