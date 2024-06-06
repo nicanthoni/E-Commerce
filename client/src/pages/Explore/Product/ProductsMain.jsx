@@ -62,7 +62,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
           }, 2500);
         }
       } catch (e) {
-        console.log(' addWishlist() Error: ', e);
+        console.log('Error: ', e);
         setErrorAlertVisible(true);
         setTimeout(() => {
           setErrorAlertVisible(false);

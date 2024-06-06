@@ -5,7 +5,6 @@ import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { IndividualProduct, WishlistedItemCheck } from '../../../utils/queries';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
-import { User } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning'; 
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
@@ -22,11 +21,11 @@ export default function SingleProduct() {
   useLazyQuery(IndividualProduct, { variables: { id: productId } });
 
   // Query - Check (boolean) if item associated with productId is in the users wishlist
-  const [checkWishlistForItem, {loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch}] = 
+  const [checkWishlistForItem, {loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch: refetchWishlistCheck}] = 
   useLazyQuery(WishlistedItemCheck, {variables: {itemId: productId, userId: id} })
 
-  // Hook
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
+  // Hook - add/delete wishlist item 
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetchWishlistCheck);
 
   // Wishlist Alert States
   const [successMessage, setSuccessMessage] = useState(''); 
@@ -71,6 +70,7 @@ useEffect(() => {
     );
   }
 
+  
   // Product ratings
   const ratings = productData.item.ratings;
   // console.log('Product ratings: ', productData.item);
@@ -93,29 +93,38 @@ useEffect(() => {
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
-        await addWishlist(itemId, userId); // hook to add to wishlist
-        setInWishlist(true)
-        setSuccessMessage('Added')
-        setSuccessAlertVisible(true);
-        setTimeout(() => {
+        if (inWishlist){ // Item already wishlisted, so delete it
+        await deleteWishlist(itemId, userId) // delete item from wishlist
+        setSuccessMessage('Removed'); // set message
+        setSuccessAlertVisible(true); // set alert
+        setInWishlist(false) // update inWishlist value
+        setTimeout(() => { // remove alert
           setSuccessAlertVisible(false);
         }, 2500);
-      } catch (e) {
-        console.log(' addWishlist() Error: ', e);
+      } else {// Item not in wishlist, so add it
+        await addWishlist(itemId, userId); //  add item to wishlist
+          setSuccessMessage('Added'); // set message
+          setSuccessAlertVisible(true); // set alert
+          setInWishlist(false); // update inWishlist value
+          setTimeout(() => { // remove alert
+            setSuccessAlertVisible(false);
+          }, 2500);
+      }
+    } catch (e) {
+        console.log('Error: ', e);
         setErrorAlertVisible(true);
         setTimeout(() => {
           setErrorAlertVisible(false);
         }, 2500);
-      }
-    } else {
-      setWarningAlertVisible(true);
-      setTimeout(() => {
-        setWarningAlertVisible(false);
-      }, 2500);
-      return;
-    }
-  };
-
+    } 
+  } else {
+    setWarningAlertVisible(true);
+    setTimeout(() => {
+    setWarningAlertVisible(false);
+    }, 2500);
+  }
+  refetchWishlistCheck();
+}
 
   return (
     <Container maxWidth='md'>
@@ -131,6 +140,7 @@ useEffect(() => {
 
         {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
         <WishlistSuccess visible={successAlertVisible && successMessage === 'Added'} message="Added to wishlist." />
+        <WishlistSuccess visible={successAlertVisible && successMessage === 'Removed'} message="Removed." />
         <WishlistWarning visible={warningAlertVisible} /> 
         <WishlistError visible={errorAlertVisible}/>
 
