@@ -2,10 +2,10 @@ import { Alert, Box, Slide } from '@mui/material';
 
 
 //  'visible' prop - passed from parents to control alert visbility 
-const WishlistSuccess = ({ visible }) => {
+const WishlistSuccess = ({ visible, message }) => {
   const alert = (
     <Alert severity='success' sx={{ maxWidth: '100%', mb: 2 }}>
-        Added to wishlist.
+        {message}
     </Alert>
   );
 

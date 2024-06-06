@@ -75,6 +75,22 @@ const resolvers = {
         throw new Error('Error checking wishlisted items');
       }
     },
+    itemInWishlist: async (_, { userId, itemId }) => {
+      try {
+        console.log(`Checking if item ${itemId} exists in ${userId}'s wishlist`);
+        
+        // Find the user by userId and populate the wishlist field
+        const user = await User.findById(userId).populate('wishlist.item');
+        
+        // Check if the item with the given itemId exists in the user's wishlist
+        const itemInWishlist = user.wishlist.some(wishlistItem => wishlistItem.item._id.toString() === itemId);
+
+        return itemInWishlist;
+      } catch (error) {
+        console.error('Error checking wishlist:', error);
+        throw new Error('Error checking wishlist');
+      }
+    }
   },
   Mutation: {
     AddUser: async (parent, { firstName, lastName, email, password }) => {

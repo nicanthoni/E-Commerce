@@ -3,7 +3,7 @@ import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { IndividualProduct } from '../../../utils/queries';
+import { IndividualProduct, WishlistedItemCheck } from '../../../utils/queries';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { User } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
@@ -15,30 +15,37 @@ import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 export default function SingleProduct() {
   const { user, id } = useAuthContext();
   const { productId } = useParams();
+  const [inWishlist , setInWishlist] = useState(false); // set to true if item is in users wishlist
 
   // Query - Load Product
-  const [
-    loadProduct,
-    { loading: productLoading, data: productData, error: productError },
-  ] = useLazyQuery(IndividualProduct, { variables: { id: productId } });
+  const [loadProduct,{ loading: productLoading, data: productData, error: productError }] = 
+  useLazyQuery(IndividualProduct, { variables: { id: productId } });
 
-  // Query - Load Wishlist
-  const [loadWishlist, {loading: wishlistLoading, data: wishlistData,error: wishlistError, refetch,},] = useLazyQuery(User, 
-  { variables: { userId: id } });
+  // Query - Check (boolean) if item associated with productId is in the users wishlist
+  const [checkWishlistForItem, {loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch}] = 
+  useLazyQuery(WishlistedItemCheck, {variables: {itemId: productId, userId: id} })
 
   // Hook
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
 
   // Wishlist Alert States
+  const [successMessage, setSuccessMessage] = useState(''); 
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
 
+ // Load product data and check wishlist for item
+useEffect(() => {
+  loadProduct();
+  checkWishlistForItem();
+}, [loadProduct, checkWishlistForItem]);
 
-  // Load product data
-  useEffect(() => {
-    loadProduct();
-  }, [loadProduct]);
+// Update inWishlist state based on wishlistData
+useEffect(() => {
+  if (wishlistData && wishlistData.itemInWishlist !== undefined) {
+    setInWishlist(wishlistData.itemInWishlist);
+  }
+}, [wishlistData]);
 
 
   if (productError) {
@@ -64,12 +71,31 @@ export default function SingleProduct() {
     );
   }
 
+  // Product ratings
+  const ratings = productData.item.ratings;
+  // console.log('Product ratings: ', productData.item);
+  
+  // Calculate average rating of item
+  const calculateAvgRating = () => {
+    const ratingCount = ratings.length; // number of ratings
+    if (ratingCount === 0) {
+      return 0; // case with no ratings
+    }
+    // Sum of each rating's star value
+    const sumOfRatings = ratings.reduce((sum, rating) => sum + rating.stars, 0);
+    // Calculate average
+    const avgRating = sumOfRatings / ratingCount;
+    return avgRating;
+  };
+
 
   // OnChange handle wishlist
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
         await addWishlist(itemId, userId); // hook to add to wishlist
+        setInWishlist(true)
+        setSuccessMessage('Added')
         setSuccessAlertVisible(true);
         setTimeout(() => {
           setSuccessAlertVisible(false);
@@ -104,8 +130,8 @@ export default function SingleProduct() {
       >
 
         {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
+        <WishlistSuccess visible={successAlertVisible && successMessage === 'Added'} message="Added to wishlist." />
         <WishlistWarning visible={warningAlertVisible} /> 
-        <WishlistSuccess visible={successAlertVisible}/>
         <WishlistError visible={errorAlertVisible}/>
 
 
@@ -130,7 +156,7 @@ export default function SingleProduct() {
           </Box>
 
           <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
-            <Rating name='read-only' value={productData.item.rating} readOnly />
+            <Rating name='read-only' value={calculateAvgRating()} readOnly />
           </Box>
         </Stack>
 
@@ -169,6 +195,7 @@ export default function SingleProduct() {
             </Button>
             <Tooltip title='Add to wishlist' placement='right'>
               <Checkbox
+                checked={inWishlist}
                 onChange={() => handleWishlistChange(id, productId)}
                 color='error'
                 icon={<FavoriteBorder />}
