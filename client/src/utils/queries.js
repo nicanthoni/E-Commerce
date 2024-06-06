@@ -56,6 +56,14 @@ export const User = gql`
   }
 `;
 
+// Wishlist - returns array of product IDs in users wishlist
+export const Wishlist = gql`
+  query UserWishlist($id: ID!) {
+    usersWishlist(id: $id)
+  }
+`;
+
+
 ////////////////////////////////////////
 
 
@@ -124,9 +132,4 @@ query SingleProductQuery($id: ID!) {
   }
 }
 `
-// Wishlist - returns array of product IDs in users wishlist
-export const Wishlist = gql`
-  query UserWishlist($id: ID!) {
-    usersWishlist(id: $id)
-  }
-`;
+

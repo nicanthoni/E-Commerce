@@ -52,13 +52,13 @@ export default function MenuDrawer() {
         {user && type === 'vendor' ? (
           null
         ) : user && type === 'buyer' ? (
-          <ListItem key='Home' disablePadding>
+          <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <NavLink
                 to='/explore'
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <ListItemText primary='Home' />
+                <ListItemText primary='Shop' />
               </NavLink>
             </ListItemButton>
           </ListItem>

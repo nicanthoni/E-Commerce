@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { add_wishlist } from '../../utils/mutations';
-import { delete_wishlist } from '../../utils/mutations';
+import { add_wishlist, delete_wishlist } from '../../utils/mutations';
 
 
 export const useWishlist = (refetch) => {

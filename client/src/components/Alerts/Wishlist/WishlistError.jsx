@@ -4,17 +4,18 @@ import { Alert, Box, Slide } from '@mui/material';
 //  'visible' prop - passed from parents to control alert visbility 
 const WishlistError = ({ visible }) => {
   const alert = (
-    <Alert severity='error' sx={{ width: '100%', mb: 2 }}>
-        Error adding item to your wishlist.
+    <Alert severity='error' sx={{ maxWidth: '100%', mb: 2 }}>
+        Unable to add to wishlist.
     </Alert>
     );
 
   return (
     <Box
       sx={{
-        width: '100%',
         position: 'fixed',
-        bottom: 1,
+        bottom: 0,
+        left: '50%', //  Positions the left edge of the Box at the center of the viewport
+        transform: 'translateX(-50%)', // Shifts Box left by 50% of its own width, centering it horizontally
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

@@ -9,15 +9,15 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Explore() {
   const { user, id } = useAuthContext()
-  const [selectedCategory, setSelectedCategory] = useState(''); // Manage state of selected Category
+  const [selectedCategory, setSelectedCategory] = useState(''); // state of selected Category
 
-  // Load Products - pass refetch to child, so this query reruns when its added to wishlist/cart
-  const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError, refetch: refetchProducts}] = useLazyQuery(Products, {
+  // Load Products  - filter loaded products by selected category
+  const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError }] = useLazyQuery(Products, {
     variables: {category: selectedCategory}
   })
 
-  // Load array of productIds (all items in users' wishlist)
-  const [loadWishlist, {loading: loadingWishlist, data: wishlistData, error: wishlistError}] = useLazyQuery(Wishlist, {
+  // Load Wishlist - array of productIds (all items in users' wishlist). refetch whenever item is added/removed from wishlist
+  const [loadWishlist, {loading: loadingWishlist, data: wishlistData, error: wishlistError, refetch: refetchWishlist}] = useLazyQuery(Wishlist, {
     variables: {id: id}
   })
 
@@ -27,7 +27,7 @@ export default function Explore() {
   }, [loadProducts]); 
 
 
-    // Load Wishlist - Trigger when user changes
+  // Load Wishlist - Trigger when user changes
   useEffect(() => {
     if (user) {
       loadWishlist();
@@ -65,7 +65,7 @@ export default function Explore() {
 
    // Grab wishlistedItems data (boolean)
    const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
-   console.log('Wishlist Data:', wishlistedItems);
+  //  console.log('Wishlist Data:', wishlistedItems);
 
 
   return (
@@ -80,7 +80,7 @@ export default function Explore() {
        
         {/* Products */}
         <Grid item xs={12} marginTop={4}>
-          <ProductsMain products={products} wishlistedItems={wishlistedItems} refetchProducts={refetchProducts}/>
+          <ProductsMain products={products} wishlistedItems={wishlistedItems} refetchWishlist={refetchWishlist}/>
         </Grid>
 
 

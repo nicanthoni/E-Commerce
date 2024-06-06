@@ -10,10 +10,9 @@ import { useAuthContext } from '../../../../hooks/useAuthContext';
 
 export default function BuyerProfile() {
   const { user, id } = useAuthContext()
-  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
+  const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
     variables: { userId: id },});
 
-  // Auth check 
   useEffect(() => {
     // Call loadUser only if user is truthy
     if (user) {
@@ -30,6 +29,7 @@ export default function BuyerProfile() {
   if (!data || !data.user) {
     return <p>No user data found</p>;
   }
+
 
   // User data object
   const userData = data.user;
@@ -83,7 +83,7 @@ export default function BuyerProfile() {
 
           {/* ACCORDIONS - component  */}
           <Grid item>
-            <ProfileAccordions />
+            <ProfileAccordions refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
           </Grid>
 
         </Grid>

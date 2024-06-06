@@ -17,30 +17,14 @@ import ReviewsImgList from './ReviewsImgList';
 
 
 
-export default function ProfileAccordion() {
+export default function ProfileAccordion( {refetchUserData, loadUser, userData} ) {
   const { id, type } = useAuthContext()
-  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
-
+ 
   // Run loadUser 1x when component renders - re-run loadUser if it changes
   useEffect(() => {
-    loadUser();
+    refetchUserData();
   }, [loadUser]);
 
-  if (error) {
-    console.error('GraphQL Error:', error);
-    return <p>Error fetching data</p>;
-  }
-  if (loading) {
-    return <p>Loading...</p>; // Replace with loading spinner
-  }
-  if (!data || !data.user) {
-    return <p>No user data found</p>;
-  }
-
-  // Grab data
-  const user = data.user;
 
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
@@ -55,9 +39,11 @@ export default function ProfileAccordion() {
           <Typography>Wishlist</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {user.wishlist.length > 0 ? (
+          {userData.wishlist.length > 0 ? (
             <Typography variant='caption'>
-              <WishImglist />
+
+              <WishImglist refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -80,9 +66,11 @@ export default function ProfileAccordion() {
           <Typography>Cart</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {user.cart.length > 0 ? (
+          {userData.cart.length > 0 ? (
             <Typography variant='caption'>
-              <CartImgList />
+
+              <CartImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -105,9 +93,11 @@ export default function ProfileAccordion() {
           <Typography>Order History</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {user.buyHistory.length > 0 ? (
+          {userData.buyHistory.length > 0 ? (
             <Typography variant='caption'>
-              <OrdersImgList />
+
+              <OrdersImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -130,9 +120,11 @@ export default function ProfileAccordion() {
           <Typography>Reviews</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {user.ratings.length > 0 ? (
+          {userData.ratings.length > 0 ? (
             <Typography variant='caption'>
-              <ReviewsImgList />
+
+              <ReviewsImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -156,9 +148,9 @@ export default function ProfileAccordion() {
             <List>
               <ListItem>Account Type: {type}</ListItem>
               <ListItem>
-                Name: {user.firstName} {user.lastName}
+                Name: {userData.firstName} {userData.lastName}
               </ListItem>
-              <ListItem>Email Address: {user.email}</ListItem>
+              <ListItem>Email Address: {userData.email}</ListItem>
               {/* <ListItem>Created on: TBD </ListItem> */}
             </List>
           </Typography>

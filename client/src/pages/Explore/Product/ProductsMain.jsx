@@ -8,36 +8,25 @@ import { useState, useEffect } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
-import { useLazyQuery } from '@apollo/client';
-import { User } from '../../../utils/queries';
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 
 
-export default function ProductsMain({ products, wishlistedItems, refetchProducts }) {
+export default function ProductsMain({ products, wishlistedItems, refetchWishlist }) {
   const { user, id } = useAuthContext();
   const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
 
-  // loadWishlist - query the user by id
-  const [loadWishlist, { loading, data, error, refetch }] = useLazyQuery(User, {
-    variables: { userId: id },});
-
-  // Hook - add/remove wishlisted item
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetch);
+  // Hook - add/remove wishlist item
+  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist();
 
   // Wishlist Alerts
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
 
-  // TODO: check users wishlist for items w iDs matching items iDs from product db
-  // => set the wishlist icon as active
-  useEffect(() => {
-    loadWishlist();
-  }, [loadWishlist, user]);
-
-
+  // if wishlistedItems is an array of Ids, for each Id, create an object that is truthy
+  // Run on initial render, and if wishlistedItems changes
   useEffect(() => {
     if (Array.isArray(wishlistedItems)) {
       const wishlistMap = {};
@@ -49,14 +38,13 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
   }, [wishlistedItems]);
   
 
-  // OnChange - handle wishlist
+  // OnChange - Refetch (loadWishlist()) from parent updating items wishlist state
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
         await addWishlist(itemId, userId); // custom hook to add to wishlist
         setSuccessAlertVisible(true);
         setInWishlist((prev) => ({ ...prev, [itemId]: true }));
-        // refetchProducts(); // Refetch products after adding to wishlist
         setTimeout(() => {
           setSuccessAlertVisible(false);
         }, 2500);
@@ -67,19 +55,17 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
         setTimeout(() => {
           setErrorAlertVisible(false);
         }, 2500);
-        // refetchProducts(); // Refetch products after error
       }
     } else {
       setWarningAlertVisible(true);
       setTimeout(() => {
         setWarningAlertVisible(false);
       }, 2500);
-      // refetchProducts(); // Refetch products after adding to wishlist
       return;
     }
-    // Refetch products after adding to wishlist & updating states
-  refetchProducts();
+    refetchWishlist();  
   };
+
 
   return (
     <Grid container spacing={3} marginBottom={6}>
@@ -88,7 +74,6 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
     <WishlistWarning visible={warningAlertVisible} /> 
     <WishlistSuccess visible={successAlertVisible}/>
     <WishlistError visible={errorAlertVisible}/>
-
 
       {/* If no products in selected categor, render message, else map */}
       {!products || products.length === 0 ? (
@@ -110,7 +95,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
         </Grid>
       ) : (
         <>
-          {/* Product Filters */}
+          {/* Product Filters - Price and Date */}
           <Grid item xs={12} marginY={1}>
             <ProductFilters />
           </Grid>
@@ -186,7 +171,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
                           <Tooltip title='Add to wishlist' placement='right'>
                             <Checkbox
                               color='error'
-                              checked={inWishlist[result._id] || false} // Check if result._id exists in inWishlist array
+                              checked={inWishlist[result._id] || false} // Check if id exists in inWishlist array
                               onChange={() =>
                                 handleWishlistChange(id, result._id)}
                               icon={<FavoriteBorder />}

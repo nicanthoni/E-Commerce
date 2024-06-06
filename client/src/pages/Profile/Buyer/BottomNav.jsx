@@ -6,6 +6,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
+import StoreIcon from '@mui/icons-material/Store';
 import { NavLink } from 'react-router-dom';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import InsightsIcon from '@mui/icons-material/Insights';
@@ -42,8 +43,8 @@ export default function BottomNav() {
           <BottomNavigationAction
             component={NavLink}
             to='/explore'
-            label='Home'
-            icon={<HomeIcon />}
+            label='Shop'
+            icon={<StoreIcon />}
             showLabel
           />
           )}
