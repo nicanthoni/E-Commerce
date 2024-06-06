@@ -13,6 +13,7 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react/prop-types': 'off', // Disable prop-types rule
+    'no-unused-vars' : 'off', // Disable no-unused-vars rule
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [
       'warn',

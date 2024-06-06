@@ -8,8 +8,6 @@ import { useState, useEffect } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
-import { useLazyQuery } from '@apollo/client';
-import { User } from '../../../utils/queries';
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
