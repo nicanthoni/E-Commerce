@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 // Layout of items within the Shopping Cart Drawer
 export default function CheckoutMain() {
   const { id } = useAuthContext()
-  const [loadUser, { loading, data, error }] = useLazyQuery(User, {
+  const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
     variables: { userId: id },
   });
 
@@ -22,20 +22,19 @@ useEffect(() => {
 
 if (error) {
   console.error('GraphQL Error:', error);
-  return <p>Error fetching data</p>;
+  return <Typography>Error fetching data</Typography>;
 }
 if (loading) {
-  return <p>Loading...</p>; 
+  return <Typography>Loading...</Typography>; 
 }
 if (!data || !data.user) {
-  return <p>No user data found</p>;
+  return <Typography>No user data found</Typography>;
 }
 
 // Grab data
 const user = data.user;
 
 // Calculate cart subtotal 
-// - could this be done in CheckoutOrder child and passed here as prop?
 const subtotal = user.cart.reduce((total, item) => {
   return total + item.item.price;
 }, 0);
@@ -83,7 +82,7 @@ const subtotal = user.cart.reduce((total, item) => {
           bgcolor: 'background.paper', // Adjust as needed
         }}
       >
-        <CheckoutOrder />
+        <CheckoutOrder refetchUserData={refetchUserData} userData={user} loadUser={loadUser}/>
       </Grid>
 
       {/* Checkout & Subtotal */}

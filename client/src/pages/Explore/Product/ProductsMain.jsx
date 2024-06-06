@@ -17,10 +17,12 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
   const { user, id } = useAuthContext();
   const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
 
+
   // Hook - add/remove wishlist item
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist();
 
   // Wishlist Alerts
+  const [successMessage, setSuccessMessage] = useState(''); 
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
@@ -42,37 +44,47 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
-        await addWishlist(itemId, userId); // custom hook to add to wishlist
-        setSuccessAlertVisible(true);
-        setInWishlist((prev) => ({ ...prev, [itemId]: true }));
-        setTimeout(() => {
-          setSuccessAlertVisible(false);
-        }, 2500);
-        
+        if (inWishlist[itemId]) { // Item already wishlisted, so delete it
+          await deleteWishlist(itemId, userId) // delete item from wishlist
+          setSuccessMessage('Removed'); // set message
+          setSuccessAlertVisible(true); // set alert
+          setInWishlist((prev) => ({ ...prev, [itemId]: false })); // update inWishlist value
+          setTimeout(() => { // remove alert
+            setSuccessAlertVisible(false);
+          }, 2500);
+        } else { // Item not in wishlist, so add it
+          await addWishlist(itemId, userId); //  add item to wishlist
+          setSuccessMessage('Added'); // set message
+          setSuccessAlertVisible(true); // set alert
+          setInWishlist((prev) => ({ ...prev, [itemId]: true })); // update inWishlist value
+          setTimeout(() => { // remove alert
+            setSuccessAlertVisible(false);
+          }, 2500);
+        }
       } catch (e) {
-        console.log(' addWishlist() Error: ', e);
+        console.log('Error: ', e);
         setErrorAlertVisible(true);
         setTimeout(() => {
           setErrorAlertVisible(false);
         }, 2500);
       }
-    } else {
-      setWarningAlertVisible(true);
-      setTimeout(() => {
+      } else {
+        setWarningAlertVisible(true);
+        setTimeout(() => {
         setWarningAlertVisible(false);
-      }, 2500);
-      return;
+        }, 2500);
+      }
+      refetchWishlist();
     }
-    refetchWishlist();  
-  };
 
 
   return (
     <Grid container spacing={3} marginBottom={6}>
 
     {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
+    <WishlistSuccess visible={successAlertVisible && successMessage === 'Added'} message="Added to wishlist." />
+    <WishlistSuccess visible={successAlertVisible && successMessage === 'Removed'} message="Removed." />
     <WishlistWarning visible={warningAlertVisible} /> 
-    <WishlistSuccess visible={successAlertVisible}/>
     <WishlistError visible={errorAlertVisible}/>
 
       {/* If no products in selected categor, render message, else map */}

@@ -19,28 +19,22 @@ const categories = [
   { id: 9, name: 'Office' },
 ];
 
-function CategorySelection({ onCategoryChange }) {
+function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onStepChange }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
-  const [activeStep, setActiveStep] = useState(0);
 
   // Carousel settings
   const categoriesPerView = isMobile ? 1 : 3; // # of categories shown per view
   const maxSteps = Math.ceil(categories.length / categoriesPerView);
 
-  // Next button
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+   // Next button
+   const handleNext = () => {
+    onStepChange(activeStep + 1);
   };
 
   // Back button
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  // Set active step (the circle indicating current category section)
-  const handleStepChange = (step) => {
-    setActiveStep(step);
+    onStepChange(activeStep - 1);
   };
 
   
@@ -61,7 +55,7 @@ function CategorySelection({ onCategoryChange }) {
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
-        onChangeIndex={handleStepChange}
+        onChangeIndex={onStepChange}
         enableMouseEvents
         style={{ height: '300px' }} 
         containerStyle={{ height: '300px' }} 
@@ -70,14 +64,14 @@ function CategorySelection({ onCategoryChange }) {
           <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
               <Button
-                color='primary'
+                color={selectedCategory === category.name ? 'secondary' : 'primary'}
                 variant='contained'
                 key={category.id}
                 sx={{
                   height: 255,
                   width: '90%',
                   mx: 1,
-                  bgcolor: 'primary.main',
+                  bgcolor: selectedCategory === category.name ? 'secondary.main' : 'primary.main',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   color: '#fffff',

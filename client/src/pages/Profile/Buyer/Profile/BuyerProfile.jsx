@@ -7,7 +7,6 @@ import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
 
 
-
 export default function BuyerProfile() {
   const { user, id } = useAuthContext()
   const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
@@ -24,16 +23,14 @@ export default function BuyerProfile() {
     console.error('GraphQL Error:', error);
   }
   if (loading) {
-    return <p>Loading...</p>; 
+    return <Typography>Loading...</Typography>; 
   }
   if (!data || !data.user) {
-    return <p>No user data found</p>;
+    return <Typography>No user data found</Typography>;
   }
-
 
   // User data object
   const userData = data.user;
-  // console.log('Buyer data: ', user);
 
   return (
     <>

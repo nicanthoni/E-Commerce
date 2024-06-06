@@ -24,10 +24,10 @@ if (error) {
   console.error('GraphQL Error:', error);
 }
 if (loading) {
-  return <p>Loading...</p>; 
+  return <Typography>Loading...</Typography>; 
 }
 if (!data || !data.vendor) {
-  return <p>No vendor data found</p>;
+  return <Typography>No vendor data found</Typography>;
 }
 
   // Vendor data 

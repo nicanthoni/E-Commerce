@@ -64,6 +64,13 @@ export const Wishlist = gql`
 `;
 
 
+export const WishlistedItemCheck = gql`
+  query ItemInWishlist($userId: ID!, $itemId: ID!) {
+    itemInWishlist(userId: $userId, itemId: $itemId)
+  }
+`;
+
+
 ////////////////////////////////////////
 
 
@@ -127,7 +134,9 @@ query SingleProductQuery($id: ID!) {
     }
     img
     ratings {
+      _id
       stars
+      review
     }
   }
 }

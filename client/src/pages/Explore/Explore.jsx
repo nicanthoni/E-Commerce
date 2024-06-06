@@ -10,6 +10,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 export default function Explore() {
   const { user, id } = useAuthContext()
   const [selectedCategory, setSelectedCategory] = useState(''); // state of selected Category
+  const [activeStep, setActiveStep] = useState(0); // state of active step in CategorySelection's carousel
 
   // Load Products  - filter loaded products by selected category
   const [loadProducts, {loading: loadingProducts, data: productsData, error: productsError }] = useLazyQuery(Products, {
@@ -24,7 +25,7 @@ export default function Explore() {
    // Load Products - trigger when selectedCategory changes
    useEffect(() => {
     loadProducts();
-  }, [loadProducts]); 
+  }, [loadProducts, selectedCategory]); 
 
 
   // Load Wishlist - Trigger when user changes
@@ -34,7 +35,6 @@ export default function Explore() {
     }
   }, [user, loadWishlist]); 
   
-
 
   if (productsError) {
     console.error('GraphQL Products Error:', productsError);
@@ -59,6 +59,11 @@ export default function Explore() {
     setSelectedCategory(category);
   };
 
+  // Callback to update the active step in the carousel
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+
   // Grab Product data
   const products = productsData ? productsData.filterItems : []; 
   // console.log(`${selectedCategory} items: `, productData);
@@ -75,7 +80,12 @@ export default function Explore() {
 
         {/* Categories */}
         <Grid item xs={12}>
-          <CategorySelection onCategoryChange={handleCategoryChange}/>
+          <CategorySelection 
+          onCategoryChange={handleCategoryChange} 
+          activeStep={activeStep} 
+          onStepChange={handleStepChange}
+          selectedCategory={selectedCategory}
+          />
         </Grid>
        
         {/* Products */}
