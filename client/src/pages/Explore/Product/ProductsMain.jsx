@@ -67,19 +67,19 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
         setTimeout(() => {
           setErrorAlertVisible(false);
         }, 2500);
-        // refetchProducts(); // Refetch products after error
+        // refetchProducts(); 
       }
     } else {
       setWarningAlertVisible(true);
       setTimeout(() => {
         setWarningAlertVisible(false);
       }, 2500);
-      // refetchProducts(); // Refetch products after adding to wishlist
+      // refetchProducts(); 
       return;
     }
-    // Refetch products after adding to wishlist & updating states
-  refetchProducts();
+  refetchProducts();  // Refetch products after adding to wishlist & updating states
   };
+
 
   return (
     <Grid container spacing={3} marginBottom={6}>
@@ -88,7 +88,6 @@ export default function ProductsMain({ products, wishlistedItems, refetchProduct
     <WishlistWarning visible={warningAlertVisible} /> 
     <WishlistSuccess visible={successAlertVisible}/>
     <WishlistError visible={errorAlertVisible}/>
-
 
       {/* If no products in selected categor, render message, else map */}
       {!products || products.length === 0 ? (
