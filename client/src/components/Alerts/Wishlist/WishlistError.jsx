@@ -5,7 +5,7 @@ import { Alert, Box, Slide } from '@mui/material';
 const WishlistError = ({ visible }) => {
   const alert = (
     <Alert severity='error' sx={{ maxWidth: '100%', mb: 2 }}>
-        Error adding item to your wishlist.
+        Unable to add to wishlist.
     </Alert>
     );
 

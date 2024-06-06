@@ -21,6 +21,7 @@ export default function WishImglist() {
   const [loadUser, { loading, data, error, refetch }] = useLazyQuery(User, {
     variables: { userId: id },
   });
+  
   const { deleteWishlist, isLoading, stateError } = useWishlist(refetch);
 
   // Run loadUser when component renders - re-run if loadUser changes

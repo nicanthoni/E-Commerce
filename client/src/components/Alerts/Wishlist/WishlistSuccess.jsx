@@ -5,7 +5,7 @@ import { Alert, Box, Slide } from '@mui/material';
 const WishlistSuccess = ({ visible }) => {
   const alert = (
     <Alert severity='success' sx={{ maxWidth: '100%', mb: 2 }}>
-        Item added to wishlist.
+        Added to wishlist.
     </Alert>
   );
 
