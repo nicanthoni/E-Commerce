@@ -56,6 +56,8 @@ export const User = gql`
   }
 `;
 
+
+
 // Wishlist - returns array of product IDs in users wishlist
 export const Wishlist = gql`
   query UserWishlist($id: ID!) {
@@ -63,15 +65,13 @@ export const Wishlist = gql`
   }
 `;
 
-
+// Wishlist check - returns boolean for if an item is in a users wishlist or not
 export const WishlistedItemCheck = gql`
   query ItemInWishlist($userId: ID!, $itemId: ID!) {
     itemInWishlist(userId: $userId, itemId: $itemId)
   }
 `;
 
-
-////////////////////////////////////////
 
 
 // Vendor
@@ -94,8 +94,6 @@ export const Vendor = gql`
   }
 `;
 
-
-////////////////////////////////////////
 
 
 // Products 

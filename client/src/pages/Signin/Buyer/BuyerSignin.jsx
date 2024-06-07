@@ -1,48 +1,34 @@
 import Copyright from '../../../components/Footer/Copyright';
-import {
-  Avatar,
-  Button,
-  Alert,
-  TextField,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container,
-} from '@mui/material';
+import { Avatar, Button, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useBuyerSignin } from '../../../hooks/Signin/useBuyerSignin';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-
+import LoginAlert from '../../../components/Alerts/Auth/Login';
 
 
 export default function Signin() {
-  const { user }  = useAuthContext() //auth context
-  const { signin, stateError, isLoading } = useBuyerSignin() // custom signin hook
+  const { user } = useAuthContext(); // auth context
+  const { signin } = useBuyerSignin(); // custom signin hook
   const navigate = useNavigate();
 
-  // Error & Alert States
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
+  // Alert States
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   // On render, check if logged in => Send to profile page
   useEffect(() => {
     if (user) {
       navigate('/profile');
     }
-  }, []);
-
+  }, [user, navigate]);
 
   // Form state
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
-
 
   // OnChange - update form state
   const handleChange = (event) => {
@@ -53,31 +39,36 @@ export default function Signin() {
     });
   };
 
-
-  // onClose - clear error message 
-  const handleClearError = () => {
-    setErrorMessage('');
-    setShowErrorAlert(false);
-  };
-
-
   // OnSubmit - validation check + run signin() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear prev error message
+    setAlertMessage(''); // Clear previous alert message
 
     try {
-      // console.log('Signin Form state:', formState);
-      await signin(formState)
-      setShowSuccessAlert(true);
-    } 
-    catch (e) {
-      setShowErrorAlert(true);
+      const success = await signin(formState);
+      if (success) {
+        setAlertMessage('Login Successful.'); // Set success message
+        setShowLoginAlert(true);
+        setTimeout(() => {
+          setShowLoginAlert(false); // Hide alert after delay
+          navigate('/profile');
+        }, 1500); // Delay to allow user to see the success alert
+      } else {
+        setAlertMessage('Login Failed.'); // Set failure message
+        setShowLoginAlert(true);
+        setTimeout(() => { // Remove alert after delay
+          setShowLoginAlert(false);
+        }, 2000);
+      }
+    } catch (e) {
+      setAlertMessage('Login Failed.');
+      setShowLoginAlert(true);
+      setTimeout(() => { // Remove alert after delay
+        setShowLoginAlert(false);
+      }, 2000);
       console.error('signin() error in BuyerSignin:', e);
     }
   };
-
-
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -89,21 +80,6 @@ export default function Signin() {
           alignItems: 'center',
         }}
       >
-        {showSuccessAlert && (
-          <Alert severity='success' sx={{ width: '100%', mb: 2 }}>
-            Sign in successful! Redirecting to profile...
-          </Alert>
-        )}
-        {showErrorAlert && (
-          <Alert
-            severity='error'
-            sx={{ width: '100%', mb: 2 }}
-            onClose={handleClearError}
-          >
-            {errorMessage ||
-              'Sign in failed! Double check your credentials and account type are accurate, or create an account if you havent'}
-          </Alert>
-        )}
         <Avatar sx={{ marginBottom: 3, bgcolor: 'primary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
@@ -162,6 +138,10 @@ export default function Signin() {
           </Grid>
         </Box>
       </Box>
+
+      {/* Alert */}
+      <LoginAlert visible={showLoginAlert} message={alertMessage} />
+
       <Copyright sx={{ mt: 3 }} />
     </Container>
   );

@@ -1,9 +1,4 @@
-import {
-  createBrowserRouter,
-  Route,
-  createRoutesFromElements,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import '../src/assets/global.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
