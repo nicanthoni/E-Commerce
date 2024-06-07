@@ -14,8 +14,10 @@ import LogoDevIcon from '@mui/icons-material/LogoDev';
 import LogoutButton from '../../../components/Buttons/Logout';
 import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import LogoutSuccess from '../../../components/Alerts/Auth/LogoutSuccess';
 
 export default function MenuDrawer() {
+  const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, type} = useAuthContext();
 
@@ -155,9 +157,8 @@ export default function MenuDrawer() {
         {user ? (
           <>
             <Divider sx={{ marginBottom: 2}}/>
-
             <Box onClick={closeDrawer}>
-              <LogoutButton />
+              <LogoutButton onLogoutSuccess={setShowLogoutAlert}/>
             </Box>
           </>
         ) : (
@@ -211,6 +212,10 @@ export default function MenuDrawer() {
       >
         {menuDrawer}
       </Drawer>
+
+      {/* Alerts */}
+      <LogoutSuccess visible={showLogoutAlert} />
+
     </>
   );
 }

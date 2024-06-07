@@ -4,9 +4,12 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../../../components/Buttons/Logout';
 import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import LogoutSuccess from '../../../components/Alerts/Auth/LogoutSuccess';
+import { useState } from 'react';
 
 export default function MainNav() {
   const { user, type } = useAuthContext();
+  const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
 
   return (
     <>
@@ -78,7 +81,6 @@ export default function MainNav() {
                 Profile
               </NavLink>
             </Button>
-            {/* <LogoutButton /> */}
           </>
         ) : (
           <>
@@ -122,10 +124,12 @@ export default function MainNav() {
 
 
       {/* LOGOUT */}
-      {user ? <LogoutButton /> : null}
-
+      {user ? <LogoutButton onLogoutSuccess={setShowLogoutAlert} /> : null}
 
       </Box>
+
+      {/* Alerts */}
+      <LogoutSuccess visible={showLogoutAlert} />
     </>
   );
 }
