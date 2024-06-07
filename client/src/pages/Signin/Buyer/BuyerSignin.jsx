@@ -43,7 +43,6 @@ export default function Signin() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setAlertMessage(''); // Clear previous alert message
-
     try {
       const success = await signin(formState);
       if (success) {
