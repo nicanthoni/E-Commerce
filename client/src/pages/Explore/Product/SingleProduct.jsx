@@ -9,6 +9,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning'; 
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
+import CartSuccess from '../../../components/Alerts/Cart/CartSuccess';
 
 
 export default function SingleProduct() {
@@ -70,7 +71,7 @@ useEffect(() => {
     );
   }
 
-  
+
   // Product ratings
   const ratings = productData.item.ratings;
   // console.log('Product ratings: ', productData.item);
