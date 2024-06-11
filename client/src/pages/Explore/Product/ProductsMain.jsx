@@ -11,6 +11,7 @@ import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
+import CartSuccess from '../../../components/Alerts/Cart/CartSuccess';
 
 
 export default function ProductsMain({ products, wishlistedItems, refetchWishlist }) {
@@ -21,11 +22,14 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
   // Hook - add/remove wishlist item
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist();
 
-  // Wishlist Alerts
+
+  // Wishlist & Cart Alerts
   const [successMessage, setSuccessMessage] = useState(''); 
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
+  const [showCartAlert, setShowCartAlert] = useState(false); 
+
 
   // if wishlistedItems is an array of Ids, for each Id, create an object that is truthy
   // Run on initial render, and if wishlistedItems changes
@@ -77,7 +81,6 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
       refetchWishlist();
     }
 
-
   return (
     <Grid container spacing={3} marginBottom={6}>
 
@@ -86,6 +89,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
     <WishlistSuccess visible={successAlertVisible && successMessage === 'Removed'} message="Removed." />
     <WishlistWarning visible={warningAlertVisible} /> 
     <WishlistError visible={errorAlertVisible}/>
+    <CartSuccess visible={successAlertVisible} />
 
       {/* If no products in selected categor, render message, else map */}
       {!products || products.length === 0 ? (
@@ -177,7 +181,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
 
                       {/* Button &  Icon */}
                       <Stack direction='row' flexWrap='wrap'>
-                        <AddToCart />
+                        <AddToCart user={user} onCartUpdate={setShowCartAlert} userId={id} itemId={result._id} />
 
                         <Box>
                           <Tooltip title='Add to wishlist' placement='right'>
