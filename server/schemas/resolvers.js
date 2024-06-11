@@ -126,9 +126,6 @@ const resolvers = {
         if (!checkPassword) {
           throw AuthenticationError
         }
-        // if (user.isOnline = true) {
-        //   throw LoginInError
-        // }
         const token = signToken({ email: user.email, _id: user._id, userType: 'buyer' })
         user.isOnline = true
         await user.save()
@@ -175,9 +172,6 @@ const resolvers = {
         if (!checkPassword) {
           throw AuthenticationError
         }
-        // if (vendor.isOnline = true) {
-        //   throw LoginInError
-        // }
         const token = signToken({ email: vendor.email, _id: vendor._id, userType: 'vendor' })
         vendor.isOnline = true
         await vendor.save()

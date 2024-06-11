@@ -31,6 +31,11 @@ export const useBuyerSignin = () => {
 
             setIsLoading(false)
 
+            // send to users profile
+            setTimeout(() => {
+                navigate('/profile');
+            }, 1500);
+
       } catch (e) {
             setStateError(true)
             setIsLoading(false)
