@@ -72,7 +72,12 @@ export const WishlistedItemCheck = gql`
   }
 `;
 
-
+// Wishlist - returns array of product IDs in users cart
+export const Cart = gql`
+  query UserCart($id: ID!) {
+    usersCart(id: $id)
+  }
+`;
 
 // Vendor
 export const Vendor = gql`

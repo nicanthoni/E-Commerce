@@ -8,14 +8,16 @@ import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 
 
-// Layout of items within the Shopping Cart Drawer
+// Layout of components within the cart drawer
 export default function CheckoutMain() {
   const { id } = useAuthContext()
+
+  // Load User
   const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
     variables: { userId: id },
   });
 
-// Run loadUser 1x when component renders - re-run loadUser if it changes
+// Run loadUser when component mounts
 useEffect(() => {
   loadUser();
 }, [loadUser]);

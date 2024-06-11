@@ -1,16 +1,9 @@
 import { Stack, Box, Typography } from '@mui/material';
-import { useEffect } from 'react';
 import QuantityIncrementer from './QuantityIncrementer';
 
 
-export default function CheckoutOrder( { refetchUserData, userData, loadUser } ) {
-
-// Run loadUser 1x when component renders
-// useEffect(() => {
-//   refetchUserData();
-// }, [loadUser]);
-
-
+// Display for each cart item
+export default function CheckoutOrder({ userData }) {
   return (
     <>
     {userData.cart.map((item, index) => (

@@ -90,7 +90,20 @@ const resolvers = {
         console.error('Error checking wishlist:', error);
         throw new Error('Error checking wishlist');
       }
-    }
+    },
+    usersCart: async (parent, { id }) => {
+      try {
+        console.log(`Checking for products in ${id}'s cart`);
+        // Find the user and populate the wishlist items
+        const user = await User.findById(id).populate('cart.item');
+        // Extract the wishlisted item IDs
+        const cartItemIds = user.cart.map(cartitem => cartitem.item._id.toString());
+        return cartItemIds;
+      } catch (error) {
+        console.error('Error checking users cart:', error);
+        throw new Error('Error checking cart items');
+      }
+    },
   },
   Mutation: {
     AddUser: async (parent, { firstName, lastName, email, password }) => {

@@ -13,7 +13,7 @@ import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 
 
-export default function ProductsMain({ products, wishlistedItems, refetchWishlist }) {
+export default function ProductsMain({ products, wishlistedItems, refetchWishlist, cartedItems, refetchCart }) {
   const { user, id } = useAuthContext();
   const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
 
@@ -176,9 +176,12 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
                         ${result.price}
                       </Typography>
 
-                      {/* Button &  Icon */}
+                      {/* Cart Button &  Wishlist Icon */}
                       <Stack direction='row' flexWrap='wrap'>
-                        <AddToCart user={user} userId={id} itemId={result._id} />
+                        <AddToCart 
+                        user={user} userId={id} itemId={result._id} 
+                        cartedItems={cartedItems} refetchCart={refetchCart}
+                        />
 
                         <Box>
                           <Tooltip title='Add to wishlist' placement='right'>

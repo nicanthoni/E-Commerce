@@ -4,33 +4,45 @@ import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CheckoutMain from '../../Checkout/CheckoutDrawer/CheckoutMain'
 import { useLazyQuery } from '@apollo/client';
-import { User } from '../../../utils/queries';
+import { User, Cart } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-
 
 
 export default function CartDrawer() {
   let itemsInCart = 0;
   const { user, id } = useAuthContext();
   const [showCart, setShowCart] = useState(false);
-  const [loadCart, { loading, data, error, refetch }] = useLazyQuery(User, {
-      variables: { userId: id}
-  });
 
-  // Toggle drawer
+   // Load Cart - array of prodcutIds (items in users' cart). Refetch whenever item is added/removed 
+   const [loadCart, {loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart}] = useLazyQuery(Cart, {
+    variables: {id: id}
+  })
+
+    // Load User
+    const [loadUser, { loading: loadingUser, data: userData, error: userError, refetch: refetchUserData }] = useLazyQuery(User, {
+      variables: { userId: id },
+    });
+
+  // Toggle drawer - refetch cart data each time the cart is toggled
   const handleDrawerToggle = () => {
     setShowCart((prevShowCart) => !prevShowCart);
+    if (!showCart) {
+      refetchUserData()
+    }
   };
 
-  // Load users data
+  // Load users cart data
   useEffect(() => {
+    if (user) {
+    loadUser();
     loadCart();
-  }, [loadCart])
+  }
+  }, [ loadCart, loadUser, user])
 
 
-// Set 'count' for number of items in cart
-if (data && data.user && data.user.cart) {
-  itemsInCart = data.user.cart.length
+// Set cart badge = number of items in users cart
+if (user && cartData) {
+  itemsInCart = cartData.usersCart.length
 } 
 
   return (
@@ -69,7 +81,7 @@ if (data && data.user && data.user.cart) {
       >
         {user ? (
           <>
-            <CheckoutMain />
+            <CheckoutMain refetchUserData={refetchUserData} loadUser={loadUser} />
           </>
         ) : (
           <>
