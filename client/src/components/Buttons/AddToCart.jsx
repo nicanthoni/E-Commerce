@@ -6,7 +6,7 @@ import CartWarning from '../Alerts/Cart/CartWarning';
 import CartError from '../Alerts/Cart/CartError';
 
 
-export default function AddToCart ({ onCartUpdate, user, userId, itemId, cartedItems, refetchCart }) {
+export default function AddToCart ({  user, userId, itemId, cartedItems, refetchCart }) {
   
   // Hooks
   const { addCart, deleteCart } = useCart()
