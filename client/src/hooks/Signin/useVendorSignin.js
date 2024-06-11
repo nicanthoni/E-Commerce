@@ -6,41 +6,41 @@ import { vendor_Login } from '../../utils/mutations';
 import { useAuthContext } from '../useAuthContext';
 
 export const useVendorSignin = () => {
-  const [stateError, setStateError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
-  const { dispatch } = useAuthContext();
-  const navigate = useNavigate();
+const [stateError, setStateError] = useState(null);
+const [isLoading, setIsLoading] = useState(null);
+const { dispatch } = useAuthContext();
+const navigate = useNavigate();
 
-  //  Mutation
-  const [VendorLogin, { error, loading, data }] = useMutation(vendor_Login);
+//  Mutation
+const [VendorLogin, { error, loading, data }] = useMutation(vendor_Login);
 
-  const signin = async (formState) => {
-    setIsLoading(true);
-    setStateError(null);
+const signin = async (formState) => {
+  setIsLoading(true);
+  setStateError(null);
 
-    try {
-      const { data } = await VendorLogin({
-        variables: formState,
-      });
+  try {
+    const { data } = await VendorLogin({
+      variables: formState,
+    });
 
-      // console.log('VendorLogin response data:', data);
-      // login with users token
-      Auth.login(data.Vendorlogin.token);
+    // console.log('VendorLogin response data:', data);
+    // login with users token
+    Auth.login(data.Vendorlogin.token);
 
-      // update the auth context
-      dispatch({ type: 'LOGIN', payload: data });
+    // update the auth context
+    dispatch({ type: 'LOGIN', payload: data });
 
-      setIsLoading(false);
+    setIsLoading(false); 
+    
+    return true; // Indicate a successful login
 
-      // send to users profile
-      setTimeout(() => {
-        navigate('/profile');
-      }, 1500);
-    } catch (e) {
-      setStateError(true);
-      setIsLoading(false);
-      console.error('VendorLogin error in useVendorSignin() hook: ', e);
-    }
-  };
-  return { signin, isLoading, stateError };
+  } catch (e) {
+    setStateError(true);
+    setIsLoading(false);
+    console.error('VendorLogin error in useVendorSignin() hook: ', e);
+    return false; // Indicate a failed login
+  }
+  
+};
+return { signin, isLoading, stateError };
 };

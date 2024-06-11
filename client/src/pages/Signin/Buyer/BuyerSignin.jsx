@@ -17,13 +17,6 @@ export default function Signin() {
   const [alertMessage, setAlertMessage] = useState('');
   const [showLoginAlert, setShowLoginAlert] = useState(false);
 
-  // On render, check if logged in => Send to profile page
-  useEffect(() => {
-    if (user) {
-      navigate('/profile');
-    }
-  }, [user, navigate]);
-
   // Form state
   const [formState, setFormState] = useState({
     email: '',
@@ -42,32 +35,30 @@ export default function Signin() {
   // OnSubmit - validation check + run signin() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setAlertMessage(''); // Clear previous alert message
-    try {
-      const success = await signin(formState);
-      if (success) {
-        setAlertMessage('Login Successful.'); // Set success message
-        setShowLoginAlert(true);
-        setTimeout(() => {
-          setShowLoginAlert(false); // Hide alert after delay
-          navigate('/profile');
-        }, 1500); // Delay to allow user to see the success alert
-      } else {
-        setAlertMessage('Login Failed.'); // Set failure message
-        setShowLoginAlert(true);
-        setTimeout(() => { // Remove alert after delay
-          setShowLoginAlert(false);
-        }, 2000);
+    setShowLoginAlert(false); // Reset alert visibility
+
+      try {
+          const success = await signin(formState);
+          if (success) {
+          setAlertMessage('Login Successful.'); // Set success message
+          setShowLoginAlert(true);
+          setTimeout(() => {
+            navigate('/profile'); // send to profile
+            setShowLoginAlert(false); // Hide alert after delay
+          }, 1500); // Delay to allow user to see the success alert
+        
+        } else {
+          setAlertMessage('Login Failed.'); // Set failure message
+          setShowLoginAlert(true);
+          setTimeout(() => { // Remove alert after delay
+            setShowLoginAlert(false);
+          }, 1500);
+        }
+  
+      } catch (e) {
+          console.error('signin() error in BuyerSignin component:', e);
+        }
       }
-    } catch (e) {
-      setAlertMessage('Login Failed.');
-      setShowLoginAlert(true);
-      setTimeout(() => { // Remove alert after delay
-        setShowLoginAlert(false);
-      }, 2000);
-      console.error('signin() error in BuyerSignin:', e);
-    }
-  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -138,7 +129,7 @@ export default function Signin() {
         </Box>
       </Box>
 
-      {/* Alert */}
+      {/* ⚠️ Alert ⚠️ */}
       <LoginAlert visible={showLoginAlert} message={alertMessage} />
 
       <Copyright sx={{ mt: 3 }} />

@@ -1,5 +1,5 @@
 import { Typography, Box, Button, Container, Stack, Rating, Checkbox, Tooltip } from '@mui/material';
-import { FavoriteBorder, Favorite } from '@mui/icons-material';
+import { FavoriteBorder, Favorite, Add } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
@@ -9,6 +9,8 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning'; 
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
+import AddToCart from '../../../components/Buttons/AddToCart';
+
 
 
 export default function SingleProduct() {
@@ -70,7 +72,7 @@ useEffect(() => {
     );
   }
 
-  
+
   // Product ratings
   const ratings = productData.item.ratings;
   // console.log('Product ratings: ', productData.item);
@@ -203,6 +205,9 @@ useEffect(() => {
             >
               Add to cart
             </Button>
+
+            {/* <AddToCart user={user} userId={id} itemId={productId} /> */}
+            
             <Tooltip title='Add to wishlist' placement='right'>
               <Checkbox
                 checked={inWishlist}

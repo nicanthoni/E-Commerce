@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 
-// BUYER 
+//// BUYER ////
 export const buyer_Signup = gql`
   mutation buyerSignup($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
     AddUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
@@ -30,17 +30,27 @@ mutation AddWishlist($itemId: ID!, $userId: ID!) {
   AddToWishlist(itemId: $itemId, userId: $userId) 
 }
 `
+
 export const delete_wishlist = gql`
 mutation DeleteWishlist($itemId: ID!, $userId: ID!) {
   DeleteFromWishlist(itemId: $itemId, userId: $userId) 
 }
 `
 
+export const add_cart = gql`
+mutation AddCart($itemId: ID!, $userId: ID!) {
+  AddToCart(itemId: $itemId, userId: $userId)
+}
+`
+export const delete_cart = gql`
+mutation DeleteCart($itemId: ID!, $userId: ID!) {
+  DeleteFromCart(itemId: $itemId, userId: $userId)
+}
+`
 
-///////////////////////////////////////////
 
 
-// VENDOR
+//// VENDOR ////
 export const vendor_Signup = gql`
   mutation vendorSignup($vendorName: String!, $email: String!, $password: String!) {
     AddVendor(vendorName: $vendorName, email: $email, password: $password) {

@@ -13,19 +13,19 @@ import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 
 
-export default function ProductsMain({ products, wishlistedItems, refetchWishlist }) {
+export default function ProductsMain({ products, wishlistedItems, refetchWishlist, cartedItems, refetchCart }) {
   const { user, id } = useAuthContext();
   const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
-
 
   // Hook - add/remove wishlist item
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist();
 
-  // Wishlist Alerts
+  // Wishlist Alerts 
   const [successMessage, setSuccessMessage] = useState(''); 
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
+
 
   // if wishlistedItems is an array of Ids, for each Id, create an object that is truthy
   // Run on initial render, and if wishlistedItems changes
@@ -40,7 +40,8 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
   }, [wishlistedItems]);
   
 
-  // OnChange - Refetch (loadWishlist()) from parent updating items wishlist state
+
+  // OnChange - Refetch (loadWishlist()) from parent, updating items wishlist state
   const handleWishlistChange = async (userId, itemId) => {
     if (user) {
       try {
@@ -52,6 +53,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
           setTimeout(() => { // remove alert
             setSuccessAlertVisible(false);
           }, 2500);
+          refetchWishlist();
         } else { // Item not in wishlist, so add it
           await addWishlist(itemId, userId); //  add item to wishlist
           setSuccessMessage('Added'); // set message
@@ -60,6 +62,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
           setTimeout(() => { // remove alert
             setSuccessAlertVisible(false);
           }, 2500);
+          refetchWishlist();
         }
       } catch (e) {
         console.log('Error: ', e);
@@ -74,9 +77,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
         setWarningAlertVisible(false);
         }, 2500);
       }
-      refetchWishlist();
     }
-
 
   return (
     <Grid container spacing={3} marginBottom={6}>
@@ -175,9 +176,12 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
                         ${result.price}
                       </Typography>
 
-                      {/* Button &  Icon */}
+                      {/* Cart Button &  Wishlist Icon */}
                       <Stack direction='row' flexWrap='wrap'>
-                        <AddToCart />
+                        <AddToCart 
+                        user={user} userId={id} itemId={result._id} 
+                        cartedItems={cartedItems} refetchCart={refetchCart}
+                        />
 
                         <Box>
                           <Tooltip title='Add to wishlist' placement='right'>

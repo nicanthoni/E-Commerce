@@ -1,11 +1,11 @@
 import { Alert, Box, Slide } from '@mui/material';
 
 
-//  'visible' prop - passed from parents to control alert visbility 
-const CartSuccess = ({ visible }) => {
+// props passed from parent AddToCart button to control visibility & message
+const CartSuccess = ({ visible, message }) => { 
   const alert = (
     <Alert severity='success' sx={{ maxWidth: '100%', mb: 2 }}>
-        Item added to Cart.
+        {message}
     </Alert>
   );
 
