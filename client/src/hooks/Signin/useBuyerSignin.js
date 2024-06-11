@@ -31,15 +31,15 @@ export const useBuyerSignin = () => {
 
             setIsLoading(false)
 
-            // send to users profile
-            setTimeout(() => {
-                navigate('/profile');
-            }, 1500);
+            // Indicate a successful login
+            return true;
+
 
       } catch (e) {
             setStateError(true)
             setIsLoading(false)
             console.error('LoginUser error in useSignin() hook: ', e);
+            return false; // Indicate a failed login
       }
          
     }
