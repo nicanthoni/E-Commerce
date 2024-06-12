@@ -7,7 +7,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import LogoutSuccess from '../../../components/Alerts/Auth/LogoutSuccess';
 import { useState } from 'react';
 
-export default function MainNav() {
+export default function TopNav() {
   const { user, type } = useAuthContext();
   const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
 

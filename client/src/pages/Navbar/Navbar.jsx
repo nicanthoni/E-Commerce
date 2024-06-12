@@ -1,12 +1,4 @@
-import {
-  Typography,
-  AppBar,
-  Box,
-  Toolbar,
-  Container,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Typography, AppBar, Box, Toolbar, Container, useMediaQuery, useTheme } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import MenuDrawer from './Drawers/MenuDrawer';
@@ -16,16 +8,55 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import SearchBar from './Search/Search';
 import { useLocation } from 'react-router-dom';
 import AlertsDrawer from './Drawers/AlertsDrawer';
+import { User, Vendor } from '../../utils/queries';
+import { useLazyQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
 
 
 export default function Navbar() {
-  const { user, type } = useAuthContext();
+  const { user, id, type } = useAuthContext();
+  const [buyerName, setBuyerName] = useState('');
+  const [vendorName, setVendorName] = useState('');
   const location = useLocation();
-  const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
-
   const theme = useTheme();
+  const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
+
+  // Query for buyers name
+  const [loadBuyer, {loading: userLoading, error: userError, data: userData }] = useLazyQuery(User, 
+    {variables: {userId: id}})
+
+  // Query for vendors name
+  const [loadVendor, {loading: vendorLoading, error: vendorError, data: vendorData }] = useLazyQuery(Vendor, 
+    {variables: {vendorId: id}})
+
+  // If buyer, loadBuyer - If vendor, loadVendor
+  useEffect(() => {
+    if (type === 'buyer') {
+      loadBuyer();
+    }
+    if (type === 'vendor') {
+      loadVendor();
+    }
+  }, [user, type, loadBuyer, loadVendor]);
+
+
+  // if data is available, update name States
+  useEffect(() => {
+    if (userData && userData.user) {
+      const name = userData.user.firstName;
+      setBuyerName(name);
+      // console.log('username: ', name);
+    }
+    if (vendorData && vendorData.vendor) {
+      const name = vendorData.vendor.vendorName;
+      setVendorName(name);
+      // console.log('vendor name: ', name);
+    }
+  }, [userData, vendorData]);
+
+
 
   return (
     <Box sx={{ display: 'flex', alignContent: 'center',}}>
@@ -50,19 +81,13 @@ export default function Navbar() {
               }}
             >
               {user && type === 'buyer' ? (
-                <NavLink
-                  to='/explore'
-                  style={{ textDecoration: 'none', color: '#fff' }}
-                >
-                  <LogoDevIcon  />
-                </NavLink>
+                  <>
+                 <Typography> Hi, {buyerName}</Typography>
+                 </>
               ) : user && type === 'vendor' ? (
-                <NavLink
-                  to='/dash'
-                  style={{ textDecoration: 'none', color: '#fff' }}
-                >
-                  <LogoDevIcon />
-                </NavLink>
+                <>
+                <Typography> Hi, {vendorName}</Typography>
+                </>
               ) : (
                 <NavLink
                   to='/'
