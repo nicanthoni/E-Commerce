@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Paper, Button, MobileStepper, Typography, Divider } from '@mui/material';
+import { Box, Button, MobileStepper, Typography, Divider } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { useMediaQuery } from '@mui/material';
+
 
 // Categories
 const categories = [
@@ -24,7 +24,7 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
 
   // Carousel settings
-  const categoriesPerView = isMobile ? 1 : 3; // # of categories shown per view
+  const categoriesPerView = isMobile ? 3 : 9; // # of categories shown per view
   const maxSteps = Math.ceil(categories.length / categoriesPerView);
 
    // Next button
@@ -40,44 +40,37 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
   
   return (
     <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }} >
-      <Paper
-        elevation={0}
-        sx={{}}
-      />
 
-        <Box marginBottom={1} textAlign='center' >
-            <Typography variant='body1'>Browse Categories</Typography>
+        {/* Component Header */}
+        {/* <Box marginBottom={1} textAlign='center' >
+            <Typography>Browse Categories</Typography>
         </Box>
 
-        <Divider variant='middle'/>
-        <br/>
+        <Divider variant='middle'/> */}
+
 
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={onStepChange}
         enableMouseEvents
-        style={{ height: '300px' }} 
-        containerStyle={{ height: '300px' }} 
       >
+        
         {Array.from({ length: maxSteps }).map((_, index) => (
-          <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          
+          <Box key={index} marginBottom={1} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
               <Button
+                size='small'
                 color={selectedCategory === category.name ? 'secondary' : 'primary'}
-                variant='contained'
+                variant='text'
                 key={category.id}
                 sx={{
-                  height: 255,
-                  width: '90%',
+                  textWrap: 'nowrap',
                   mx: 1,
-                  bgcolor: selectedCategory === category.name ? 'secondary.main' : 'primary.main',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  color: '#fffff',
                   textAlign: 'center',
-                  lineHeight: '255px',
-                  fontSize: '1.5rem',
+                  // width: '100%',
+                  // bgcolor: selectedCategory === category.name ? 'secondary.main' : 'primary.main',
                 }}
                 onClick={() => onCategoryChange(category.name)}
               >
@@ -89,7 +82,8 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
       </SwipeableViews>
 
        
-       {/* Back & Next */}
+       {/* Back & Next - only show on mobile */}
+       {!isMobile ? (null) : (
       <MobileStepper
         steps={maxSteps}
         position='static'
@@ -101,7 +95,7 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
-            Next
+        
             {theme.direction === 'rtl' ? (
               <KeyboardArrowLeft />
             ) : (
@@ -117,11 +111,11 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
             ) : (
               <KeyboardArrowLeft />
             )}
-            Back
+          
           </Button>
         }
       />
-
+    )}
     </Box>
   );
 }

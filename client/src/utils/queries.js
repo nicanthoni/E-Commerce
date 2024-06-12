@@ -7,6 +7,7 @@ export const User = gql`
       firstName
       lastName
       email
+      # createdAt
       cart {
         item {
           name

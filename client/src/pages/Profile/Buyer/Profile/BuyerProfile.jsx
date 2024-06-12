@@ -31,6 +31,7 @@ export default function BuyerProfile() {
 
   // User data object
   const userData = data.user;
+  // console.log('user data: ', userData)
 
   return (
     <>
@@ -47,7 +48,7 @@ export default function BuyerProfile() {
                 />
                   
               <Typography textAlign='center' variant='h6'>
-                Hi there, {userData.firstName}👋
+                Member since: 
               </Typography>
               <Stack
                 direction='row'
