@@ -1,0 +1,1 @@
+// Move existing wishlist icon and corresponding logic into reusable component 

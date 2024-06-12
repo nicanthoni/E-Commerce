@@ -109,7 +109,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
       ) : (
         <>
           {/* Product Filters - Price and Date */}
-          <Grid item xs={12} marginY={1}>
+          <Grid item xs={12} marginBottom={2} >
             <ProductFilters />
           </Grid>
 

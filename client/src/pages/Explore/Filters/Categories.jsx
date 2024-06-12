@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box, Paper, Button, MobileStepper, Typography, Divider } from '@mui/material';
+import { Box, Button, MobileStepper } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
@@ -24,11 +23,11 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
 
   // Carousel settings
-  const categoriesPerView = isMobile ? 1 : 3; // # of categories shown per view
+  const categoriesPerView = isMobile ? 3 : 9; // # of categories shown per view
   const maxSteps = Math.ceil(categories.length / categoriesPerView);
 
-   // Next button
-   const handleNext = () => {
+  // Next button
+  const handleNext = () => {
     onStepChange(activeStep + 1);
   };
 
@@ -37,91 +36,85 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
     onStepChange(activeStep - 1);
   };
 
-  
   return (
-    <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto' }} >
-      <Paper
-        elevation={0}
-        sx={{}}
-      />
+    <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto', position: 'relative' }}>
 
-        <Box marginBottom={1} textAlign='center' >
-            <Typography variant='body1'>Browse Categories</Typography>
-        </Box>
+      <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-        <Divider variant='middle'/>
-        <br/>
+        {/* Back button - only on mobile */}
+        {isMobile && (
+          <Button
+            size='small'
+            onClick={handleBack}
+            disabled={activeStep === 0}
+            sx={{ position: 'absolute', left: -20, zIndex: 1 }}  // Moved button further to the left
+          >
+            {theme.direction === 'rtl' ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+          </Button>
+        )}
 
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={onStepChange}
-        enableMouseEvents
-        style={{ height: '300px' }} 
-        containerStyle={{ height: '300px' }} 
-      >
-        {Array.from({ length: maxSteps }).map((_, index) => (
-          <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-            {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
-              <Button
-                color={selectedCategory === category.name ? 'secondary' : 'primary'}
-                variant='contained'
-                key={category.id}
-                sx={{
-                  height: 255,
-                  width: '90%',
-                  mx: 1,
-                  bgcolor: selectedCategory === category.name ? 'secondary.main' : 'primary.main',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  color: '#fffff',
-                  textAlign: 'center',
-                  lineHeight: '255px',
-                  fontSize: '1.5rem',
-                }}
-                onClick={() => onCategoryChange(category.name)}
-              >
-                {category.name}
-              </Button>
-            ))}
-          </Box>
-        ))}
-      </SwipeableViews>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={activeStep}
+          onChangeIndex={onStepChange}
+          enableMouseEvents
+          style={{ flex: 1 }}
+        >
+          {/* Category Buttons */}
+          {Array.from({ length: maxSteps }).map((_, index) => (
+            <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+              {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
+                <Button
+                  size='small'
+                  color={selectedCategory === category.name ? 'secondary' : 'primary'}
+                  variant='text'
+                  key={category.id}
+                  sx={{
+                    textWrap: 'nowrap',
+                    mx: 1,
+                    textAlign: 'center',
+                    textTransform: 'none',
+                  }}
+                  onClick={() => onCategoryChange(category.name)}
+                >
+                  {category.name}
+                </Button>
+              ))}
+            </Box>
+          ))}
+        </SwipeableViews>
 
-       
-       {/* Back & Next */}
-      <MobileStepper
-        steps={maxSteps}
-        position='static'
-        activeStep={activeStep}
-        
-        nextButton={
+        {/* Next button - only on mobile*/}
+        {isMobile && (
           <Button
             size='small'
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
+            sx={{ position: 'absolute', right: -20, zIndex: 1 }}  // Moved button further to the right
           >
-            Next
             {theme.direction === 'rtl' ? (
               <KeyboardArrowLeft />
             ) : (
               <KeyboardArrowRight />
             )}
           </Button>
-        }
+        )}
+      </Box>
 
-        backButton={
-          <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
-
+      {/* Stepper - only show on mobile */}
+      {isMobile && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
+          <MobileStepper
+            steps={maxSteps}
+            position='static'
+            activeStep={activeStep}
+          />
+        </Box>
+      )}
     </Box>
   );
 }

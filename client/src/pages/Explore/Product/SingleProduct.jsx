@@ -3,7 +3,7 @@ import { FavoriteBorder, Favorite, Add } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { IndividualProduct, WishlistedItemCheck } from '../../../utils/queries';
+import { IndividualProduct, WishlistedItemCheck, Cart } from '../../../utils/queries';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning'; 
@@ -26,8 +26,17 @@ export default function SingleProduct() {
   const [checkWishlistForItem, {loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch: refetchWishlistCheck}] = 
   useLazyQuery(WishlistedItemCheck, {variables: {itemId: productId, userId: id} })
 
+   // Query - Load array of prodcutIds (items in users' cart). Refetch whenever item is added/removed 
+   const [loadCart, {loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart}] = useLazyQuery(Cart, {
+    variables: {id: id}
+  })
+
   // Hook - add/delete wishlist item 
   const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetchWishlistCheck);
+
+  // Grab cartItems IDs
+  const cartedItems =  cartData ? cartData.usersCart : [] ; 
+
 
   // Wishlist Alert States
   const [successMessage, setSuccessMessage] = useState(''); 
@@ -195,7 +204,7 @@ useEffect(() => {
 
           {/* Button & Wishlist Stack */}
           <Stack direction='row' gap={1}>
-            <Button
+            {/* <Button
               variant='contained'
               color='secondary'
               sx={{
@@ -204,10 +213,11 @@ useEffect(() => {
               }}
             >
               Add to cart
-            </Button>
+            </Button> */}
+            <>
+            <AddToCart user={user} userId={id} itemId={productId} cartedItems={cartedItems} refetchCart={refetchCart} />
+            </>
 
-            {/* <AddToCart user={user} userId={id} itemId={productId} /> */}
-            
             <Tooltip title='Add to wishlist' placement='right'>
               <Checkbox
                 checked={inWishlist}
