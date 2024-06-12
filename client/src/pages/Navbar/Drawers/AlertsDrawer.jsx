@@ -23,7 +23,7 @@ export default function AlertsDrawer() {
     <>
       {/* Notifcations Icon */}
       <IconButton
-        className='menu-icon'
+        className='notifications-icon'
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}

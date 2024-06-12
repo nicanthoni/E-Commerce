@@ -11,6 +11,7 @@ import AlertsDrawer from './Drawers/AlertsDrawer';
 import { User, Vendor } from '../../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import { KeyboardArrowDown } from '@mui/icons-material';
 
 
 export default function Navbar() {
@@ -81,11 +82,15 @@ export default function Navbar() {
             >
               {user && type === 'buyer' ? (
                   <>
-                 <Typography> Hi, {buyerName}</Typography>
+                 <Typography> 
+                  Hi, {buyerName}
+                  </Typography>
                  </>
               ) : user && type === 'vendor' ? (
                 <>
-                <Typography> Hi, {vendorName}</Typography>
+                <Typography> 
+                  Hi, {vendorName}
+                </Typography>
                 </>
               ) : (
                 <NavLink
