@@ -29,7 +29,7 @@ export default function CheckoutOrder({ userData }) {
       </Box>
       
 
-      {/* STACK for product details */}
+      {/* Product details */}
       <Stack
         direction='column'
         justifyContent='center'

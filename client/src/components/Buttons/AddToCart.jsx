@@ -6,20 +6,22 @@ import CartWarning from '../Alerts/Cart/CartWarning';
 import CartError from '../Alerts/Cart/CartError';
 
 
+// user = auth status | userId = users id | itemId = itemsId | 
+// cartedItems = array of item's Ids from users cart | refetchCart = refetch query 'Cart' for list of user cart's item ids
 export default function AddToCart ({  user, userId, itemId, cartedItems, refetchCart }) {
   
   // Hooks
   const { addCart, deleteCart } = useCart()
 
-  // States
+  // Alert States
   const [alertMessage, setAlertMessage] = useState(''); 
   const [successAlertVisible, setSuccessAlertVisible] = useState(false);
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
 
-   // Check if item is already in cart
+   // Check if item with matching id is in cart
    const isInCart = cartedItems.includes(itemId);
 
-
+  // onClick
    const handleCartChange = async () => {
     if (user) {
       try {
@@ -69,9 +71,7 @@ export default function AddToCart ({  user, userId, itemId, cartedItems, refetch
         >
           Remove
         </Button>
-
       ) : ( // Render the Add to Cart button
-
         <Button
           onClick={() => handleCartChange()} 
           variant='contained'
@@ -85,7 +85,7 @@ export default function AddToCart ({  user, userId, itemId, cartedItems, refetch
         </Button>
       )}
 
-      {/* Render Alerts with visibility controlled by local state */}
+      {/* Alerts visibility controlled by local state */}
       <CartSuccess visible={successAlertVisible && alertMessage === 'Added'} message="Added to cart." /> 
       <CartSuccess visible={successAlertVisible && alertMessage === 'Removed'} message="Removed from cart." /> 
       <CartWarning visible={warningAlertVisible} /> 

@@ -74,7 +74,7 @@ const subtotal = user.cart.reduce((total, item) => {
         </Typography>
       </Grid>
 
-      {/* Cart Items */}
+      {/* Products in Cart*/}
       <Grid
         item
         sx={{
@@ -87,7 +87,7 @@ const subtotal = user.cart.reduce((total, item) => {
         <CheckoutOrder refetchUserData={refetchUserData} userData={user} loadUser={loadUser}/>
       </Grid>
 
-      {/* Checkout & Subtotal */}
+      {/* Checkout Button & Subtotal */}
       <Grid
         item
         sx={{
