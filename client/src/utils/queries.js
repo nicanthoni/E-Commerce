@@ -1,6 +1,27 @@
 import { gql } from '@apollo/client';
 
-// Buyer
+
+// Vendor - by id, returns all data associated with vendor
+export const Vendor = gql`
+  query VendorQuery($vendorId: ID!) {
+    vendor(id: $vendorId) {
+      vendorName
+      email
+      inventory {
+        name
+        inventory
+      }
+      sales {
+        item {
+          name
+        }
+        sold
+      }
+    }
+  }
+`;
+
+// Buyer - by user id, returns all data assocoiated with buyer
 export const User = gql`
   query UserQuery($userId: ID!) {
     user(id: $userId) {
@@ -57,52 +78,28 @@ export const User = gql`
   }
 `;
 
-
-
-// Wishlist - returns array of product IDs in users wishlist
+// Wishlist - by user id, returns array of product ids in wishlist
 export const Wishlist = gql`
   query UserWishlist($id: ID!) {
     usersWishlist(id: $id)
   }
 `;
 
-// Wishlist check - returns boolean for if an item is in a users wishlist or not
+// Wishlist - by item and user id, checks if item is in wishlist and returns boolean 
 export const WishlistedItemCheck = gql`
   query ItemInWishlist($userId: ID!, $itemId: ID!) {
     itemInWishlist(userId: $userId, itemId: $itemId)
   }
 `;
 
-// Wishlist - returns array of product IDs in users cart
+// Cart - by user id, returns array of product IDs in users cart
 export const Cart = gql`
   query UserCart($id: ID!) {
     usersCart(id: $id)
   }
 `;
 
-// Vendor
-export const Vendor = gql`
-  query VendorQuery($vendorId: ID!) {
-    vendor(id: $vendorId) {
-      vendorName
-      email
-      inventory {
-        name
-        inventory
-      }
-      sales {
-        item {
-          name
-        }
-        sold
-      }
-    }
-  }
-`;
-
-
-
-// Products 
+// Product(s) - by category
 export const Products = gql`
 query ProductsQuery($category: String) {
   filterItems(category: $category) {
@@ -125,7 +122,7 @@ query ProductsQuery($category: String) {
 }
 `;
 
-// Single product
+// Product - by id
 export const IndividualProduct = gql`
 query SingleProductQuery($id: ID!) {
   item(id: $id) {
@@ -145,4 +142,3 @@ query SingleProductQuery($id: ID!) {
   }
 }
 `
-

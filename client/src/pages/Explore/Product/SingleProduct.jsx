@@ -1,33 +1,28 @@
 import {Typography,Box,Container,Stack,Rating,Checkbox,Tooltip,} from '@mui/material';
-import { FavoriteBorder, Favorite, Add } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
-import { IndividualProduct, WishlistedItemCheck, Cart, Wishlist } from '../../../utils/queries';
-import { useWishlist } from '../../../hooks/Products/useWishlist';
+import { useEffect } from 'react';
+import { IndividualProduct, Cart, Wishlist } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import CartButton from '../../../components/Buttons/CartButton';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
 import { getAverage } from '../../../utils/calculations/getAverage';
 
+
 export default function SingleProduct() {
   const { user, id } = useAuthContext();
   const { productId } = useParams();
 
-  // Query - Load Product
+  //  loadProduct Query - returns data associated with single item
   const [loadProduct, { loading: productLoading, data: productData, error: productError },] = useLazyQuery(IndividualProduct, 
     { variables: { id: productId } });
 
-  // Query - Check (boolean) if item associated with productId is in the users wishlist
-  const [ checkWishlistForItem, { loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch: refetchWishlistCheck,},] = useLazyQuery(WishlistedItemCheck,
-     {variables: { itemId: productId, userId: id }, });
-
-    // Load Wishlist - array of productIds (items in users' wishlist). Refetch whenever item is added/removed
+    // loadWishlist Query - returns array of productIds (in users wishlist). Refetch when item is added/removed
   const [loadWishlist, {loading: wishlistArrayLoading, data: wishlistArray, error: wishlistArrayError, refetch: refetchWishlist}] = useLazyQuery(Wishlist, {
     variables: {id: id}
   })
 
-  // Query - Load array of prodcutIds (items in users' cart). Refetch whenever item is added/removed
+  // loadCart Query - returns array of productIds (in users' cart). Refetch when item is added/removed
   const [ loadCart, { loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart },] = useLazyQuery(Cart, 
     { variables: { id: id } });
 
@@ -42,9 +37,7 @@ export default function SingleProduct() {
     loadWishlist();
     loadCart();
     loadProduct();
-    checkWishlistForItem();
-    console.log('wishlist data: ', wishlistData)
-  }, [loadProduct, checkWishlistForItem, loadCart, loadWishlist, wishlistData]);
+  }, [loadProduct, loadCart, loadWishlist]);
 
   if (productError) {
     console.error('GraphQL Error:', productError);
@@ -140,10 +133,10 @@ export default function SingleProduct() {
           <Stack direction='row' gap={1}>
             <>
               <CartButton
-                user={user}
-                userId={id}
-                itemId={productId}
-                cartedItems={cartedItems}
+                user={user} // auth
+                userId={id} // user id
+                itemId={productId} // item id
+                cartedItems={cartedItems} // array of users carted item ids
                 refetchCart={refetchCart}
               />
 
@@ -152,8 +145,7 @@ export default function SingleProduct() {
                 userId={id} // user id
                 itemId={productId} // item id
                 wishlistedItems={wishlistedItems} // array of users wishlisted item ids
-                refetchWishlist={refetchWishlist}
-                wishlistData={wishlistData} // boolean
+                refetchWishlist={refetchWishlist} // refetch Wishlist query
               />
             </>
           </Stack>

@@ -6,7 +6,11 @@ import WishlistSuccess from '../Alerts/Wishlist/WishlistSuccess';
 import WishlistWarning from '../Alerts/Wishlist/WishlistWarning';
 import WishlistError from '../Alerts/Wishlist/WishlistError';
 
-export default function WishlistButton({ user, userId, itemId, wishlistedItems, refetchWishlist, wishlistData }) {
+
+// user = auth status | userId = users id | itemId = itemsId 
+// wishlistedItems = array of item Ids from users wishlist 
+// refetchWishlist = refetch query 'Wishlist' for list of user cart's item ids
+export default function WishlistButton({ user, userId, itemId, wishlistedItems, refetchWishlist }) {
 
   // States
   const [inWishlist, setInWishlist] = useState(false);
@@ -18,23 +22,15 @@ export default function WishlistButton({ user, userId, itemId, wishlistedItems, 
   // Hook - add/remove wishlist item
   const { addWishlist, deleteWishlist } = useWishlist();
 
-  // Check if item with matching id is in wishlist
+  // Check if item with matching id is in users wishlist
   const isInWishlist = wishlistedItems.includes(itemId)
 
-
-  // Update inWishlist state based on wishlistedItems - Array of ids
+  // Update inWishlist state based on wishlistedItems 
   useEffect(() => {
     if (Array.isArray(wishlistedItems)) {
       setInWishlist(wishlistedItems.includes(itemId));
     }
   }, [wishlistedItems, itemId]);
-
-  // Update inWishlist state based on wishlistData - Boolean
-  useEffect(() => {
-    if (wishlistedItems.includes(itemId)) {
-      setInWishlist(true); 
-    }
-  }, [wishlistedItems]);
 
 
   // Handle wishlist change
@@ -45,11 +41,9 @@ export default function WishlistButton({ user, userId, itemId, wishlistedItems, 
           await deleteWishlist(itemId, userId);
           setSuccessMessage('Removed');
           setSuccessAlertVisible(true);
-          // setInWishlist(false);
           setTimeout(() => {
             setSuccessAlertVisible(false);
-          }, 2500);
-          refetchWishlist();
+          }, 2500);   
         } else { // Item not in wishlist, so add it
           await addWishlist(itemId, userId);
           setSuccessMessage('Added');
@@ -57,8 +51,8 @@ export default function WishlistButton({ user, userId, itemId, wishlistedItems, 
           setTimeout(() => {
             setSuccessAlertVisible(false);
           }, 2500);
-          refetchWishlist();
         }
+        refetchWishlist(); // refetch wishlist after deleting or adding item
       } catch (e) {
         console.log('Error: ', e);
       }

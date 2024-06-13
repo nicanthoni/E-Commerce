@@ -6,8 +6,9 @@ import CartWarning from '../Alerts/Cart/CartWarning';
 import CartError from '../Alerts/Cart/CartError';
 
 
-// user = auth status | userId = users id | itemId = itemsId | 
-// cartedItems = array of item's Ids from users cart | refetchCart = refetch query 'Cart' for list of user cart's item ids
+// user = auth status | userId = users id | itemId = itemsId 
+// cartedItems = array of item's Ids from users cart 
+// refetchCart = refetch query 'Cart' for list of user cart's item ids
 export default function CartButton ({  user, userId, itemId, cartedItems, refetchCart }) {
   
   // Hooks
@@ -44,10 +45,6 @@ export default function CartButton ({  user, userId, itemId, cartedItems, refetc
         }
       } catch (e) {
         console.log('Add to cart error:', e);
-        // setErrorAlertVisible(true);
-        // setTimeout(() => { 
-        //   setErrorAlertVisible(false); 
-        // }, 2000);
       }
     } else { // for non-authenticated users
       setWarningAlertVisible(true); // show warning alert
