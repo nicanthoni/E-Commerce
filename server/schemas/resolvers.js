@@ -8,7 +8,6 @@ const resolvers = {
     },
     user: async (parent, { id }, context) => {
       console.log('User ID:', id)
-      // console.log(context)
       const user = await User.findById(id).populate({
         path: 'cart.item',
         populate: { path: 'vendor' }
@@ -22,7 +21,6 @@ const resolvers = {
         path: 'ratings',
         populate: { path: 'item' },
       })
-      //console.log('User Data:', user)
       return user
     },
     vendor: async (parent, { id }) => {

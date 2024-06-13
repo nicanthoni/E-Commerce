@@ -44,11 +44,12 @@ export default function SingleProduct() {
   const [warningAlertVisible, setWarningAlertVisible] = useState(false);
   const [errorAlertVisible, setErrorAlertVisible] = useState(false);
 
- // Load product data and check wishlist for item
+ // Load product data, check users wishlist & cart for item
 useEffect(() => {
+  loadCart();
   loadProduct();
   checkWishlistForItem();
-}, [loadProduct, checkWishlistForItem]);
+}, [loadProduct, checkWishlistForItem, loadCart]);
 
 // Update inWishlist state based on wishlistData
 useEffect(() => {
@@ -204,16 +205,6 @@ useEffect(() => {
 
           {/* Button & Wishlist Stack */}
           <Stack direction='row' gap={1}>
-            {/* <Button
-              variant='contained'
-              color='secondary'
-              sx={{
-                color: 'primary.main',
-                textTransform: 'none',
-              }}
-            >
-              Add to cart
-            </Button> */}
             <>
             <AddToCart user={user} userId={id} itemId={productId} cartedItems={cartedItems} refetchCart={refetchCart} />
             </>
