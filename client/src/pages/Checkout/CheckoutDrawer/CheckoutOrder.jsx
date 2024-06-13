@@ -10,11 +10,13 @@ export default function CheckoutOrder({ userData }) {
     <Stack
       key={index}
       borderBottom='inset'
+      borderColor='white'
       direction='row'
       gap={2}
       padding={3}
       flexWrap='nowrap'
       justifyContent='center'
+      bgcolor='#F2F2F2'
     >
 
 
@@ -76,12 +78,17 @@ export default function CheckoutOrder({ userData }) {
             {item.item.description}
           </Typography>
 
-
-
           <Button 
-          size='small'
-          variant='outlined'>
-            Delete
+            size='small'
+            variant='contained'
+            color='grey'
+            sx={{
+              backgroundColor: 'white',
+              color: 'primary.main',
+              textTransform: 'none',
+            }}
+            >
+              Delete
           </Button>
 
 
