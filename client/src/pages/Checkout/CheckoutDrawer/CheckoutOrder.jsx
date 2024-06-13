@@ -1,8 +1,8 @@
-import { Stack, Box, Typography } from '@mui/material';
+import { Stack, Box, Typography, Button } from '@mui/material';
 import QuantityIncrementer from './QuantityIncrementer';
 
 
-// Display for each cart item
+// For each item in cart
 export default function CheckoutOrder({ userData }) {
   return (
     <>
@@ -10,55 +10,88 @@ export default function CheckoutOrder({ userData }) {
     <Stack
       key={index}
       borderBottom='inset'
+      borderColor='white'
       direction='row'
-      gap={1}
-      padding={1}
+      gap={2}
+      padding={3}
       flexWrap='nowrap'
+      justifyContent='center'
+      bgcolor='#F2F2F2'
     >
-      {/* Product img */}
-      <Box sx={{ height: '100px', width: '100px' }}>
-        <img
-          src={item.item.img}
-          alt='Product'
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain', // ensures image fits within the Box
-          }}
-        />
-      </Box>
+
+
+        <Stack gap={2}>
+        {/* Product img & Incrementer */}
+        <Box sx={{ height: '100px', width: '100px' }}>
+          <img
+            src={item.item.img}
+            alt='Product'
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain', // ensures image fits within the Box
+            }}
+          />
+        </Box>
+  
+        <QuantityIncrementer/>
+        </Stack>
       
 
-      {/* Product details */}
-      <Stack
-        direction='column'
-        justifyContent='center'
-        alignItems='center'
-        width='60%'
-        gap={2}
-      >
-        {/* Name & Price */}
-        <Stack direction='row' justifyContent='center' width='100%' gap={2}>
+        {/* Product details */}
+        <Stack
+          direction='column'
+          justifyContent='flex-end'
+
+        >
+
+        {/* Name, Description, Price, & Button */}
+            <Typography
+            textAlign='left'
+            variant='body1'
+            sx={{ fontSize: 14 }}
+          >
+            {item.item.name}
+          </Typography>
+
+
           <Typography
             textAlign='left'
             variant='body1'
             fontWeight={'bold'}
-            sx={{ fontSize: 14 }}
-          >
-            Product Name 
-          </Typography>
-          <Typography
-          
-            variant='body1'
-            fontWeight={'bolder'}
             sx={{ fontSize: 14}}
           >
             ${item.item.price}
           </Typography>
-        </Stack>
 
-        {/* Quantity component */}
-          <QuantityIncrementer/>
+          <Typography
+            textAlign='left'
+            variant='caption'
+            sx={{
+              display: '-webkit-box',
+              WebkitLineClamp: 1,
+              WebkitBoxOrient: 'vertical',
+              textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
+              overflow: 'hidden',
+            }}
+          >
+            {item.item.description}
+          </Typography>
+
+          <Button 
+            size='small'
+            variant='contained'
+            color='grey'
+            sx={{
+              backgroundColor: 'white',
+              color: 'primary.main',
+              textTransform: 'none',
+            }}
+            >
+              Delete
+          </Button>
+
+
       </Stack>
     </Stack>
   ))}
