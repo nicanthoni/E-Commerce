@@ -36,10 +36,11 @@ if (!data || !data.user) {
 // Grab data
 const user = data.user;
 
+
 // Calculate cart subtotal 
 const subtotal = user.cart.reduce((total, item) => {
   return total + item.item.price;
-}, 0);
+}, 0).toFixed(2);
 
   
   return (
