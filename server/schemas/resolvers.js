@@ -30,7 +30,10 @@ const resolvers = {
       return vendor
     },
     item: async (parent, { id }) => {
-      const item = await Item.findById(id)
+      const item = await Item.findById(id).populate({
+        path: 'ratings',
+        populate: {path: 'user'},
+      })
       console.log('Item: ', item)
       return item
     },

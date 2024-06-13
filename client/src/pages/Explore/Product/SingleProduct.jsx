@@ -10,6 +10,8 @@ import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning
 import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
 import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
 import AddToCart from '../../../components/Buttons/AddToCart';
+import { getAverage } from '../../../utils/calculations/getAverage';
+
 
 
 
@@ -85,20 +87,16 @@ useEffect(() => {
 
   // Product ratings
   const ratings = productData.item.ratings;
-  // console.log('Product ratings: ', productData.item);
-  
-  // Calculate average rating of item
-  const calculateAvgRating = () => {
-    const ratingCount = ratings.length; // number of ratings
-    if (ratingCount === 0) {
+  console.log('Product ratings: ', productData.item);
+  //  getAverage (utility)
+  const avgStars = (ratings) =>  {
+    if (ratings.length === 0) {
       return 0; // case with no ratings
     }
-    // Sum of each rating's star value
-    const sumOfRatings = ratings.reduce((sum, rating) => sum + rating.stars, 0);
-    // Calculate average
-    const avgRating = sumOfRatings / ratingCount;
-    return avgRating;
-  };
+    const starsArray = ratings.map(rating => rating.stars);
+    return getAverage(starsArray);
+  }
+
 
 
   // OnChange handle wishlist
@@ -178,7 +176,7 @@ useEffect(() => {
           </Box>
 
           <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
-            <Rating name='read-only' value={calculateAvgRating()} readOnly />
+            <Rating name='read-only' value={avgStars(ratings)} readOnly  />
           </Box>
         </Stack>
 
