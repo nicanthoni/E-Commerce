@@ -18,12 +18,12 @@ export default function SingleProduct() {
     { variables: { id: productId } });
 
     // loadWishlist Query - returns array of productIds (in users wishlist). Refetch when item is added/removed
-  const [loadWishlist, {loading: wishlistArrayLoading, data: wishlistArray, error: wishlistArrayError, refetch: refetchWishlist}] = useLazyQuery(Wishlist, {
+  const [loadWishlist, { data: wishlistArray, refetch: refetchWishlist}] = useLazyQuery(Wishlist, {
     variables: {id: id}
   })
 
   // loadCart Query - returns array of productIds (in users' cart). Refetch when item is added/removed
-  const [ loadCart, { loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart },] = useLazyQuery(Cart, 
+  const [ loadCart, { data: cartData, refetch: refetchCart },] = useLazyQuery(Cart, 
     { variables: { id: id } });
 
   // Grab cartItems IDs
@@ -62,7 +62,7 @@ export default function SingleProduct() {
     );
   }
 
-  // getAverage()  - utility to calculate avg of star ratings
+  // Average Rating  - getAverage() utility to calculate avg rating
   const ratings = productData.item.ratings;
   const avgStars = (ratings) => {
     if (ratings.length === 0) {
@@ -137,7 +137,7 @@ export default function SingleProduct() {
                 userId={id} // user id
                 itemId={productId} // item id
                 cartedItems={cartedItems} // array of users carted item ids
-                refetchCart={refetchCart}
+                refetchCart={refetchCart} // refetch Cart query
               />
 
               <WishlistButton

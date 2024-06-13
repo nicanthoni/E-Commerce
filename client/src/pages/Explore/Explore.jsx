@@ -96,21 +96,22 @@ export default function Explore() {
         {/* Categories + props */}
         <Grid item xs={12}>
           <CategorySelection 
-          onCategoryChange={handleCategoryChange} 
-          activeStep={activeStep} 
-          onStepChange={handleStepChange}
-          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange} // callback to set selected category
+          activeStep={activeStep} // state of active step
+          onStepChange={handleStepChange} // callback to update the active step
+          selectedCategory={selectedCategory} // state of selected Category
           />
         </Grid>
        
         {/* Products + props*/}
         <Grid item xs={12} marginTop={2}>
           <ProductsMain 
-          products={products} 
-          wishlistedItems={wishlistedItems} 
-          cartedItems={cartedItems}
-          refetchWishlist={refetchWishlist} 
-          refetchCart={refetchCart}/>
+          products={products} // products by chosen category
+          wishlistedItems={wishlistedItems} // items in users wishlist
+          cartedItems={cartedItems} // items in users cart
+          refetchWishlist={refetchWishlist} // refetch Wishlist query
+          refetchCart={refetchCart} // refetch Cart query
+          /> 
         </Grid>
 
 

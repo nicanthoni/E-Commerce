@@ -47,7 +47,7 @@ export default function CartButton ({  user, userId, itemId, cartedItems, refetc
         console.log('Add to cart error:', e);
       }
     } else { // for non-authenticated users
-      setWarningAlertVisible(true); // show warning alert
+      setWarningAlertVisible(true); 
       setTimeout(() => { 
         setWarningAlertVisible(false); 
       }, 2500);

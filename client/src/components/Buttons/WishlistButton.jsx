@@ -56,7 +56,7 @@ export default function WishlistButton({ user, userId, itemId, wishlistedItems, 
       } catch (e) {
         console.log('Error: ', e);
       }
-    } else {
+    } else { // for non-authenticated users
       setWarningAlertVisible(true);
       setTimeout(() => {
         setWarningAlertVisible(false);

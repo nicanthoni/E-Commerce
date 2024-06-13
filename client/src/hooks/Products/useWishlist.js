@@ -23,7 +23,6 @@ const addWishlist = async (itemId, userId) => {
         });
 
         setIsLoading(false)
-        refetch(); // Re-fetch data after successful mutation
 
     } catch (e) {
         setStateError(true)
@@ -44,10 +43,6 @@ const addWishlist = async (itemId, userId) => {
       });
 
       setIsLoading(false);
-      setTimeout(() => {
-        refetch(); // Re-fetch data after successful mutation
-      }, 1900);
-      
 
     } catch (e) {
       setStateError(true);

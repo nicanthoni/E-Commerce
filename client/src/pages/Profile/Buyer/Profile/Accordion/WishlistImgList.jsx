@@ -12,7 +12,7 @@ export default function WishImglist ({ refetchUserData, userData }) {
   const [alert, setAlert] = useState({});
   const [showButton, setShowButton] = useState({});
   
-  const { deleteWishlist, isLoading, stateError } = useWishlist(refetchUserData);
+  const { deleteWishlist, isLoading, stateError } = useWishlist();
 
   const handleOpenModal = (index) => {
     const newOpenModals = [...openModals];
@@ -34,8 +34,10 @@ export default function WishImglist ({ refetchUserData, userData }) {
       setAlert((prev) => ({ ...prev, [itemId]: true }));
       setTimeout(() => {
         setAlert((prev) => ({ ...prev, [itemId]: false }));
+        refetchUserData()
         handleCloseModal(index);
-      }, 1800);
+      }, 1700);
+      
     } catch (e) {
       console.log('Error: ', e);
     }
