@@ -1,65 +1,50 @@
-import { Typography, Box, Button, Container, Stack, Rating, Checkbox, Tooltip } from '@mui/material';
+import {Typography,Box,Container,Stack,Rating,Checkbox,Tooltip,} from '@mui/material';
 import { FavoriteBorder, Favorite, Add } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-import { IndividualProduct, WishlistedItemCheck, Cart } from '../../../utils/queries';
+import { IndividualProduct, WishlistedItemCheck, Cart, Wishlist } from '../../../utils/queries';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning'; 
-import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
-import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
-import AddToCart from '../../../components/Buttons/AddToCart';
+import CartButton from '../../../components/Buttons/CartButton';
+import WishlistButton from '../../../components/Buttons/WishlistButton';
 import { getAverage } from '../../../utils/calculations/getAverage';
-
-
-
 
 export default function SingleProduct() {
   const { user, id } = useAuthContext();
   const { productId } = useParams();
-  const [inWishlist , setInWishlist] = useState(false); // set to true if item is in users wishlist
 
   // Query - Load Product
-  const [loadProduct,{ loading: productLoading, data: productData, error: productError }] = 
-  useLazyQuery(IndividualProduct, { variables: { id: productId } });
+  const [loadProduct, { loading: productLoading, data: productData, error: productError },] = useLazyQuery(IndividualProduct, 
+    { variables: { id: productId } });
 
   // Query - Check (boolean) if item associated with productId is in the users wishlist
-  const [checkWishlistForItem, {loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch: refetchWishlistCheck}] = 
-  useLazyQuery(WishlistedItemCheck, {variables: {itemId: productId, userId: id} })
+  const [ checkWishlistForItem, { loading: wishlistLoading, data: wishlistData, error: wishlistError, refetch: refetchWishlistCheck,},] = useLazyQuery(WishlistedItemCheck,
+     {variables: { itemId: productId, userId: id }, });
 
-   // Query - Load array of prodcutIds (items in users' cart). Refetch whenever item is added/removed 
-   const [loadCart, {loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart}] = useLazyQuery(Cart, {
+    // Load Wishlist - array of productIds (items in users' wishlist). Refetch whenever item is added/removed
+  const [loadWishlist, {loading: wishlistArrayLoading, data: wishlistArray, error: wishlistArrayError, refetch: refetchWishlist}] = useLazyQuery(Wishlist, {
     variables: {id: id}
   })
 
-  // Hook - add/delete wishlist item 
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist(refetchWishlistCheck);
+  // Query - Load array of prodcutIds (items in users' cart). Refetch whenever item is added/removed
+  const [ loadCart, { loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart },] = useLazyQuery(Cart, 
+    { variables: { id: id } });
 
   // Grab cartItems IDs
-  const cartedItems =  cartData ? cartData.usersCart : [] ; 
+  const cartedItems = cartData ? cartData.usersCart : [];
 
+  // Grab wishlistedItems IDs
+  const wishlistedItems = wishlistArray ? wishlistArray.usersWishlist : [];
 
-  // Wishlist Alert States
-  const [successMessage, setSuccessMessage] = useState(''); 
-  const [successAlertVisible, setSuccessAlertVisible] = useState(false);
-  const [warningAlertVisible, setWarningAlertVisible] = useState(false);
-  const [errorAlertVisible, setErrorAlertVisible] = useState(false);
-
- // Load product data, check users wishlist & cart for item
-useEffect(() => {
-  loadCart();
-  loadProduct();
-  checkWishlistForItem();
-}, [loadProduct, checkWishlistForItem, loadCart]);
-
-// Update inWishlist state based on wishlistData
-useEffect(() => {
-  if (wishlistData && wishlistData.itemInWishlist !== undefined) {
-    setInWishlist(wishlistData.itemInWishlist);
-  }
-}, [wishlistData]);
-
+  // Load product data, check users wishlist & cart for item
+  useEffect(() => {
+    loadWishlist();
+    loadCart();
+    loadProduct();
+    checkWishlistForItem();
+    console.log('wishlist data: ', wishlistData)
+  }, [loadProduct, checkWishlistForItem, loadCart, loadWishlist, wishlistData]);
 
   if (productError) {
     console.error('GraphQL Error:', productError);
@@ -84,61 +69,18 @@ useEffect(() => {
     );
   }
 
-
-  // Product ratings
+  // getAverage()  - utility to calculate avg of star ratings
   const ratings = productData.item.ratings;
-  console.log('Product ratings: ', productData.item);
-  //  getAverage (utility)
-  const avgStars = (ratings) =>  {
+  const avgStars = (ratings) => {
     if (ratings.length === 0) {
       return 0; // case with no ratings
     }
-    const starsArray = ratings.map(rating => rating.stars);
+    const starsArray = ratings.map((rating) => rating.stars);
     return getAverage(starsArray);
-  }
-
-
-
-  // OnChange handle wishlist
-  const handleWishlistChange = async (userId, itemId) => {
-    if (user) {
-      try {
-        if (inWishlist){ // Item already wishlisted, so delete it
-        await deleteWishlist(itemId, userId) // delete item from wishlist
-        setSuccessMessage('Removed'); // set message
-        setSuccessAlertVisible(true); // set alert
-        setInWishlist(false) // update inWishlist value
-        setTimeout(() => { // remove alert
-          setSuccessAlertVisible(false);
-        }, 2500);
-      } else {// Item not in wishlist, so add it
-        await addWishlist(itemId, userId); //  add item to wishlist
-          setSuccessMessage('Added'); // set message
-          setSuccessAlertVisible(true); // set alert
-          setInWishlist(false); // update inWishlist value
-          setTimeout(() => { // remove alert
-            setSuccessAlertVisible(false);
-          }, 2500);
-      }
-    } catch (e) {
-        console.log('Error: ', e);
-        setErrorAlertVisible(true);
-        setTimeout(() => {
-          setErrorAlertVisible(false);
-        }, 2500);
-    } 
-  } else {
-    setWarningAlertVisible(true);
-    setTimeout(() => {
-    setWarningAlertVisible(false);
-    }, 2500);
-  }
-  refetchWishlistCheck();
-}
+  };
 
   return (
     <Container maxWidth='md'>
-
       {/* Parent Stack */}
       <Stack
         sx={{
@@ -147,13 +89,6 @@ useEffect(() => {
           marginTop: { xs: 10, md: 20 },
         }}
       >
-
-        {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
-        <WishlistSuccess visible={successAlertVisible && successMessage === 'Added'} message="Added to wishlist." />
-        <WishlistSuccess visible={successAlertVisible && successMessage === 'Removed'} message="Removed." />
-        <WishlistWarning visible={warningAlertVisible} /> 
-        <WishlistError visible={errorAlertVisible}/>
-
 
         {/* Image & Rating Stack */}
         <Stack alignItems={'center'} gap={2}>
@@ -176,7 +111,7 @@ useEffect(() => {
           </Box>
 
           <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
-            <Rating name='read-only' value={avgStars(ratings)} readOnly  />
+            <Rating name='read-only' value={avgStars(ratings)} readOnly />
           </Box>
         </Stack>
 
@@ -204,20 +139,24 @@ useEffect(() => {
           {/* Button & Wishlist Stack */}
           <Stack direction='row' gap={1}>
             <>
-            <AddToCart user={user} userId={id} itemId={productId} cartedItems={cartedItems} refetchCart={refetchCart} />
-            </>
-
-            <Tooltip title='Add to wishlist' placement='right'>
-              <Checkbox
-                checked={inWishlist}
-                onChange={() => handleWishlistChange(id, productId)}
-                color='error'
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
+              <CartButton
+                user={user}
+                userId={id}
+                itemId={productId}
+                cartedItems={cartedItems}
+                refetchCart={refetchCart}
               />
-            </Tooltip>
-          </Stack>
 
+              <WishlistButton
+                user={user} // auth
+                userId={id} // user id
+                itemId={productId} // item id
+                wishlistedItems={wishlistedItems} // array of users wishlisted item ids
+                refetchWishlist={refetchWishlist}
+                wishlistData={wishlistData} // boolean
+              />
+            </>
+          </Stack>
         </Stack>
       </Stack>
     </Container>

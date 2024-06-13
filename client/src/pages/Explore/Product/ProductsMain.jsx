@@ -1,93 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
-import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useWishlist } from '../../../hooks/Products/useWishlist';
-import { useState, useEffect } from 'react';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
-import AddToCart from '../../../components/Buttons/AddToCart';
-import WishlistSuccess from '../../../components/Alerts/Wishlist/WishlistSuccess';
-import WishlistWarning from '../../../components/Alerts/Wishlist/WishlistWarning';
-import WishlistError from '../../../components/Alerts/Wishlist/WishlistError';
+import CartButton from '../../../components/Buttons/CartButton';
+import WishlistButton from '../../../components/Buttons/WishlistButton';
 
 
 export default function ProductsMain({ products, wishlistedItems, refetchWishlist, cartedItems, refetchCart }) {
   const { user, id } = useAuthContext();
-  const [inWishlist , setInWishlist] = useState({}); // set to true if item in users wishlist
-
-  // Hook - add/remove wishlist item
-  const { addWishlist, deleteWishlist, isLoading, stateError } = useWishlist();
-
-  // Wishlist Alerts 
-  const [successMessage, setSuccessMessage] = useState(''); 
-  const [successAlertVisible, setSuccessAlertVisible] = useState(false);
-  const [warningAlertVisible, setWarningAlertVisible] = useState(false);
-  const [errorAlertVisible, setErrorAlertVisible] = useState(false);
-
-
-  // if wishlistedItems is an array of Ids, for each Id, create an object that is truthy
-  // Run on initial render, and if wishlistedItems changes
-  useEffect(() => {
-    if (Array.isArray(wishlistedItems)) {
-      const wishlistMap = {};
-      wishlistedItems.forEach((itemId) => {
-        wishlistMap[itemId] = true;
-      });
-      setInWishlist(wishlistMap);
-    }
-  }, [wishlistedItems]);
-  
-
-
-  // OnChange - Refetch (loadWishlist()) from parent, updating items wishlist state
-  const handleWishlistChange = async (userId, itemId) => {
-    if (user) {
-      try {
-        if (inWishlist[itemId]) { // Item already wishlisted, so delete it
-          await deleteWishlist(itemId, userId) // delete item from wishlist
-          setSuccessMessage('Removed'); // set message
-          setSuccessAlertVisible(true); // set alert
-          setInWishlist((prev) => ({ ...prev, [itemId]: false })); // update inWishlist value
-          setTimeout(() => { // remove alert
-            setSuccessAlertVisible(false);
-          }, 2500);
-          refetchWishlist();
-        } else { // Item not in wishlist, so add it
-          await addWishlist(itemId, userId); //  add item to wishlist
-          setSuccessMessage('Added'); // set message
-          setSuccessAlertVisible(true); // set alert
-          setInWishlist((prev) => ({ ...prev, [itemId]: true })); // update inWishlist value
-          setTimeout(() => { // remove alert
-            setSuccessAlertVisible(false);
-          }, 2500);
-          refetchWishlist();
-        }
-      } catch (e) {
-        console.log('Error: ', e);
-        setErrorAlertVisible(true);
-        setTimeout(() => {
-          setErrorAlertVisible(false);
-        }, 2500);
-      }
-      } else {
-        setWarningAlertVisible(true);
-        setTimeout(() => {
-        setWarningAlertVisible(false);
-        }, 2500);
-      }
-    }
 
   return (
     <Grid container spacing={3} marginBottom={6}>
-
-    {/* Wishlist Alerts - passing {visible} prop to wishlist components */}
-    <WishlistSuccess visible={successAlertVisible && successMessage === 'Added'} message="Added to wishlist." />
-    <WishlistSuccess visible={successAlertVisible && successMessage === 'Removed'} message="Removed." />
-    <WishlistWarning visible={warningAlertVisible} /> 
-    <WishlistError visible={errorAlertVisible}/>
-
       {/* If no products in selected categor, render message, else map */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -109,7 +34,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
       ) : (
         <>
           {/* Product Filters - Price and Date */}
-          <Grid item xs={12} marginBottom={2} >
+          <Grid item xs={12} marginBottom={2}>
             <ProductFilters />
           </Grid>
 
@@ -176,25 +101,22 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
                         ${result.price}
                       </Typography>
 
-                      {/* Cart Button &  Wishlist Icon */}
+                      {/* Buttons - Cart & Wishlist */}
                       <Stack direction='row' flexWrap='wrap'>
-                        <AddToCart 
-                        user={user} userId={id} itemId={result._id} 
-                        cartedItems={cartedItems} refetchCart={refetchCart}
+                        <CartButton
+                          user={user}
+                          userId={id}
+                          itemId={result._id}
+                          cartedItems={cartedItems}
+                          refetchCart={refetchCart}
                         />
-
-                        <Box>
-                          <Tooltip title='Add to wishlist' placement='right'>
-                            <Checkbox
-                              color='error'
-                              checked={inWishlist[result._id] || false} // Check if id exists in inWishlist array
-                              onChange={() =>
-                                handleWishlistChange(id, result._id)}
-                              icon={<FavoriteBorder />}
-                              checkedIcon={<Favorite />}
-                            />
-                          </Tooltip>
-                        </Box>
+                        <WishlistButton
+                          user={user}
+                          userId={id}
+                          itemId={result._id}
+                          wishlistedItems={wishlistedItems}
+                          refetchWishlist={refetchWishlist}
+                        />
                       </Stack>
                     </CardContent>
                   </Stack>
