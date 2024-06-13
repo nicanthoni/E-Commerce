@@ -13,6 +13,8 @@ db.once("open", async () => {
     await cleanDB("Rating", "ratings");
     const users = await User.create(userSeeds);
     const vendors = await Vendor.create(vendorSeeds);
+
+    // ITEMS
     const item1 = await Item.create({
       name: "Red ball",
       price: 1.99,
@@ -173,6 +175,8 @@ db.once("open", async () => {
     vendors[3].inventory.push(item14._id);
     vendors[2].inventory.push(item15._id);
     vendors[1].inventory.push(item16._id);
+
+    // CARTS
     users[0].cart.push({ item: item1._id, quantity: 2 });
     item1.inCart += 2;
     users[0].cart.push({ item: item2._id, quantity: 1 });
@@ -205,6 +209,8 @@ db.once("open", async () => {
     item15.inCart += 1;
     users[2].cart.push({ item: item16._id, quantity: 1 });
     item16.inCart += 1;
+
+    // RATINGS + BUY HISTORY + SALES HISTORY
     const rating1 = await Rating.create({
       user: users[0]._id,
       item: item3._id,

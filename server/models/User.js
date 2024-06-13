@@ -69,7 +69,9 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Rating'
     }]
-})
+}, 
+{ timestamps: true }
+)
 
 userSchema.virtual('total').get(function () {
     let totalPrice = this.cart.reduce((total, item) => {
