@@ -1,25 +1,36 @@
-import { Paper, InputBase, IconButton } from '@mui/material';
-import { useState } from 'react';
+import { Paper, InputBase, IconButton, Box } from '@mui/material';
+import { useState, useRef, useMemo } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
 
 export default function SearchBar() {
-  const [search, setSearch] = useState({ search:''}) 
+  const [products, setProducts] = useState([])
+  const [query, setQuery] = useState('')
+  const inputRef = useRef()
+  
 
-  // onChange - update search state
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setSearch({
-      ...search,
-      [name]: value,
-    });
-  };
+  // Only updte list of filtered items, when products or query parameters change
+  // Check if any of the products match the search query
+  const filteredProducts = useMemo (() => {
+    return products.filter(product => {
+    return product.toLowerCase().includes(query.toLowerCase())
+    })
+  },[products, query])
+
 
   // handle Search
-  const handleSearch = () => {
-    console.log('Searched for: ', search)
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
+    console.log('Searched for: ', query)
+    const searchValue = inputRef.current.value
+    if (searchValue === '') return
+    setProducts(prev => {
+      return[...prev, searchValue]
+    })
+    setQuery('') // clear search bar
+    inputRef.current.value = ''
+  }
 
 
   return (
@@ -30,16 +41,20 @@ export default function SearchBar() {
 
       {/* Input field */}
       <InputBase
-        onChange={handleChange}
+        type='search'
+        onChange={e => setQuery(e.target.value)}
+        value={query} // Bind search state to input value
         sx={{ ml: 2, flex: 1 }}
         placeholder='Search Products'
         inputProps={{ 'aria-label': 'search' }}
         name='search'
+        inputRef={inputRef} // Assign inputRef to the InputBase component
       />
+
 
       {/* Search button */}
       <IconButton 
-      onClick={handleSearch}
+      onClick={handleSubmit} // submit search
       aria-label='search'
       type='button'
       bgcolor='secondary' 
@@ -52,6 +67,12 @@ export default function SearchBar() {
         <SearchIcon />
       </IconButton>
 
+      {/* Returned products */}
+      <Box>
+        {filteredProducts.map((product, index) => (
+          <div key={index}>{product}</div>
+        ))}
+      </Box>
   </Paper>
   );
 }
