@@ -1,9 +1,9 @@
 import { Stack, Box, Typography, Button } from '@mui/material';
-import QuantityIncrementer from './QuantityIncrementer';
+import QuantityIncrementer from '../../../components/_tests_/QuantityIncrementer';
 
 
 // For each item in cart
-export default function CheckoutOrder({ userData }) {
+export default function CartItem({ userData }) {
   return (
     <>
     {userData.cart.map((item, index) => (

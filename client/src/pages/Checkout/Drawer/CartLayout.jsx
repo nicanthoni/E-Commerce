@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import CheckoutOrder from './CheckoutOrder';
+import CartItem from './CartItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Grid from '@mui/material/Grid';
 import { useAuthContext } from '../../../hooks/useAuthContext';
@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 
 // Layout of components within the cart drawer
-export default function CheckoutMain() {
+export default function CartLayout() {
   const { id } = useAuthContext()
 
   // Load User
@@ -36,7 +36,6 @@ if (!data || !data.user) {
 // Grab data
 const user = data.user;
 
-
 // Calculate cart subtotal 
 const subtotal = user.cart.reduce((total, item) => {
   return total + item.item.price;
@@ -44,8 +43,7 @@ const subtotal = user.cart.reduce((total, item) => {
 
   
   return (
-    <Grid
-      container
+    <Grid container
       direction='column'
       flexWrap='nowrap'
       sx={{
@@ -56,8 +54,7 @@ const subtotal = user.cart.reduce((total, item) => {
       }}
     >
       {/* Cart icon */}
-      <Grid
-        item
+      <Grid item
         sx={{
           bgcolor: 'primary.main',
           flex: '0 0 10%', // Fixed height for the icon section
@@ -75,22 +72,22 @@ const subtotal = user.cart.reduce((total, item) => {
         </Typography>
       </Grid>
 
-      {/* Products in Cart*/}
-      <Grid
-        item
+
+      {/* Items in Cart*/}
+      <Grid item
         sx={{
           flex: '1 1 auto', // Grow to fill the remaining space
           overflowY: 'auto',
           justifyContent: 'flex-start',
           bgcolor: 'background.paper', // Adjust as needed
-        }}
-      >
-        <CheckoutOrder refetchUserData={refetchUserData} userData={user} loadUser={loadUser}/>
+        }}>
+
+        <CartItem refetchUserData={refetchUserData} userData={user} loadUser={loadUser}/>
       </Grid>
 
+
       {/* Checkout Button & Subtotal */}
-      <Grid
-        item
+      <Grid item
         sx={{
           flex: '0 0 auto', // Fixed height for the footer section
           mt: 'auto',

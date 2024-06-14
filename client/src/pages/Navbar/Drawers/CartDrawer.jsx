@@ -2,7 +2,7 @@ import { Box, Badge, IconButton, Drawer, Stack, Typography, Button } from '@mui/
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CheckoutMain from '../../Checkout/CheckoutDrawer/CheckoutMain'
+import CartLayout from '../../Checkout/Drawer/CartLayout'
 import { useLazyQuery } from '@apollo/client';
 import { User, Cart } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
@@ -81,7 +81,7 @@ if (user && cartData) {
       >
         {user ? (
           <>
-            <CheckoutMain refetchUserData={refetchUserData} loadUser={loadUser} />
+            <CartLayout refetchUserData={refetchUserData} loadUser={loadUser} />
           </>
         ) : (
           <>
