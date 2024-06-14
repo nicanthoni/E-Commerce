@@ -1,5 +1,5 @@
 import { Grid, Container, Typography } from '@mui/material';
-import ProductsMain from './Product/ProductsMain';
+import AllProducts from './Product/AllProducts';
 import CategorySelection from './Filters/Categories';
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
@@ -105,7 +105,7 @@ export default function Explore() {
        
         {/* Products + props*/}
         <Grid item xs={12} marginTop={2}>
-          <ProductsMain 
+          <AllProducts 
           products={products} // products by chosen category
           wishlistedItems={wishlistedItems} // items in users wishlist
           cartedItems={cartedItems} // items in users cart

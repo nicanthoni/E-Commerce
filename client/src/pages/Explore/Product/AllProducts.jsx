@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
-import { Typography, Box, Grid, Stack, Checkbox, Tooltip } from '@mui/material';
+import { Typography, Grid, Stack } from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
-import CartButton from '../../../components/Buttons/CartButton';
+import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
 
 
-export default function ProductsMain({ products, wishlistedItems, refetchWishlist, cartedItems, refetchCart }) {
+export default function AllProducts({ products, wishlistedItems, refetchWishlist, cartedItems, refetchCart }) {
   const { user, id } = useAuthContext();
 
   return (
@@ -103,7 +103,7 @@ export default function ProductsMain({ products, wishlistedItems, refetchWishlis
 
                       {/* Buttons - Cart & Wishlist */}
                       <Stack direction='row' flexWrap='wrap'>
-                        <CartButton
+                        <AddToCart
                           user={user}
                           userId={id}
                           itemId={result._id}

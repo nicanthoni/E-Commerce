@@ -1,51 +1,33 @@
 import { Box, Button, Typography } from '@mui/material';
-import CheckoutOrder from './CheckoutOrder';
+import CartItem from './CartItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Grid from '@mui/material/Grid';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { User } from '../../../utils/queries';
-import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 
 
 // Layout of components within the cart drawer
-export default function CheckoutMain() {
-  const { id } = useAuthContext()
-
-  // Load User
-  const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
+export default function CartLayout({  loadUser, userData, cartData, refetchCart, refetchUserData  }) {
+const { id } = useAuthContext()
 
 // Run loadUser when component mounts
 useEffect(() => {
   loadUser();
 }, [loadUser]);
 
-if (error) {
-  console.error('GraphQL Error:', error);
-  return <Typography>Error fetching data</Typography>;
-}
-if (loading) {
-  return <Typography>Loading...</Typography>; 
-}
-if (!data || !data.user) {
-  return <Typography>No user data found</Typography>;
-}
 
-// Grab data
-const user = data.user;
-
+ // Loading check
+ if (!userData || !cartData) {
+  return <Typography>Loading...</Typography>;
+}
 
 // Calculate cart subtotal 
-const subtotal = user.cart.reduce((total, item) => {
+const subtotal = userData.user.cart.reduce((total, item) => {
   return total + item.item.price;
 }, 0).toFixed(2);
-
   
   return (
-    <Grid
-      container
+    <Grid container
       direction='column'
       flexWrap='nowrap'
       sx={{
@@ -56,8 +38,7 @@ const subtotal = user.cart.reduce((total, item) => {
       }}
     >
       {/* Cart icon */}
-      <Grid
-        item
+      <Grid item
         sx={{
           bgcolor: 'primary.main',
           flex: '0 0 10%', // Fixed height for the icon section
@@ -75,22 +56,37 @@ const subtotal = user.cart.reduce((total, item) => {
         </Typography>
       </Grid>
 
-      {/* Products in Cart*/}
-      <Grid
-        item
+
+      {/* Items in Cart*/}
+      {cartData.usersCart.length === 0 ?  (
+      <Grid item>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          0 items in your cart.
+        </Typography>
+        <Button
+          href='/explore'
+          variant='contained'
+          color='secondary'
+          sx={{ textTransform: 'none', mx: 3 }}
+          >
+          Shop Items
+        </Button>
+      </Grid>
+      ) : (
+      <Grid item
         sx={{
-          flex: '1 1 auto', // Grow to fill the remaining space
           overflowY: 'auto',
           justifyContent: 'flex-start',
-          bgcolor: 'background.paper', // Adjust as needed
-        }}
-      >
-        <CheckoutOrder refetchUserData={refetchUserData} userData={user} loadUser={loadUser}/>
+          bgcolor: 'background.paper',
+        }}>
+        <CartItem refetchUserData={refetchUserData} refetchCart={refetchCart} userData={userData} loadUser={loadUser} cartData={cartData}/>
       </Grid>
+      )} 
+
 
       {/* Checkout Button & Subtotal */}
-      <Grid
-        item
+      {cartData.usersCart.length === 0 ? (null) : (
+      <Grid item
         sx={{
           flex: '0 0 auto', // Fixed height for the footer section
           mt: 'auto',
@@ -98,8 +94,8 @@ const subtotal = user.cart.reduce((total, item) => {
         }}
       >
         <Box>
-          <Typography padding={1} fontWeight='bold' color='#fff'>
-            Subtotal: ${subtotal}
+          <Typography padding={1}  color='#fff'>
+            <span style={{ fontWeight: 'bold'}}>Subtotal:</span> ${subtotal}
           </Typography>
 
           <Button
@@ -117,6 +113,7 @@ const subtotal = user.cart.reduce((total, item) => {
           </Button>
         </Box>
       </Grid>
+      )}
 
 
     </Grid>

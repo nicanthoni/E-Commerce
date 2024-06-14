@@ -1,12 +1,13 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
-  return (
 
+
+const NumberInput = forwardRef(function CustomNumberInput(props, ref) {
+  return (
     <BaseNumberInput
       slots={{
         root: StyledInputRoot,
@@ -30,10 +31,14 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
   );
 });
 
+
+
 export default function QuantityIncrementer() {
-  // stopPropagation() prevents the drawer closing itself whenevr clicking the increment button
-  return <NumberInput onClick={(e) => { e.stopPropagation();}} aria-label='Quantity Input' min={1} max={99} />;
+  return (
+  <NumberInput aria-label='Quantity Input' min={1} max={10} />
+  );
 }
+
 
 const blue = {
   100: '#daecff',

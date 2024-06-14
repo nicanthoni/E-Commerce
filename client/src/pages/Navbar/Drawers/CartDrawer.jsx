@@ -1,8 +1,7 @@
 import { Box, Badge, IconButton, Drawer, Stack, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CheckoutMain from '../../Checkout/CheckoutDrawer/CheckoutMain'
+import CartLayout from '../../Checkout/Drawer/CartLayout'
 import { useLazyQuery } from '@apollo/client';
 import { User, Cart } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
@@ -18,10 +17,11 @@ export default function CartDrawer() {
     variables: {id: id}
   })
 
-    // Load User
-    const [loadUser, { loading: loadingUser, data: userData, error: userError, refetch: refetchUserData }] = useLazyQuery(User, {
-      variables: { userId: id },
-    });
+  // Load User
+  const [loadUser, { loading: loadingUser, data: userData, error: userError, refetch: refetchUserData }] = useLazyQuery(User, {
+    variables: { userId: id },
+  });
+
 
   // Toggle drawer - refetch cart data each time the cart is toggled
   const handleDrawerToggle = () => {
@@ -31,6 +31,7 @@ export default function CartDrawer() {
     }
   };
 
+  
   // Load users cart data
   useEffect(() => {
     if (user) {
@@ -79,22 +80,16 @@ if (user && cartData) {
           textAlign: 'center',
         }}
       >
+
         {user ? (
           <>
-            <CheckoutMain refetchUserData={refetchUserData} loadUser={loadUser} />
+            <CartLayout refetchUserData={refetchUserData} refetchCart={refetchCart} loadUser={loadUser} userData={userData} cartData={cartData} />
           </>
         ) : (
           <>
             <Stack textAlign='center'>
               <Typography variant='h6' sx={{ m: 2 }}>
-                <Link
-                  onClick={handleDrawerToggle}
-                  underline='hover'
-                  fontWeight='bold'
-                  to='/signin'
-                >
                   Sign in
-                </Link>{' '}
                 to view your cart.
               </Typography>
 

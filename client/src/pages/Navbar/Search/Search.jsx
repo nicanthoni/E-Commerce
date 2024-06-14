@@ -68,11 +68,11 @@ export default function SearchBar() {
       </IconButton>
 
       {/* Returned products */}
-      <Box>
+      {/* <Box>
         {filteredProducts.map((product, index) => (
           <div key={index}>{product}</div>
         ))}
-      </Box>
+      </Box> */}
   </Paper>
   );
 }

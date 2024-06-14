@@ -3,6 +3,8 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 import NicsAvatar from '../../assets/images/MyAvatar-PNG.png'
+import Avatar1 from '../../assets/images/SampleAvatar-PNG.png'
+import Avatar2 from '../../assets/images/SampleAvatar2-PNG.png'
 import {Divider} from '@mui/material';
 
 
@@ -59,7 +61,7 @@ export default function HomeTestimonials() {
 
         {/* Review 2 */}
         <Stack padding={2} alignItems='center' gap={1} direction='column'>
-          <Avatar src={NicsAvatar} alt='Customer Photo' 
+          <Avatar src={Avatar2} alt='Customer Photo' 
           sx={{ bgcolor: 'primary.main', width: 68, height: 68 }}>
           </Avatar>
 
@@ -69,7 +71,7 @@ export default function HomeTestimonials() {
           </Typography>
 
           <Typography variant='caption'>
-            - Marcus
+            - Tammy
           </Typography>
 
           <Typography variant='caption'>
@@ -82,7 +84,7 @@ export default function HomeTestimonials() {
 
         {/* Review 3 */}
         <Stack padding={2} alignItems='center' gap={1} direction='column'>
-          <Avatar src={NicsAvatar} alt='Customer Photo' 
+          <Avatar src={Avatar1} alt='Customer Photo' 
           sx={{ bgcolor: 'primary.main', width: 68, height: 68 }}>
           </Avatar>
 
