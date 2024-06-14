@@ -9,35 +9,23 @@ import { useEffect } from 'react';
 
 
 // Layout of components within the cart drawer
-export default function CartLayout({   cartData, refetchCart  }) {
+export default function CartLayout({  loadUser, userData, cartData, refetchCart, refetchUserData  }) {
   const { id } = useAuthContext()
-
-  // Load User
-  const [loadUser, { loading, error, data, refetch: refetchUserData }] = useLazyQuery(User, {
-    variables: { userId: id },
-  });
 
 // Run loadUser when component mounts
 useEffect(() => {
   loadUser();
 }, [loadUser]);
 
-if (error) {
-  console.error('GraphQL Error:', error);
-  return <Typography>Error fetching data</Typography>;
-}
-if (loading) {
-  return <Typography>Loading...</Typography>; 
-}
-if (!data || !data.user) {
-  return <Typography>No user data found</Typography>;
+
+ // Loading check
+ if (!userData || !cartData) {
+  return <Typography>Loading...</Typography>;
 }
 
-// Grab data
-const user = data.user;
 
 // Calculate cart subtotal 
-const subtotal = user.cart.reduce((total, item) => {
+const subtotal = userData.user.cart.reduce((total, item) => {
   return total + item.item.price;
 }, 0).toFixed(2);
 
@@ -74,6 +62,21 @@ const subtotal = user.cart.reduce((total, item) => {
 
 
       {/* Items in Cart*/}
+      {cartData.usersCart.length === 0 ?  (
+      <Grid item>
+        <Typography variant='h6' sx={{ m: 2 }}>
+          0 items in your cart.
+        </Typography>
+        <Button
+          href='/explore'
+          variant='contained'
+          color='secondary'
+          sx={{ textTransform: 'none', mx: 3 }}
+          >
+          Shop Items
+        </Button>
+      </Grid>
+      ) : (
       <Grid item
         sx={{
           flex: '1 1 auto', // Grow to fill the remaining space
@@ -81,12 +84,13 @@ const subtotal = user.cart.reduce((total, item) => {
           justifyContent: 'flex-start',
           bgcolor: 'background.paper', // Adjust as needed
         }}>
-
-        <CartItem refetchUserData={refetchUserData} refetchCart={refetchCart} userData={user} loadUser={loadUser} cartData={cartData}/>
+        <CartItem refetchUserData={refetchUserData} refetchCart={refetchCart} userData={userData} loadUser={loadUser} cartData={cartData}/>
       </Grid>
+      )} 
 
 
       {/* Checkout Button & Subtotal */}
+      {cartData.usersCart.length === 0 ? (null) : (
       <Grid item
         sx={{
           flex: '0 0 auto', // Fixed height for the footer section
@@ -114,6 +118,7 @@ const subtotal = user.cart.reduce((total, item) => {
           </Button>
         </Box>
       </Grid>
+      )}
 
 
     </Grid>

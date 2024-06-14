@@ -4,7 +4,7 @@ import CartSuccess from '../../Alerts/Cart/CartSuccess';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useCart } from '../../../hooks/_tests_/useCart';
 
-export default function DeleteItem({ refetchCart, itemId }) {
+export default function DeleteItem({ refetchCart, itemId, refetchUserData }) {
     const { id } = useAuthContext();
     const userId = id;
 
@@ -25,11 +25,13 @@ export default function DeleteItem({ refetchCart, itemId }) {
             setTimeout(() => {
                 setSuccessAlertVisible(false);
             }, 2000);
+            refetchUserData() // refetch updated user data
             refetchCart(); // refetch the updated cart data
         } catch (e) {
             console.log('Delete from cart error:', e);
         }
     };
+
 
     return (
         <>
@@ -41,8 +43,7 @@ export default function DeleteItem({ refetchCart, itemId }) {
                     backgroundColor: 'white',
                     color: 'primary.main',
                     textTransform: 'none',
-                }}
-            >
+                }}>
                 Delete
             </Button>
 

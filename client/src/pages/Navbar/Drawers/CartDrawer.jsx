@@ -1,5 +1,4 @@
 import { Box, Badge, IconButton, Drawer, Stack, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartLayout from '../../Checkout/Drawer/CartLayout'
@@ -17,7 +16,6 @@ export default function CartDrawer() {
    const [loadCart, {loading: loadingCart, data: cartData, error: cartError, refetch: refetchCart}] = useLazyQuery(Cart, {
     variables: {id: id}
   })
-
 
     // Load User
     const [loadUser, { loading: loadingUser, data: userData, error: userError, refetch: refetchUserData }] = useLazyQuery(User, {
@@ -82,22 +80,16 @@ if (user && cartData) {
           textAlign: 'center',
         }}
       >
+
         {user ? (
           <>
-            <CartLayout refetchUserData={refetchUserData} refetchCart={refetchCart} loadUser={loadUser} data={userData} cartData={cartData} />
+            <CartLayout refetchUserData={refetchUserData} refetchCart={refetchCart} loadUser={loadUser} userData={userData} cartData={cartData} />
           </>
         ) : (
           <>
             <Stack textAlign='center'>
               <Typography variant='h6' sx={{ m: 2 }}>
-                <Link
-                  onClick={handleDrawerToggle}
-                  underline='hover'
-                  fontWeight='bold'
-                  to='/signin'
-                >
                   Sign in
-                </Link>{' '}
                 to view your cart.
               </Typography>
 

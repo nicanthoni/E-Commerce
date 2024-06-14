@@ -4,11 +4,11 @@ import QuantityIncrementer from '../../../components/_tests_/QuantityIncrementer
 
 
 // For each item in cart
-export default function CartItem({ userData, refetchCart }) {
+export default function CartItem({ userData, refetchCart, refetchUserData }) {
 
   return (
     <>
-    {userData.cart.map((item, index) => (
+    {userData.user.cart.map((item, index) => (
     <Stack
       key={index}
       borderBottom='inset'
@@ -77,7 +77,7 @@ export default function CartItem({ userData, refetchCart }) {
           </Typography>
 
         {/* Button  */}
-          <DeleteItem itemId={item.item._id} refetchCart={refetchCart} /> 
+          <DeleteItem itemId={item.item._id} refetchCart={refetchCart} refetchUserData={refetchUserData}/> 
 
       </Stack>
     </Stack>
