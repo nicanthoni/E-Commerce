@@ -1,9 +1,11 @@
 import { Stack, Box, Typography, Button } from '@mui/material';
+import DeleteItem from '../../../components/Buttons/_tests_/DeleteItem';
 import QuantityIncrementer from '../../../components/_tests_/QuantityIncrementer';
 
 
 // For each item in cart
-export default function CartItem({ userData }) {
+export default function CartItem({ userData, refetchCart }) {
+
   return (
     <>
     {userData.cart.map((item, index) => (
@@ -19,33 +21,28 @@ export default function CartItem({ userData }) {
       bgcolor='#F2F2F2'
     >
 
-
-        <Stack gap={2}>
         {/* Product img & Incrementer */}
-        <Box sx={{ height: '100px', width: '100px' }}>
-          <img
-            src={item.item.img}
-            alt='Product'
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain', // ensures image fits within the Box
-            }}
-          />
-        </Box>
+        <Stack gap={2}>
+          <Box sx={{ height: '100px', width: '100px' }}>
+            <img
+              src={item.item.img}
+              alt='Product'
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain', // ensures image fits within the Box
+              }}
+            />
+          </Box>
   
-        <QuantityIncrementer/>
+          <QuantityIncrementer userData={userData} />
         </Stack>
       
 
         {/* Product details */}
-        <Stack
-          direction='column'
-          justifyContent='flex-end'
+        <Stack direction='column' justifyContent='flex-end' >
 
-        >
-
-        {/* Name, Description, Price, & Button */}
+        {/* Name */}
             <Typography
             textAlign='left'
             variant='body1'
@@ -54,7 +51,7 @@ export default function CartItem({ userData }) {
             {item.item.name}
           </Typography>
 
-
+        {/* Price */}
           <Typography
             textAlign='left'
             variant='body1'
@@ -64,6 +61,7 @@ export default function CartItem({ userData }) {
             ${item.item.price}
           </Typography>
 
+        {/* Description */}
           <Typography
             textAlign='left'
             variant='caption'
@@ -78,19 +76,8 @@ export default function CartItem({ userData }) {
             {item.item.description}
           </Typography>
 
-          <Button 
-            size='small'
-            variant='contained'
-            color='grey'
-            sx={{
-              backgroundColor: 'white',
-              color: 'primary.main',
-              textTransform: 'none',
-            }}
-            >
-              Delete
-          </Button>
-
+        {/* Button  */}
+          <DeleteItem itemId={item.item._id} refetchCart={refetchCart} /> 
 
       </Stack>
     </Stack>

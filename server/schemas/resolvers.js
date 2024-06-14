@@ -95,9 +95,9 @@ const resolvers = {
     usersCart: async (parent, { id }) => {
       try {
         console.log(`Checking for products in ${id}'s cart`);
-        // Find the user and populate the wishlist items
+        // Find the user and populate their items in cart
         const user = await User.findById(id).populate('cart.item');
-        // Extract the wishlisted item IDs
+        // Extract the cart item's IDs
         const cartItemIds = user.cart.map(cartitem => cartitem.item._id.toString());
         return cartItemIds;
       } catch (error) {

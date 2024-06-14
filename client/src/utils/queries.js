@@ -28,9 +28,9 @@ export const User = gql`
       firstName
       lastName
       email
-      # createdAt
       cart {
         item {
+          _id
           name
           price
           img

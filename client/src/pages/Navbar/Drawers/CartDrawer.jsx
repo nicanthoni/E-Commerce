@@ -18,10 +18,12 @@ export default function CartDrawer() {
     variables: {id: id}
   })
 
+
     // Load User
     const [loadUser, { loading: loadingUser, data: userData, error: userError, refetch: refetchUserData }] = useLazyQuery(User, {
       variables: { userId: id },
     });
+
 
   // Toggle drawer - refetch cart data each time the cart is toggled
   const handleDrawerToggle = () => {
@@ -31,6 +33,7 @@ export default function CartDrawer() {
     }
   };
 
+  
   // Load users cart data
   useEffect(() => {
     if (user) {
@@ -81,7 +84,7 @@ if (user && cartData) {
       >
         {user ? (
           <>
-            <CartLayout refetchUserData={refetchUserData} loadUser={loadUser} />
+            <CartLayout refetchUserData={refetchUserData} refetchCart={refetchCart} loadUser={loadUser} data={userData} cartData={cartData} />
           </>
         ) : (
           <>

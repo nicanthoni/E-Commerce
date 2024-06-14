@@ -9,11 +9,11 @@ import { useEffect } from 'react';
 
 
 // Layout of components within the cart drawer
-export default function CartLayout() {
+export default function CartLayout({   cartData, refetchCart  }) {
   const { id } = useAuthContext()
 
   // Load User
-  const [loadUser, { loading, data, error, refetch: refetchUserData }] = useLazyQuery(User, {
+  const [loadUser, { loading, error, data, refetch: refetchUserData }] = useLazyQuery(User, {
     variables: { userId: id },
   });
 
@@ -82,7 +82,7 @@ const subtotal = user.cart.reduce((total, item) => {
           bgcolor: 'background.paper', // Adjust as needed
         }}>
 
-        <CartItem refetchUserData={refetchUserData} userData={user} loadUser={loadUser}/>
+        <CartItem refetchUserData={refetchUserData} refetchCart={refetchCart} userData={user} loadUser={loadUser} cartData={cartData}/>
       </Grid>
 
 
