@@ -5,7 +5,7 @@ import InfoIcon from '@mui/icons-material/Info';
 export default function CartImgList({ refetchUserData, loadUser, userData  }) {
   const subtotal = userData.cart.reduce((total, item) => { // Calculate cart subtotal
     return total + item.item.price;
-  }, 0);
+  },0).toFixed(2);
   
 
   return (

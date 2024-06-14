@@ -9,7 +9,7 @@ import CartError from '../Alerts/Cart/CartError';
 // user = auth status | userId = users id | itemId = itemsId 
 // cartedItems = array of item's Ids from users cart 
 // refetchCart = refetch query 'Cart' for list of user cart's item ids
-export default function CartButton ({  user, userId, itemId, cartedItems, refetchCart }) {
+export default function AddToCart ({  user, userId, itemId, cartedItems, refetchCart }) {
   
   // Hooks
   const { addCart, deleteCart } = useCart()

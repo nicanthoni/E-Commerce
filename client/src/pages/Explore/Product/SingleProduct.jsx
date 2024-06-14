@@ -4,7 +4,7 @@ import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { IndividualProduct, Cart, Wishlist } from '../../../utils/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import CartButton from '../../../components/Buttons/CartButton';
+import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
 import { getAverage } from '../../../utils/calculations/getAverage';
 
@@ -132,7 +132,7 @@ export default function SingleProduct() {
           {/* Button & Wishlist Stack */}
           <Stack direction='row' gap={1}>
             <>
-              <CartButton
+              <AddToCart
                 user={user} // auth
                 userId={id} // user id
                 itemId={productId} // item id

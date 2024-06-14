@@ -3,14 +3,12 @@ import CartItem from './CartItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Grid from '@mui/material/Grid';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { User } from '../../../utils/queries';
-import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 
 
 // Layout of components within the cart drawer
 export default function CartLayout({  loadUser, userData, cartData, refetchCart, refetchUserData  }) {
-  const { id } = useAuthContext()
+const { id } = useAuthContext()
 
 // Run loadUser when component mounts
 useEffect(() => {
@@ -23,12 +21,10 @@ useEffect(() => {
   return <Typography>Loading...</Typography>;
 }
 
-
 // Calculate cart subtotal 
 const subtotal = userData.user.cart.reduce((total, item) => {
   return total + item.item.price;
 }, 0).toFixed(2);
-
   
   return (
     <Grid container
@@ -79,10 +75,9 @@ const subtotal = userData.user.cart.reduce((total, item) => {
       ) : (
       <Grid item
         sx={{
-          flex: '1 1 auto', // Grow to fill the remaining space
           overflowY: 'auto',
           justifyContent: 'flex-start',
-          bgcolor: 'background.paper', // Adjust as needed
+          bgcolor: 'background.paper',
         }}>
         <CartItem refetchUserData={refetchUserData} refetchCart={refetchCart} userData={userData} loadUser={loadUser} cartData={cartData}/>
       </Grid>
@@ -99,8 +94,8 @@ const subtotal = userData.user.cart.reduce((total, item) => {
         }}
       >
         <Box>
-          <Typography padding={1} fontWeight='bold' color='#fff'>
-            Subtotal: ${subtotal}
+          <Typography padding={1}  color='#fff'>
+            <span style={{ fontWeight: 'bold'}}>Subtotal:</span> ${subtotal}
           </Typography>
 
           <Button
