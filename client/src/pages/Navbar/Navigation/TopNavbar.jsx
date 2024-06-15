@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../../../components/Buttons/Logout';
 import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import LogoutSuccess from '../../../components/Alerts/Auth/LogoutSuccess';
+import LogoutAlert from '../../../components/Alerts/Auth/Logout';
 import { useState } from 'react';
 
 export default function TopNav() {
@@ -129,7 +129,7 @@ export default function TopNav() {
       </Box>
 
       {/* Alerts */}
-      <LogoutSuccess visible={showLogoutAlert} />
+      <LogoutAlert visible={showLogoutAlert} />
     </>
   );
 }

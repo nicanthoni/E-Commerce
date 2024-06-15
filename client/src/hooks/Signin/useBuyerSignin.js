@@ -23,25 +23,20 @@ const signin = async (formState) => {
     variables: formState,
     });
     
-    // login with users token
-    Auth.login(data.Userlogin.token);
+    Auth.login(data.Userlogin.token); // login with users token
     
-    // update the auth context
-    dispatch({ type: 'LOGIN', payload: data })
+    dispatch({ type: 'LOGIN', payload: data }) // update the auth context
 
     setIsLoading(false)
 
-    
     return true; // Indicate a successful login
-
 
     } catch (e) {
         setStateError(true)
         setIsLoading(false)
         console.error('LoginUser error in useSignin() hook: ', e);
         return false; // Indicate a failed login
-    }
-        
+    }      
 }
 return { signin, isLoading, stateError }
 }
