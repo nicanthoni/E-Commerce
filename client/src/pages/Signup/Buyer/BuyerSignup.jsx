@@ -46,6 +46,17 @@ export default function BuyerSignup() {
     event.preventDefault();
     setShowSignupAlert(false);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check for empty input fields 
+    const { firstName, lastName, email, password } = formState;
+    if (!firstName || !lastName || !email || !password) {
+      setAlertMessage('Please complete all fields');
+      setShowSignupAlert(true);
+      setTimeout(() => {
+        setShowSignupAlert(false);
+      }, 1500);
+      return;
+    }
   
     // Check if both email and password are invalid
     if (!emailRegex.test(formState.email) && formState.password.length < 8) {
