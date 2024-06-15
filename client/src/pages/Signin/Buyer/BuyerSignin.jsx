@@ -54,7 +54,6 @@ export default function Signin() {
             setShowLoginAlert(false);
           }, 1500);
         }
-  
       } catch (e) {
           console.error('signin() error in BuyerSignin component:', e);
         }

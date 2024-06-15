@@ -18,28 +18,24 @@ export const useVendorSignup = () => {
         setIsLoading(true)
         setStateError(null)
 
-        try {
-            const { data } = await AddVendor({
-            variables: formState,
-            });
-            
-            // create new token
-            Auth.login(data.AddVendor.token);
-            
-            // update the auth context
-            dispatch({ type: 'LOGIN', payload: data })
+    try {
+        const { data } = await AddVendor({
+        variables: formState,
+        });        
+        
+        Auth.login(data.AddVendor.token); // create new token
+        
+        dispatch({ type: 'LOGIN', payload: data }) // update the auth context
 
-            setIsLoading(false)
+        setIsLoading(false)
 
-            // send to users profile
-            setTimeout(() => {
-                navigate('/profile');
-                }, 1500);
+        return true; // Indicate a successful registration
 
       } catch (e) {
             setStateError(true)
             setIsLoading(false)
             console.error('AddUser error in useSignup() hook:', e);
+            return false; // Indicate a failed registration
       }
          
     }

@@ -1,28 +1,21 @@
 import Copyright from '../../../components/Footer/Copyright';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import { Alert } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import {Avatar, Button, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useBuyerSignup } from '../../../hooks/Signup/useBuyerSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import SignupAlert from '../../../components/Alerts/Auth/Signup';
+
 
 export default function BuyerSignup() {
   const { user } = useAuthContext();
   const { signup, stateError, isLoading } = useBuyerSignup(); // custom hook
   const navigate = useNavigate();
 
-  // Error & Alert States
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  // Alert States
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showSignupAlert, setShowSignupAlert] = useState(false);
 
   // Form state
   const [formState, setFormState] = useState({
@@ -48,50 +41,79 @@ export default function BuyerSignup() {
     });
   };
 
-  // onClose - clear error message
-  const handleClearError = () => {
-    setErrorMessage('');
-    setShowErrorAlert(false);
-  };
-
   // OnSubmit - validation check + run signup() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Clear previous error message
+    setShowSignupAlert(false);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailRegex.test(formState.email)) {
-      setErrorMessage('Invalid email address');
+    // Check for empty input fields 
+    const { firstName, lastName, email, password } = formState;
+    if (!firstName || !lastName || !email || !password) {
+      setAlertMessage('Please complete all fields');
+      setShowSignupAlert(true);
+      setTimeout(() => {
+        setShowSignupAlert(false);
+      }, 1500);
+      return;
     }
-
-    if (formState.password.length < 8) {
-      setErrorMessage(
-        (prevMessage) =>
-          prevMessage + ' Password must be at least 8 characters long'
-      );
-    }
-
+  
+    // Check if both email and password are invalid
     if (!emailRegex.test(formState.email) && formState.password.length < 8) {
-      setErrorMessage(
-        'The email address is invalid, and your password must be at least 8 characters long'
-      );
+      setAlertMessage('Invalid email, and password less than 8 characters');
+      setShowSignupAlert(true);
+      setTimeout(() => {
+        setShowSignupAlert(false);
+      }, 1500);
+      return;
     }
-
-    if (errorMessage) {
-      setShowErrorAlert(true);
+    // Check if email is invalid
+    if (!emailRegex.test(formState.email)) {
+      setAlertMessage('Invalid email address');
+      setShowSignupAlert(true);
+      setTimeout(() => {
+        setShowSignupAlert(false);
+      }, 1500);
+      return;
+    }
+    // Check if password is too short
+    if (formState.password.length < 8) {
+      setAlertMessage('Password must be at least 8 characters');
+      setShowSignupAlert(true);
+      setTimeout(() => {
+        setShowSignupAlert(false);
+      }, 1500);
       return;
     }
 
     try {
-      // console.log('Signup Form state:', formState);
-      await signup(formState);
-      setShowSuccessAlert(true);
+      const success = await signup(formState);
+      if (success) {
+        setAlertMessage('Registration Successful.');
+        setShowSignupAlert(true);
+        setTimeout(() => {
+          navigate('/profile');
+          setShowSignupAlert(false);
+        }, 1500);
+      } else {
+        // Handle any other cases if needed
+        setAlertMessage('Registration failed. Please try again.');
+        setShowSignupAlert(true);
+        setTimeout(() => {
+          setShowSignupAlert(false);
+        }, 1500);
+      }
     } catch (e) {
-      setShowErrorAlert(true);
       console.error('signup() error in BuyerSignup:', e);
+      setAlertMessage('An error occurred during signup. Please try again later.');
+      setShowSignupAlert(true);
+      setTimeout(() => {
+        setShowSignupAlert(false);
+      }, 1500);
     }
   };
 
+  
   return (
     <Container component='main' maxWidth='xs'>
       <Box
@@ -102,21 +124,6 @@ export default function BuyerSignup() {
           alignItems: 'center',
         }}
       >
-        {showSuccessAlert && (
-          <Alert severity='success' sx={{ width: '100%', mb: 2 }}>
-            Registration successful! Redirecting to profile...
-          </Alert>
-        )}
-        {showErrorAlert && (
-          <Alert
-            severity='error'
-            sx={{ width: '100%', mb: 2 }}
-            onClose={handleClearError}
-          >
-            {errorMessage ||
-              'Please complete the form, or try a different email address'}
-          </Alert>
-        )}
         <Avatar sx={{ marginBottom: 3, bgcolor: 'primary.main' }}>
           <ShoppingBasketIcon />
         </Avatar>
@@ -200,6 +207,9 @@ export default function BuyerSignup() {
           </Grid>
         </Box>
       </Box>
+
+      {/* ⚠️ Alert ⚠️ */}
+      <SignupAlert visible={showSignupAlert} message={alertMessage} />
       <Copyright sx={{ mt: 3 }} />
     </Container>
   );

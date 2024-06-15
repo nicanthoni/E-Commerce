@@ -1,6 +1,7 @@
-import { Stack, Box, Typography, Button } from '@mui/material';
+import { Stack, Box, Typography } from '@mui/material';
 import DeleteItem from '../../../components/Buttons/DeleteItem';
 import QuantityIncrementer from '../../../components/_tests_/QuantityIncrementer';
+import WishlistButton from '../../../components/Buttons/WishlistButton';
 
 // For each item in cart
 export default function CartItem({ userData, refetchCart, refetchUserData }) {
@@ -69,7 +70,7 @@ export default function CartItem({ userData, refetchCart, refetchUserData }) {
               {item.item.description}
             </Typography>
 
-            {/* Button  */}
+            {/* Buttons  */}
             <DeleteItem
               itemId={item.item._id}
               refetchCart={refetchCart}

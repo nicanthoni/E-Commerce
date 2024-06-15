@@ -74,6 +74,7 @@ const subtotal = userData.user.cart.reduce((total, item) => {
       </Grid>
       ) : (
       <Grid item
+        p={1}
         sx={{
           overflowY: 'auto',
           justifyContent: 'flex-start',

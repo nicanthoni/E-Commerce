@@ -23,22 +23,19 @@ export const useBuyerSignup = () => {
         variables: formState,
       });
 
-      // create new token
-      Auth.login(data.AddUser.token);
+      Auth.login(data.AddUser.token); // create new token
 
-      // update the auth context
-      dispatch({ type: 'LOGIN', payload: data });
+      dispatch({ type: 'LOGIN', payload: data }); // update the auth context
 
       setIsLoading(false);
 
-      // send to users profile
-      setTimeout(() => {
-        navigate('/profile');
-      }, 1500);
+      return true; // Indicate a successful registration
+
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
       console.error('AddUser error in useSignup() hook:', e);
+      return false; // Indicate a failed registration
     }
   };
   return { signup, isLoading, stateError };
