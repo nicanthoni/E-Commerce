@@ -42,7 +42,7 @@ import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
 
 // Testing
-import VendorAddItem from './pages/Profile/Vendor/_tests_/AddItem.jsx';
+import UploadItem from './pages/Profile/Vendor/_tests_/UploadItem.jsx';
 import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
 
 // Routes
@@ -64,7 +64,7 @@ const router = createBrowserRouter(
       <Route path='/product/:productId' element={<SingleProduct />} />
       <Route path='/checkout' element={<Checkout />} />
       <Route path='/inbox' element={<Inbox />} />
-      <Route path='/additem' element={<VendorAddItem />} />
+      <Route path='/uploaditem' element={<UploadItem />} />
       <Route path='*' element={<ErrorPage />} />
     </Route>
   )

@@ -8,9 +8,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UploadButton from '../../../../components/Buttons/_tests_/UploadButton';
 
-const defaultTheme = createTheme();
 
-export default function AddItemForm() {
+
+// Page for Vendors to add a new product for sale by using the AddItemForm component
+export default function UploadItem() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,9 +24,7 @@ export default function AddItemForm() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component='main' maxWidth='xs'>
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -34,12 +33,9 @@ export default function AddItemForm() {
             alignItems: 'center',
           }}
         >
-          <Typography component='h1' variant='h5'>
-            Add Product
-          </Typography>
-
-          <Box margin={1}>
-            {/* Upload image file component */}
+          
+          {/* Upload image */}
+          <Box margin={3}>
             <UploadButton />
           </Box>
 
@@ -50,7 +46,8 @@ export default function AddItemForm() {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
-            <Grid container spacing={2}>
+            <Grid container spacing={2} justifyContent='center'>
+
               {/* Vendors Name */}
               <Grid item xs={12}>
                 <TextField
@@ -61,6 +58,7 @@ export default function AddItemForm() {
                   name='vendor'
                 />
               </Grid>
+
               {/* Vendors Product */}
               <Grid item xs={12}>
                 <TextField
@@ -71,6 +69,7 @@ export default function AddItemForm() {
                   name='product'
                 />
               </Grid>
+
               {/* Product Description */}
               <Grid item xs={12}>
                 <TextField
@@ -81,6 +80,7 @@ export default function AddItemForm() {
                   id='vendorProductDescription'
                 />
               </Grid>
+
               {/* $ Product Price $ */}
               <Grid item xs={12}>
                 <TextField
@@ -91,19 +91,25 @@ export default function AddItemForm() {
                   id='vendorProductPrice'
                 />
               </Grid>
+
+              {/* Submit Button */}
+              <Grid item>
+              <Button
+                type='submit'
+                variant='contained'
+                color='secondary'
+                sx={{
+                  color: 'primary.main',
+                  textTransform: 'none',
+                }}
+              >
+                Submit
+              </Button>
+              </Grid>
+
             </Grid>
-            {/* Submit Button */}
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Submit
-            </Button>
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

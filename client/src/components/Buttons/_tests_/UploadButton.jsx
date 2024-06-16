@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 
+
 // This Button is in use on the Vendor's AddItem page
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -16,17 +17,20 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
+
 export default function UploadButton() {
   return (
     <Button
       component='label'
-      role={undefined}
       variant='contained'
-      name='imgUpload'
-      tabIndex={-1}
+      color='secondary'
       startIcon={<CloudUploadIcon />}
+      sx={{
+        color: 'primary.main',
+        textTransform: 'none',
+      }}
     >
-    Image Upload
+    Upload image
       <VisuallyHiddenInput type='file' />
     </Button>
   );
