@@ -1,16 +1,32 @@
-import { Button } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useState } from 'react';
 import { useLogout } from '../../hooks/useLogout';
 import DeleteUserAlert from '../Alerts/Auth/DeleteUser';
 import { delete_user } from '../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 
+
 export default function DeleteAccount({ userId }) {
-  const [showDeletionAlert, setShowDeletionAlert] = useState(false);
+
+  // states
+  const [showDeletionAlert, setShowDeletionAlert] = useState(false); // alert after deletion
+  const [promptConfirmation, setPromptConfirmation] = useState(false) //  confirmation prompt
+
+  // hooks
   const { logout } = useLogout();
 
   // Mutation
   const [DeleteUser, { loading, data, error }] = useMutation(delete_user);
+ 
+  // OnClick Button click - show confirmation prompt
+  const handleConfirmation = () => {
+    setPromptConfirmation(true);
+  }       
+  
+  // OnClose - close confirmation prompt
+  const handleClose = () => {
+    setPromptConfirmation(false)
+  }
 
   // OnClick - Delete account and logout
   const handleDeleteAccount = async () => {
@@ -29,7 +45,7 @@ export default function DeleteAccount({ userId }) {
   return (
     <>
       <Button
-        onClick={() => handleDeleteAccount()}
+        onClick={handleConfirmation}
         variant='contained'
         color='error'
         sx={{
@@ -41,7 +57,37 @@ export default function DeleteAccount({ userId }) {
         Delete Account
       </Button>
 
-      {/* Alert to go below - visibility controlled by local state */}
+      {/* Deletion Confirmation */}
+      <Dialog
+        open={promptConfirmation}
+        onClose={handleClose}
+        >
+
+        <DialogTitle>
+            {'Delete account and associated data?'}
+        </DialogTitle>
+
+        <DialogContent>
+            <DialogContentText>
+                By proceeding to delete, you authorize the deletion of all of your account data. This cannot be undone.
+            </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+            <Button variant='contained' color='grey' onClick={handleClose} 
+            sx={{ textTransform: 'none', backgroundColor: 'white', color: 'primary.main' }}>
+                Nevermind
+            </Button>
+
+            <Button variant='contained' onClick={() => handleDeleteAccount()} color='error' 
+            sx={{ textTransform: 'none' }}>
+                Delete
+            </Button>
+
+        </DialogActions>
+      </Dialog>
+
+      {/* Alert - visibility controlled by local state */}
       <DeleteUserAlert visible={showDeletionAlert} />
     </>
   );
