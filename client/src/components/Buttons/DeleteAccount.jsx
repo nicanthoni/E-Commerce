@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useLogout } from '../../hooks/useLogout';
 import DeleteUserAlert from '../Alerts/Auth/DeleteUser';
-import { delete_user } from '../../utils/mutations';
+import { delete_user } from '../../graphql/mutations';
 import { useMutation } from '@apollo/client';
 
 export default function DeleteAccount({ userId }) {
