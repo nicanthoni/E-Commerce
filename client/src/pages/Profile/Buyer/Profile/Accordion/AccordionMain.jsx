@@ -7,10 +7,11 @@ import CartImgList from './CartImgList';
 import WishImglist from './WishlistImgList';
 import OrdersImgList from './OrdersImgList';
 import ReviewsImgList from './ReviewsImgList';
+import DeleteAccountButton from '../../../../../components/Buttons/_tests_/DeleteAccount';
 
 
 
-export default function ProfileAccordion( {refetchUserData, loadUser, userData} ) {
+export default function ProfileAccordion( {refetchUserData, loadUser, userData, userId} ) {
   const { type } = useAuthContext()
  
   // refetchUserData() when component renders - re-run loadUser if it changes
@@ -139,10 +140,9 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
           <Typography variant='caption'>
             <List>
               <ListItem>Account Type: {type}</ListItem>
-              <ListItem>
-                Name: {userData.firstName} {userData.lastName}
-              </ListItem>
+              <ListItem>Name: {userData.firstName} {userData.lastName}</ListItem>
               <ListItem>Email Address: {userData.email}</ListItem>
+              <ListItem> <DeleteAccountButton userId={userId}/> </ListItem>
               {/* <ListItem>Created on: TBD </ListItem> */}
             </List>
           </Typography>

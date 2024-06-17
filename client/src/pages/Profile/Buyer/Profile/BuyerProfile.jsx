@@ -81,7 +81,7 @@ export default function BuyerProfile() {
 
           {/* ACCORDIONS - component  */}
           <Grid item>
-            <ProfileAccordions refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
+            <ProfileAccordions refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} userId={id}/>
           </Grid>
 
         </Grid>

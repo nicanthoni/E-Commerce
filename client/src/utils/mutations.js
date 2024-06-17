@@ -72,3 +72,11 @@ mutation vendorLogin($email: String!, $password: String!) {
   }
 }
 `
+
+// Buyer & Vendors
+
+export const delete_user = gql`
+mutation DeleteUser($userId: ID!) {
+  DeleteUser(userId: $userId)
+}
+`
