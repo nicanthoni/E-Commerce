@@ -5,7 +5,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import MailIcon from '@mui/icons-material/Mail';
 import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import HomeIcon from '@mui/icons-material/Home';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
 import { NavLink } from 'react-router-dom';
 import { useAuthContext } from '../../../hooks/useAuthContext';
@@ -30,7 +30,7 @@ export default function BottomNav() {
           }}
         >
 
-          {/* Home OR Dashboard (buyer vs vendor)*/}
+          {/* Shop OR Dashboard (buyer vs vendor)*/}
           {user && type === 'vendor' ? (
           <BottomNavigationAction
             component={NavLink}
@@ -67,6 +67,18 @@ export default function BottomNav() {
             icon={<MailIcon />}
             showLabel
           />
+
+          {/* Upload item (vendor) */}
+          {user && type === 'vendor' ? (
+          <BottomNavigationAction
+            component={NavLink}
+            to='/uploaditem'
+            label='Upload'
+            icon={<AddBoxIcon />}
+            showLabel
+          />
+        ): (null)}
+        
         </BottomNavigation>
       </Paper>
     </Box>

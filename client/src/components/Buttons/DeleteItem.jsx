@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import CartSuccess from '../Alerts/Cart/CartSuccess';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useCart } from '../../hooks/_tests_/useCart';
+import { useCart } from '../../hooks/Products/useCart';
 
 export default function DeleteItem({ refetchCart, itemId, refetchUserData }) {
   const { id } = useAuthContext();

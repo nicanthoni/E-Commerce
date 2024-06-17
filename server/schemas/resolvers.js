@@ -125,7 +125,7 @@ const resolvers = {
       try {
         const user = await User.findById(userId)
         await user.deleteOne()
-        return 'User was deleted'
+        return `User ${userId} was deleted`
       } catch (e) {
         throw new Error(e)
       }

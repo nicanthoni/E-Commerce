@@ -2,7 +2,7 @@ import { Container, Stack, Typography } from '@mui/material';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 
 
-export default function MainSupport () {    
+export default function Support () {    
 return (
     <Container maxWidth='xl'>
         

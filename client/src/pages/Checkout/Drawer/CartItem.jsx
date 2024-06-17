@@ -1,6 +1,6 @@
 import { Stack, Box, Typography } from '@mui/material';
 import DeleteItem from '../../../components/Buttons/DeleteItem';
-import QuantityIncrementer from '../../../components/_tests_/QuantityIncrementer';
+import QuantityIncrementer from '../../../components/test.QuantityIncrementer';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
 
 // For each item in cart

@@ -1,46 +1,56 @@
-import { Typography, AppBar, Box, Toolbar, Container, useMediaQuery, useTheme } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-import LogoDevIcon from '@mui/icons-material/LogoDev';
-import MenuDrawer from './Drawers/MenuDrawer';
-import TopNavbar from './Navigation/TopNavbar';
-import CartDrawer from './Drawers/CartDrawer';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import SearchBar from './Search/Search';
-import { useLocation } from 'react-router-dom';
-import AlertsDrawer from './Drawers/AlertsDrawer';
-import { User, Vendor } from '../../utils/queries';
-import { useLazyQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
-import { KeyboardArrowDown } from '@mui/icons-material';
-
+import {
+  Typography,
+  AppBar,
+  Box,
+  Toolbar,
+  Container,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { NavLink } from "react-router-dom";
+import LogoDevIcon from "@mui/icons-material/LogoDev";
+import MenuDrawer from "./Drawers/MenuDrawer";
+import TopNavbar from "./Navigation/TopNavbar";
+import CartDrawer from "./Drawers/CartDrawer";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import SearchBar from "./Search/Search";
+import { useLocation } from "react-router-dom";
+import AlertsDrawer from "./Drawers/AlertsDrawer";
+import { User, Vendor } from "../../graphql/queries";
+import { useLazyQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { KeyboardArrowDown } from "@mui/icons-material";
 
 export default function Navbar() {
   const { user, id, type } = useAuthContext();
-  const [buyerName, setBuyerName] = useState('');
-  const [vendorName, setVendorName] = useState('');
+  const [buyerName, setBuyerName] = useState("");
+  const [vendorName, setVendorName] = useState("");
   const location = useLocation();
   const theme = useTheme();
-  const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
+  const isExploreRoute = location.pathname === "/explore"; // Check if current path is '/explore'
+  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // mediaQuery for medium size or less
 
   // Query for buyers name
-  const [loadBuyer, {loading: userLoading, error: userError, data: userData }] = useLazyQuery(User, 
-    {variables: {userId: id}})
+  const [
+    loadBuyer,
+    { loading: userLoading, error: userError, data: userData },
+  ] = useLazyQuery(User, { variables: { userId: id } });
 
   // Query for vendors name
-  const [loadVendor, {loading: vendorLoading, error: vendorError, data: vendorData }] = useLazyQuery(Vendor, 
-    {variables: {vendorId: id}})
+  const [
+    loadVendor,
+    { loading: vendorLoading, error: vendorError, data: vendorData },
+  ] = useLazyQuery(Vendor, { variables: { vendorId: id } });
 
   // If buyer, loadBuyer - If vendor, loadVendor
   useEffect(() => {
-    if (type === 'buyer') {
+    if (type === "buyer") {
       loadBuyer();
     }
-    if (type === 'vendor') {
+    if (type === "vendor") {
       loadVendor();
     }
   }, [user, type, loadBuyer, loadVendor]);
-
 
   // if data is available, update name States
   useEffect(() => {
@@ -56,46 +66,39 @@ export default function Navbar() {
     }
   }, [userData, vendorData]);
 
-
-
   return (
-    <Box sx={{ display: 'flex', alignContent: 'center',}}>
+    <Box sx={{ display: "flex", alignContent: "center" }}>
       <AppBar
-        component='nav'
-        sx={{ backgroundColor: 'primary', display: 'flex' }}
+        component="nav"
+        sx={{ backgroundColor: "primary", display: "flex" }}
         elevation={0}
-        
       >
-        <Container maxWidth='xl'>
+        <Container maxWidth="xl">
           <Toolbar>
             {/* Menu drawer */}
             <MenuDrawer />
 
             {/* Logo & Brand Name */}
             <Typography
-              variant='h6'
-              component='div'
+              variant="h6"
+              component="div"
               sx={{
                 flexGrow: 1,
-                textAlign: { xs: 'center', sm: 'left' },
+                textAlign: { xs: "center", sm: "left" },
               }}
             >
-              {user && type === 'buyer' ? (
-                  <>
-                 <Typography> 
-                  Hi, {buyerName}
-                  </Typography>
-                 </>
-              ) : user && type === 'vendor' ? (
+              {user && type === "buyer" ? (
                 <>
-                <Typography> 
-                  Hi, {vendorName}
-                </Typography>
+                  <Typography>Hi, {buyerName}</Typography>
+                </>
+              ) : user && type === "vendor" ? (
+                <>
+                  <Typography>Hi, {vendorName}</Typography>
                 </>
               ) : (
                 <NavLink
-                  to='/'
-                  style={{ textDecoration: 'none', color: '#fff' }}
+                  to="/"
+                  style={{ textDecoration: "none", color: "#fff" }}
                 >
                   <LogoDevIcon />
                 </NavLink>
@@ -109,12 +112,11 @@ export default function Navbar() {
             <TopNavbar />
 
             {/* Checkout & Alerts drawers - depending on vendor or not*/}
-            {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
-            </Toolbar>
+            {user && type === "vendor" ? <AlertsDrawer /> : <CartDrawer />}
+          </Toolbar>
 
-            {/* SearchBar for mobile screens */}
-            {isMobile && isExploreRoute && <SearchBar />}
-
+          {/* SearchBar for mobile screens */}
+          {isMobile && isExploreRoute && <SearchBar />}
         </Container>
       </AppBar>
     </Box>

@@ -1,28 +1,26 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { add_wishlist, delete_wishlist } from "../../graphql/mutations";
+import { add_cart, delete_cart } from "../../graphql/mutations";
 
-export const useWishlist = (refetch) => {
+export const useCart = (refetch) => {
   const [stateError, setStateError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
   //  Mutations
+  const [AddToCart, { error: addError, loading: addLoading, data: addData }] =
+    useMutation(add_cart);
   const [
-    AddToWishlist,
-    { error: addError, loading: addLoading, data: addData },
-  ] = useMutation(add_wishlist);
-  const [
-    DeleteFromWishlist,
+    DeleteFromCart,
     { error: removeError, loading: removeLoading, data: removeData },
-  ] = useMutation(delete_wishlist);
+  ] = useMutation(delete_cart);
 
-  // ADD to wishlist
-  const addWishlist = async (itemId, userId) => {
+  // ADD to cart
+  const addCart = async (itemId, userId) => {
     setIsLoading(true);
     setStateError(null);
 
     try {
-      await AddToWishlist({
+      await AddToCart({
         variables: { itemId, userId },
       });
 
@@ -30,17 +28,17 @@ export const useWishlist = (refetch) => {
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
-      console.error("addWishlist error in useWishlist() hook: ", e);
+      console.error("addCart error in useCart() hook: ", e);
     }
   };
 
-  // DELETE from wishlist
-  const deleteWishlist = async (itemId, userId) => {
+  // DELETE from cart
+  const deleteCart = async (itemId, userId) => {
     setIsLoading(true);
     setStateError(null);
 
     try {
-      await DeleteFromWishlist({
+      await DeleteFromCart({
         variables: { itemId, userId },
       });
 
@@ -48,9 +46,9 @@ export const useWishlist = (refetch) => {
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
-      console.error("deleteWishlist error in useWishlist() hook: ", e);
+      console.error("deleteCart error in useCart() hook: ", e);
     }
   };
 
-  return { addWishlist, deleteWishlist, isLoading, stateError };
+  return { addCart, deleteCart, isLoading, stateError };
 };

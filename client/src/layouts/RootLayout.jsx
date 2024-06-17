@@ -10,7 +10,7 @@ const { user } = useAuthContext();
   return (
     <>
       <Navbar/>
-      <Outlet />
+      <Outlet/>
 
       {user &&
       <BottomNav/>

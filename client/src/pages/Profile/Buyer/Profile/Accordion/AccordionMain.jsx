@@ -1,4 +1,9 @@
-import {Accordion, AccordionSummary, AccordionDetails, Box,} from '@mui/material';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+} from '@mui/material';
 import { Typography, List, ListItem, Link } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useEffect } from 'react';
@@ -7,12 +12,16 @@ import CartImgList from './CartImgList';
 import WishImglist from './WishlistImgList';
 import OrdersImgList from './OrdersImgList';
 import ReviewsImgList from './ReviewsImgList';
+import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
 
+export default function ProfileAccordion({
+  refetchUserData,
+  loadUser,
+  userData,
+  userId,
+}) {
+  const { type } = useAuthContext();
 
-
-export default function ProfileAccordion( {refetchUserData, loadUser, userData} ) {
-  const { type } = useAuthContext()
- 
   // refetchUserData() when component renders - re-run loadUser if it changes
   useEffect(() => {
     refetchUserData();
@@ -20,7 +29,6 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
 
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
-
       {/* WISHLIST */}
       <Accordion defaultExpanded>
         <AccordionSummary
@@ -33,9 +41,11 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.wishlist.length > 0 ? (
             <Typography variant='caption'>
-
-              <WishImglist refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
-
+              <WishImglist
+                refetchUserData={refetchUserData}
+                loadUser={loadUser}
+                userData={userData}
+              />
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -60,9 +70,11 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.cart.length > 0 ? (
             <Typography variant='caption'>
-
-              <CartImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
-
+              <CartImgList
+                refetchUserData={refetchUserData}
+                loadUser={loadUser}
+                userData={userData}
+              />
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -87,9 +99,11 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.buyHistory.length > 0 ? (
             <Typography variant='caption'>
-
-              <OrdersImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
-
+              <OrdersImgList
+                refetchUserData={refetchUserData}
+                loadUser={loadUser}
+                userData={userData}
+              />
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -114,9 +128,11 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
         <AccordionDetails>
           {userData.ratings.length > 0 ? (
             <Typography variant='caption'>
-
-              <ReviewsImgList refetchUserData={refetchUserData} loadUser={loadUser} userData={userData} />
-
+              <ReviewsImgList
+                refetchUserData={refetchUserData}
+                loadUser={loadUser}
+                userData={userData}
+              />
             </Typography>
           ) : (
             <Typography variant='caption'>
@@ -143,6 +159,10 @@ export default function ProfileAccordion( {refetchUserData, loadUser, userData} 
                 Name: {userData.firstName} {userData.lastName}
               </ListItem>
               <ListItem>Email Address: {userData.email}</ListItem>
+              <ListItem>
+                {' '}
+                <DeleteAccountButton userId={userId} />{' '}
+              </ListItem>
               {/* <ListItem>Created on: TBD </ListItem> */}
             </List>
           </Typography>

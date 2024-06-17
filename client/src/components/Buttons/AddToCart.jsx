@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { useCart } from '../../hooks/_tests_/useCart'
+import { useCart } from '../../hooks/Products/useCart'
 import { useState } from 'react';
 import CartSuccess from '../Alerts/Cart/CartSuccess';
 import CartWarning from '../Alerts/Cart/CartWarning';

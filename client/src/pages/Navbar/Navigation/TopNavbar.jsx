@@ -4,12 +4,32 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../../../components/Buttons/Logout';
 import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import LogoutAlert from '../../../components/Alerts/Auth/Logout';
 import { useState } from 'react';
+import { useLogout } from '../../../hooks/useLogout';
+import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
 export default function TopNav() {
   const { user, type } = useAuthContext();
-  const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
+  const { logout } = useLogout();
+  
+
+   // Alert States
+   const [alertMessage, setAlertMessage] = useState('');
+   const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
+
+   // OnClick - handle logout
+  const handleLogout = async () => {
+    try {
+      await logout(); // call logout hook
+      setAlertMessage('Logout successful.')
+      setShowLogoutAlert(true); // show alert via parent component
+      setTimeout(() => { // hide alert after delay
+        setShowLogoutAlert(false);
+      }, 2000);
+    } catch (e) {
+      console.log('Logout error: ', e);
+    }
+  };
 
   return (
     <>
@@ -124,12 +144,12 @@ export default function TopNav() {
 
 
       {/* LOGOUT */}
-      {user ? <LogoutButton onLogoutSuccess={setShowLogoutAlert} /> : null}
+      {user ? <LogoutButton onClick={handleLogout} /> : null}
 
       </Box>
 
       {/* Alerts */}
-      <LogoutAlert visible={showLogoutAlert} />
+      <AuthAlert visible={showLogoutAlert} message={alertMessage}  />
     </>
   );
 }

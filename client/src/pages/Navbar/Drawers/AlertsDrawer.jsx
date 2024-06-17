@@ -57,7 +57,7 @@ export default function AlertsDrawer() {
         <>
           <Stack textAlign='center'>
             <Typography variant='h6' sx={{ m: 2 }}>
-              You have no notifications
+              You have no notifications.
             </Typography>
           </Stack>
         </>
