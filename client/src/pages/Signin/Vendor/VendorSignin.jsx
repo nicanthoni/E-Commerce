@@ -1,15 +1,23 @@
 import Copyright from '../../../components/Footer/Copyright';
-import { Avatar, Button, Alert, TextField, Link, Grid,  Box, Typography, Container } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  Alert,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useVendorSignin } from '../../../hooks/Signin/useVendorSignin';
-import LoginAlert from '../../../components/Alerts/Auth/Login';
+import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
 
 export default function Signin() {
-  const { user } = useAuthContext(); //auth context
   const { signin, stateError, isLoading } = useVendorSignin(); // custom signin hook
   const navigate = useNavigate();
 
@@ -37,29 +45,27 @@ export default function Signin() {
     event.preventDefault();
     setShowLoginAlert(false); // Reset alert visibility
 
-      try {
-          const success = await signin(formState);
-          if (success) {
-          setAlertMessage('Login Successful.'); // Set success message
-          setShowLoginAlert(true);
-          setTimeout(() => {
-            navigate('/profile'); // send to profile
-            setShowLoginAlert(false); // Hide alert after delay
-          }, 1500); // Delay to allow user to see the success alert
-        
-        } else {
-          setAlertMessage('Login Failed.'); // Set failure message
-          setShowLoginAlert(true);
-          setTimeout(() => { // Remove alert after delay
-            setShowLoginAlert(false);
-          }, 1500);
-        }
-  
-      } catch (e) {
-          console.error('signin() error in BuyerSignin component:', e);
-        }
+    try {
+      const success = await signin(formState);
+      if (success) {
+        setAlertMessage('Login Successful.'); // Set success message
+        setShowLoginAlert(true);
+        setTimeout(() => {
+          navigate('/profile'); // send to profile
+          setShowLoginAlert(false); // Hide alert after delay
+        }, 1500); // Delay to allow user to see the success alert
+      } else {
+        setAlertMessage('Login Failed.'); // Set failure message
+        setShowLoginAlert(true);
+        setTimeout(() => {
+          // Remove alert after delay
+          setShowLoginAlert(false);
+        }, 1500);
       }
-
+    } catch (e) {
+      console.error('signin() error in BuyerSignin component:', e);
+    }
+  };
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -130,8 +136,8 @@ export default function Signin() {
         </Box>
       </Box>
 
-            {/* ⚠️ Alert ⚠️ */}
-      <LoginAlert visible={showLoginAlert} message={alertMessage} />
+      {/* ⚠️ Alert ⚠️ */}
+      <AuthAlert visible={showLoginAlert} message={alertMessage} />
 
       <Copyright sx={{ mt: 3 }} />
     </Container>

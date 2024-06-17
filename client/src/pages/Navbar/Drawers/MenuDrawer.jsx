@@ -14,12 +14,18 @@ import LogoDevIcon from '@mui/icons-material/LogoDev';
 import LogoutButton from '../../../components/Buttons/Logout';
 import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import LogoutAlert from '../../../components/Alerts/Auth/Logout';
+import { useLogout } from '../../../hooks/useLogout';
+import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
+
 
 export default function MenuDrawer() {
-  const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { logout } = useLogout();
   const { user, type} = useAuthContext();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Alert States
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showLogoutAlert, setShowLogoutAlert] = useState(false); 
 
   // Toggle drawer
   const handleDrawerToggle = () => {
@@ -30,6 +36,22 @@ export default function MenuDrawer() {
   const closeDrawer = () => {
     setMobileOpen(false);
   };
+
+
+  // OnClick - handle logout
+  const handleLogout = async () => {
+    try {
+      await logout(); // call logout hook
+      setAlertMessage('Logout successful.')
+      setShowLogoutAlert(true); // show alert via parent component
+      setTimeout(() => { // hide alert after delay
+        setShowLogoutAlert(false);
+      }, 2000);
+    } catch (e) {
+      console.log('Logout error: ', e);
+    }
+  };
+
 
   const menuDrawer = (
     <Box sx={{ textAlign: 'center' }}>
@@ -158,7 +180,7 @@ export default function MenuDrawer() {
           <>
             <Divider sx={{ marginBottom: 2}}/>
             <Box onClick={closeDrawer}>
-              <LogoutButton onLogoutSuccess={setShowLogoutAlert}/>
+              <LogoutButton onClick={handleLogout}/>
             </Box>
           </>
         ) : (
@@ -214,7 +236,7 @@ export default function MenuDrawer() {
       </Drawer>
 
       {/* Alerts */}
-      <LogoutAlert visible={showLogoutAlert} />
+      <AuthAlert visible={showLogoutAlert} message={alertMessage} />
 
     </>
   );

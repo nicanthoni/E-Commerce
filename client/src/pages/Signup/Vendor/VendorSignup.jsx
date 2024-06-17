@@ -1,21 +1,30 @@
 import Copyright from '../../../components/Footer/Copyright';
-import {Avatar, Button, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from '@mui/material';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useVendorSignup } from '../../../hooks/Signup/useVendorSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import SignupAlert from '../../../components/Alerts/Auth/Signup';
+import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
 
 export default function VendorSignup() {
   const { user } = useAuthContext();
-  const { signup, stateError, isLoading } = useVendorSignup() // custom hook
+  const { signup, stateError, isLoading } = useVendorSignup(); // custom hook
   const navigate = useNavigate();
 
-   // Alert States
-   const [alertMessage, setAlertMessage] = useState('');
-   const [showSignupAlert, setShowSignupAlert] = useState(false);
+  // Alert States
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showSignupAlert, setShowSignupAlert] = useState(false);
 
   // Form state
   const [formState, setFormState] = useState({
@@ -40,14 +49,13 @@ export default function VendorSignup() {
     });
   };
 
-
   // OnSubmit - validation check + run signup() hook
   const handleSubmit = async (event) => {
     event.preventDefault();
     setShowSignupAlert(false);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Check for empty input fields 
+    // Check for empty input fields
     const { vendorName, email, password } = formState;
     if (!vendorName || !email || !password) {
       setAlertMessage('Please complete all fields');
@@ -57,7 +65,7 @@ export default function VendorSignup() {
       }, 1500);
       return;
     }
-  
+
     // Check if both email and password are invalid
     if (!emailRegex.test(formState.email) && formState.password.length < 8) {
       setAlertMessage('Invalid email, and password less than 8 characters');
@@ -105,14 +113,15 @@ export default function VendorSignup() {
       }
     } catch (e) {
       console.error('signup() error in VendorSignup:', e);
-      setAlertMessage('An error occurred during signup. Please try again later.');
+      setAlertMessage(
+        'An error occurred during signup. Please try again later.'
+      );
       setShowSignupAlert(true);
       setTimeout(() => {
         setShowSignupAlert(false);
       }, 1500);
     }
   };
-
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -195,7 +204,8 @@ export default function VendorSignup() {
       </Box>
 
       {/* ⚠️ Alert ⚠️ */}
-      <SignupAlert visible={showSignupAlert} message={alertMessage} />
+      <AuthAlert visible={showSignupAlert} message={alertMessage} />
+
       <Copyright sx={{ mt: 3 }} />
     </Container>
   );

@@ -1,11 +1,20 @@
 import Copyright from '../../../components/Footer/Copyright';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import {Avatar, Button, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
+import {
+  Avatar,
+  Button,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from '@mui/material';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useBuyerSignup } from '../../../hooks/Signup/useBuyerSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import SignupAlert from '../../../components/Alerts/Auth/Signup';
+import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
 
 export default function BuyerSignup() {
@@ -47,7 +56,7 @@ export default function BuyerSignup() {
     setShowSignupAlert(false);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Check for empty input fields 
+    // Check for empty input fields
     const { firstName, lastName, email, password } = formState;
     if (!firstName || !lastName || !email || !password) {
       setAlertMessage('Please complete all fields');
@@ -57,7 +66,7 @@ export default function BuyerSignup() {
       }, 1500);
       return;
     }
-  
+
     // Check if both email and password are invalid
     if (!emailRegex.test(formState.email) && formState.password.length < 8) {
       setAlertMessage('Invalid email, and password less than 8 characters');
@@ -105,7 +114,9 @@ export default function BuyerSignup() {
       }
     } catch (e) {
       console.error('signup() error in BuyerSignup:', e);
-      setAlertMessage('An error occurred during signup. Please try again later.');
+      setAlertMessage(
+        'An error occurred during signup. Please try again later.'
+      );
       setShowSignupAlert(true);
       setTimeout(() => {
         setShowSignupAlert(false);
@@ -113,7 +124,6 @@ export default function BuyerSignup() {
     }
   };
 
-  
   return (
     <Container component='main' maxWidth='xs'>
       <Box
@@ -209,7 +219,8 @@ export default function BuyerSignup() {
       </Box>
 
       {/* ⚠️ Alert ⚠️ */}
-      <SignupAlert visible={showSignupAlert} message={alertMessage} />
+      <AuthAlert visible={showSignupAlert} message={alertMessage} />
+
       <Copyright sx={{ mt: 3 }} />
     </Container>
   );
