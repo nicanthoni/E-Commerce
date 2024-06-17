@@ -1,4 +1,9 @@
-import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
 import '../src/assets/global.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
@@ -30,9 +35,9 @@ import RootLayout from './layouts/RootLayout';
 // Pages
 import Home from './pages/Home/Home.jsx';
 import Explore from './pages/Explore/Explore.jsx';
-import MainSupport from './pages/Support/MainSupport.jsx';
+import Support from './pages/Support/Support.jsx';
 import SingleProduct from './pages/Explore/Product/SingleProduct.jsx';
-import Checkout from './pages/Checkout/_tests_/Checkout.jsx';
+import Checkout from './pages/Checkout/Checkout.jsx';
 import Inbox from './pages/Profile/Inbox/Inbox.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Signin from './pages/Signin/Signin.jsx';
@@ -42,7 +47,7 @@ import Profile from './pages/Profile/ProfileType.jsx';
 import ErrorPage from './pages/ErrorPage';
 
 // Testing
-import UploadItem from './pages/Profile/Vendor/_tests_/UploadItem.jsx';
+import UploadItem from './pages/Profile/Vendor/UploadItem.jsx';
 import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
 
 // Routes
@@ -53,7 +58,7 @@ const router = createBrowserRouter(
       {/* <Route path='/test' element={<Test/>} /> */}
       <Route path='/dash' element={<VendorDashboard />} />
       <Route path='/home' element={<Home />} />
-      <Route path='/support' element={<MainSupport />} />
+      <Route path='/support' element={<Support />} />
       <Route path='/signup' element={<AccountType />} />
       <Route path='/signin' element={<LoginType />} />
       <Route path='/signup/:userType' element={<Signup />} />

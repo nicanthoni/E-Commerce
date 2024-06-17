@@ -1,7 +1,7 @@
 {
   "name": "e-commerce",
   "version": "1.0.0",
-  "description": "A little info about your project and/ or overview that explains **what** the project is about.",
+  "description": "Ecommerce web application with buyer and vendor authentication.",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
@@ -19,10 +19,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.9.10",
-    "graphql-date-scalars": "^0.2.0",
     "install": "^0.13.0",
-    "jwt-decode": "^4.0.0",
-    "react-swipeable-views": "^0.14.0",
-    "react-swipeable-views-utils": "^0.14.0"
+    "jwt-decode": "^4.0.0"
   }
 }
