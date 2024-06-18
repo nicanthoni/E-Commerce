@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import CartSuccess from '../Alerts/Cart/CartSuccess';
+import ItemAlert from '../Alerts/Items/ItemUpdate';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCart } from '../../hooks/Products/useCart';
 
@@ -21,11 +21,11 @@ export default function DeleteItem({ refetchCart, itemId, refetchUserData }) {
       await deleteCart(itemId, userId); // delete item from user's cart
       setAlertMessage('Removed'); // set message
       setSuccessAlertVisible(true); // show alert
+      refetchCart(); // refetch the updated cart data
       setTimeout(() => {
         setSuccessAlertVisible(false);
-      }, 2000);
+      }, 1000);
       refetchUserData(); // refetch updated user data
-      refetchCart(); // refetch the updated cart data
     } catch (e) {
       console.log('Delete from cart error:', e);
     }
@@ -48,9 +48,9 @@ export default function DeleteItem({ refetchCart, itemId, refetchUserData }) {
       </Button>
 
       {/* Alerts visibility controlled by local state */}
-      <CartSuccess
+      <ItemAlert
         visible={successAlertVisible && alertMessage === 'Removed'}
-        message='Removed from cart.'
+        message={alertMessage}
       />
     </>
   );

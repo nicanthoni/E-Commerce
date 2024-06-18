@@ -1,11 +1,15 @@
 import { Alert, Box, Slide } from '@mui/material';
 
 
-//  'visible' prop - passed from parents to control alert visbility 
-const CartWarning = ({ visible }) => {
+//  Props passed from parents to control alert visibility & alert's message content
+const ItemAlert = ({ visible, message }) => { 
   const alert = (
-    <Alert severity='warning' sx={{ maxWidth: '100%', mb: 2 }}>
-        Sign in first.
+    <Alert severity={
+        message === 'Added' || message === 'Removed' ? 'success' : 
+        message === 'Sign in first' ? 'warning' : 
+        'error'} 
+        sx={{ maxWidth: '100%', mb: 2 }}>
+        {message}
     </Alert>
   );
 
@@ -29,4 +33,4 @@ const CartWarning = ({ visible }) => {
   );
 };
 
-export default CartWarning;
+export default ItemAlert;

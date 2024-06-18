@@ -1,15 +1,16 @@
-import { Grid, Container, Typography } from "@mui/material";
-import AllProducts from "./Product/AllProducts";
-import CategorySelection from "./Filters/Categories";
-import { useEffect, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
-import { Products, Wishlist, Cart } from "../../graphql/queries";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { Grid, Container, Typography } from '@mui/material';
+import AllProducts from './Product/AllProducts';
+import CategorySelection from './Filters/Categories';
+import { useEffect, useState } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { Products, Wishlist, Cart } from '../../graphql/queries';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Explore() {
   const { user, id } = useAuthContext();
-  const [selectedCategory, setSelectedCategory] = useState(""); // state of selected Category
+  const [selectedCategory, setSelectedCategory] = useState(''); // state of selected Category
   const [activeStep, setActiveStep] = useState(0); // state of active step in CategorySelection's carousel
+
 
   // Load Products  - filter loaded products by selected category
   const [
@@ -58,18 +59,19 @@ export default function Explore() {
     }
   }, [user, loadWishlist, loadCart]);
 
+
   if (productsError) {
-    console.error("GraphQL Products Error:", productsError);
+    console.error('GraphQL Products Error:', productsError);
     return <Typography>Error fetching product data</Typography>;
   }
 
   if (wishlistError) {
-    console.error("GraphQL Wishlist Error:", wishlistError);
+    console.error('GraphQL Wishlist Error:', wishlistError);
     return <Typography>Error fetching wishlist data</Typography>;
   }
 
   if (cartError) {
-    console.error("GraphQL Wishlist Error:", cartError);
+    console.error('GraphQL Wishlist Error:', cartError);
     return <Typography>Error fetching cart data</Typography>;
   }
 
@@ -80,6 +82,7 @@ export default function Explore() {
   if (!productsData) {
     return <Typography>No product data found</Typography>;
   }
+  
 
   // Callback to update the selected category
   const handleCategoryChange = (category) => {
@@ -104,8 +107,8 @@ export default function Explore() {
   // console.log('Cart Data', cartedItems)
 
   return (
-    <Container maxWidth="xl">
-      <Grid container justifyContent="center" marginTop={16} marginBottom={4}>
+    <Container maxWidth='xl'>
+      <Grid container justifyContent='center' marginTop={16} marginBottom={4}>
         {/* Categories + props */}
         <Grid item xs={12}>
           <CategorySelection
