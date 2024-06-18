@@ -46,7 +46,7 @@ export default function MenuDrawer() {
       setShowLogoutAlert(true); // show alert via parent component
       setTimeout(() => { // hide alert after delay
         setShowLogoutAlert(false);
-      }, 2000);
+      }, 1000);
     } catch (e) {
       console.log('Logout error: ', e);
     }

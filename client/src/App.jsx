@@ -66,7 +66,7 @@ const router = createBrowserRouter(
       <Route path='/profile' element={<Profile />} />
       <Route path='/explore/:category' element={<Explore />} />
       <Route path='/explore' element={<Explore />} />
-      <Route path='/product/:productId' element={<SingleProduct />} />
+      <Route path='/product/:itemId' element={<SingleProduct />} />
       <Route path='/checkout' element={<Checkout />} />
       <Route path='/inbox' element={<Inbox />} />
       <Route path='/uploaditem' element={<UploadItem />} />

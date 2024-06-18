@@ -6,14 +6,121 @@ import ProductFilters from '../Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
+import { useState, useEffect } from 'react';
+import { useWishlist } from '../../../hooks/Products/useWishlist';
+import { useCart } from '../../../hooks/Products/useCart';
+import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
+import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
 
 export default function AllProducts({ products, wishlistedItems, refetchWishlist, cartedItems, refetchCart }) {
-  const { user, id } = useAuthContext();
+  const { user, id: userId } = useAuthContext();
+
+  // Wishlist & Cart statuses
+  const [wishlistStatus, setWishlistStatus] = useState({});
+  const [cartStatus, setCartStatus] = useState({});
+
+  // Alert vsibility and contents
+  const [alertMessage, setAlertMessage] = useState(''); 
+  const [itemAlertVisible, setItemAlertVisible] = useState(false)
+
+  // Hook - add/remove wishlist item
+  const { addWishlist, deleteWishlist } = useWishlist();
+  const { addCart, deleteCart } = useCart()
+
+  // Update wishlistStatus state based on wishlistedItems
+  useEffect(() => {
+    if (Array.isArray(wishlistedItems)) {
+      const status = {};
+      products.forEach(product => {
+        status[product._id] = wishlistedItems.includes(product._id);
+      });
+      setWishlistStatus(status);
+    }
+  }, [wishlistedItems, products]);
+
+  // Update cartStatuses state based on cartedItems
+  useEffect(() => {
+    if (Array.isArray(cartedItems)) {
+      const status = {};
+      products.forEach(product => {
+        status[product._id] = cartedItems.includes(product._id);
+      });
+      setCartStatus(status);
+    }
+  }, [cartedItems, products]);
+
+
+  // Handle wishlist onClick
+  const handleWishlist = async (itemId) => {
+    if (user) {
+      const isInWishlist = wishlistedItems.includes(itemId); // Check if item with matching id is in wishlist
+      try {
+        if (isInWishlist) { // Item already wishlisted, so delete it
+          await deleteWishlist(itemId, userId);
+          setAlertMessage('Removed');
+          setItemAlertVisible(true);
+          setTimeout(() => {
+            setItemAlertVisible(false);
+          }, 1000);
+        } else { // Item not in wishlist, so add it
+          await addWishlist(itemId, userId);
+          setAlertMessage('Added');
+          setItemAlertVisible(true);
+          setTimeout(() => {
+            setItemAlertVisible(false);
+          }, 1000);
+        }
+        refetchWishlist(); // refetch wishlist after deleting or adding item
+      } catch (e) {
+        console.log('Error: ', e);
+      }
+    } else { // for non-authenticated users
+      setAlertMessage('Sign in first');
+      setItemAlertVisible(true);
+      setTimeout(() => {
+        setItemAlertVisible(false);
+      }, 1000);
+    }
+  };
+
+  // Handle Cart onClick
+  const handleCart = async (itemId) => {
+    if (user) {
+      const isInCart = cartedItems.includes(itemId); // Check if item with matching id is in wishlist
+      try {
+        if (isInCart) { // if item's in the cart already, delete it
+        await deleteCart(itemId, userId) // delete item from users cart
+        setAlertMessage('Removed'); // set message
+        setItemAlertVisible(true);
+        setTimeout(() => { 
+          setItemAlertVisible(false);
+          }, 1000);
+          refetchCart();
+        } else { // if item's not in cart, add it
+          await addCart(itemId, userId); // call add to cart hook
+          setAlertMessage('Added'); // set message
+          setItemAlertVisible(true); // show alert 
+          setTimeout(() => { 
+            setItemAlertVisible(false); 
+          }, 1000);
+          refetchCart();
+        }
+      } catch (e) {
+        console.log('Add to cart error:', e);
+      }
+    } else { // for non-authenticated users
+      setAlertMessage('Sign in first');
+      setItemAlertVisible(true);
+      setTimeout(() => { 
+        setItemAlertVisible(false); 
+      }, 2500);
+    }
+  }
 
   return (
     <Grid container spacing={3} marginBottom={6}>
-      {/* If no products in selected categor, render message, else map */}
+      {/* If no products in selected category, render message, else map */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
           <Typography variant='h6'>
@@ -102,21 +209,25 @@ export default function AllProducts({ products, wishlistedItems, refetchWishlist
                       </Typography>
 
                       {/* Buttons - Cart & Wishlist */}
+                      
                       <Stack direction='row' flexWrap='wrap'>
+                        <>
+                        {cartedItems.includes(result._id) ? (
+                          <RemoveFromCart
+                          onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                          />
+                        ) : (
                         <AddToCart
-                          user={user}
-                          userId={id}
-                          itemId={result._id}
-                          cartedItems={cartedItems}
-                          refetchCart={refetchCart}
+                          onClick={() => handleCart(result._id)} // pass result._id to function as itemId
                         />
+                      )}
+
                         <WishlistButton
-                          user={user}
-                          userId={id}
-                          itemId={result._id}
-                          wishlistedItems={wishlistedItems}
-                          refetchWishlist={refetchWishlist}
+                          wishlistStatus={wishlistStatus[result._id] || false } // pass wishlist status (in or out) for product
+                          onClick={() => handleWishlist(result._id)} // pass result._id to function as itemId               
                         />
+
+                        </>
                       </Stack>
                     </CardContent>
                   </Stack>
@@ -126,6 +237,12 @@ export default function AllProducts({ products, wishlistedItems, refetchWishlist
           ))}
         </>
       )}
+      {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
+      <ItemAlert
+        visible={itemAlertVisible}
+        message={alertMessage}
+      />
+
     </Grid>
   );
 }
