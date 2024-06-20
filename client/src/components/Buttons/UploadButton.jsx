@@ -2,8 +2,6 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-
-
 // This Button is in use on the Vendor's AddItem page
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -17,7 +15,6 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-
 export default function UploadButton() {
   return (
     <Button
@@ -30,7 +27,7 @@ export default function UploadButton() {
         textTransform: 'none',
       }}
     >
-    Upload image
+      Upload image
       <VisuallyHiddenInput type='file' />
     </Button>
   );

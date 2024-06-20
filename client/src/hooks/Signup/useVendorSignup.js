@@ -1,9 +1,9 @@
-import Auth from "../../utils/auth";
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
-import { vendor_Signup } from "../../graphql/mutations";
-import { useAuthContext } from "../useAuthContext";
+import Auth from '../../auth/auth';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
+import { vendor_Signup } from '../../graphql/mutations';
+import { useAuthContext } from '../useAuthContext';
 
 export const useVendorSignup = () => {
   const [stateError, setStateError] = useState(null);
@@ -25,7 +25,7 @@ export const useVendorSignup = () => {
 
       Auth.login(data.AddVendor.token); // create new token
 
-      dispatch({ type: "LOGIN", payload: data }); // update the auth context
+      dispatch({ type: 'LOGIN', payload: data }); // update the auth context
 
       setIsLoading(false);
 
@@ -33,7 +33,7 @@ export const useVendorSignup = () => {
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
-      console.error("AddUser error in useSignup() hook:", e);
+      console.error('AddUser error in useSignup() hook:', e);
       return false; // Indicate a failed registration
     }
   };

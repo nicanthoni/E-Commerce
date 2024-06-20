@@ -1,24 +1,23 @@
-import Auth from '../utils/auth';
+import Auth from '../auth/auth';
 import { createContext, useReducer, useEffect } from 'react';
 
 // Context
-export const AuthContext = createContext(); 
-
+export const AuthContext = createContext();
 
 // Reducer - on Login, return {user} token, user {type}, and user {id} for quicker access
 export const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { 
-        user: action.payload, 
-        type: Auth.getProfile().data.userType, 
-        id: Auth.getProfile().data._id
-      }
+      return {
+        user: action.payload,
+        type: Auth.getProfile().data.userType,
+        id: Auth.getProfile().data._id,
+      };
     case 'LOGOUT':
-      return { 
-        user: null, 
-        type: null, 
-        id: null 
+      return {
+        user: null,
+        type: null,
+        id: null,
       };
     default:
       return state;
@@ -28,27 +27,27 @@ export const authReducer = (state, action) => {
 // custom component to wrap entire root app and provide the state value from context to entire application
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
-    user: null, 
+    user: null,
     type: null,
-    id: null
+    id: null,
   });
 
   // When app starts...
   useEffect(() => {
-    const user = localStorage.getItem('id_token')
+    const user = localStorage.getItem('id_token');
     // check local storage for user (loggedin), else dont dispatch 'LOGIN'
     if (user) {
       // console.log('User is logged in')
-      dispatch({ type: 'LOGIN', payload: user })
+      dispatch({ type: 'LOGIN', payload: user });
     }
-  }, [])
-  
+  }, []);
+
   // console.log('AuthContext state: ', state)
   return (
     // ...state represents 'user' property from AuthContextProvider
     // Using spread to account for future additional properties
-    <AuthContext.Provider value={{...state, dispatch}}>
-        { children }
+    <AuthContext.Provider value={{ ...state, dispatch }}>
+      {children}
     </AuthContext.Provider>
-  )
+  );
 };

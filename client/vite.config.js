@@ -7,7 +7,12 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@mui/material/Tooltip', '@emotion/styled', '@mui/material/Grid'],
     // excluded to overcome 'outdated dependency' issue after updating lint rule
-    exclude: ['eslint', 'eslint-plugin-react', 'eslint-plugin-react-hooks', 'eslint-plugin-react-refresh']
+    exclude: [
+      'eslint',
+      'eslint-plugin-react',
+      'eslint-plugin-react-hooks',
+      'eslint-plugin-react-refresh',
+    ],
   },
 
   server: {
@@ -19,6 +24,6 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-    }
+    },
   },
 });

@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import UploadButton from '../../../components/Buttons/UploadButton';
 
-
 // Page for Vendors to add a new product for sale by using the AddItemForm component
 export default function UploadItem() {
   const handleSubmit = (event) => {

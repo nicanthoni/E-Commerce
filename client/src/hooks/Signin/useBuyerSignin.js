@@ -1,9 +1,9 @@
-import Auth from "../../utils/auth";
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
-import { buyer_login } from "../../graphql/mutations";
-import { useAuthContext } from "../useAuthContext";
+import Auth from '../../auth/auth';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
+import { buyer_login } from '../../graphql/mutations';
+import { useAuthContext } from '../useAuthContext';
 
 export const useBuyerSignin = () => {
   const [stateError, setStateError] = useState(null);
@@ -25,7 +25,7 @@ export const useBuyerSignin = () => {
 
       Auth.login(data.Userlogin.token); // login with users token
 
-      dispatch({ type: "LOGIN", payload: data }); // update the auth context
+      dispatch({ type: 'LOGIN', payload: data }); // update the auth context
 
       setIsLoading(false);
 
@@ -33,7 +33,7 @@ export const useBuyerSignin = () => {
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
-      console.error("LoginUser error in useSignin() hook: ", e);
+      console.error('LoginUser error in useSignin() hook: ', e);
       return false; // Indicate a failed login
     }
   };

@@ -59,9 +59,11 @@ export default function SingleProduct() {
 
   // Load product data, check users wishlist & cart for item
   useEffect(() => {
+  
     loadWishlist();
     loadCart();
     loadProduct();
+    console.log('Product Data', productData)
   }, [loadProduct, loadCart, loadWishlist]);
 
   // check if current item is in array of users wishlistedItems - setWishlistStatus state accoordingly
