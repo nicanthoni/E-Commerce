@@ -1,4 +1,13 @@
-import { Typography, Box, Container, Stack, Rating } from '@mui/material';
+import {
+  Typography,
+  Box,
+  Container,
+  Stack,
+  Rating,
+  Link,
+  Avatar,
+  Divider,
+} from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
@@ -11,6 +20,7 @@ import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
+import HelpIcon from '@mui/icons-material/Help';
 
 export default function SingleProduct() {
   const { user, id: userId } = useAuthContext();
@@ -59,11 +69,9 @@ export default function SingleProduct() {
 
   // Load product data, check users wishlist & cart for item
   useEffect(() => {
-  
     loadWishlist();
     loadCart();
     loadProduct();
-    console.log('Product Data', productData)
   }, [loadProduct, loadCart, loadWishlist]);
 
   // check if current item is in array of users wishlistedItems - setWishlistStatus state accoordingly
@@ -179,16 +187,34 @@ export default function SingleProduct() {
 
   return (
     <Container maxWidth='md'>
-      {/* Parent Stack */}
+      {/* Vendor info Stack - Name, link to page, and logo eventually*/}
+      <Stack
+        alignItems='center'
+        marginBottom={2}
+        sx={{ marginTop: { xs: 10, md: 12 } }}
+      >
+        {/* <Avatar></Avatar> */}
+        <Typography fontWeight='bolder'>
+          {productData.item.vendor.vendorName}
+        </Typography>
+        <Typography>
+          <Link href='#' underline='hover'>
+            Visit the store
+          </Link>
+        </Typography>
+      </Stack>
+
+
+
+      {/* Parent Item Stack */}
       <Stack
         sx={{
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
-          marginTop: { xs: 10, md: 20 },
         }}
       >
         {/* Image & Rating Stack */}
-        <Stack alignItems={'center'} gap={2}>
+        <Stack alignItems={'center'} gap={1}>
           <Box
             sx={{
               height: { xs: '200px', md: '400px' },
@@ -215,7 +241,6 @@ export default function SingleProduct() {
         {/* Price, Name, and Description Stack */}
         <Stack
           direction='column'
-          gap={1}
           sx={{
             alignItems: { xs: 'center', md: 'flex-start' },
             textAlign: { xs: 'center', md: 'left' },
@@ -225,7 +250,7 @@ export default function SingleProduct() {
             ${productData.item.price}
           </Typography>
 
-          <Typography variant='h5' component='div' fontWeight='bold'>
+          <Typography variant='h5' component='div' >
             {productData.item.name}
           </Typography>
 
@@ -234,7 +259,7 @@ export default function SingleProduct() {
           </Typography>
 
           {/* Buttons */}
-          <Stack direction='row' gap={1}>
+          <Stack direction='row'>
             <>
               {isInCart ? (
                 <RemoveFromCart onClick={handleCart} />
