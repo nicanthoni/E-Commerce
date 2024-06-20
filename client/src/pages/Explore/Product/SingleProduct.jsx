@@ -1,10 +1,4 @@
-import {
-  Typography,
-  Box,
-  Container,
-  Stack,
-  Rating,
-} from '@mui/material';
+import { Typography, Box, Container, Stack, Rating } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
@@ -18,7 +12,6 @@ import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
-
 export default function SingleProduct() {
   const { user, id: userId } = useAuthContext();
   const { itemId } = useParams();
@@ -27,13 +20,12 @@ export default function SingleProduct() {
   const [wishlistStatus, setWishlistStatus] = useState(false);
 
   // Alert vsibility and contents
-  const [alertMessage, setAlertMessage] = useState(''); 
-  const [itemAlertVisible, setItemAlertVisible] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('');
+  const [itemAlertVisible, setItemAlertVisible] = useState(false);
 
   // Hooks - Cart & Wishlist
   const { addWishlist, deleteWishlist } = useWishlist();
-  const { addCart, deleteCart } = useCart()
-
+  const { addCart, deleteCart } = useCart();
 
   //  loadProduct Query - returns data associated with single item
   const [
@@ -53,7 +45,6 @@ export default function SingleProduct() {
     { variables: { id: userId } }
   );
 
-
   // Grab cartItems IDs
   const cartedItems = cartData ? cartData.usersCart : [];
 
@@ -64,8 +55,7 @@ export default function SingleProduct() {
   const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
 
   // Check if item with matching id is in users wishlist
-  const isInWishlist = wishlistedItems.includes(itemId)
-
+  const isInWishlist = wishlistedItems.includes(itemId);
 
   // Load product data, check users wishlist & cart for item
   useEffect(() => {
@@ -74,14 +64,12 @@ export default function SingleProduct() {
     loadProduct();
   }, [loadProduct, loadCart, loadWishlist]);
 
-
   // check if current item is in array of users wishlistedItems - setWishlistStatus state accoordingly
   useEffect(() => {
     if (Array.isArray(wishlistedItems)) {
       setWishlistStatus(wishlistedItems.includes(itemId));
     }
-  }, [wishlistedItems, itemId])
-
+  }, [wishlistedItems, itemId]);
 
   if (productError) {
     console.error('GraphQL Error:', productError);
@@ -110,14 +98,16 @@ export default function SingleProduct() {
   const handleWishlist = async () => {
     if (user) {
       try {
-        if (isInWishlist) { // Item already wishlisted, so delete it
+        if (isInWishlist) {
+          // Item already wishlisted, so delete it
           await deleteWishlist(itemId, userId);
           setAlertMessage('Removed');
           setItemAlertVisible(true);
           setTimeout(() => {
             setItemAlertVisible(false);
-          }, 1000);   
-        } else { // Item not in wishlist, so add it
+          }, 1000);
+        } else {
+          // Item not in wishlist, so add it
           await addWishlist(itemId, userId);
           setAlertMessage('Added');
           setItemAlertVisible(true);
@@ -129,7 +119,8 @@ export default function SingleProduct() {
       } catch (e) {
         console.log('Error: ', e);
       }
-    } else { // for non-authenticated users
+    } else {
+      // for non-authenticated users
       setAlertMessage('Sign in first');
       setItemAlertVisible(true);
       setTimeout(() => {
@@ -142,35 +133,37 @@ export default function SingleProduct() {
   const handleCart = async () => {
     if (user) {
       try {
-        if (isInCart) { // if item's in the cart already, delete it
-        await deleteCart(itemId, userId) // delete item from users cart
-        setAlertMessage('Removed'); // set message
-        setItemAlertVisible(true);
-        setTimeout(() => { 
-          setItemAlertVisible(false);
+        if (isInCart) {
+          // if item's in the cart already, delete it
+          await deleteCart(itemId, userId); // delete item from users cart
+          setAlertMessage('Removed'); // set message
+          setItemAlertVisible(true);
+          setTimeout(() => {
+            setItemAlertVisible(false);
           }, 1000);
           refetchCart();
-        } else { // if item's not in cart, add it
+        } else {
+          // if item's not in cart, add it
           await addCart(itemId, userId); // call add to cart hook
           setAlertMessage('Added'); // set message
-          setItemAlertVisible(true); // show alert 
-          setTimeout(() => { 
-            setItemAlertVisible(false); 
+          setItemAlertVisible(true); // show alert
+          setTimeout(() => {
+            setItemAlertVisible(false);
           }, 1000);
           refetchCart();
         }
       } catch (e) {
         console.log('Add to cart error:', e);
       }
-    } else { // for non-authenticated users
+    } else {
+      // for non-authenticated users
       setAlertMessage('Sign in first');
       setItemAlertVisible(true);
-      setTimeout(() => { 
-        setItemAlertVisible(false); 
+      setTimeout(() => {
+        setItemAlertVisible(false);
       }, 1000);
     }
-  }
-
+  };
 
   // Average Rating  - getAverage() utility to calculate avg rating
   const ratings = productData.item.ratings;
@@ -181,8 +174,6 @@ export default function SingleProduct() {
     const starsArray = ratings.map((rating) => rating.stars);
     return getAverage(starsArray);
   };
-
-  
 
   return (
     <Container maxWidth='md'>
@@ -244,14 +235,10 @@ export default function SingleProduct() {
           <Stack direction='row' gap={1}>
             <>
               {isInCart ? (
-                <RemoveFromCart
-                onClick={handleCart}
-                />
+                <RemoveFromCart onClick={handleCart} />
               ) : (
-                <AddToCart
-                onClick={handleCart}
-              />
-            )}
+                <AddToCart onClick={handleCart} />
+              )}
 
               <WishlistButton
                 wishlistStatus={wishlistStatus}
@@ -261,13 +248,9 @@ export default function SingleProduct() {
           </Stack>
         </Stack>
       </Stack>
-    
-    {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
-    <ItemAlert
-      visible={itemAlertVisible}
-      message={alertMessage}
-    />
 
+      {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
+      <ItemAlert visible={itemAlertVisible} message={alertMessage} />
     </Container>
   );
 }
