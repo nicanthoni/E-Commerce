@@ -44,7 +44,7 @@ const resolvers = {
         .populate('vendor') // Populate the vendor field
         .populate({
           path: 'ratings',
-          populate: { path: 'user' } // Populate the user field inside ratings
+          populate: { path: 'user' }, // Populate the user field inside ratings
         });
       console.log('Item: ', item);
       return item;
@@ -240,10 +240,10 @@ const resolvers = {
     },
     CreateItem: async (
       parent,
-      { name, price, category, vendor, inventory, img }
+      { name, price, category, vendorId, inventory, img, description }
     ) => {
       try {
-        const selectedVendor = await Vendor.findById(vendor);
+        const selectedVendor = await Vendor.findById(vendorId);
         if (!selectedVendor) {
           throw AuthenticationError;
         }
@@ -251,9 +251,10 @@ const resolvers = {
           name,
           price,
           category,
-          vendor,
+          vendorId,
           inventory,
           img,
+          description,
         });
         if (!item) {
           throw new Error('Item could not be created');

@@ -74,7 +74,6 @@ const typeDefs = `
         AddVendor(vendorName: String!, email: String!, password: String!): Auth
         DeleteVendor(userId: ID!): String
         Vendorlogin(email: String!, password: String!): Auth
-        CreateItem(name: String!, price: Int!, category: String!, vendor: ID!, inventory: Int, img: String): Item
         DeleteItem(itemId: ID!, vendorId: ID!): String
         AddToCart(itemId: ID!, userId: ID!): String
         DeleteFromCart(itemId: ID!, userId: ID!): String
@@ -82,7 +81,7 @@ const typeDefs = `
         DeleteFromWishlist(itemId: ID!, userId: ID!): String
         AddFromWishlistToCart(itemId: ID!, userId: ID!): String
         AddRating(itemId: ID!, userId: ID!, stars: Float!, review: String): String
-
+        CreateItem(name: String!, description: String!, price: Int!, category: String!, vendorId: ID!, inventory: Int!, img: String!): Item
     }
-`
-module.exports = typeDefs
+`;
+module.exports = typeDefs;

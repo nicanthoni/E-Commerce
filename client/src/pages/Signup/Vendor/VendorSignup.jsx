@@ -16,7 +16,6 @@ import { useVendorSignup } from '../../../hooks/Signup/useVendorSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
-
 export default function VendorSignup() {
   const { user } = useAuthContext();
   const { signup, stateError, isLoading } = useVendorSignup(); // custom hook

@@ -55,15 +55,6 @@ export default function BottomNav() {
             showLabel
           />
 
-          {/* Inbox */}
-          <BottomNavigationAction
-            component={NavLink}
-            to='/inbox'
-            label='Inbox'
-            icon={<MailIcon />}
-            showLabel
-          />
-
           {/* Upload item (vendor) */}
           {user && type === 'vendor' ? (
             <BottomNavigationAction
@@ -74,6 +65,15 @@ export default function BottomNav() {
               showLabel
             />
           ) : null}
+
+          {/* Inbox */}
+          <BottomNavigationAction
+            component={NavLink}
+            to='/inbox'
+            label='Inbox'
+            icon={<MailIcon />}
+            showLabel
+          />
         </BottomNavigation>
       </Paper>
     </Box>

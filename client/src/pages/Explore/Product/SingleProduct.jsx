@@ -6,7 +6,6 @@ import {
   Rating,
   Link,
   Avatar,
-  Divider,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -20,7 +19,6 @@ import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
-import HelpIcon from '@mui/icons-material/Help';
 
 export default function SingleProduct() {
   const { user, id: userId } = useAuthContext();
@@ -204,8 +202,6 @@ export default function SingleProduct() {
         </Typography>
       </Stack>
 
-
-
       {/* Parent Item Stack */}
       <Stack
         sx={{
@@ -250,7 +246,7 @@ export default function SingleProduct() {
             ${productData.item.price}
           </Typography>
 
-          <Typography variant='h5' component='div' >
+          <Typography variant='h5' component='div'>
             {productData.item.name}
           </Typography>
 
