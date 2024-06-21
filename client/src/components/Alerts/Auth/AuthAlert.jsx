@@ -1,12 +1,20 @@
 import { Alert, Box, Slide } from '@mui/material';
 
-
 //  Props passed from parents to control alert visibility & alert's message content
 const AuthAlert = ({ visible, message }) => {
   const alert = (
-    <Alert severity={message === 'Login Successful.' || message === 'Registration Successful.' || message === 'Logout successful.' ? 'success' : 'error'} 
-      sx={{ maxWidth: '100%', mb: 2 }}>
-        {message}
+    <Alert
+      severity={
+        message === 'Login Successful.' ||
+        message === 'Registration Successful.' ||
+        message === 'Logout successful.' ||
+        message == 'Account successfuly deleted.'
+          ? 'success'
+          : 'error'
+      }
+      sx={{ maxWidth: '100%', mb: 2 }}
+    >
+      {message}
     </Alert>
   );
 
@@ -23,7 +31,7 @@ const AuthAlert = ({ visible, message }) => {
         zIndex: 10,
       }}
     >
-      <Slide direction="up" in={visible} mountOnEnter unmountOnExit>
+      <Slide direction='up' in={visible} mountOnEnter unmountOnExit>
         {alert}
       </Slide>
     </Box>

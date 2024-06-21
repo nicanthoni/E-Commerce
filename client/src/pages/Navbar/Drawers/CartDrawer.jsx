@@ -6,17 +6,19 @@ import {
   Stack,
   Typography,
   Button,
-} from "@mui/material";
-import { useEffect, useState } from "react";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import CartLayout from "../../Checkout/Drawer/CartLayout";
-import { useLazyQuery } from "@apollo/client";
-import { User, Cart } from "../../../graphql/queries";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+} from '@mui/material';
+import { useEffect, useState } from 'react';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CartLayout from '../../Checkout/Drawer/CartLayout';
+import { useLazyQuery } from '@apollo/client';
+import { User, Cart } from '../../../graphql/queries';
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 export default function CartDrawer() {
   let itemsInCart = 0;
   const { user, id } = useAuthContext();
+
+  // Drawer state
   const [showCart, setShowCart] = useState(false);
 
   // Load Cart - array of prodcutIds (items in users' cart). Refetch whenever item is added/removed
@@ -70,34 +72,34 @@ export default function CartDrawer() {
     <>
       {/* Icon */}
       <IconButton
-        className="menu-icon"
-        aria-label="open drawer"
-        edge="start"
+        className='menu-icon'
+        aria-label='open drawer'
+        edge='start'
         onClick={handleDrawerToggle}
-        sx={{ ml: { xs: 0, md: 2 }, display: { color: "#fff" } }}
+        sx={{ ml: { xs: 0, md: 2 }, display: { color: '#fff' } }}
       >
-        <Box className="cart-icon" sx={{ cursor: "pointer" }}>
-          <Badge badgeContent={itemsInCart} max={20} color="error">
+        <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
+          <Badge badgeContent={itemsInCart} max={20} color='error'>
             <ShoppingCartIcon />
           </Badge>
         </Box>
       </IconButton>
 
       <Drawer
-        variant="temporary"
-        anchor="right"
+        variant='temporary'
+        anchor='right'
         open={showCart}
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile
         }}
         sx={{
-          display: { xs: "inline-block" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
+          display: { xs: 'inline-block' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
             width: 285,
           },
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         {user ? (
@@ -106,22 +108,23 @@ export default function CartDrawer() {
               refetchUserData={refetchUserData}
               refetchCart={refetchCart}
               loadUser={loadUser}
+              userId={id}
               userData={userData}
               cartData={cartData}
             />
           </>
         ) : (
           <>
-            <Stack textAlign="center">
-              <Typography variant="h6" sx={{ m: 2 }}>
+            <Stack textAlign='center'>
+              <Typography variant='h6' sx={{ m: 2 }}>
                 Sign in to view your cart.
               </Typography>
 
               <Button
-                href="/signin"
-                variant="contained"
-                color="secondary"
-                sx={{ textTransform: "none", mx: 3 }}
+                href='/signin'
+                variant='contained'
+                color='secondary'
+                sx={{ textTransform: 'none', mx: 3 }}
               >
                 Sign in
               </Button>

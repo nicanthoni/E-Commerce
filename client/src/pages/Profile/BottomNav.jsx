@@ -8,14 +8,12 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
 import { NavLink } from 'react-router-dom';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import InsightsIcon from '@mui/icons-material/Insights';
 
-
 export default function BottomNav() {
-  const { user, type } = useAuthContext()
+  const { user, type } = useAuthContext();
   const [active, setActive] = useState(1);
-
 
   return (
     <Box>
@@ -29,27 +27,25 @@ export default function BottomNav() {
             setActive(newActive);
           }}
         >
-
           {/* Shop OR Dashboard (buyer vs vendor)*/}
           {user && type === 'vendor' ? (
-          <BottomNavigationAction
-            component={NavLink}
-            to='/dash'
-            label='Dashboard'
-            icon={<InsightsIcon />}
-            showLabel
-          />
+            <BottomNavigationAction
+              component={NavLink}
+              to='/dash'
+              label='Dashboard'
+              icon={<InsightsIcon />}
+              showLabel
+            />
           ) : (
-          <BottomNavigationAction
-            component={NavLink}
-            to='/explore'
-            label='Shop'
-            icon={<StoreIcon />}
-            showLabel
-          />
+            <BottomNavigationAction
+              component={NavLink}
+              to='/explore'
+              label='Shop'
+              icon={<StoreIcon />}
+              showLabel
+            />
           )}
 
-          
           {/* Profile */}
           <BottomNavigationAction
             component={NavLink}
@@ -59,6 +55,17 @@ export default function BottomNav() {
             showLabel
           />
 
+          {/* Upload item (vendor) */}
+          {user && type === 'vendor' ? (
+            <BottomNavigationAction
+              component={NavLink}
+              to='/uploaditem'
+              label='Upload'
+              icon={<AddBoxIcon />}
+              showLabel
+            />
+          ) : null}
+
           {/* Inbox */}
           <BottomNavigationAction
             component={NavLink}
@@ -67,18 +74,6 @@ export default function BottomNav() {
             icon={<MailIcon />}
             showLabel
           />
-
-          {/* Upload item (vendor) */}
-          {user && type === 'vendor' ? (
-          <BottomNavigationAction
-            component={NavLink}
-            to='/uploaditem'
-            label='Upload'
-            icon={<AddBoxIcon />}
-            showLabel
-          />
-        ): (null)}
-        
         </BottomNavigation>
       </Paper>
     </Box>

@@ -6,12 +6,16 @@ import {
 } from '@mui/material';
 import { Typography, List, ListItem, Link } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { delete_user } from '../../../../../graphql/mutations';
+import { useLogout } from '../../../../../hooks/useLogout';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 import CartImgList from './CartImgList';
 import WishImglist from './WishlistImgList';
 import OrdersImgList from './OrdersImgList';
 import ReviewsImgList from './ReviewsImgList';
+import AuthAlert from '../../../../../components/Alerts/Auth/AuthAlert';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
 
 export default function ProfileAccordion({
@@ -22,10 +26,36 @@ export default function ProfileAccordion({
 }) {
   const { type } = useAuthContext();
 
+  // states
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false); 
+
+  // hooks
+  const { logout } = useLogout();
+
+  // Mutation
+  const [DeleteUser, { loading, data, error }] = useMutation(delete_user);
+
   // refetchUserData() when component renders - re-run loadUser if it changes
   useEffect(() => {
     refetchUserData();
   }, [loadUser]);
+
+
+  // onClick of DeleteAccountButton - Delete account and logout
+  const handleDeleteAccount = async () => {
+    try {
+      await DeleteUser({ variables: { userId } }); // delete user
+      setAlertMessage('Account successfuly deleted.');
+      setShowAlert(true); 
+      setTimeout(() => {
+        setShowAlert(false); 
+        logout(); 
+      }, 2000);
+    } catch (e) {
+      console.log('User Deletion error: ', e);
+    }
+  };
 
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
@@ -160,14 +190,15 @@ export default function ProfileAccordion({
               </ListItem>
               <ListItem>Email Address: {userData.email}</ListItem>
               <ListItem>
-                {' '}
-                <DeleteAccountButton userId={userId} />{' '}
+                <DeleteAccountButton onClick={handleDeleteAccount} />
               </ListItem>
-              {/* <ListItem>Created on: TBD </ListItem> */}
             </List>
           </Typography>
         </AccordionDetails>
       </Accordion>
+
+      {/* Alert - visibility controlled by local state */}
+      <AuthAlert visible={showAlert} message={alertMessage} />
     </Box>
   );
 }

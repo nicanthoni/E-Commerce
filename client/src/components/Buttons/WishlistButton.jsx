@@ -2,7 +2,6 @@ import { Box, Tooltip, Checkbox } from '@mui/material';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 
 export default function WishlistButton({ onClick, wishlistStatus }) {
-  // onClick = callback function defined in parent
   // wishlistStatus =  state for if the item is in the wishlist or not
 
   return (

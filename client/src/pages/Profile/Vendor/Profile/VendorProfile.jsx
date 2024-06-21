@@ -5,12 +5,12 @@ import {
   Grid,
   Avatar,
   Divider,
-} from "@mui/material";
-import { Vendor } from "../../../../graphql/queries";
-import { useLazyQuery } from "@apollo/client";
-import { useEffect } from "react";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
-import StorefrontIcon from "@mui/icons-material/Storefront";
+} from '@mui/material';
+import { Vendor } from '../../../../graphql/queries';
+import { useLazyQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { useAuthContext } from '../../../../hooks/useAuthContext';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 
 export default function VendorProfile() {
   const { user, id } = useAuthContext();
@@ -26,7 +26,7 @@ export default function VendorProfile() {
   }, [loadVendor, user]);
 
   if (error) {
-    console.error("GraphQL Error:", error);
+    console.error('GraphQL Error:', error);
   }
   if (loading) {
     return <Typography>Loading...</Typography>;
@@ -41,46 +41,46 @@ export default function VendorProfile() {
 
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container direction="column" marginTop={12}>
+      <Container maxWidth='lg'>
+        <Grid container direction='column' marginTop={12}>
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
-            <Stack direction="column" alignItems="center" spacing={2}>
+            <Stack direction='column' alignItems='center' spacing={2}>
               <Avatar
-                sx={{ bgcolor: "primary.main" }}
+                sx={{ bgcolor: 'primary.main' }}
                 alt={`${vendorData.vendorName}'s Logo`}
               >
                 <StorefrontIcon />
               </Avatar>
 
-              <Typography textAlign="center" variant="h6">
+              <Typography textAlign='center' variant='h6'>
                 Hi, {vendorData.vendorName} 👋
               </Typography>
 
               <Stack
-                direction="row"
-                justifyContent="space-around"
-                alignItems="center"
-                textAlign="center"
+                direction='row'
+                justifyContent='space-around'
+                alignItems='center'
+                textAlign='center'
                 spacing={4}
               >
-                <Stack alignItems="center">
-                  <Typography fontWeight="bold" color="secondary.main">
+                <Stack alignItems='center'>
+                  <Typography fontWeight='bold' color='secondary.main'>
                     {vendorData.inventory.length}
                   </Typography>
-                  <Typography variant="caption">Inventory</Typography>
+                  <Typography variant='caption'>Inventory</Typography>
                 </Stack>
-                <Stack alignItems="center">
-                  <Typography fontWeight="bold" color="secondary.main">
+                <Stack alignItems='center'>
+                  <Typography fontWeight='bold' color='secondary.main'>
                     {vendorData.sales.length}
                   </Typography>
-                  <Typography variant="caption">Sales</Typography>
+                  <Typography variant='caption'>Sales</Typography>
                 </Stack>
-                <Stack alignItems="center">
-                  <Typography fontWeight="bold" color="secondary.main">
+                <Stack alignItems='center'>
+                  <Typography fontWeight='bold' color='secondary.main'>
                     0
                   </Typography>
-                  <Typography variant="caption">Followers</Typography>
+                  <Typography variant='caption'>Followers</Typography>
                 </Stack>
               </Stack>
             </Stack>
@@ -92,17 +92,17 @@ export default function VendorProfile() {
           <Grid item>
             <Stack
               my={6}
-              direction="column"
-              alignItems={"center"}
+              direction='column'
+              alignItems={'center'}
               spacing={3}
-              textAlign="center"
+              textAlign='center'
             >
-              <Typography variant="subtitle2">
+              <Typography variant='subtitle2'>
                 Vendor profile's are undergoing maintenence. Soon, you will see
                 your businesses performance data here.
               </Typography>
 
-              <Typography variant="subtitle2" fontStyle="italic">
+              <Typography variant='subtitle2' fontStyle='italic'>
                 Thank you for your patience.
               </Typography>
             </Stack>

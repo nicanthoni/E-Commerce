@@ -4,21 +4,14 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { useMediaQuery } from '@mui/material';
+import { categories } from '../../../data/itemData';
 
-// Categories
-const categories = [
-  { id: 1, name: 'All Products' },
-  { id: 2, name: 'Apparel' },
-  { id: 3, name: 'Sports & Outdoors' },
-  { id: 4, name: 'Kids' },
-  { id: 5, name: 'Baby Care' },
-  { id: 6, name: 'Home Decor' },
-  { id: 7, name: 'Art' },
-  { id: 8, name: 'Gaming' },
-  { id: 9, name: 'Office' },
-];
-
-function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onStepChange }) {
+function CategorySelection({
+  selectedCategory,
+  onCategoryChange,
+  activeStep,
+  onStepChange,
+}) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
 
@@ -37,17 +30,31 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
   };
 
   return (
-    <Box marginBottom={1} sx={{ maxWidth: 1200, flexGrow: 1, overflow: 'hidden', mx: 'auto', position: 'relative' }}>
-
-      <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-
+    <Box
+      marginBottom={1}
+      sx={{
+        maxWidth: 1200,
+        flexGrow: 1,
+        overflow: 'hidden',
+        mx: 'auto',
+        position: 'relative',
+      }}
+    >
+      <Box
+        sx={{
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         {/* Back button - only on mobile */}
         {isMobile && (
           <Button
             size='small'
             onClick={handleBack}
             disabled={activeStep === 0}
-            sx={{ position: 'absolute', left: -20, zIndex: 1 }}  // Moved button further to the left
+            sx={{ position: 'absolute', left: -20, zIndex: 1 }} // Moved button further to the left
           >
             {theme.direction === 'rtl' ? (
               <KeyboardArrowRight />
@@ -66,24 +73,36 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
         >
           {/* Category Buttons */}
           {Array.from({ length: maxSteps }).map((_, index) => (
-            <Box key={index} sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-              {categories.slice(index * categoriesPerView, (index + 1) * categoriesPerView).map((category) => (
-                <Button
-                  size='small'
-                  color={selectedCategory === category.name ? 'secondary' : 'primary'}
-                  variant='text'
-                  key={category.id}
-                  sx={{
-                    textWrap: 'nowrap',
-                    mx: 1,
-                    textAlign: 'center',
-                    textTransform: 'none',
-                  }}
-                  onClick={() => onCategoryChange(category.name)}
-                >
-                  {category.name}
-                </Button>
-              ))}
+            <Box
+              key={index}
+              sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+            >
+              {categories
+                .slice(
+                  index * categoriesPerView,
+                  (index + 1) * categoriesPerView
+                )
+                .map((category) => (
+                  <Button
+                    size='small'
+                    color={
+                      selectedCategory === category.name
+                        ? 'secondary'
+                        : 'primary'
+                    }
+                    variant='text'
+                    key={category.id}
+                    sx={{
+                      textWrap: 'nowrap',
+                      mx: 1,
+                      textAlign: 'center',
+                      textTransform: 'none',
+                    }}
+                    onClick={() => onCategoryChange(category.name)}
+                  >
+                    {category.name}
+                  </Button>
+                ))}
             </Box>
           ))}
         </SwipeableViews>
@@ -94,7 +113,7 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep, onS
             size='small'
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
-            sx={{ position: 'absolute', right: -20, zIndex: 1 }}  // Moved button further to the right
+            sx={{ position: 'absolute', right: -20, zIndex: 1 }} // Moved button further to the right
           >
             {theme.direction === 'rtl' ? (
               <KeyboardArrowLeft />
