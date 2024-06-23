@@ -1,10 +1,10 @@
-import { Typography, Container } from "@mui/material";
-import { useLazyQuery } from "@apollo/client";
-import { User } from "../../../../graphql/queries";
-import { useEffect } from "react";
-import { Grid, Avatar, Stack } from "@mui/material";
-import ProfileAccordions from "./Accordion/AccordionMain";
-import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { Typography, Container } from '@mui/material';
+import { useLazyQuery } from '@apollo/client';
+import { User } from '../../../../graphql/queries';
+import { useEffect } from 'react';
+import { Grid, Avatar, Stack } from '@mui/material';
+import ProfileAccordions from './Accordion/AccordionMain';
+import { useAuthContext } from '../../../../hooks/useAuthContext';
 
 export default function BuyerProfile() {
   const { user, id } = useAuthContext();
@@ -21,7 +21,7 @@ export default function BuyerProfile() {
   }, [loadUser, user]);
 
   if (error) {
-    console.error("GraphQL Error:", error);
+    console.error('GraphQL Error:', error);
   }
   if (loading) {
     return <Typography>Loading...</Typography>;
@@ -36,43 +36,43 @@ export default function BuyerProfile() {
 
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container direction="column" marginTop={12}>
+      <Container maxWidth='lg'>
+        <Grid container direction='column' marginTop={12}>
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
-            <Stack direction="column" alignItems="center" spacing={2}>
+            <Stack direction='column' alignItems='center' spacing={2}>
               <Avatar
-                sx={{ bgcolor: "primary.main" }}
+                sx={{ bgcolor: 'primary.main' }}
                 alt={`${userData.firstName}'s Avatar`}
               />
 
-              <Typography textAlign="center" variant="h6">
-                Member since:
+              <Typography textAlign='center' variant='h6'>
+                Hi, {userData.firstName}
               </Typography>
               <Stack
-                direction="row"
-                justifyContent="space-around"
-                alignItems="center"
-                textAlign="center"
+                direction='row'
+                justifyContent='space-around'
+                alignItems='center'
+                textAlign='center'
                 spacing={4}
               >
-                <Stack alignItems="center">
-                  <Typography fontWeight="bold" color="secondary.main">
+                <Stack alignItems='center'>
+                  <Typography fontWeight='bold' color='secondary.main'>
                     {userData.ratings.length}
                   </Typography>
-                  <Typography variant="caption">Reviews</Typography>
+                  <Typography variant='caption'>Reviews</Typography>
                 </Stack>
-                <Stack alignItems="center">
-                  <Typography fontWeight="bold" color="secondary.main">
+                <Stack alignItems='center'>
+                  <Typography fontWeight='bold' color='secondary.main'>
                     {userData.wishlist.length}
                   </Typography>
-                  <Typography variant="caption">Wishlist</Typography>
+                  <Typography variant='caption'>Wishlist</Typography>
                 </Stack>
-                <Stack alignItems="center">
-                  <Typography fontWeight="bold" color="secondary.main">
+                <Stack alignItems='center'>
+                  <Typography fontWeight='bold' color='secondary.main'>
                     {userData.buyHistory.length}
                   </Typography>
-                  <Typography variant="caption">Orders</Typography>
+                  <Typography variant='caption'>Orders</Typography>
                 </Stack>
               </Stack>
             </Stack>

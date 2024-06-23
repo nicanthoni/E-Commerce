@@ -5,7 +5,7 @@ const { Vendor, Item } = require('../models');
 
 const upload = multer({ dest: './uploads/' });
 
-router.post('/', upload.single('file'), async (req, res) => {
+router.post('/uploads', upload.single('file'), async (req, res) => {
   const { vendorId, name, price, description, category, inventory } = req.body;
 
   if (!vendorId) {
@@ -35,7 +35,7 @@ router.post('/', upload.single('file'), async (req, res) => {
     price,
     description,
     category,
-    vendor: vendor._id,
+    vendor: vendorId,
     inventory,
     img: newFilePath,
   });

@@ -30,7 +30,6 @@ export default function UploadItem() {
 
   // Form state
   const [formState, setFormState] = useState({
-    vendorName: '', // vendors name
     item: '', // item name
     price: '', // item price
     description: '', // item description
@@ -45,16 +44,6 @@ export default function UploadItem() {
       loadVendor();
     }
   }, [loadVendor, user]);
-
-  // Effect: Update vendorName in form state when vendorData changes
-  useEffect(() => {
-    if (vendorData && vendorData.vendor) {
-      setFormState((prevState) => ({
-        ...prevState,
-        vendorName: vendorData.vendor.vendorName,
-      }));
-    }
-  }, [vendorData]);
 
   // OnChange - update form state
   const handleChange = (event) => {
@@ -111,8 +100,8 @@ export default function UploadItem() {
     formData.append('file', formState.uploaded_item);
 
     try {
-      // Make HTTP POST request to backend endpoint using fetch
-      const response = await fetch('/api/upload', {
+      // Make POST request to backend endpoint using fetch
+      const response = await fetch('/api/uploads', {
         method: 'POST',
         body: formData,
       });
@@ -141,13 +130,13 @@ export default function UploadItem() {
   return (
     <Container component='main' maxWidth='xs'>
       <Paper
-        elevation={2}
+        elevation={3}
         component='form'
         encType='multipart/form-data'
         noValidate
         onSubmit={handleSubmit}
         sx={{
-          // bgcolor: 'primary.main',
+          // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)', // Change the RGBA color to your desired shadow color
           marginTop: 15,
           padding: 2,
           display: 'flex',

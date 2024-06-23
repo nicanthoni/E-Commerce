@@ -12,8 +12,8 @@ const routes = require('./controller/')
 
 require('dotenv').config();
 
-app.use(express.json());
 
+// Apollo Server setup
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -22,11 +22,18 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
   await server.start();
 
+  // Middleware
+  app.use(express.json());
   app.use(cors())
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-  app.use('/uploads', express.static(path.join(__dirname, 'uploads'))) // Use uploads router for file uploads
+
+  // Use routes
   app.use(routes)
+
+  // Serve static files
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads'))) // Use uploads router for file uploads
+
   app.use(
     '/graphql',
     expressMiddleware(server, {
