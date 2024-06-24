@@ -49,6 +49,7 @@ import ErrorPage from './pages/ErrorPage';
 
 // Testing
 import UploadItem from './pages/Profile/Vendor/UploadItem.jsx';
+import Inventory from './pages/Profile/Vendor/Inventory.jsx';
 import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
 
 // Routes
@@ -71,6 +72,7 @@ const router = createBrowserRouter(
       <Route path='/checkout' element={<Checkout />} />
       <Route path='/inbox' element={<Inbox />} />
       <Route path='/uploaditem' element={<UploadItem />} />
+      <Route path='/inventory' element={<Inventory />} />
       <Route path='/wishlist' element={<UserWishlist />} />
       <Route path='*' element={<ErrorPage />} />
     </Route>

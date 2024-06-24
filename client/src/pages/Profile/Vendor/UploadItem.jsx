@@ -121,7 +121,7 @@ export default function UploadItem() {
       }, 1500);
     } catch (error) {
       console.error('Error: ', error);
-      setAlertMessage('Error uploading');
+      setAlertMessage('Upload Error');
       setShowUploadAlert(true);
       setTimeout(() => {
         setShowUploadAlert(false);
