@@ -5,7 +5,8 @@ const { Vendor, Item } = require('../models');
 
 const upload = multer({ dest: './uploads/' });
 
-router.post('/uploads', upload.single('file'), async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
+  console.log('Handling /uploads POST request...');
   const { vendorId, name, price, description, category, inventory } = req.body;
 
   if (!vendorId) {
@@ -25,7 +26,7 @@ router.post('/uploads', upload.single('file'), async (req, res) => {
 
   const originalFilename = file.originalname;
   const filenameWithoutSpaces = originalFilename.replace(/\s+/g, '');
-  const filename = vendorId + filenameWithoutSpaces;
+  const filename = vendorId + '_' + filenameWithoutSpaces;
   const newFilePath = './uploads/' + filename;
   fs.renameSync(file.path, newFilePath);
 
@@ -42,7 +43,7 @@ router.post('/uploads', upload.single('file'), async (req, res) => {
 
   await newItem.save();
 
-  // Update vendor's inventory
+  // Add item to Vendor's inventory
   vendor.inventory.push(newItem._id);
   await vendor.save();
 

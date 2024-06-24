@@ -32,11 +32,11 @@ const resolvers = {
       return user;
     },
     vendor: async (parent, { id }) => {
-      console.log('VendorID:', id);
+      // console.log('VendorID:', id);
       const vendor = await Vendor.findById(id)
         .populate('inventory')
         .populate('sales.item');
-      console.log('Vendor Data:', vendor);
+      // console.log('Vendor Data:', vendor);
       return vendor;
     },
     item: async (parent, { id }) => {

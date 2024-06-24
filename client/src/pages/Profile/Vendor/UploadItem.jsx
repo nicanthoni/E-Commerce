@@ -89,6 +89,8 @@ export default function UploadItem() {
       return;
     }
 
+    console.log('formState: ', formState);
+
     // Prepare FormData to send to backend
     const formData = new FormData();
     formData.append('vendorId', vendorId);
@@ -101,7 +103,7 @@ export default function UploadItem() {
 
     try {
       // Make POST request to backend endpoint using fetch
-      const response = await fetch('/api/uploads', {
+      const response = await fetch('http://localhost:3001/uploads', {
         method: 'POST',
         body: formData,
       });
@@ -112,14 +114,14 @@ export default function UploadItem() {
 
       const responseData = await response.json();
       console.log('Item uploaded successfully:', responseData);
-      setAlertMessage('Item uploaded successfully');
+      setAlertMessage('Added');
       setShowUploadAlert(true);
       setTimeout(() => {
         setShowUploadAlert(false);
       }, 1500);
     } catch (error) {
       console.error('Error: ', error);
-      setAlertMessage('Error uploading item');
+      setAlertMessage('Error uploading');
       setShowUploadAlert(true);
       setTimeout(() => {
         setShowUploadAlert(false);
@@ -130,7 +132,7 @@ export default function UploadItem() {
   return (
     <Container component='main' maxWidth='xs'>
       <Paper
-        elevation={3}
+        elevation={2}
         component='form'
         encType='multipart/form-data'
         noValidate
@@ -248,7 +250,7 @@ export default function UploadItem() {
       </Paper>
 
       {/* ⚠️ Alert ⚠️ */}
-      {showUploadAlert && <ItemAlert message={alertMessage} />}
+      <ItemAlert visible={showUploadAlert} message={alertMessage} />
     </Container>
   );
 }
