@@ -74,6 +74,7 @@ export default function SingleProduct() {
 
   // check if current item is in array of users wishlistedItems - setWishlistStatus state accoordingly
   useEffect(() => {
+    console.log('productData: ', productData);
     if (Array.isArray(wishlistedItems)) {
       setWishlistStatus(wishlistedItems.includes(itemId));
     }
@@ -218,8 +219,12 @@ export default function SingleProduct() {
               overflow: 'hidden',
             }}
           >
-            <img
-              src={productData.item.img}
+            <img // check img property for if a seeded img or img added via multer upload
+              src={
+                productData.item.img.startsWith('/images/seededItems')
+                  ? productData.item.img
+                  : `http://localhost:3001/${productData.item.img}`
+              }
               alt='Product Photo'
               style={{
                 width: '100%',

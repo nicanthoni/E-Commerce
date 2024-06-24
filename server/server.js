@@ -7,13 +7,12 @@ const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const PORT = process.env.PORT || 3001;
 const path = require('path');
-const cors = require('cors')
-const routes = require('./controller/')
+const cors = require('cors');
+const routes = require('./controller/');
 
 require('dotenv').config();
 
-app.use(express.json());
-
+// Apollo Server setup
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -22,11 +21,23 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
   await server.start();
 
-  app.use(cors())
+  // Middleware
+  app.use((req, res, next) => {
+    console.log(`Incoming request: ${req.method} ${req.url}`);
+    next();
+  });
+
+  app.use(express.json());
+  app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-  app.use('/uploads', express.static(path.join(__dirname, 'uploads'))) // Use uploads router for file uploads
-  app.use(routes)
+
+  // Use routes
+  app.use(routes);
+
+  // Serve static files
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Use uploads router for file uploads
+
   app.use(
     '/graphql',
     expressMiddleware(server, {

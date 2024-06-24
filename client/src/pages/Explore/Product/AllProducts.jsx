@@ -179,7 +179,11 @@ export default function AllProducts({
                   >
                     <CardMedia
                       component='img'
-                      image={result.img}
+                      image={ // check img property for if a seeded img, or img added via multer upload
+                        result.img.startsWith('/images/seededItems')
+                          ? result.img
+                          : `http://localhost:3001/${result.img}`
+                      }
                       alt={`Photo of a ${result.name}`}
                       sx={{
                         width: 150,

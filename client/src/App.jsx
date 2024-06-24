@@ -44,11 +44,13 @@ import Signin from './pages/Signin/Signin.jsx';
 import LoginType from './pages/Signin/LoginType.jsx'; // Account type - LOGIN
 import AccountType from './pages/Signup/AccountType.jsx'; // Account type - SIGNUP
 import Profile from './pages/Profile/ProfileType.jsx';
+import UserWishlist from './pages/Profile/Buyer/UserWishlist.jsx';
 import ErrorPage from './pages/ErrorPage';
-
-// Testing
 import UploadItem from './pages/Profile/Vendor/UploadItem.jsx';
+import Inventory from './pages/Profile/Vendor/Inventory.jsx';
 import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
+
+// Test routes
 
 // Routes
 const router = createBrowserRouter(
@@ -70,6 +72,8 @@ const router = createBrowserRouter(
       <Route path='/checkout' element={<Checkout />} />
       <Route path='/inbox' element={<Inbox />} />
       <Route path='/uploaditem' element={<UploadItem />} />
+      <Route path='/inventory' element={<Inventory />} />
+      <Route path='/wishlist' element={<UserWishlist />} />
       <Route path='*' element={<ErrorPage />} />
     </Route>
   )

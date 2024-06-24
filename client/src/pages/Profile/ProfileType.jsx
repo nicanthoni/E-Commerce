@@ -3,7 +3,7 @@ import VendorProfile from './Vendor/Profile/VendorProfile';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Profile() {
-const {user, type} = useAuthContext()
+  const { user, type } = useAuthContext();
 
   if (!user) {
     return null;

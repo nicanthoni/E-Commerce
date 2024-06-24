@@ -30,7 +30,6 @@ export default function UploadItem() {
 
   // Form state
   const [formState, setFormState] = useState({
-    vendorName: '', // vendors name
     item: '', // item name
     price: '', // item price
     description: '', // item description
@@ -45,16 +44,6 @@ export default function UploadItem() {
       loadVendor();
     }
   }, [loadVendor, user]);
-
-  // Effect: Update vendorName in form state when vendorData changes
-  useEffect(() => {
-    if (vendorData && vendorData.vendor) {
-      setFormState((prevState) => ({
-        ...prevState,
-        vendorName: vendorData.vendor.vendorName,
-      }));
-    }
-  }, [vendorData]);
 
   // OnChange - update form state
   const handleChange = (event) => {
@@ -100,6 +89,8 @@ export default function UploadItem() {
       return;
     }
 
+    console.log('formState: ', formState);
+
     // Prepare FormData to send to backend
     const formData = new FormData();
     formData.append('vendorId', vendorId);
@@ -111,8 +102,8 @@ export default function UploadItem() {
     formData.append('file', formState.uploaded_item);
 
     try {
-      // Make HTTP POST request to backend endpoint using fetch
-      const response = await fetch('/api/upload', {
+      // Make POST request to backend endpoint using fetch
+      const response = await fetch('http://localhost:3001/uploads', {
         method: 'POST',
         body: formData,
       });
@@ -123,14 +114,14 @@ export default function UploadItem() {
 
       const responseData = await response.json();
       console.log('Item uploaded successfully:', responseData);
-      setAlertMessage('Item uploaded successfully');
+      setAlertMessage('Added');
       setShowUploadAlert(true);
       setTimeout(() => {
         setShowUploadAlert(false);
       }, 1500);
     } catch (error) {
       console.error('Error: ', error);
-      setAlertMessage('Error uploading item');
+      setAlertMessage('Upload Error');
       setShowUploadAlert(true);
       setTimeout(() => {
         setShowUploadAlert(false);
@@ -147,7 +138,7 @@ export default function UploadItem() {
         noValidate
         onSubmit={handleSubmit}
         sx={{
-          // bgcolor: 'primary.main',
+          // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)', // Change the RGBA color to your desired shadow color
           marginTop: 15,
           padding: 2,
           display: 'flex',
@@ -259,7 +250,7 @@ export default function UploadItem() {
       </Paper>
 
       {/* ⚠️ Alert ⚠️ */}
-      {showUploadAlert && <ItemAlert message={alertMessage} />}
+      <ItemAlert visible={showUploadAlert} message={alertMessage} />
     </Container>
   );
 }

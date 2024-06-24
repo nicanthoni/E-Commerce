@@ -10,6 +10,8 @@ import StoreIcon from '@mui/icons-material/Store';
 import { NavLink } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import InsightsIcon from '@mui/icons-material/Insights';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 export default function BottomNav() {
   const { user, type } = useAuthContext();
@@ -32,7 +34,7 @@ export default function BottomNav() {
             <BottomNavigationAction
               component={NavLink}
               to='/dash'
-              label='Dashboard'
+              label='Dash'
               icon={<InsightsIcon />}
               showLabel
             />
@@ -62,6 +64,28 @@ export default function BottomNav() {
               to='/uploaditem'
               label='Upload'
               icon={<AddBoxIcon />}
+              showLabel
+            />
+          ) : null}
+
+          {/* Inventory (vendor) */}
+          {user && type === 'vendor' ? (
+            <BottomNavigationAction
+              component={NavLink}
+              to='/inventory'
+              label='Inventory'
+              icon={<InventoryIcon />}
+              showLabel
+            />
+          ) : null}
+
+          {/* Wishlist (buyer) */}
+          {user && type === 'buyer' ? (
+            <BottomNavigationAction
+              component={NavLink}
+              to='/wishlist'
+              label='Wishlist'
+              icon={<FavoriteIcon />}
               showLabel
             />
           ) : null}
