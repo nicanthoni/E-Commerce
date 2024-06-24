@@ -46,11 +46,11 @@ import AccountType from './pages/Signup/AccountType.jsx'; // Account type - SIGN
 import Profile from './pages/Profile/ProfileType.jsx';
 import UserWishlist from './pages/Profile/Buyer/UserWishlist.jsx';
 import ErrorPage from './pages/ErrorPage';
-
-// Testing
 import UploadItem from './pages/Profile/Vendor/UploadItem.jsx';
 import Inventory from './pages/Profile/Vendor/Inventory.jsx';
 import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
+
+// Test routes
 
 // Routes
 const router = createBrowserRouter(
