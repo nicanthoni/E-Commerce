@@ -1,18 +1,22 @@
-import {ImageList, ImageListItem, ImageListItemBar, ListSubheader, IconButton} from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  ListSubheader,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
-
-export default function CartImgList({ refetchUserData, loadUser, userData  }) {
-  const subtotal = userData.cart.reduce((total, item) => { // Calculate cart subtotal
-    return total + item.item.price;
-  },0).toFixed(2);
-  
+export default function CartImgList({ refetchUserData, loadUser, userData }) {
+  const subtotal = userData.cart
+    .reduce((total, item) => {
+      // Calculate cart subtotal
+      return total + item.item.price;
+    }, 0)
+    .toFixed(2);
 
   return (
     <ImageList>
-      <ImageListItem key='Subheader' cols={2}>
-        <ListSubheader component='div'>Subtotal: ${subtotal} </ListSubheader>
-      </ImageListItem>
       {userData.cart.map((item, index) => (
         <ImageListItem key={index}>
           <img

@@ -28,8 +28,10 @@ export default function CartLayout({
 
   // Calculate cart subtotal
   const subtotal = userData.user.cart
-    .reduce((total, item) => {
-      return total + item.item.price;
+    .reduce((total, cartItem) => {
+      const price = parseFloat(cartItem.item.price) || 0;
+      const quantity = parseInt(cartItem.quantity, 10) || 0; // ensures cartItem.quantity is interpreted as a decimal (base 10) number
+      return total + price * quantity;
     }, 0)
     .toFixed(2);
 
