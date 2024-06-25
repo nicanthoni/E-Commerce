@@ -1,12 +1,26 @@
 import { useState } from 'react';
-import {Box, Button, IconButton, Typography, Modal, Rating} from '@mui/material';
-import {ImageList, ImageListItem, ImageListItemBar, ListSubheader} from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  Typography,
+  Modal,
+  Rating,
+} from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  ListSubheader,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
-
-export default function ReviewsImgList({ refetchUserData, loadUser, userData }) {
+export default function ReviewsImgList({
+  refetchUserData,
+  loadUser,
+  userData,
+}) {
   const [openModals, setOpenModals] = useState([]);
-
 
   const handleOpenModal = (index) => {
     const newOpenModals = [...openModals];
@@ -46,6 +60,7 @@ export default function ReviewsImgList({ refetchUserData, loadUser, userData }) 
               />
             </Button>
             <ImageListItemBar
+              onClick={() => handleOpenModal(index)}
               title={rating.item.name}
               subtitle={`Rating: ${rating.stars}`}
               actionIcon={
@@ -65,17 +80,23 @@ export default function ReviewsImgList({ refetchUserData, loadUser, userData }) 
               aria-labelledby='modal-modal-title'
               aria-describedby='modal-modal-description'
             >
-              <Box sx={{position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: 400,
-                bgcolor: 'background.paper',
-                border: '1px solid #000',
-                boxShadow: 24,
-                p: 4,
-                textAlign: 'center'
-                }}>
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 400,
+                  bgcolor: 'background.paper',
+                  border: '1px solid #000',
+                  boxShadow: 24,
+                  p: 4,
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <img
                   srcSet={
                     rating.item.img.startsWith('/images/seededItems')
@@ -89,16 +110,19 @@ export default function ReviewsImgList({ refetchUserData, loadUser, userData }) 
                   }
                   alt={rating.item.name}
                   loading='lazy'
-                  style={{ width: '100px', height: 'auto' }}
+                  style={{ width: '100px', height: 'auto', marginBottom: 15 }}
                 />
                 <Typography id='modal-modal-title' variant='h6' component='h2'>
                   {rating.item.name}
                 </Typography>
                 <Typography
+                  id='modal-modal-title'
                   variant='caption'
-                  id='review-description'
-                  sx={{ mt: 2 }}
+                  marginBottom={2}
                 >
+                  {/* {userData.buyHistory.item.vendor.vendorName} */}
+                </Typography>
+                <Typography variant='caption' id='review-description'>
                   '{rating.review}'
                 </Typography>
 

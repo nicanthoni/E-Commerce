@@ -1,18 +1,18 @@
-import { forwardRef } from 'react';
 import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
+import { useState } from 'react';
 import { styled } from '@mui/system';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-
-
-const NumberInput = forwardRef(function CustomNumberInput(props, ref) {
+const NumberInput = function CustomNumberInput(userData, onClick) {
+  const [itemQuantity, setItemQuantity] = useState();
   return (
     <BaseNumberInput
+      defaultValue={1}
       slots={{
         root: StyledInputRoot,
         input: StyledInput,
-        incrementButton: StyledButton,
+        incrementButton: StyledButton, 
         decrementButton: StyledButton,
       }}
       slotProps={{
@@ -24,21 +24,13 @@ const NumberInput = forwardRef(function CustomNumberInput(props, ref) {
           children: <RemoveIcon fontSize='small' />,
         },
       }}
-      {...props}
-      ref={ref}
     />
-    
   );
-});
+};
 
-
-
-export default function QuantityIncrementer() {
-  return (
-  <NumberInput aria-label='Quantity Input' min={1} max={10} />
-  );
+export default function QuantityIncrementer (onClick) {
+  return <NumberInput aria-label='Quantity Input' min={1} max={10} />;
 }
-
 
 const blue = {
   100: '#daecff',
@@ -73,7 +65,7 @@ const StyledInputRoot = styled('div')(
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-`,
+`
 );
 
 const StyledInput = styled('input')(
@@ -102,13 +94,15 @@ const StyledInput = styled('input')(
 
   &:focus {
     border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[700] : blue[200]};
+    box-shadow: 0 0 0 3px ${
+      theme.palette.mode === 'dark' ? blue[700] : blue[200]
+    };
   }
 
   &:focus-visible {
     outline: 0;
   }
-`,
+`
 );
 
 const StyledButton = styled('button')(
@@ -146,5 +140,5 @@ const StyledButton = styled('button')(
   &.increment {
     order: 1;
   }
-`,
+`
 );

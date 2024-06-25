@@ -77,6 +77,8 @@ const typeDefs = `
         DeleteItem(itemId: ID!, vendorId: ID!): String
         AddToCart(itemId: ID!, userId: ID!): String
         DeleteFromCart(itemId: ID!, userId: ID!): String
+        IncreaseQuantity(itemId: ID!, userId: ID!): String
+        DecreaseQuantity(itemId: ID!, userId: ID!): String
         AddToWishlist(itemId: ID!, userId: ID!): String
         DeleteFromWishlist(itemId: ID!, userId: ID!): String
         AddFromWishlistToCart(itemId: ID!, userId: ID!): String

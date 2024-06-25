@@ -1,5 +1,13 @@
 import { useState } from 'react';
-import { Box, Stack, Button, Typography, Modal, Alert } from '@mui/material';
+import {
+  Box,
+  Stack,
+  Button,
+  Typography,
+  Modal,
+  Alert,
+  Link,
+} from '@mui/material';
 import {
   ImageList,
   ImageListItem,
@@ -99,8 +107,13 @@ export default function WishImglist({ refetchUserData, userData }) {
                 bgcolor='background.paper'
                 padding={4}
                 boxShadow={24}
-                gap={1}
+                gap={0}
               >
+                <Typography variant='caption'>
+                  <Link href={`/product/${item.item._id}`} underline='hover'>
+                    View item
+                  </Link>
+                </Typography>
                 <img
                   srcSet={
                     item.item.img.startsWith('/images/seededItems')
@@ -114,16 +127,16 @@ export default function WishImglist({ refetchUserData, userData }) {
                   }
                   alt={item.item.name}
                   loading='lazy'
-                  style={{ width: '100px', height: 'auto' }}
+                  style={{ width: '100px', height: 'auto', marginBottom: 10 }}
                 />
+
+                <Typography>${item.item.price}</Typography>
 
                 <Typography id='modal-modal-title' fontWeight='bold'>
                   {item.item.name}
                 </Typography>
 
-                <Typography>${item.item.price}</Typography>
-
-                <Typography variant='caption'>
+                <Typography variant='caption' marginBottom={2}>
                   {item.item.description}
                 </Typography>
 

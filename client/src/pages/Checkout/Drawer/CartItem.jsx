@@ -35,6 +35,11 @@ export default function CartItem({
     }
   };
 
+  const handleQuantity = async (itemId) => {
+    console.log(`Button clicked for item ${itemId}`)
+    
+  }
+
   return (
     <>
       {userData.user.cart.map((item, index) => (
@@ -66,7 +71,7 @@ export default function CartItem({
                 }}
               />
             </Box>
-            <QuantityIncrementer userData={userData} />
+            <QuantityIncrementer userData={userData} onClick={() => handleQuantity(item.item._id)}/>
           </Stack>
 
           {/* Product details */}
