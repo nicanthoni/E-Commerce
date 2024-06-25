@@ -26,7 +26,7 @@ router.post('/', upload.single('file'), async (req, res) => {
 
   const originalFilename = file.originalname;
   const filenameWithoutSpaces = originalFilename.replace(/\s+/g, '');
-  const filename = vendorId + '_' + filenameWithoutSpaces;
+  const filename = vendorId + 'test';
   const newFilePath = './uploads/' + filename;
   fs.renameSync(file.path, newFilePath);
 

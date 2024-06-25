@@ -298,7 +298,11 @@ const resolvers = {
           (cartItem) => cartItem.item.toString() === itemId
         );
         if (alreadyInCart !== -1) {
+          if (user.cart[alreadyInCart].quantity + 1 > item.inventory) {
+            throw new Error('Not enough in stock')
+          }
           user.cart[alreadyInCart].quantity += 1;
+
         } else {
           user.cart.push({ item: item._id, quantity: 1 });
         }
@@ -405,6 +409,52 @@ const resolvers = {
         return `${user.username} left a review on ${item.name}`;
       } catch (e) {
         throw new Error(e);
+      }
+    },
+    IncreaseQuantity: async (parent, { itemId, userId }) => {
+      try {
+        const user = await User.findById(userId).populate('cart.item');
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        const cartItem = user.cart.find(
+          (item) => item.item._id.toString() === itemId
+        );
+        if (!cartItem) {
+          throw new Error('Item not found in cart');
+        }
+
+        cartItem.quantity += 1;
+
+        await user.save();
+
+        return `${cartItem.item.name} quantity increased to ${cartItem.quantity} in ${user.username}'s cart`;
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    },
+    DecreaseQuantity: async (parent, { itemId, userId }) => {
+      try {
+        const user = await User.findById(userId).populate('cart.item');
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        const cartItem = user.cart.find(
+          (item) => item.item._id.toString() === itemId
+        );
+        if (!cartItem) {
+          throw new Error('Item not found in cart');
+        }
+
+        cartItem.quantity -= 1;
+
+        await user.save();
+
+        return `${cartItem.item.name} quantity decreased to ${cartItem.quantity} in ${user.username}'s cart`;
+      } catch (e) {
+        throw new Error(e.message);
       }
     },
     // checkout: async (parent, { userId }) => {
