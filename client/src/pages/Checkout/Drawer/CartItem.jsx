@@ -49,11 +49,15 @@ export default function CartItem({
           justifyContent='flex-start'
           bgcolor='#F2F2F2'
         >
-          {/* Product img & Incrementer */}
+          {/* Product IMG & Incrementer */}
           <Stack gap={2}>
             <Box sx={{ height: '100px', width: '100px' }}>
               <img
-                src={item.item.img}
+                src={
+                  item.item.img.startsWith('/images/seededItems')
+                    ? item.item.img
+                    : `http://localhost:3001/${item.item.img}`
+                }
                 alt='Product'
                 style={{
                   width: '100%',

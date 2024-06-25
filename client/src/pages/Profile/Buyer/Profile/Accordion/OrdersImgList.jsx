@@ -12,8 +12,16 @@ export default function OrdersImgList({ refetchUserData, loadUser, userData }) {
       {userData.buyHistory.map((item, index) => (
         <ImageListItem key={index}>
           <img
-            srcSet={item.item.img}
-            src={item.item.img}
+            srcSet={
+              item.item.img.startsWith('/images/seededItems')
+                ? item.item.img
+                : `http://localhost:3001/${item.item.img}`
+            }
+            src={
+              item.item.img.startsWith('/images/seededItems')
+                ? item.item.img
+                : `http://localhost:3001/${item.item.img}`
+            }
             alt={item.item.name}
             loading='lazy'
             style={{ width: '100px', height: 'auto', alignSelf: 'center' }}

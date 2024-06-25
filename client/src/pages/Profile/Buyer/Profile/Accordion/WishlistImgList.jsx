@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { Box, Stack, Button, Typography, Modal, Alert } from '@mui/material';
-import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useWishlist } from '../../../../../hooks/Products/useWishlist';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
-
-export default function WishImglist ({ refetchUserData, userData }) {
+export default function WishImglist({ refetchUserData, userData }) {
   const { id } = useAuthContext();
   const [openModals, setOpenModals] = useState([]);
   const [alert, setAlert] = useState({});
   const [showButton, setShowButton] = useState({});
-  
+
   const { deleteWishlist, isLoading, stateError } = useWishlist();
 
   const handleOpenModal = (index) => {
@@ -34,15 +38,13 @@ export default function WishImglist ({ refetchUserData, userData }) {
       setAlert((prev) => ({ ...prev, [itemId]: true }));
       setTimeout(() => {
         setAlert((prev) => ({ ...prev, [itemId]: false }));
-        refetchUserData()
+        refetchUserData();
         handleCloseModal(index);
       }, 1700);
-      
     } catch (e) {
       console.log('Error: ', e);
     }
   };
-
 
   return (
     <Box>
@@ -51,8 +53,17 @@ export default function WishImglist ({ refetchUserData, userData }) {
           <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
-                srcSet={item.item.img}
-                src={item.item.img}
+                // srcSet={item.item.img}
+                srcSet={
+                  item.item.img.startsWith('/images/seededItems')
+                    ? item.item.img
+                    : `http://localhost:3001/${item.item.img}`
+                }
+                src={
+                  item.item.img.startsWith('/images/seededItems')
+                    ? item.item.img
+                    : `http://localhost:3001/${item.item.img}`
+                }
                 alt={item.item.name}
                 loading='lazy'
                 style={{ width: '100px', height: 'auto' }}
@@ -91,8 +102,16 @@ export default function WishImglist ({ refetchUserData, userData }) {
                 gap={1}
               >
                 <img
-                  srcSet={item.item.img}
-                  src={item.item.img}
+                  srcSet={
+                    item.item.img.startsWith('/images/seededItems')
+                      ? item.item.img
+                      : `http://localhost:3001/${item.item.img}`
+                  }
+                  src={
+                    item.item.img.startsWith('/images/seededItems')
+                      ? item.item.img
+                      : `http://localhost:3001/${item.item.img}`
+                  }
                   alt={item.item.name}
                   loading='lazy'
                   style={{ width: '100px', height: 'auto' }}

@@ -30,8 +30,16 @@ export default function ReviewsImgList({ refetchUserData, loadUser, userData }) 
           <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
-                srcSet={rating.item.img}
-                src={rating.item.img}
+                srcSet={
+                  rating.item.img.startsWith('/images/seededItems')
+                    ? rating.item.img
+                    : `http://localhost:3001/${rating.item.img}`
+                }
+                src={
+                  rating.item.img.startsWith('/images/seededItems')
+                    ? rating.item.img
+                    : `http://localhost:3001/${rating.item.img}`
+                }
                 alt={rating.item.name}
                 loading='lazy'
                 style={{ width: '100px', height: 'auto' }}
@@ -69,8 +77,16 @@ export default function ReviewsImgList({ refetchUserData, loadUser, userData }) 
                 textAlign: 'center'
                 }}>
                 <img
-                  srcSet={rating.item.img}
-                  src={rating.item.img}
+                  srcSet={
+                    rating.item.img.startsWith('/images/seededItems')
+                      ? rating.item.img
+                      : `http://localhost:3001/${rating.item.img}`
+                  }
+                  src={
+                    rating.item.img.startsWith('/images/seededItems')
+                      ? rating.item.img
+                      : `http://localhost:3001/${rating.item.img}`
+                  }
                   alt={rating.item.name}
                   loading='lazy'
                   style={{ width: '100px', height: 'auto' }}
