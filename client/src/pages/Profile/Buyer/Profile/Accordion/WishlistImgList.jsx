@@ -1,17 +1,29 @@
 import { useState } from 'react';
-import { Box, Stack, Button, Typography, Modal, Alert } from '@mui/material';
-import { ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
+import {
+  Box,
+  Stack,
+  Button,
+  Typography,
+  Modal,
+  Alert,
+  Link,
+} from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useWishlist } from '../../../../../hooks/Products/useWishlist';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
-
-export default function WishImglist ({ refetchUserData, userData }) {
+export default function WishImglist({ refetchUserData, userData }) {
   const { id } = useAuthContext();
   const [openModals, setOpenModals] = useState([]);
   const [alert, setAlert] = useState({});
   const [showButton, setShowButton] = useState({});
-  
+
   const { deleteWishlist, isLoading, stateError } = useWishlist();
 
   const handleOpenModal = (index) => {
@@ -34,15 +46,13 @@ export default function WishImglist ({ refetchUserData, userData }) {
       setAlert((prev) => ({ ...prev, [itemId]: true }));
       setTimeout(() => {
         setAlert((prev) => ({ ...prev, [itemId]: false }));
-        refetchUserData()
+        refetchUserData();
         handleCloseModal(index);
       }, 1700);
-      
     } catch (e) {
       console.log('Error: ', e);
     }
   };
-
 
   return (
     <Box>
@@ -51,8 +61,17 @@ export default function WishImglist ({ refetchUserData, userData }) {
           <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
               <img
-                srcSet={item.item.img}
-                src={item.item.img}
+                // srcSet={item.item.img}
+                srcSet={
+                  item.item.img.startsWith('/images/seededItems')
+                    ? item.item.img
+                    : `http://localhost:3001/${item.item.img}`
+                }
+                src={
+                  item.item.img.startsWith('/images/seededItems')
+                    ? item.item.img
+                    : `http://localhost:3001/${item.item.img}`
+                }
                 alt={item.item.name}
                 loading='lazy'
                 style={{ width: '100px', height: 'auto' }}
@@ -88,23 +107,36 @@ export default function WishImglist ({ refetchUserData, userData }) {
                 bgcolor='background.paper'
                 padding={4}
                 boxShadow={24}
-                gap={1}
+                gap={0}
               >
+                <Typography variant='caption'>
+                  <Link href={`/product/${item.item._id}`} underline='hover'>
+                    View item
+                  </Link>
+                </Typography>
                 <img
-                  srcSet={item.item.img}
-                  src={item.item.img}
+                  srcSet={
+                    item.item.img.startsWith('/images/seededItems')
+                      ? item.item.img
+                      : `http://localhost:3001/${item.item.img}`
+                  }
+                  src={
+                    item.item.img.startsWith('/images/seededItems')
+                      ? item.item.img
+                      : `http://localhost:3001/${item.item.img}`
+                  }
                   alt={item.item.name}
                   loading='lazy'
-                  style={{ width: '100px', height: 'auto' }}
+                  style={{ width: '100px', height: 'auto', marginBottom: 10 }}
                 />
+
+                <Typography>${item.item.price}</Typography>
 
                 <Typography id='modal-modal-title' fontWeight='bold'>
                   {item.item.name}
                 </Typography>
 
-                <Typography>${item.item.price}</Typography>
-
-                <Typography variant='caption'>
+                <Typography variant='caption' marginBottom={2}>
                   {item.item.description}
                 </Typography>
 

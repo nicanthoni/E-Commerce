@@ -1,14 +1,12 @@
-import { forwardRef } from 'react';
 import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
 import { styled } from '@mui/system';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-
-
-const NumberInput = forwardRef(function CustomNumberInput(props, ref) {
+const NumberInput = ({ handleQuantIncrease, handleQuantDecrease }) => {
   return (
     <BaseNumberInput
+      defaultValue={1}
       slots={{
         root: StyledInputRoot,
         input: StyledInput,
@@ -19,26 +17,27 @@ const NumberInput = forwardRef(function CustomNumberInput(props, ref) {
         incrementButton: {
           children: <AddIcon fontSize='small' />,
           className: 'increment',
+          onClick: handleQuantIncrease,
         },
         decrementButton: {
           children: <RemoveIcon fontSize='small' />,
+          onClick: handleQuantDecrease,
         },
       }}
-      {...props}
-      ref={ref}
     />
-    
   );
-});
+};
 
-
-
-export default function QuantityIncrementer() {
+const QuantityIncrementer = ({ handleQuantIncrease, handleQuantDecrease }) => {
   return (
-  <NumberInput aria-label='Quantity Input' min={1} max={10} />
+    <NumberInput
+      handleQuantIncrease={handleQuantIncrease}
+      handleQuantDecrease={handleQuantDecrease}
+    />
   );
-}
+};
 
+export default QuantityIncrementer;
 
 const blue = {
   100: '#daecff',
@@ -73,7 +72,7 @@ const StyledInputRoot = styled('div')(
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-`,
+`
 );
 
 const StyledInput = styled('input')(
@@ -102,13 +101,15 @@ const StyledInput = styled('input')(
 
   &:focus {
     border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[700] : blue[200]};
+    box-shadow: 0 0 0 3px ${
+      theme.palette.mode === 'dark' ? blue[700] : blue[200]
+    };
   }
 
   &:focus-visible {
     outline: 0;
   }
-`,
+`
 );
 
 const StyledButton = styled('button')(
@@ -146,5 +147,5 @@ const StyledButton = styled('button')(
   &.increment {
     order: 1;
   }
-`,
+`
 );

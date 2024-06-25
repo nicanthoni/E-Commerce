@@ -57,6 +57,17 @@ export const delete_cart = gql`
   }
 `;
 
+export const increase_quantity = gql`
+mutation IncreaseQuantity($itemId: ID!, $userId: ID!) {
+  IncreaseQuantity(itemId: $itemId, userId: $userId)
+}
+`
+export const decrease_quantity = gql`
+mutation DecreaseQuantity($itemId: ID!, $userId: ID!) {
+  DecreaseQuantity(itemId: $itemId, userId: $userId)
+}
+`
+
 //// VENDOR ////
 export const vendor_Signup = gql`
   mutation vendorSignup(

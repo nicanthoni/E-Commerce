@@ -16,8 +16,14 @@ export default function CartItem({
   const [alertMessage, setAlertMessage] = useState('');
   const [itemAlertVisible, setItemAlertVisible] = useState(false);
 
-  // Hook
-  const { deleteCart, isLoading, stateError } = useCart();
+  // Hooks
+  const {
+    deleteCart,
+    increaseQuantity,
+    decreaseQuantity,
+    isLoading,
+    stateError,
+  } = useCart();
 
   // onClick of delete button - handle item deletion
   const handleDeleteItem = async (itemId) => {
@@ -35,6 +41,30 @@ export default function CartItem({
     }
   };
 
+  // onClick of (+) button, handle quantity increase
+  const handleQuantIncrease = async (itemId) => {
+    console.log(`Button clicked for item ${itemId}`);
+    try {
+      await increaseQuantity(itemId, userId);
+      refetchCart(); // refetch the updated cart data
+      refetchUserData(); // refetch updated user data
+    } catch (e) {
+      console.log('handleQuantIncrease error: ', e);
+    }
+  };
+
+  // onClick of (-) button, handle quantity reduction
+  const handleQuantDecrease = async (itemId) => {
+    console.log(`Button clicked for item ${itemId}`);
+    try {
+      await decreaseQuantity(itemId, userId);
+      refetchCart(); // refetch the updated cart data
+      refetchUserData(); // refetch updated user data
+    } catch (e) {
+      console.log('handleQuantDecrease error: ', e);
+    }
+  };
+
   return (
     <>
       {userData.user.cart.map((item, index) => (
@@ -49,11 +79,15 @@ export default function CartItem({
           justifyContent='flex-start'
           bgcolor='#F2F2F2'
         >
-          {/* Product img & Incrementer */}
+          {/* Product IMG & Incrementer */}
           <Stack gap={2}>
             <Box sx={{ height: '100px', width: '100px' }}>
               <img
-                src={item.item.img}
+                src={
+                  item.item.img.startsWith('/images/seededItems')
+                    ? item.item.img
+                    : `http://localhost:3001/${item.item.img}`
+                }
                 alt='Product'
                 style={{
                   width: '100%',
@@ -62,7 +96,11 @@ export default function CartItem({
                 }}
               />
             </Box>
-            <QuantityIncrementer userData={userData} />
+            <QuantityIncrementer
+              userData={userData}
+              handleQuantIncrease={() => handleQuantIncrease(item.item._id)}
+              handleQuantDecrease={() => handleQuantDecrease(item.item._id)}
+            />
           </Stack>
 
           {/* Product details */}
