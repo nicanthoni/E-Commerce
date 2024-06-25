@@ -6,11 +6,12 @@ import Container from '@mui/material/Container';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { Vendor } from '../../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { categories, quantities } from '../../../data/itemData';
 import MenuItem from '@mui/material/MenuItem';
 import { Paper } from '@mui/material';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
+import UploadButton from '../../../components/Buttons/UploadButton';
 
 export default function UploadItem() {
   // Auth
@@ -148,15 +149,21 @@ export default function UploadItem() {
       >
         {/* Form */}
         <Grid container spacing={2} justifyContent='center'>
-          {/* Upload img */}
-          <Grid item>
-            <input
-              type='file'
-              accept='image/*'
-              onChange={handleChange}
-              name='uploaded_item'
-            />
-          </Grid>
+
+          <Stack textAlign='center' marginTop={2} marginBottom={2} gap={1}>
+            {/* Upload img */}
+
+            <Grid item>
+              <UploadButton onChange={handleChange} />
+            </Grid>
+
+            {/* File Name Preview */}
+            <Grid item>
+              {formState.uploaded_item && (
+                <Typography>{formState.uploaded_item.name}</Typography>
+              )}
+            </Grid>
+          </Stack>
 
           {/* Item name */}
           <Grid item xs={12}>

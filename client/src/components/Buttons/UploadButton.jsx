@@ -29,6 +29,7 @@ export default function UploadButton({ onChange }) {
       Upload image
       <VisuallyHiddenInput
         type='file'
+        accept='image/*'
         name='uploaded_item'
         onChange={onChange}
       />
