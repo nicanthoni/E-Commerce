@@ -25,7 +25,6 @@ export default function CartItem({
     stateError,
   } = useCart();
 
-  console.log(userData)
   // onClick of delete button - handle item deletion
   const handleDeleteItem = async (itemId) => {
     try {
