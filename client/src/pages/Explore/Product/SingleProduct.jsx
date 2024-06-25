@@ -74,7 +74,6 @@ export default function SingleProduct() {
 
   // check if current item is in array of users wishlistedItems - setWishlistStatus state accoordingly
   useEffect(() => {
-    console.log('productData: ', productData);
     if (Array.isArray(wishlistedItems)) {
       setWishlistStatus(wishlistedItems.includes(itemId));
     }

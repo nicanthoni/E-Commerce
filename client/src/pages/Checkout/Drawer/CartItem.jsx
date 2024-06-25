@@ -25,6 +25,7 @@ export default function CartItem({
     stateError,
   } = useCart();
 
+  console.log(userData)
   // onClick of delete button - handle item deletion
   const handleDeleteItem = async (itemId) => {
     try {
@@ -42,24 +43,24 @@ export default function CartItem({
   };
 
   // onClick of (+) button, handle quantity increase
-  const handleQuantIncrease = async (itemId) => {
-    console.log(`Button clicked for item ${itemId}`);
+  const handleQuantIncrease = async (itemId, quantity) => {
     try {
       await increaseQuantity(itemId, userId);
       refetchCart(); // refetch the updated cart data
       refetchUserData(); // refetch updated user data
+      // console.log('item quant after increase: ', quantity);
     } catch (e) {
       console.log('handleQuantIncrease error: ', e);
     }
   };
 
   // onClick of (-) button, handle quantity reduction
-  const handleQuantDecrease = async (itemId) => {
-    console.log(`Button clicked for item ${itemId}`);
+  const handleQuantDecrease = async (itemId, quantity) => {
     try {
       await decreaseQuantity(itemId, userId);
       refetchCart(); // refetch the updated cart data
       refetchUserData(); // refetch updated user data
+      // console.log('item quant after decrease: ', quantity);
     } catch (e) {
       console.log('handleQuantDecrease error: ', e);
     }
@@ -80,7 +81,7 @@ export default function CartItem({
           bgcolor='#F2F2F2'
         >
           {/* Product IMG & Incrementer */}
-          <Stack gap={2}>
+          <Stack gap={1} alignItems={'center'}>
             <Box sx={{ height: '100px', width: '100px' }}>
               <img
                 src={
@@ -96,11 +97,17 @@ export default function CartItem({
                 }}
               />
             </Box>
-            <QuantityIncrementer
-              userData={userData}
-              handleQuantIncrease={() => handleQuantIncrease(item.item._id)}
-              handleQuantDecrease={() => handleQuantDecrease(item.item._id)}
-            />
+            <>
+              <QuantityIncrementer
+                quantity={item.quantity}
+                handleQuantIncrease={() =>
+                  handleQuantIncrease(item.item._id, item.quantity)
+                }
+                handleQuantDecrease={() =>
+                  handleQuantDecrease(item.item._id, item.quantity)
+                }
+              />
+            </>
           </Stack>
 
           {/* Product details */}
