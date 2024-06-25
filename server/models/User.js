@@ -52,7 +52,8 @@ const userSchema = new mongoose.Schema({
         },
         quantity: {
             type: Number,
-            default: 1
+            default: 1, 
+            max: 10
         }
     }],
     buyHistory: [{

@@ -25,6 +25,8 @@ export default function CartItem({
     stateError,
   } = useCart();
 
+  console.log('UserData cart: ', userData)
+
   // onClick of delete button - handle item deletion
   const handleDeleteItem = async (itemId) => {
     try {
@@ -96,11 +98,13 @@ export default function CartItem({
                 }}
               />
             </Box>
-            <QuantityIncrementer
-              userData={userData}
-              handleQuantIncrease={() => handleQuantIncrease(item.item._id)}
-              handleQuantDecrease={() => handleQuantDecrease(item.item._id)}
-            />
+            <>
+              <QuantityIncrementer
+                quantity={item.item.quantity}
+                handleQuantIncrease={() => handleQuantIncrease(item.item._id)}
+                handleQuantDecrease={() => handleQuantDecrease(item.item._id)}
+              />
+            </>
           </Stack>
 
           {/* Product details */}
