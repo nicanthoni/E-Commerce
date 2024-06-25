@@ -1,36 +1,43 @@
 import { Unstable_NumberInput as BaseNumberInput } from '@mui/base/Unstable_NumberInput';
-import { useState } from 'react';
 import { styled } from '@mui/system';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 
-const NumberInput = function CustomNumberInput(userData, onClick) {
-  const [itemQuantity, setItemQuantity] = useState();
+const NumberInput = ({ handleQuantIncrease, handleQuantDecrease }) => {
   return (
     <BaseNumberInput
       defaultValue={1}
       slots={{
         root: StyledInputRoot,
         input: StyledInput,
-        incrementButton: StyledButton, 
+        incrementButton: StyledButton,
         decrementButton: StyledButton,
       }}
       slotProps={{
         incrementButton: {
           children: <AddIcon fontSize='small' />,
           className: 'increment',
+          onClick: handleQuantIncrease,
         },
         decrementButton: {
           children: <RemoveIcon fontSize='small' />,
+          onClick: handleQuantDecrease,
         },
       }}
     />
   );
 };
 
-export default function QuantityIncrementer (onClick) {
-  return <NumberInput aria-label='Quantity Input' min={1} max={10} />;
-}
+const QuantityIncrementer = ({ handleQuantIncrease, handleQuantDecrease }) => {
+  return (
+    <NumberInput
+      handleQuantIncrease={handleQuantIncrease}
+      handleQuantDecrease={handleQuantDecrease}
+    />
+  );
+};
+
+export default QuantityIncrementer;
 
 const blue = {
   100: '#daecff',

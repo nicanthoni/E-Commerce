@@ -16,8 +16,14 @@ export default function CartItem({
   const [alertMessage, setAlertMessage] = useState('');
   const [itemAlertVisible, setItemAlertVisible] = useState(false);
 
-  // Hook
-  const { deleteCart, isLoading, stateError } = useCart();
+  // Hooks
+  const {
+    deleteCart,
+    increaseQuantity,
+    decreaseQuantity,
+    isLoading,
+    stateError,
+  } = useCart();
 
   // onClick of delete button - handle item deletion
   const handleDeleteItem = async (itemId) => {
@@ -35,10 +41,29 @@ export default function CartItem({
     }
   };
 
-  const handleQuantity = async (itemId) => {
-    console.log(`Button clicked for item ${itemId}`)
-    
-  }
+  // onClick of (+) button, handle quantity increase
+  const handleQuantIncrease = async (itemId) => {
+    console.log(`Button clicked for item ${itemId}`);
+    try {
+      await increaseQuantity(itemId, userId);
+      refetchCart(); // refetch the updated cart data
+      refetchUserData(); // refetch updated user data
+    } catch (e) {
+      console.log('handleQuantIncrease error: ', e);
+    }
+  };
+
+  // onClick of (-) button, handle quantity reduction
+  const handleQuantDecrease = async (itemId) => {
+    console.log(`Button clicked for item ${itemId}`);
+    try {
+      await decreaseQuantity(itemId, userId);
+      refetchCart(); // refetch the updated cart data
+      refetchUserData(); // refetch updated user data
+    } catch (e) {
+      console.log('handleQuantDecrease error: ', e);
+    }
+  };
 
   return (
     <>
@@ -71,7 +96,11 @@ export default function CartItem({
                 }}
               />
             </Box>
-            <QuantityIncrementer userData={userData} onClick={() => handleQuantity(item.item._id)}/>
+            <QuantityIncrementer
+              userData={userData}
+              handleQuantIncrease={() => handleQuantIncrease(item.item._id)}
+              handleQuantDecrease={() => handleQuantDecrease(item.item._id)}
+            />
           </Stack>
 
           {/* Product details */}
