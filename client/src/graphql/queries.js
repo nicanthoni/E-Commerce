@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-
 // Vendor - by id, returns all data associated with vendor
 export const Vendor = gql`
   query VendorQuery($vendorId: ID!) {
@@ -10,6 +9,27 @@ export const Vendor = gql`
       inventory {
         name
         inventory
+        category
+        description
+        price
+        img
+        inCart
+        ratings {
+          _id
+          review
+          stars
+          createdAt
+          user {
+            _id
+            email
+          }
+          item {
+            _id
+            name
+            category
+          }
+        }
+        createdAt
       }
       sales {
         item {
@@ -85,7 +105,7 @@ export const Wishlist = gql`
   }
 `;
 
-// Wishlist - by item and user id, checks if item is in wishlist and returns boolean 
+// Wishlist - by item and user id, checks if item is in wishlist and returns boolean
 export const WishlistedItemCheck = gql`
   query ItemInWishlist($userId: ID!, $itemId: ID!) {
     itemInWishlist(userId: $userId, itemId: $itemId)
@@ -101,44 +121,44 @@ export const Cart = gql`
 
 // Product(s) - by category
 export const Products = gql`
-query ProductsQuery($category: String) {
-  filterItems(category: $category) {
-    _id
-    name
-    price
-    description
-    category
-    vendor {
-      vendorName
+  query ProductsQuery($category: String) {
+    filterItems(category: $category) {
+      _id
+      name
+      price
+      description
+      category
+      vendor {
+        vendorName
+      }
+      inventory
+      img
+      ratings {
+        stars
+        review
+      }
+      inCart
     }
-    inventory
-    img
-    ratings {
-      stars
-      review
-    }
-    inCart
   }
-}
 `;
 
 // Product - by id
 export const IndividualProduct = gql`
-query SingleProductQuery($id: ID!) {
-  item(id: $id) {
-    name
-    price
-    description
-    category
-    vendor {
-      vendorName
-    }
-    img
-    ratings {
-      _id
-      stars
-      review
+  query SingleProductQuery($id: ID!) {
+    item(id: $id) {
+      name
+      price
+      description
+      category
+      vendor {
+        vendorName
+      }
+      img
+      ratings {
+        _id
+        stars
+        review
+      }
     }
   }
-}
-`
+`;
