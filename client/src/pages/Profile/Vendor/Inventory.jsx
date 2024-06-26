@@ -1,12 +1,16 @@
-import { Container, Typography, Box, CircularProgress } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  CircularProgress,
+  IconButton,
+} from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from '@apollo/client';
 import { Vendor } from '../../../graphql/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import { delete_Item } from '../../../graphql/mutations';
 import { useState } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export default function Inventory() {
   // Auth context
@@ -27,8 +31,6 @@ export default function Inventory() {
   // Show error if there's an error fetching data
   if (error) return <Typography>Error! {error.message}</Typography>;
 
-  // console.log('Vendor Inventory: ', data.vendor.inventory);
-
   // Map the fetched data to DataGrid rows
   const rows = data.vendor.inventory.map((item, index) => ({
     id: item._id,
@@ -45,15 +47,40 @@ export default function Inventory() {
         : 'N/A',
   }));
 
-  // Handler for when selection model changes
+  // Handle checkbox selection change
   const handleSelectionModelChange = (newSelection) => {
     setSelectedItems(newSelection.selectionModel);
     console.log('Selected items:', newSelection.selectionModel);
-    setShowDeleteIcon(true);
+
+    // Log the _id of the selected rows
+    newSelection.selectionModel.forEach((selectedId) => {
+      const selectedRow = rows.find((row) => row.id === selectedId);
+      if (selectedRow) {
+        console.log('Selected row ID:', selectedRow.id);
+        // Perform actions with selectedRow.id as needed
+      }
+    });
+
+    setShowDeleteIcon(true); // Show delete icon when items are selected
+  };
+
+  // Handle row click event (optional, for row click)
+  const handleRowClick = (params) => {
+    console.log('Clicked row ID:', params.row.id);
+    // Do something with the clicked row ID
+  };
+
+  const handleDelete = () => {
+    console.log('Delete button clicked');
   };
 
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='lg'>
+      {/* {showDeleteIcon && (
+        <IconButton onClick={handleDelete}>
+          <DeleteForeverIcon />
+        </IconButton>
+      )} */}
       <Box marginTop={14}>
         <DataGrid
           rows={rows}
@@ -61,37 +88,25 @@ export default function Inventory() {
             { field: 'id', headerName: 'ID', width: 100 },
             { field: 'firstName', headerName: 'Item', width: 130 },
             { field: 'lastName', headerName: 'Category', width: 130 },
-            {
-              field: 'price',
-              headerName: 'Price',
-              type: 'number',
-              width: 80,
-            },
-            {
-              field: 'units',
-              headerName: 'Units',
-              type: 'number',
-              width: 65,
-            },
+            { field: 'price', headerName: 'Price', type: 'number', width: 80 },
+            { field: 'units', headerName: 'Units', type: 'number', width: 65 },
             {
               field: 'inCart',
               headerName: 'InCart',
               type: 'number',
               width: 65,
             },
-
             {
               field: 'rating',
               headerName: 'Rating',
               type: 'number',
               width: 65,
             },
-
             {
               field: 'dateCreated',
               headerName: 'Created',
               type: 'date',
-              width: 90,
+              width: 87,
             },
             {
               field: 'description',
@@ -107,10 +122,11 @@ export default function Inventory() {
               paginationModel: { page: 0, pageSize: 10 },
             },
           }}
-          pageSizeOptions={[5, 10, 15, 20]}
+          pageSizeOptions={[10, 25, 50]}
           checkboxSelection
-          onSelectionModelChange={handleSelectionModelChange}
           selectionModel={selectedItems}
+          onSelectionModelChange={handleSelectionModelChange} // Handle checkbox selection change
+          onRowClick={handleRowClick} // Handle row click event
         />
       </Box>
     </Container>
