@@ -7,6 +7,7 @@ export const Vendor = gql`
       vendorName
       email
       inventory {
+        _id
         name
         inventory
         category
@@ -25,8 +26,10 @@ export const Vendor = gql`
           }
           item {
             _id
-            name
             category
+            ratings {
+              stars
+            }
           }
         }
         createdAt
