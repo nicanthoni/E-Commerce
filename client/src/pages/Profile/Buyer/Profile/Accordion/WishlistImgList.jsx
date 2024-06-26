@@ -58,8 +58,6 @@ export default function WishImglist({ refetchUserData, userData }) {
     <Box>
       <ImageList>
         {userData.wishlist.map((item, index) => {
-          if (!item || !item.item) return null; // Check if item or item.item is null (case if vendor deleted the item in users wishlist)
-
           return (
             <ImageListItem key={index}>
               <Button onClick={() => handleOpenModal(index)}>

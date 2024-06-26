@@ -17,8 +17,6 @@ export default function CartImgList({ refetchUserData, loadUser, userData }) {
   return (
     <ImageList>
       {userData.cart.map((item, index) => {
-        // if (!item || !item.item) return null; // Check if item or item.item is null (case if vendor deleted the item in users wishlist)
-
         return (
           <ImageListItem key={index}>
             <img
