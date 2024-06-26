@@ -16,47 +16,34 @@ import { Vendor } from '../../../../graphql/queries';
 import Traffic from './Traffic';
 import VendorInventory from './Inventory';
 import MonthlySales from './Sales';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 
 export default function VendorDashboard() {
   return (
     <>
       <Container maxWidth='xl'>
-        <Grid
-          container
-          direction='row'
-          my={12}
-          justifyContent='center'
-          textAlign='center'
-          spacing={4}
-        >
-          {/* Header */}
-          <Grid item xs={12}>
-            <Typography variant='h6' marginBottom={2}>
-              Performance Analytics
+        
+        <Stack 
+        my={12}
+        direction='column' 
+        alignItems={'center'}
+        spacing={2} 
+        textAlign='center'>
+
+            <EngineeringIcon 
+                fontSize='large' 
+                sx={{ color: 'primary.main' }}
+            />
+
+            <Typography variant='h5' fontStyle='italic'>
+                The Vendor Dashboard is undergoing maintenence.
+            </Typography>
+            <Typography variant='h6' fontStyle='italic'>
+                Check back later!
             </Typography>
 
-            <Divider variant='middle' />
-          </Grid>
-
-          {/* Monthly Traffic */}
-          <Grid item xs={12} marginBottom={2}>
-            <Traffic />
-          </Grid>
-
-          {/* Monthly sales */}
-          <Grid item xs={12} md={6}>
-            <MonthlySales />
-          </Grid>
-
-          {/* Other Data */}
-          <Grid item xs={12} md={6}>
-            <VendorInventory />
-          </Grid>
-
-          {/* Other Data */}
-          <Grid item xs={12} md={6}></Grid>
-        </Grid>
-      </Container>
+        </Stack>
+    </Container>
     </>
   );
 }
