@@ -1,8 +1,9 @@
-import { Container, Typography, Box, CircularProgress } from '@mui/material';
+import { Container, Typography, Box, CircularProgress, IconButton } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useQuery } from '@apollo/client';
 import { Vendor } from '../../../graphql/queries';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '../../../hooks/useAuthContext';;
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Inventory() {
   // Auth context
@@ -31,7 +32,10 @@ export default function Inventory() {
     inCart: item.inCart,
     dateCreated: new Date(parseInt(item.createdAt)), // Convert createdAt to Date object
     description: item.description,
-    rating: item.ratings.length && item.ratings[0].stars !== null ? item.ratings[0].stars : 'N/A', 
+    rating:
+      item.ratings.length && item.ratings[0].stars !== null
+        ? item.ratings[0].stars
+        : 'N/A',
   }));
 
   return (
@@ -76,7 +80,8 @@ export default function Inventory() {
             {
               field: 'description',
               headerName: 'Description',
-              description: 'This column has a value getter and is not sortable.',
+              description:
+                'This column has a value getter and is not sortable.',
               sortable: false,
               width: 160,
             },

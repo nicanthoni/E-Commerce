@@ -28,7 +28,7 @@ export default function ProfileAccordion({
 
   // states
   const [alertMessage, setAlertMessage] = useState('');
-  const [showAlert, setShowAlert] = useState(false); 
+  const [showAlert, setShowAlert] = useState(false);
 
   // hooks
   const { logout } = useLogout();
@@ -41,16 +41,15 @@ export default function ProfileAccordion({
     refetchUserData();
   }, [loadUser]);
 
-
   // onClick of DeleteAccountButton - Delete account and logout
   const handleDeleteAccount = async () => {
     try {
       await DeleteUser({ variables: { userId } }); // delete user
       setAlertMessage('Account successfuly deleted.');
-      setShowAlert(true); 
+      setShowAlert(true);
       setTimeout(() => {
-        setShowAlert(false); 
-        logout(); 
+        setShowAlert(false);
+        logout();
       }, 2000);
     } catch (e) {
       console.log('User Deletion error: ', e);
