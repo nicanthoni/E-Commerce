@@ -29,14 +29,30 @@ const resolvers = {
           path: 'ratings',
           populate: { path: 'item' },
         });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      // Filter out null values in cart and wishlist (vendor may have deleted item)
+      user.cart = user.cart.filter((cartItem) => cartItem.item != null);
+      user.wishlist = user.wishlist.filter(
+        (wishlistItem) => wishlistItem.item != null
+      );
+
       return user;
     },
     vendor: async (parent, { id }) => {
-      // console.log('VendorID:', id);
       const vendor = await Vendor.findById(id)
         .populate('inventory')
-        .populate('sales.item');
-      // console.log('Vendor Data:', vendor);
+        .populate('sales.item')
+        .populate({
+          path: 'inventory',
+          populate: {
+            path: 'ratings',
+          },
+        });
+
       return vendor;
     },
     item: async (parent, { id }) => {
@@ -270,20 +286,33 @@ const resolvers = {
       try {
         const item = await Item.findById(itemId);
         const vendor = await Vendor.findById(vendorId);
+
         if (!item || !vendor) {
           throw new Error('Item or Vendor not found');
         }
-        await User.updateMany({ cart: item }, { $pull: { cart: item } });
+
+        // Remove item from all users' carts where it exists
         await User.updateMany(
-          { wishlist: item },
-          { $pull: { wishlist: item } }
+          { 'cart.item': itemId }, // Update based on item ID
+          { $pull: { cart: { item: itemId } } } // Pull the item from cart array
         );
+
+        // Remove item from all users' wishlists where it exists
+        await User.updateMany(
+          { 'wishlist.item': itemId }, // Update based on item ID
+          { $pull: { wishlist: { item: itemId } } } // Pull the item from wishlist array
+        );
+
+        // Delete the item from the vendor's inventory
         await item.deleteOne();
-        return `${item.name} from ${vendor.username} was deleted`;
+
+        return `${item.name} from ${vendor.vendorName} was deleted`;
       } catch (e) {
-        throw new Error(e);
+        console.error('Error deleting item:', e);
+        throw e;
       }
     },
+
     AddToCart: async (parent, { itemId, userId }) => {
       try {
         const item = await Item.findById(itemId);
@@ -299,10 +328,9 @@ const resolvers = {
         );
         if (alreadyInCart !== -1) {
           if (user.cart[alreadyInCart].quantity + 1 > item.inventory) {
-            throw new Error('Not enough in stock')
+            throw new Error('Not enough in stock');
           }
           user.cart[alreadyInCart].quantity += 1;
-
         } else {
           user.cart.push({ item: item._id, quantity: 1 });
         }
