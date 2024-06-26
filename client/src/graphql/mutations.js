@@ -58,15 +58,15 @@ export const delete_cart = gql`
 `;
 
 export const increase_quantity = gql`
-mutation IncreaseQuantity($itemId: ID!, $userId: ID!) {
-  IncreaseQuantity(itemId: $itemId, userId: $userId)
-}
-`
+  mutation IncreaseQuantity($itemId: ID!, $userId: ID!) {
+    IncreaseQuantity(itemId: $itemId, userId: $userId)
+  }
+`;
 export const decrease_quantity = gql`
-mutation DecreaseQuantity($itemId: ID!, $userId: ID!) {
-  DecreaseQuantity(itemId: $itemId, userId: $userId)
-}
-`
+  mutation DecreaseQuantity($itemId: ID!, $userId: ID!) {
+    DecreaseQuantity(itemId: $itemId, userId: $userId)
+  }
+`;
 
 //// VENDOR ////
 export const vendor_Signup = gql`
@@ -96,16 +96,37 @@ export const vendor_Login = gql`
 `;
 
 export const create_Item = gql`
-mutation createItem($name: String!, $description: String!, $price: Int!, $category: String!, $vendorId: ID!, $inventory: Int!, $img: String!) {
-  createItem(name: $name, description: $description, price: $price, category: $category, vendorId: $vendorId, inventory: $inventory, img: $img) {
-    _id
-    name
+  mutation createItem(
+    $name: String!
+    $description: String!
+    $price: Int!
+    $category: String!
+    $vendorId: ID!
+    $inventory: Int!
+    $img: String!
+  ) {
+    createItem(
+      name: $name
+      description: $description
+      price: $price
+      category: $category
+      vendorId: $vendorId
+      inventory: $inventory
+      img: $img
+    ) {
+      _id
+      name
+    }
   }
-}
+`;
+
+export const delete_Item = gql`
+  mutation deleteItem($vendorId: ID!, $itemId: ID!) {
+    DeleteItem(vendorId: $vendorId, itemId: $itemId)
+  }
 `;
 
 // Buyer & Vendors
-
 export const delete_user = gql`
   mutation DeleteUser($userId: ID!) {
     DeleteUser(userId: $userId)

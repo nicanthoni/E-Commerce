@@ -57,63 +57,10 @@ export default function WishImglist({ refetchUserData, userData }) {
   return (
     <Box>
       <ImageList>
-        {userData.wishlist.map((item, index) => (
-          <ImageListItem key={index}>
-            <Button onClick={() => handleOpenModal(index)}>
-              <img
-                // srcSet={item.item.img}
-                srcSet={
-                  item.item.img.startsWith('/images/seededItems')
-                    ? item.item.img
-                    : `http://localhost:3001/${item.item.img}`
-                }
-                src={
-                  item.item.img.startsWith('/images/seededItems')
-                    ? item.item.img
-                    : `http://localhost:3001/${item.item.img}`
-                }
-                alt={item.item.name}
-                loading='lazy'
-                style={{ width: '100px', height: 'auto' }}
-              />
-            </Button>
-            <ImageListItemBar
-              onClick={() => handleOpenModal(index)}
-              title={item.item.name}
-              subtitle={`$${item.item.price}`}
-              actionIcon={
-                <IconButton
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                  aria-label={`info about ${item.item.name}`}
-                  onClick={() => handleOpenModal(index)}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-
-            {/* Modal */}
-            <Modal
-              open={openModals[index] || false}
-              onClose={() => handleCloseModal(index)}
-              aria-labelledby='modal-modal-title'
-              aria-describedby='modal-modal-description'
-              sx={{ alignContent: 'center', justifySelf: 'center' }}
-            >
-              {/* Modal's Contents */}
-              <Stack
-                alignItems='center'
-                width={400}
-                bgcolor='background.paper'
-                padding={4}
-                boxShadow={24}
-                gap={0}
-              >
-                <Typography variant='caption'>
-                  <Link href={`/product/${item.item._id}`} underline='hover'>
-                    View item
-                  </Link>
-                </Typography>
+        {userData.wishlist.map((item, index) => {
+          return (
+            <ImageListItem key={index}>
+              <Button onClick={() => handleOpenModal(index)}>
                 <img
                   srcSet={
                     item.item.img.startsWith('/images/seededItems')
@@ -127,43 +74,99 @@ export default function WishImglist({ refetchUserData, userData }) {
                   }
                   alt={item.item.name}
                   loading='lazy'
-                  style={{ width: '100px', height: 'auto', marginBottom: 10 }}
+                  style={{ width: '100px', height: 'auto' }}
                 />
-
-                <Typography>${item.item.price}</Typography>
-
-                <Typography id='modal-modal-title' fontWeight='bold'>
-                  {item.item.name}
-                </Typography>
-
-                <Typography variant='caption' marginBottom={2}>
-                  {item.item.description}
-                </Typography>
-
-                {/* Button & Alert */}
-                {showButton[item.item._id] !== false && (
-                  <Button
-                    onClick={() => removeFromWishlist(id, item.item._id, index)}
-                    variant='contained'
-                    color='secondary'
-                    sx={{
-                      color: 'primary.main',
-                      textTransform: 'none',
-                    }}
+              </Button>
+              <ImageListItemBar
+                onClick={() => handleOpenModal(index)}
+                title={item.item.name}
+                subtitle={`$${item.item.price}`}
+                actionIcon={
+                  <IconButton
+                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                    aria-label={`info about ${item.item.name}`}
+                    onClick={() => handleOpenModal(index)}
                   >
-                    Remove from Wishlist
-                  </Button>
-                )}
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
 
-                {alert[item.item._id] && (
-                  <Alert severity='success' sx={{ width: '70%', mb: 2 }}>
-                    Removed from wishlist.
-                  </Alert>
-                )}
-              </Stack>
-            </Modal>
-          </ImageListItem>
-        ))}
+              {/* Modal */}
+              <Modal
+                open={openModals[index] || false}
+                onClose={() => handleCloseModal(index)}
+                aria-labelledby='modal-modal-title'
+                aria-describedby='modal-modal-description'
+                sx={{ alignContent: 'center', justifySelf: 'center' }}
+              >
+                {/* Modal's Contents */}
+                <Stack
+                  alignItems='center'
+                  width={400}
+                  bgcolor='background.paper'
+                  padding={4}
+                  boxShadow={24}
+                  gap={0}
+                >
+                  <Typography variant='caption'>
+                    <Link href={`/product/${item.item._id}`} underline='hover'>
+                      View item
+                    </Link>
+                  </Typography>
+                  <img
+                    srcSet={
+                      item.item.img.startsWith('/images/seededItems')
+                        ? item.item.img
+                        : `http://localhost:3001/${item.item.img}`
+                    }
+                    src={
+                      item.item.img.startsWith('/images/seededItems')
+                        ? item.item.img
+                        : `http://localhost:3001/${item.item.img}`
+                    }
+                    alt={item.item.name}
+                    loading='lazy'
+                    style={{ width: '100px', height: 'auto', marginBottom: 10 }}
+                  />
+
+                  <Typography>${item.item.price}</Typography>
+
+                  <Typography id='modal-modal-title' fontWeight='bold'>
+                    {item.item.name}
+                  </Typography>
+
+                  <Typography variant='caption' marginBottom={2}>
+                    {item.item.description}
+                  </Typography>
+
+                  {/* Button & Alert */}
+                  {showButton[item.item._id] !== false && (
+                    <Button
+                      onClick={() =>
+                        removeFromWishlist(id, item.item._id, index)
+                      }
+                      variant='contained'
+                      color='secondary'
+                      sx={{
+                        color: 'primary.main',
+                        textTransform: 'none',
+                      }}
+                    >
+                      Remove from Wishlist
+                    </Button>
+                  )}
+
+                  {alert[item.item._id] && (
+                    <Alert severity='success' sx={{ width: '70%', mb: 2 }}>
+                      Removed from wishlist.
+                    </Alert>
+                  )}
+                </Stack>
+              </Modal>
+            </ImageListItem>
+          );
+        })}
       </ImageList>
     </Box>
   );
