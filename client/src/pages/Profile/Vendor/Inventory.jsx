@@ -68,6 +68,22 @@ export default function Inventory() {
 
   // Dat grid columns
   const columns = [
+    {
+      field: 'actions',
+      type: 'actions',
+      width: 20,
+      getActions: (params) =>
+        selectedRows.includes(params.id)
+          ? [
+              <GridActionsCellItem
+                key={params.id}
+                icon={<DeleteForeverIcon color='error' />}
+                label='Delete'
+                onClick={() => handleConfirmation(params.id)}
+              />,
+            ]
+          : [],
+    },
     { field: 'id', headerName: 'ID', width: 80 },
     { field: 'itemName', headerName: 'Item', width: 130 },
     { field: 'category', headerName: 'Category', width: 130 },
@@ -91,28 +107,12 @@ export default function Inventory() {
       type: 'date',
       width: 87,
     },
-    {
-      field: 'actions',
-      type: 'actions',
-      width: 50,
-      getActions: (params) =>
-        selectedRows.includes(params.id)
-          ? [
-              <GridActionsCellItem
-                key={params.id}
-                icon={<DeleteForeverIcon color='error' />}
-                label='Delete'
-                onClick={() => handleConfirmation(params.id)}
-              />,
-            ]
-          : [],
-    },
   ];
 
   // On checkbox selection - show delete icon
   const onRowSelection = (selectionModel) => {
     setSelectedRows(selectionModel);
-    console.log('selected rows: ', selectionModel)
+    console.log('selected rows: ', selectionModel);
   };
 
   // onClick of delete icon - show delete confirmation
@@ -145,9 +145,13 @@ export default function Inventory() {
 
   return (
     <Container maxWidth='md'>
-      <Box marginTop={14}>
+      <Box marginTop={12} textAlign='center'>
+        <Typography variant='h6' marginBottom={2}>
+          Inventory Management
+        </Typography>
         {/* Data grid */}
         <DataGrid
+        
           rows={rows}
           columns={columns}
           initialState={{

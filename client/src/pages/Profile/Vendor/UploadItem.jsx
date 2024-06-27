@@ -9,7 +9,7 @@ import { useLazyQuery } from '@apollo/client';
 import { Stack, Typography } from '@mui/material';
 import { categories, quantities } from '../../../data/itemData';
 import MenuItem from '@mui/material/MenuItem';
-import { Paper } from '@mui/material';
+import { Paper, Box } from '@mui/material';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import UploadButton from '../../../components/Buttons/UploadButton';
 
@@ -90,8 +90,6 @@ export default function UploadItem() {
       return;
     }
 
-    console.log('formState: ', formState);
-
     // Prepare FormData to send to backend
     const formData = new FormData();
     formData.append('vendorId', vendorId);
@@ -103,7 +101,7 @@ export default function UploadItem() {
     formData.append('file', formState.uploaded_item);
 
     try {
-      // Make POST request to backend endpoint using fetch
+      // POST request to backend endpoint
       const response = await fetch('http://localhost:3001/uploads', {
         method: 'POST',
         body: formData,
@@ -132,6 +130,12 @@ export default function UploadItem() {
 
   return (
     <Container component='main' maxWidth='xs'>
+      <Box marginTop={12} textAlign='center'>
+        <Typography variant='h6' marginBottom={1}>
+          Upload items
+        </Typography>
+      </Box>
+
       <Paper
         elevation={2}
         component='form'
@@ -140,7 +144,6 @@ export default function UploadItem() {
         onSubmit={handleSubmit}
         sx={{
           // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)', // Change the RGBA color to your desired shadow color
-          marginTop: 15,
           padding: 2,
           display: 'flex',
           flexDirection: 'column',
@@ -149,10 +152,10 @@ export default function UploadItem() {
       >
         {/* Form */}
         <Grid container spacing={2} justifyContent='center'>
-          <Stack textAlign='center' marginTop={2} marginBottom={2} gap={1}>
+          <Stack textAlign='center' marginBottom={1} gap={1}>
             {/* Upload img */}
 
-            <Grid item>
+            <Grid item marginTop={2}>
               <UploadButton onChange={handleChange} />
             </Grid>
 

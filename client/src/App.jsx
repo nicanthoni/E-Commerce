@@ -12,6 +12,8 @@ import { ThemeProvider } from '@mui/material';
 const theme = createTheme({
   palette: {
     primary: {
+      // Backup primary colors:
+      // #577399 -
       main: '#024959',
     },
     secondary: {
