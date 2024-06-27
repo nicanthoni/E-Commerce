@@ -149,7 +149,6 @@ export default function UploadItem() {
       >
         {/* Form */}
         <Grid container spacing={2} justifyContent='center'>
-
           <Stack textAlign='center' marginTop={2} marginBottom={2} gap={1}>
             {/* Upload img */}
 

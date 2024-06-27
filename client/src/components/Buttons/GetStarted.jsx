@@ -1,12 +1,13 @@
 import { Button } from '@mui/material';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
-// Reusable Get Started button component
 export default function GetStarted() {
-    
+  const { user } = useAuthContext();
+
   return (
     <Button
       variant='contained'
-      href='/signup'
+      href={!user ? '/signup' : '/profile'} // if already logged in, send to profile instead
       color='secondary'
       sx={{ color: 'primary.main', textTransform: 'none' }}
     >
