@@ -3,7 +3,6 @@ import {
   Typography,
   Box,
   CircularProgress,
-  IconButton,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -12,12 +11,11 @@ import {
   Button,
 } from '@mui/material';
 import { delete_Item } from '../../../graphql/mutations';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useMutation, useQuery } from '@apollo/client';
 import { Vendor } from '../../../graphql/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useState } from 'react';
-import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 
@@ -30,7 +28,6 @@ export default function Inventory() {
   const [alertMessage, setAlertMessage] = useState('');
   const [itemToDelete, setItemToDelete] = useState(null); // stores itemId
   const [deleteConfirmation, setDeleteConfirmation] = useState(false); //  confirmation prompt
-  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
   // Mutation - delete item
@@ -48,14 +45,14 @@ export default function Inventory() {
     variables: { vendorId },
   });
 
-  // Show loading spinner while data is being fetched
+  // If loading
   if (loading) return <CircularProgress />;
 
-  // Show error if there's an error fetching data
+  // If error
   if (error) return <Typography>Error! {error.message}</Typography>;
 
-  // Map the fetched data to DataGrid rows
-  const rows = data.vendor.inventory.map((item, index) => ({
+  // Data grid rows
+  const rows = data.vendor.inventory.map((item) => ({
     id: item._id,
     itemName: item.name,
     category: item.category,
@@ -63,31 +60,77 @@ export default function Inventory() {
     price: `$${item.price}`,
     inCart: item.inCart,
     dateCreated: new Date(parseInt(item.createdAt)), // Convert createdAt to Date object
-    description: item.description,
     rating:
       item.ratings.length && item.ratings[0].stars !== null
         ? item.ratings[0].stars
         : 'N/A',
   }));
 
-  // onClick - show item deletion confirmation
+  // Dat grid columns
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 80 },
+    { field: 'itemName', headerName: 'Item', width: 130 },
+    { field: 'category', headerName: 'Category', width: 130 },
+    { field: 'price', headerName: 'Price', type: 'number', width: 80 },
+    { field: 'units', headerName: 'Units', type: 'number', width: 65 },
+    {
+      field: 'inCart',
+      headerName: 'InCart',
+      type: 'number',
+      width: 65,
+    },
+    {
+      field: 'rating',
+      headerName: 'Rating',
+      type: 'number',
+      width: 65,
+    },
+    {
+      field: 'dateCreated',
+      headerName: 'Created',
+      type: 'date',
+      width: 87,
+    },
+    {
+      field: 'actions',
+      type: 'actions',
+      width: 50,
+      getActions: (params) =>
+        selectedRows.includes(params.id)
+          ? [
+              <GridActionsCellItem
+                key={params.id}
+                icon={<DeleteForeverIcon color='error' />}
+                label='Delete'
+                onClick={() => handleConfirmation(params.id)}
+              />,
+            ]
+          : [],
+    },
+  ];
+
+  // On checkbox selection - show delete icon
+  const onRowSelection = (selectionModel) => {
+    setSelectedRows(selectionModel);
+    console.log('selected rows: ', selectionModel)
+  };
+
+  // onClick of delete icon - show delete confirmation
   const handleConfirmation = (itemId) => {
     setItemToDelete(itemId);
     setDeleteConfirmation(true);
   };
 
-  // onClose - close confirmation
+  // onClose - close confirmation window
   const handleClose = () => {
     setDeleteConfirmation(false);
     setItemToDelete(null);
   };
 
-  // onClick - handle item deletion
+  // onClick of delete confirmation - handle item deletion
   const handleDelete = async () => {
-    console.log('Item clicked: ', itemToDelete);
     try {
       await deleteItem({ variables: { itemId: itemToDelete, vendorId } });
-      console.log(`Item ${itemToDelete} deleted`);
       setAlertMessage('Removed');
       setShowAlert(true);
       setTimeout(() => {
@@ -101,57 +144,12 @@ export default function Inventory() {
   };
 
   return (
-    <Container maxWidth='lg'>
+    <Container maxWidth='md'>
       <Box marginTop={14}>
+        {/* Data grid */}
         <DataGrid
           rows={rows}
-          columns={[
-            { field: 'id', headerName: 'ID', width: 80 },
-            { field: 'itemName', headerName: 'Item', width: 130 },
-            { field: 'category', headerName: 'Category', width: 130 },
-            { field: 'price', headerName: 'Price', type: 'number', width: 80 },
-            { field: 'units', headerName: 'Units', type: 'number', width: 65 },
-            {
-              field: 'inCart',
-              headerName: 'InCart',
-              type: 'number',
-              width: 65,
-            },
-            {
-              field: 'rating',
-              headerName: 'Rating',
-              type: 'number',
-              width: 65,
-            },
-            {
-              field: 'dateCreated',
-              headerName: 'Created',
-              type: 'date',
-              width: 87,
-            },
-            {
-              field: 'description',
-              headerName: 'Description',
-              description:
-                'This column has a value getter and is not sortable.',
-              sortable: false,
-              width: 160,
-            },
-            {
-              field: 'actions',
-              type: 'actions',
-              width: 80,
-              getActions: (params) => [
-                <GridActionsCellItem
-                  key={params.id}
-                  icon={<DeleteForeverIcon color='error' />}
-                  label='Delete'
-                  // onClick={() => handleDelete(params.id)}
-                  onClick={() => handleConfirmation(params.id)}
-                />,
-              ],
-            },
-          ]}
+          columns={columns}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 10 },
@@ -159,7 +157,9 @@ export default function Inventory() {
           }}
           pageSizeOptions={[10, 25, 50]}
           checkboxSelection
-          selectionModel={selectedRows}
+          onRowSelectionModelChange={(newSelection) =>
+            onRowSelection(newSelection)
+          }
         />
       </Box>
 
