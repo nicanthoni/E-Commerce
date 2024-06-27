@@ -144,7 +144,7 @@ export default function Inventory() {
               getActions: (params) => [
                 <GridActionsCellItem
                   key={params.id}
-                  icon={<DeleteForeverIcon sx={{ color: 'secondary.main' }} />}
+                  icon={<DeleteForeverIcon color='error' />}
                   label='Delete'
                   // onClick={() => handleDelete(params.id)}
                   onClick={() => handleConfirmation(params.id)}
