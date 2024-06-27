@@ -5,24 +5,36 @@ import {
   CircularProgress,
   IconButton,
 } from '@mui/material';
+import { delete_Item } from '../../../graphql/mutations';
 import { DataGrid } from '@mui/x-data-grid';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { Vendor } from '../../../graphql/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useState } from 'react';
+import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export default function Inventory() {
   // Auth context
-  const { user, id, type } = useAuthContext();
+  const { id: vendorId } = useAuthContext();
 
   // States
   const [showDeleteIcon, setShowDeleteIcon] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  // Mutation - delete item
+  const [
+    deleteItem,
+    {
+      loading: deleteItemLoading,
+      error: deleteItemError,
+      data: deleteItemData,
+    },
+  ] = useMutation(delete_Item);
 
   // Query - Vendor data
   const { loading, error, data } = useQuery(Vendor, {
-    variables: { vendorId: id },
+    variables: { vendorId },
   });
 
   // Show loading spinner while data is being fetched
@@ -34,8 +46,8 @@ export default function Inventory() {
   // Map the fetched data to DataGrid rows
   const rows = data.vendor.inventory.map((item, index) => ({
     id: item._id,
-    firstName: item.name,
-    lastName: item.category,
+    itemName: item.name,
+    category: item.category,
     units: item.inventory,
     price: `$${item.price}`,
     inCart: item.inCart,
@@ -47,47 +59,26 @@ export default function Inventory() {
         : 'N/A',
   }));
 
-  // Handle checkbox selection change
-  const handleSelectionModelChange = (newSelection) => {
-    setSelectedItems(newSelection.selectionModel);
-    console.log('Selected items:', newSelection.selectionModel);
-
-    // Log the _id of the selected rows
-    newSelection.selectionModel.forEach((selectedId) => {
-      const selectedRow = rows.find((row) => row.id === selectedId);
-      if (selectedRow) {
-        console.log('Selected row ID:', selectedRow.id);
-        // Perform actions with selectedRow.id as needed
-      }
-    });
-
-    setShowDeleteIcon(true); // Show delete icon when items are selected
-  };
-
-  // Handle row click event (optional, for row click)
-  const handleRowClick = (params) => {
-    console.log('Clicked row ID:', params.row.id);
-    // Do something with the clicked row ID
-  };
-
-  const handleDelete = () => {
-    console.log('Delete button clicked');
+  // onClick - handle item deletion
+  const handleDelete = async (itemId) => {
+    console.log('Item clicked: ', itemId);
+    try {
+      await deleteItem({ variables: { itemId, vendorId } });
+      console.log(`Item ${itemId} deleted`)
+    } catch (e) {
+      console.log('Error: ', e);
+    }
   };
 
   return (
     <Container maxWidth='lg'>
-      {/* {showDeleteIcon && (
-        <IconButton onClick={handleDelete}>
-          <DeleteForeverIcon />
-        </IconButton>
-      )} */}
       <Box marginTop={14}>
         <DataGrid
           rows={rows}
           columns={[
-            { field: 'id', headerName: 'ID', width: 100 },
-            { field: 'firstName', headerName: 'Item', width: 130 },
-            { field: 'lastName', headerName: 'Category', width: 130 },
+            { field: 'id', headerName: 'ID', width: 80 },
+            { field: 'itemName', headerName: 'Item', width: 130 },
+            { field: 'category', headerName: 'Category', width: 130 },
             { field: 'price', headerName: 'Price', type: 'number', width: 80 },
             { field: 'units', headerName: 'Units', type: 'number', width: 65 },
             {
@@ -116,6 +107,19 @@ export default function Inventory() {
               sortable: false,
               width: 160,
             },
+            {
+              field: 'actions',
+              type: 'actions',
+              width: 80,
+              getActions: (params) => [
+                <GridActionsCellItem
+                  key={params.id}
+                  icon={<DeleteForeverIcon sx={{ color: 'secondary.main' }} />}
+                  label='Delete'
+                  onClick={() => handleDelete(params.id)}
+                />,
+              ],
+            },
           ]}
           initialState={{
             pagination: {
@@ -124,9 +128,7 @@ export default function Inventory() {
           }}
           pageSizeOptions={[10, 25, 50]}
           checkboxSelection
-          selectionModel={selectedItems}
-          onSelectionModelChange={handleSelectionModelChange} // Handle checkbox selection change
-          onRowClick={handleRowClick} // Handle row click event
+          selectionModel={selectedRows}
         />
       </Box>
     </Container>
