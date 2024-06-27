@@ -26,7 +26,7 @@ export default function UploadButton({ onChange }) {
         textTransform: 'none',
       }}
     >
-      Upload image
+      Image
       <VisuallyHiddenInput
         type='file'
         accept='image/*'
