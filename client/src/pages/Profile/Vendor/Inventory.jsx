@@ -4,6 +4,12 @@ import {
   Box,
   CircularProgress,
   IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
 } from '@mui/material';
 import { delete_Item } from '../../../graphql/mutations';
 import { DataGrid } from '@mui/x-data-grid';
@@ -13,12 +19,17 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useState } from 'react';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 
 export default function Inventory() {
   // Auth context
   const { id: vendorId } = useAuthContext();
 
   // States
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [itemToDelete, setItemToDelete] = useState(null); // stores itemId
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false); //  confirmation prompt
   const [showDeleteIcon, setShowDeleteIcon] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -33,7 +44,7 @@ export default function Inventory() {
   ] = useMutation(delete_Item);
 
   // Query - Vendor data
-  const { loading, error, data } = useQuery(Vendor, {
+  const { loading, error, data, refetch } = useQuery(Vendor, {
     variables: { vendorId },
   });
 
@@ -59,15 +70,34 @@ export default function Inventory() {
         : 'N/A',
   }));
 
+  // onClick - show item deletion confirmation
+  const handleConfirmation = (itemId) => {
+    setItemToDelete(itemId);
+    setDeleteConfirmation(true);
+  };
+
+  // onClose - close confirmation
+  const handleClose = () => {
+    setDeleteConfirmation(false);
+    setItemToDelete(null);
+  };
+
   // onClick - handle item deletion
-  const handleDelete = async (itemId) => {
-    console.log('Item clicked: ', itemId);
+  const handleDelete = async () => {
+    console.log('Item clicked: ', itemToDelete);
     try {
-      await deleteItem({ variables: { itemId, vendorId } });
-      console.log(`Item ${itemId} deleted`)
+      await deleteItem({ variables: { itemId: itemToDelete, vendorId } });
+      console.log(`Item ${itemToDelete} deleted`);
+      setAlertMessage('Removed');
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        refetch(); // refetch data after item deletion
+      }, 1000);
     } catch (e) {
       console.log('Error: ', e);
     }
+    handleClose();
   };
 
   return (
@@ -116,7 +146,8 @@ export default function Inventory() {
                   key={params.id}
                   icon={<DeleteForeverIcon sx={{ color: 'secondary.main' }} />}
                   label='Delete'
-                  onClick={() => handleDelete(params.id)}
+                  // onClick={() => handleDelete(params.id)}
+                  onClick={() => handleConfirmation(params.id)}
                 />,
               ],
             },
@@ -131,6 +162,46 @@ export default function Inventory() {
           selectionModel={selectedRows}
         />
       </Box>
+
+      {/* Deletion Confirmation */}
+      <Dialog open={deleteConfirmation} onClose={handleClose}>
+        <DialogTitle>{'Delete item and associated data?'}</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            By deleting an item from your inventory, you will be removing it
+            from the shop and deleting its associated data. This cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button
+            variant='contained'
+            color='grey'
+            onClick={handleClose}
+            sx={{
+              textTransform: 'none',
+              backgroundColor: 'white',
+              color: 'primary.main',
+            }}
+          >
+            Nevermind
+          </Button>
+
+          <Button
+            variant='contained'
+            onClick={handleDelete}
+            color='error'
+            sx={{ textTransform: 'none' }}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* ⚠️ Alerts ⚠️ */}
+      <ItemAlert visible={showAlert} message={alertMessage} />
     </Container>
   );
 }
