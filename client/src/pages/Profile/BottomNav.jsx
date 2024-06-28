@@ -67,7 +67,7 @@ export default function BottomNav() {
                 <BottomNavigationAction
                   component={NavLink}
                   to='/explore'
-                  label='Explore'
+                  label='Shop'
                   icon={<StoreIcon />}
                   showLabel
                 />
