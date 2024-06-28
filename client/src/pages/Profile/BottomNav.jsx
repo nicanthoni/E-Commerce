@@ -35,10 +35,11 @@ export default function BottomNav() {
         <Box>
           <Paper
             sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-            elevation={3}
+            elevation={0}
           >
             <BottomNavigation
-              value={active}
+              sx={{ bgcolor: 'primary.main' }}
+              value={active} 
               onChange={(event, newActive) => {
                 setActive(newActive);
               }}
@@ -49,8 +50,14 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/'
                   label='Home'
-                  icon={<HomeIcon />}
+                  icon={<HomeIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               )}
 
@@ -60,16 +67,28 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/dash'
                   label='Dash'
-                  icon={<InsightsIcon />}
+                  icon={<InsightsIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               ) : (
                 <BottomNavigationAction
                   component={NavLink}
                   to='/explore'
                   label='Shop'
-                  icon={<StoreIcon />}
+                  icon={<StoreIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               )}
 
@@ -79,8 +98,14 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/signin'
                   label='Sign in'
-                  icon={<LoginIcon />}
+                  icon={<LoginIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               )}
 
@@ -90,8 +115,14 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/profile'
                   label='Profile'
-                  icon={<AccountBoxIcon />}
+                  icon={<AccountBoxIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               )}
 
@@ -101,8 +132,14 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/inventory'
                   label='Inventory'
-                  icon={<InventoryIcon />}
+                  icon={<InventoryIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               ) : null}
 
@@ -112,8 +149,14 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/uploaditem'
                   label='Upload'
-                  icon={<AddBoxIcon />}
+                  icon={<AddBoxIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               ) : null}
 
@@ -123,21 +166,18 @@ export default function BottomNav() {
                   component={NavLink}
                   to='/wishlist'
                   label='Wishlist'
-                  icon={<FavoriteIcon />}
+                  icon={<FavoriteIcon sx={{ color: '#fff' }} />}
                   showLabel
+                  sx={{
+                    color: '#fff',
+                    '&.Mui-selected': {
+                      color: '#fff'
+                    }
+                  }}
                 />
               ) : null}
 
-              {/* Inbox - authorized users */}
-              {user && (
-                <BottomNavigationAction
-                  component={NavLink}
-                  to='/inbox'
-                  label='Inbox'
-                  icon={<MailIcon />}
-                  showLabel
-                />
-              )}
+
             </BottomNavigation>
           </Paper>
         </Box>

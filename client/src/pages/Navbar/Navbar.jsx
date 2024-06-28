@@ -6,6 +6,7 @@ import {
   Container,
   useMediaQuery,
   useTheme,
+  Button,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
@@ -19,7 +20,10 @@ import AlertsDrawer from './Drawers/AlertsDrawer';
 import { User, Vendor } from '../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
-
+import { useLogout } from '../../hooks/useLogout';
+import AuthAlert from '../../components/Alerts/Auth/AuthAlert';
+import GetStarted from '../../components/Buttons/GetStarted';
+import LogoutButton from '../../components/Buttons/Logout';
 
 export default function Navbar() {
   const { user, id, type } = useAuthContext();
@@ -29,6 +33,13 @@ export default function Navbar() {
   const theme = useTheme();
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
+
+  // Hooks
+  const { logout } = useLogout();
+
+  // Alert States
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
 
   // Query for buyers name
   const [
@@ -66,6 +77,20 @@ export default function Navbar() {
     }
   }, [userData, vendorData]);
 
+  // OnClick - handle logout
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setAlertMessage('Logout successful.');
+      setShowLogoutAlert(true);
+      setTimeout(() => {
+        setShowLogoutAlert(false);
+      }, 1000);
+    } catch (e) {
+      console.log('Logout error: ', e);
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex', alignContent: 'center' }}>
       <AppBar
@@ -75,7 +100,7 @@ export default function Navbar() {
       >
         <Container maxWidth='xl'>
           <Toolbar>
-            {/* Menu drawer */}
+            {/* Navigation drawer - mobile */}
             <NavDrawer />
 
             {/* Logo & Brand Name */}
@@ -109,7 +134,52 @@ export default function Navbar() {
             {!isMobile && isExploreRoute && <SearchBar />}
 
             {/* Main navbar */}
-            <NavDesktop />
+            <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
+              {/* Non-authenticated users */}
+              {!user ? (
+                <>
+                  <Button
+                    key='Home'
+                    sx={{ color: '#fff', textTransform: 'none' }}
+                  >
+                    <NavLink
+                      to='/'
+                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                      Home
+                    </NavLink>
+                  </Button>
+
+                  <Button
+                    key='Explore'
+                    sx={{ color: '#fff', textTransform: 'none' }}
+                  >
+                    <NavLink
+                      to='/explore'
+                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                      Shop
+                    </NavLink>
+                  </Button>
+
+                  <Button
+                    key='Signin'
+                    sx={{ color: '#fff', textTransform: 'none' }}
+                  >
+                    <NavLink
+                      to='/signin'
+                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                      Sign In
+                    </NavLink>
+                  </Button>
+                  <GetStarted />
+                </>
+              ) : (
+                // Logout button - authenticated users
+                <LogoutButton onClick={handleLogout} />
+              )}
+            </Box>
 
             {/* Checkout & Alerts drawers - depending on vendor or not*/}
             {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
@@ -119,6 +189,8 @@ export default function Navbar() {
           {isMobile && isExploreRoute && <SearchBar />}
         </Container>
       </AppBar>
+      {/* ⚠️Alerts ⚠️*/}
+      <AuthAlert visible={showLogoutAlert} message={alertMessage} />
     </Box>
   );
 }

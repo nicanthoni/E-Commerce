@@ -29,6 +29,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import { Avatar } from '@mui/material';
 
 export default function NavDrawer() {
   const { logout } = useLogout();
@@ -72,18 +73,24 @@ export default function NavDrawer() {
 
   const menuDrawer = (
     <Box sx={{ textAlign: 'center' }}>
-      {/* Logo */}
+      {/* User Avatar or Logo */}
       <Box sx={{ bgcolor: 'primary.main' }}>
         <Typography
           variant='h6'
           color='#fff'
-          sx={{ my: 1.7, display: 'inline-block' }}
+          sx={{ my: 1.4, display: 'inline-block' }}
         >
-          <LogoDevIcon />
+          {user ? (
+            <Avatar
+              alt='users avatar'
+              sizes='sm'
+              sx={{ bgcolor: '#fff', color: 'primary.main' }}
+            />
+          ) : (
+            <LogoDevIcon />
+          )}
         </Typography>
       </Box>
-
-      <Divider />
 
       {/* DRAWER ITEMS */}
       <List sx={{ display: 'inline-block' }}>
@@ -201,23 +208,6 @@ export default function NavDrawer() {
           </ListItem>
         ) : null}
 
-        {/* INBOX - authorized users */}
-        {!user ? null : (
-          <ListItem key='Inbox' disablePadding>
-            <ListItemButton onClick={closeDrawer}>
-              <ListItemIcon sx={{ minWidth: '30px' }}>
-                <MailIcon sx={{ color: '#fff' }} />
-              </ListItemIcon>
-              <NavLink
-                to='/inbox'
-                style={{ textDecoration: 'none', color: '#fff' }}
-              >
-                <ListItemText primary='Inbox' />
-              </NavLink>
-            </ListItemButton>
-          </ListItem>
-        )}
-
         {/* WISHLIST - buyer */}
         {user && type === 'buyer' ? (
           <ListItem key='Dashboard' disablePadding>
@@ -234,6 +224,23 @@ export default function NavDrawer() {
             </ListItemButton>
           </ListItem>
         ) : null}
+
+        {/* INBOX - authorized users */}
+        {!user ? null : (
+          <ListItem key='Inbox' disablePadding>
+            <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <MailIcon sx={{ color: '#fff' }} />
+              </ListItemIcon>
+              <NavLink
+                to='/inbox'
+                style={{ textDecoration: 'none', color: '#fff' }}
+              >
+                <ListItemText primary='Inbox' />
+              </NavLink>
+            </ListItemButton>
+          </ListItem>
+        )}
 
         {/* SUPPORT - authorized users */}
         {!user ? null : (

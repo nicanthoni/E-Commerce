@@ -36,7 +36,7 @@ export default function BuyerProfile() {
 
   return (
     <>
-      <Container maxWidth='lg'>
+      <Container maxWidth='xl'>
         <Grid container direction='column' marginTop={12}>
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
