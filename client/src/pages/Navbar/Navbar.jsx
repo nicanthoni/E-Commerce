@@ -20,7 +20,6 @@ import { User, Vendor } from '../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 
-
 export default function Navbar() {
   const { user, id, type } = useAuthContext();
   const [buyerName, setBuyerName] = useState('');

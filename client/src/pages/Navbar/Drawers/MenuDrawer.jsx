@@ -16,16 +16,34 @@ import GetStarted from '../../../components/Buttons/GetStarted';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
-
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import HomeIcon from '@mui/icons-material/Home';
+import InsightsIcon from '@mui/icons-material/Insights';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import MailIcon from '@mui/icons-material/Mail';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import LoginIcon from '@mui/icons-material/Login';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import StoreIcon from '@mui/icons-material/Store';
+import ListItemIcon from '@mui/material/ListItemIcon';
 
 export default function MenuDrawer() {
   const { logout } = useLogout();
-  const { user, type} = useAuthContext();
+  const { user, type } = useAuthContext();
+  const theme = useTheme();
+
+  // Viewport State
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
+
+  // Mobile Drawer State
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // Alert States
   const [alertMessage, setAlertMessage] = useState('');
-  const [showLogoutAlert, setShowLogoutAlert] = useState(false); 
+  const [showLogoutAlert, setShowLogoutAlert] = useState(false);
 
   // Toggle drawer
   const handleDrawerToggle = () => {
@@ -37,21 +55,20 @@ export default function MenuDrawer() {
     setMobileOpen(false);
   };
 
-
   // OnClick - handle logout
   const handleLogout = async () => {
     try {
       await logout(); // call logout hook
-      setAlertMessage('Logout successful.')
+      setAlertMessage('Logout successful.');
       setShowLogoutAlert(true); // show alert via parent component
-      setTimeout(() => { // hide alert after delay
+      setTimeout(() => {
+        // hide alert after delay
         setShowLogoutAlert(false);
       }, 1000);
     } catch (e) {
       console.log('Logout error: ', e);
     }
   };
-
 
   const menuDrawer = (
     <Box sx={{ textAlign: 'center' }}>
@@ -70,14 +87,13 @@ export default function MenuDrawer() {
 
       {/* DRAWER ITEMS */}
       <List sx={{ display: 'inline-block' }}>
-
-
-        {/* HOME */}
-        {user && type === 'vendor' ? (
-          null
-        ) : user && type === 'buyer' ? (
+        {/* HOME - buyer */}
+        {user && type === 'vendor' ? null : user && type === 'buyer' ? (
           <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <StoreIcon />
+              </ListItemIcon>
               <NavLink
                 to='/explore'
                 style={{ textDecoration: 'none', color: 'inherit' }}
@@ -87,8 +103,12 @@ export default function MenuDrawer() {
             </ListItemButton>
           </ListItem>
         ) : (
+          // HOME - non-authorized users
           <ListItem key='Home' disablePadding>
             <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <HomeIcon />
+              </ListItemIcon>
               <NavLink
                 to='/'
                 style={{ textDecoration: 'none', color: 'inherit' }}
@@ -97,28 +117,32 @@ export default function MenuDrawer() {
               </NavLink>
             </ListItemButton>
           </ListItem>
-        )
-      }
-       
-      {/* DASHBOARD */}
+        )}
+
+        {/* DASHBOARD - vendor */}
         {user && type === 'vendor' ? (
           <ListItem key='Dashboard' disablePadding>
-          <ListItemButton onClick={closeDrawer}>
-            <NavLink
-              to='/dash'
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <ListItemText primary='Dashboard' />
-            </NavLink>
-          </ListItemButton>
-        </ListItem>
-        ) : (null)}
-        
+            <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <InsightsIcon />
+              </ListItemIcon>
+              <NavLink
+                to='/dash'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <ListItemText primary='Dashboard' />
+              </NavLink>
+            </ListItemButton>
+          </ListItem>
+        ) : null}
 
-        {/* EXPLORE */}
+        {/* EXPLORE - non-authorized users */}
         {user ? null : (
           <ListItem key='Explore' disablePadding>
             <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <StoreIcon />
+              </ListItemIcon>
               <NavLink
                 to='/explore'
                 style={{ textDecoration: 'none', color: 'inherit' }}
@@ -129,11 +153,13 @@ export default function MenuDrawer() {
           </ListItem>
         )}
 
-
-        {/* PROFILE */}
+        {/* PROFILE - authorized users */}
         {!user ? null : (
           <ListItem key='Profile' disablePadding>
             <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <AccountBoxIcon />
+              </ListItemIcon>
               <NavLink
                 to='/profile'
                 style={{ textDecoration: 'none', color: 'inherit' }}
@@ -144,26 +170,81 @@ export default function MenuDrawer() {
           </ListItem>
         )}
 
+        {/* INVENTORY - vendor */}
+        {user && type === 'vendor' ? (
+          <ListItem key='Inventory' disablePadding>
+            <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <InventoryIcon />
+              </ListItemIcon>
+              <NavLink
+                to='/inventory'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <ListItemText primary='Inventory' />
+              </NavLink>
+            </ListItemButton>
+          </ListItem>
+        ) : null}
 
-        {/* INBOX */}
+        {/* UPLOAD - vendor */}
+        {user && type === 'vendor' ? (
+          <ListItem key='Upload' disablePadding>
+            <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <AddBoxIcon />
+              </ListItemIcon>
+              <NavLink
+                to='/uploaditem'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <ListItemText primary='Upload item' />
+              </NavLink>
+            </ListItemButton>
+          </ListItem>
+        ) : null}
+
+        {/* INBOX - authorized users */}
         {!user ? null : (
           <ListItem key='Inbox' disablePadding>
-          <ListItemButton onClick={closeDrawer}>
-            <NavLink
-              to='/inbox'
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <ListItemText primary='Inbox' />
-            </NavLink>
-          </ListItemButton>
-        </ListItem>
+            <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <MailIcon />
+              </ListItemIcon>
+              <NavLink
+                to='/inbox'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <ListItemText primary='Inbox' />
+              </NavLink>
+            </ListItemButton>
+          </ListItem>
         )}
 
+        {/* WISHLIST - buyer */}
+        {user && type === 'buyer' ? (
+          <ListItem key='Dashboard' disablePadding>
+            <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <FavoriteIcon />
+              </ListItemIcon>
+              <NavLink
+                to='/wishlist'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <ListItemText primary='Wishlist' />
+              </NavLink>
+            </ListItemButton>
+          </ListItem>
+        ) : null}
 
-        {/* SUPPORT */}
+        {/* SUPPORT - authorized users */}
         {!user ? null : (
           <ListItem key='Support' disablePadding>
             <ListItemButton onClick={closeDrawer}>
+              <ListItemIcon sx={{ minWidth: '30px' }}>
+                <ContactSupportIcon />
+              </ListItemIcon>
               <NavLink
                 to='/support'
                 style={{ textDecoration: 'none', color: 'inherit' }}
@@ -174,13 +255,12 @@ export default function MenuDrawer() {
           </ListItem>
         )}
 
-        
         {/* SIGN IN / LOGOUT  */}
         {user ? (
           <>
-            <Divider sx={{ marginBottom: 2}}/>
+            <Divider sx={{ marginBottom: 2 }} />
             <Box onClick={closeDrawer}>
-              <LogoutButton onClick={handleLogout}/>
+              <LogoutButton onClick={handleLogout} />
             </Box>
           </>
         ) : (
@@ -188,6 +268,9 @@ export default function MenuDrawer() {
             {/* SIGN IN */}
             <ListItem key='SignIn' disablePadding>
               <ListItemButton onClick={closeDrawer}>
+                <ListItemIcon sx={{ minWidth: '30px' }}>
+                  <LoginIcon />
+                </ListItemIcon>
                 <NavLink
                   to='/signin'
                   style={{ textDecoration: 'none', color: 'inherit' }}
@@ -196,7 +279,7 @@ export default function MenuDrawer() {
                 </NavLink>
               </ListItemButton>
             </ListItem>
-            <Divider sx={{ marginBottom: 2}}/>
+            <Divider sx={{ marginBottom: 2 }} />
             <GetStarted />
           </>
         )}
@@ -206,38 +289,60 @@ export default function MenuDrawer() {
 
   return (
     <>
-      <IconButton
-        className='menu-icon'
-        aria-label='open drawer'
-        edge='start'
-        onClick={handleDrawerToggle}
-        sx={{ display: { sm: 'none', color: '#fff' } }}
-      >
-        <MenuIcon />
-      </IconButton>
+      {/* Display permanent or temporary drawer depending on screen size */}
+      {isMobile ? (
+        <>
+          <IconButton
+            className='menu-icon'
+            aria-label='open drawer'
+            edge='start'
+            onClick={handleDrawerToggle}
+            sx={{ display: { sm: 'none', color: '#fff' } }}
+          >
+            <MenuIcon />
+          </IconButton>
 
-      {/* Drawer component */}
-      <Drawer
-        variant='temporary'
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile
-        }}
-        sx={{
-          display: { xs: 'block', sm: 'none' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
-            width: 285,
-          },
-        }}
-      >
-        {menuDrawer}
-      </Drawer>
+          {/* Drawer - MOBILE (temporary) */}
+          <Drawer
+            variant='temporary'
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: 285,
+              },
+            }}
+          >
+            {menuDrawer}
+          </Drawer>
+        </>
+      ) : (
+        <>
+          {/* Drawer - DESKTOP (permanent) */}
+          <Drawer
+            variant='permanent'
+            anchor='left'
+            sx={{
+              width: 285,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: 255,
+                boxSizing: 'border-box',
+              },
+            }}
+          >
+            {menuDrawer}
+          </Drawer>
+        </>
+      )}
 
       {/* Alerts */}
       <AuthAlert visible={showLogoutAlert} message={alertMessage} />
-
     </>
   );
 }
