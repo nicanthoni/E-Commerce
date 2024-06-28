@@ -37,7 +37,7 @@ export default function NavDrawer() {
   const theme = useTheme();
 
   // Viewport State
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile size
 
   // Mobile Drawer State
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -341,7 +341,7 @@ export default function NavDrawer() {
                 width: 285,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                  width: 200,
+                  width: 150,
                   boxSizing: 'border-box',
                   bgcolor: 'primary.main',
                 },

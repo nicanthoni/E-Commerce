@@ -11,7 +11,6 @@ import {
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import NavDrawer from './Drawers/NavDrawer';
-import NavDesktop from './Navigation/NavDesktop';
 import CartDrawer from './Drawers/CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import SearchBar from './Search/Search';
@@ -27,8 +26,6 @@ import LogoutButton from '../../components/Buttons/Logout';
 
 export default function Navbar() {
   const { user, id, type } = useAuthContext();
-  const [buyerName, setBuyerName] = useState('');
-  const [vendorName, setVendorName] = useState('');
   const location = useLocation();
   const theme = useTheme();
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
@@ -63,20 +60,6 @@ export default function Navbar() {
     }
   }, [user, type, loadBuyer, loadVendor]);
 
-  // if data is available, update name States
-  useEffect(() => {
-    if (userData && userData.user) {
-      const name = userData.user.firstName;
-      setBuyerName(name);
-      // console.log('username: ', name);
-    }
-    if (vendorData && vendorData.vendor) {
-      const name = vendorData.vendor.vendorName;
-      setVendorName(name);
-      // console.log('vendor name: ', name);
-    }
-  }, [userData, vendorData]);
-
   // OnClick - handle logout
   const handleLogout = async () => {
     try {
@@ -92,52 +75,32 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignContent: 'center' }}>
+    <Box sx={{ display: 'flex' }}>
       <AppBar
         component='nav'
         sx={{ backgroundColor: 'primary', display: 'flex' }}
         elevation={0}
       >
         <Container maxWidth='xl'>
-          <Toolbar>
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
             {/* Navigation drawer - mobile */}
-            <NavDrawer />
+            <Box>
+              <NavDrawer />
+            </Box>
 
-            {/* Logo & Brand Name */}
-            <Typography
-              variant='h6'
-              component='div'
-              sx={{
-                flexGrow: 1,
-                textAlign: { xs: 'center', sm: 'left' },
-              }}
+            {/* SearchBar - desktop view */}
+            <Box sx={{ flexGrow: 1}}>
+              {/* SearchBar - desktop view */}
+              {!isMobile && isExploreRoute && <SearchBar />}
+            </Box>
+
+            {/* MAIN navbar */}
+            <Box
+              sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}
             >
-              {user && type === 'buyer' ? (
-                <>
-                  <Typography>Hi, {buyerName}</Typography>
-                </>
-              ) : user && type === 'vendor' ? (
-                <>
-                  <Typography>Hi, {vendorName}</Typography>
-                </>
-              ) : (
-                <NavLink
-                  to='/'
-                  style={{ textDecoration: 'none', color: '#fff' }}
-                >
-                  <LogoDevIcon />
-                </NavLink>
-              )}
-            </Typography>
-
-            {/* SearchBar for larger screens */}
-            {!isMobile && isExploreRoute && <SearchBar />}
-
-            {/* Main navbar */}
-            <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
-              {/* Non-authenticated users */}
               {!user ? (
                 <>
+                  {/* Home */}
                   <Button
                     key='Home'
                     sx={{ color: '#fff', textTransform: 'none' }}
@@ -150,6 +113,7 @@ export default function Navbar() {
                     </NavLink>
                   </Button>
 
+                  {/* Shop */}
                   <Button
                     key='Explore'
                     sx={{ color: '#fff', textTransform: 'none' }}
@@ -162,6 +126,7 @@ export default function Navbar() {
                     </NavLink>
                   </Button>
 
+                  {/* Sign in */}
                   <Button
                     key='Signin'
                     sx={{ color: '#fff', textTransform: 'none' }}
@@ -181,11 +146,13 @@ export default function Navbar() {
               )}
             </Box>
 
-            {/* Checkout & Alerts drawers - depending on vendor or not*/}
-            {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
+            {/* Checkout & Alerts drawers - right side */}
+            <Box>
+              {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
+            </Box>
           </Toolbar>
 
-          {/* SearchBar for mobile screens */}
+          {/* SearchBar - mobile view */}
           {isMobile && isExploreRoute && <SearchBar />}
         </Container>
       </AppBar>
