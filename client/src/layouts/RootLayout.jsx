@@ -10,8 +10,7 @@ export default function RootLayout() {
     <>
       <Navbar />
       <Outlet />
-
-      {user && <BottomNav />}
+      <BottomNav />
     </>
   );
 }
