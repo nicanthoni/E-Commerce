@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useLogout } from '../../../hooks/useLogout';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
-export default function TopNav() {
+export default function NavDesktop() {
   const { user, type } = useAuthContext();
   const { logout } = useLogout();
   

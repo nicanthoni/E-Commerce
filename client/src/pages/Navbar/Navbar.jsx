@@ -9,8 +9,8 @@ import {
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import MenuDrawer from './Drawers/MenuDrawer';
-import TopNavbar from './Navigation/TopNavbar';
+import NavDrawer from './Drawers/NavDrawer';
+import NavDesktop from './Navigation/NavDesktop';
 import CartDrawer from './Drawers/CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import SearchBar from './Search/Search';
@@ -76,7 +76,7 @@ export default function Navbar() {
         <Container maxWidth='xl'>
           <Toolbar>
             {/* Menu drawer */}
-            <MenuDrawer />
+            <NavDrawer />
 
             {/* Logo & Brand Name */}
             <Typography
@@ -109,7 +109,7 @@ export default function Navbar() {
             {!isMobile && isExploreRoute && <SearchBar />}
 
             {/* Main navbar */}
-            <TopNavbar />
+            <NavDesktop />
 
             {/* Checkout & Alerts drawers - depending on vendor or not*/}
             {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}

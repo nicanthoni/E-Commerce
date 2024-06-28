@@ -30,7 +30,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
 
-export default function MenuDrawer() {
+export default function NavDrawer() {
   const { logout } = useLogout();
   const { user, type } = useAuthContext();
   const theme = useTheme();
@@ -77,8 +77,10 @@ export default function MenuDrawer() {
         <Typography
           variant='h6'
           color='#fff'
-          sx={{ my: 3.6, display: 'inline-block' }}
-        ></Typography>
+          sx={{ my: 1.7, display: 'inline-block' }}
+        >
+          <LogoDevIcon />
+        </Typography>
       </Box>
 
       <Divider />
@@ -90,7 +92,7 @@ export default function MenuDrawer() {
           <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <StoreIcon sx={{ color: '#fff'}}/>
+                <StoreIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/explore'
@@ -105,7 +107,7 @@ export default function MenuDrawer() {
           <ListItem key='Home' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <HomeIcon sx={{ color: '#fff'}}/>
+                <HomeIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink to='/' style={{ textDecoration: 'none', color: '#fff' }}>
                 <ListItemText primary='Home' />
@@ -119,7 +121,7 @@ export default function MenuDrawer() {
           <ListItem key='Dashboard' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <InsightsIcon sx={{ color: '#fff'}}/>
+                <InsightsIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/dash'
@@ -136,7 +138,7 @@ export default function MenuDrawer() {
           <ListItem key='Explore' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <StoreIcon sx={{ color: '#fff'}} />
+                <StoreIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/explore'
@@ -153,7 +155,7 @@ export default function MenuDrawer() {
           <ListItem key='Profile' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <AccountBoxIcon sx={{ color: '#fff'}}/>
+                <AccountBoxIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/profile'
@@ -170,7 +172,7 @@ export default function MenuDrawer() {
           <ListItem key='Inventory' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <InventoryIcon sx={{ color: '#fff'}}/>
+                <InventoryIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/inventory'
@@ -187,7 +189,7 @@ export default function MenuDrawer() {
           <ListItem key='Upload' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <AddBoxIcon sx={{ color: '#fff'}}/>
+                <AddBoxIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/uploaditem'
@@ -204,7 +206,7 @@ export default function MenuDrawer() {
           <ListItem key='Inbox' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <MailIcon sx={{ color: '#fff'}}/>
+                <MailIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/inbox'
@@ -221,7 +223,7 @@ export default function MenuDrawer() {
           <ListItem key='Dashboard' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <FavoriteIcon sx={{ color: '#fff'}}/>
+                <FavoriteIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/wishlist'
@@ -238,7 +240,7 @@ export default function MenuDrawer() {
           <ListItem key='Support' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <ContactSupportIcon sx={{ color: '#fff'}}/>
+                <ContactSupportIcon sx={{ color: '#fff' }} />
               </ListItemIcon>
               <NavLink
                 to='/support'
@@ -250,34 +252,38 @@ export default function MenuDrawer() {
           </ListItem>
         )}
 
-        {/* SIGN IN / LOGOUT  */}
-        {user ? (
+        {/* LOGOUT button  */}
+        {user && isMobile ? (
           <>
             <Divider sx={{ marginBottom: 2 }} />
             <Box onClick={closeDrawer}>
               <LogoutButton onClick={handleLogout} />
             </Box>
           </>
-        ) : (
-          <>
-            {/* SIGN IN */}
-            <ListItem key='SignIn' disablePadding>
-              <ListItemButton onClick={closeDrawer}>
-                <ListItemIcon sx={{ minWidth: '30px' }}>
-                  <LoginIcon sx={{ color: '#fff'}} />
-                </ListItemIcon>
-                <NavLink
-                  to='/signin'
-                  style={{ textDecoration: 'none', color: '#fff' }}
-                >
-                  <ListItemText primary='Sign In' />
-                </NavLink>
-              </ListItemButton>
-            </ListItem>
-            <Divider sx={{ marginBottom: 2 }} />
-            <GetStarted />
-          </>
-        )}
+        ) : null}
+        <>
+          {/* SIGN IN */}
+          {!user && (
+            <>
+              <ListItem key='SignIn' disablePadding>
+                <ListItemButton onClick={closeDrawer}>
+                  <ListItemIcon sx={{ minWidth: '30px' }}>
+                    <LoginIcon sx={{ color: '#fff' }} />
+                  </ListItemIcon>
+                  <NavLink
+                    to='/signin'
+                    style={{ textDecoration: 'none', color: '#fff' }}
+                  >
+                    <ListItemText primary='Sign In' />
+                  </NavLink>
+                </ListItemButton>
+              </ListItem>
+
+              <Divider sx={{ marginBottom: 2 }} />
+              <GetStarted />
+            </>
+          )}
+        </>
       </List>
     </Box>
   );
@@ -320,21 +326,23 @@ export default function MenuDrawer() {
       ) : (
         <>
           {/* Drawer - DESKTOP (permanent) */}
-          <Drawer
-            variant='permanent'
-            anchor='left'
-            sx={{
-              width: 285,
-              flexShrink: 0,
-              '& .MuiDrawer-paper': {
-                width: 200,
-                boxSizing: 'border-box',
-                bgcolor: 'primary.main',
-              },
-            }}
-          >
-            {menuDrawer}
-          </Drawer>
+          {user && (
+            <Drawer
+              variant='permanent'
+              anchor='left'
+              sx={{
+                width: 285,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                  width: 200,
+                  boxSizing: 'border-box',
+                  bgcolor: 'primary.main',
+                },
+              }}
+            >
+              {menuDrawer}
+            </Drawer>
+          )}
         </>
       )}
 
