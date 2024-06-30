@@ -1,4 +1,4 @@
-import Navbar from '../pages/Navbar/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import BottomNav from '../components/Navbar/BottomNav';

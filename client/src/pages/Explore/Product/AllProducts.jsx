@@ -152,7 +152,7 @@ export default function AllProducts({
         <>
           {/* Product Filters - Price and Date */}
           <Grid item xs={12} marginBottom={2}>
-            <ProductFilters />
+            <ProductFilters products={products} />
           </Grid>
 
           {/* Product Map and create card */}
