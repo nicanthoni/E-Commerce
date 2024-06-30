@@ -11,7 +11,6 @@ export default function Explore() {
   const [selectedCategory, setSelectedCategory] = useState(''); // state of selected Category
   const [activeStep, setActiveStep] = useState(0); // state of active step in CategorySelection's carousel
 
-
   // Load Products  - filter loaded products by selected category
   const [
     loadProducts,
@@ -59,7 +58,6 @@ export default function Explore() {
     }
   }, [user, loadWishlist, loadCart]);
 
-
   if (productsError) {
     console.error('GraphQL Products Error:', productsError);
     return <Typography>Error fetching product data</Typography>;
@@ -82,7 +80,6 @@ export default function Explore() {
   if (!productsData) {
     return <Typography>No product data found</Typography>;
   }
-  
 
   // Callback to update the selected category
   const handleCategoryChange = (category) => {

@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function AlertsDrawer() {
   const { user } = useAuthContext();

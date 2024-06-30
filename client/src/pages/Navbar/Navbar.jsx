@@ -10,12 +10,12 @@ import {
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import NavDrawer from './Drawers/NavDrawer';
-import CartDrawer from './Drawers/CartDrawer';
+import NavDrawer from '../../components/Drawers/NavDrawer';
+import CartDrawer from '../../components/Drawers/CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import SearchBar from './Search/Search';
+import SearchBar from '../../components/Search/Search';
 import { useLocation } from 'react-router-dom';
-import AlertsDrawer from './Drawers/AlertsDrawer';
+import AlertsDrawer from '../../components/Drawers/AlertsDrawer';
 import { User, Vendor } from '../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
@@ -89,7 +89,7 @@ export default function Navbar() {
             </Box>
 
             {/* SearchBar - desktop view */}
-            <Box sx={{ flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
               {/* SearchBar - desktop view */}
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>

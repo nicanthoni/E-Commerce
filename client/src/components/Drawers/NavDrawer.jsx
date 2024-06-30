@@ -11,11 +11,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import LogoutButton from '../../../components/Buttons/Logout';
-import GetStarted from '../../../components/Buttons/GetStarted';
-import { useAuthContext } from '../../../hooks/useAuthContext';
-import { useLogout } from '../../../hooks/useLogout';
-import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
+import LogoutButton from '../Buttons/Logout';
+import GetStarted from '../Buttons/GetStarted';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useLogout } from '../../hooks/useLogout';
+import AuthAlert from '../Alerts/Auth/AuthAlert';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
@@ -295,63 +295,37 @@ export default function NavDrawer() {
     </Box>
   );
 
+  // MENU DRAWER
   return (
     <>
-      {/* Display permanent or temporary drawer depending on screen size */}
-      {isMobile ? (
-        <>
-          <IconButton
-            className='menu-icon'
-            aria-label='open drawer'
-            edge='start'
-            onClick={handleDrawerToggle}
-            sx={{ display: { sm: 'none', color: '#fff' } }}
-          >
-            <MenuIcon />
-          </IconButton>
+      <IconButton
+        className='menu-icon'
+        aria-label='open drawer'
+        edge='start'
+        onClick={handleDrawerToggle}
+        sx={{ display: { color: '#fff' } }}
+      >
+        <MenuIcon />
+      </IconButton>
 
-          {/* Drawer - MOBILE (temporary) */}
-          <Drawer
-            variant='temporary'
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': {
-                boxSizing: 'border-box',
-                width: 285,
-                bgcolor: 'primary.main',
-              },
-            }}
-          >
-            {menuDrawer}
-          </Drawer>
-        </>
-      ) : (
-        <>
-          {/* Drawer - DESKTOP (permanent) */}
-          {user && (
-            <Drawer
-              variant='permanent'
-              anchor='left'
-              sx={{
-                width: 285,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                  width: 150,
-                  boxSizing: 'border-box',
-                  bgcolor: 'primary.main',
-                },
-              }}
-            >
-              {menuDrawer}
-            </Drawer>
-          )}
-        </>
-      )}
+      <Drawer
+        variant='temporary'
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile
+        }}
+        sx={{
+          display: { xs: 'block' },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: 285,
+            bgcolor: 'primary.main',
+          },
+        }}
+      >
+        {menuDrawer}
+      </Drawer>
 
       {/* Alerts */}
       <AuthAlert visible={showLogoutAlert} message={alertMessage} />
