@@ -89,7 +89,7 @@ export default function Navbar() {
             </Box>
 
             {/* SearchBar - desktop view */}
-            <Box sx={{ flexGrow: 1}}>
+            <Box sx={{ flexGrow: 1 }}>
               {/* SearchBar - desktop view */}
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>

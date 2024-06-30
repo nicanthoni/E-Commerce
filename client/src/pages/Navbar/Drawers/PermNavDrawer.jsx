@@ -31,7 +31,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Avatar } from '@mui/material';
 
-export default function NavDrawer() {
+export default function PermNavDrawer() {
   const { logout } = useLogout();
   const { user, type } = useAuthContext();
   const theme = useTheme();
@@ -297,40 +297,26 @@ export default function NavDrawer() {
 
   return (
     <>
-      
-          <IconButton
-            className='menu-icon'
-            aria-label='open drawer'
-            edge='start'
-            onClick={handleDrawerToggle}
-            sx={{ display: { color: '#fff' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          {/* Drawer - MOBILE (temporary) */}
-          <Drawer
-            variant='temporary'
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile
-            }}
-            sx={{
-              display: { xs: 'block' },
-              '& .MuiDrawer-paper': {
-                boxSizing: 'border-box',
+      {/* Display permanent or temporary drawer depending on screen size */}
+ 
+          {/* Drawer - DESKTOP (permanent) */}
+          {user && !isMobile && (
+            <Drawer
+              variant='permanent'
+              anchor='left'
+              sx={{
                 width: 285,
-                bgcolor: 'primary.main',
-              },
-            }}
-          >
-            {menuDrawer}
-          </Drawer>
-
-
-      {/* Alerts */}
-      <AuthAlert visible={showLogoutAlert} message={alertMessage} />
-    </>
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                  width: 150,
+                  boxSizing: 'border-box',
+                  bgcolor: 'primary.main',
+                },
+              }}
+            >
+              {menuDrawer}
+            </Drawer>
+          )}
+        </>
   );
 }
