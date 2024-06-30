@@ -1,7 +1,7 @@
 import { Stack, Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import DeleteItem from '../../../components/Buttons/DeleteItem';
-import QuantityIncrementer from '../../../components/test.QuantityIncrementer';
+import QuantityIncrementer from '../../../components/Cart/Incrementer';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import { useCart } from '../../../hooks/Products/useCart';
 

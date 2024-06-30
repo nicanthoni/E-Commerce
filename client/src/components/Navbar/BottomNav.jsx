@@ -16,7 +16,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LoginIcon from '@mui/icons-material/Login';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import Home from '../Home/Home';
+import Home from '../../pages/Home/Home';
 
 export default function BottomNav() {
   const { user, type } = useAuthContext();
@@ -39,7 +39,7 @@ export default function BottomNav() {
           >
             <BottomNavigation
               sx={{ bgcolor: 'primary.main' }}
-              value={active} 
+              value={active}
               onChange={(event, newActive) => {
                 setActive(newActive);
               }}
@@ -55,8 +55,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               )}
@@ -72,8 +72,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               ) : (
@@ -86,8 +86,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               )}
@@ -103,8 +103,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               )}
@@ -120,8 +120,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               )}
@@ -137,8 +137,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               ) : null}
@@ -154,8 +154,8 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               ) : null}
@@ -171,13 +171,11 @@ export default function BottomNav() {
                   sx={{
                     color: '#fff',
                     '&.Mui-selected': {
-                      color: '#fff'
-                    }
+                      color: '#fff',
+                    },
                   }}
                 />
               ) : null}
-
-
             </BottomNavigation>
           </Paper>
         </Box>

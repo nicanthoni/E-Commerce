@@ -9,10 +9,10 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CartLayout from '../../Checkout/Drawer/CartLayout';
+import CartLayout from '../../pages/Checkout/Drawer/CartLayout';
 import { useLazyQuery } from '@apollo/client';
-import { User, Cart } from '../../../graphql/queries';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { User, Cart } from '../../graphql/queries';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function CartDrawer() {
   let itemsInCart = 0;

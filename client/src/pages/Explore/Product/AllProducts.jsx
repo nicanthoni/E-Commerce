@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { Typography, Grid, Stack } from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import ProductFilters from '../Filters/ProductFilters';
+import ProductFilters from '../../../components/Filters/ProductFilters';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';

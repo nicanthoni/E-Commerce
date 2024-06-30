@@ -1,9 +1,7 @@
 import Navbar from '../pages/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
-import BottomNav from '../pages/Profile/BottomNav';
-import PermNavDrawer from '../pages/Navbar/Drawers/PermNavDrawer';
-
+import BottomNav from '../components/Navbar/BottomNav';
 
 export default function RootLayout() {
   const { user } = useAuthContext();
@@ -11,7 +9,6 @@ export default function RootLayout() {
   return (
     <>
       <Navbar />
-      {/* <PermNavDrawer/> */}
       <Outlet />
       <BottomNav />
     </>
