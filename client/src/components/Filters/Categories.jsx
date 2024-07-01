@@ -70,7 +70,7 @@ function CategorySelection({
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={activeStep}
           onChangeIndex={onStepChange}
-          // enableMouseEvents    // Only worked with react-swipeable-views component
+          enableMouseEvents    // Only worked with react-swipeable-views component
           style={{ flex: 1 }}
         >
           {/* Category Buttons */}
