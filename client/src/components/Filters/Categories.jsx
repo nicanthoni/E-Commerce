@@ -3,7 +3,10 @@ import { Box, Button, MobileStepper } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useMediaQuery } from '@mui/material';
-import { categories } from '../../../data/itemData';
+import { categories } from '../../data/itemData';
+import SwipeableViews from 'react-swipeable-views';
+
+
 
 function CategorySelection({
   selectedCategory,
@@ -63,11 +66,11 @@ function CategorySelection({
           </Button>
         )}
 
-        <Box
+        <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={activeStep}
           onChangeIndex={onStepChange}
-          enableMouseEvents
+          // enableMouseEvents    // Only worked with react-swipeable-views component
           style={{ flex: 1 }}
         >
           {/* Category Buttons */}
@@ -104,7 +107,7 @@ function CategorySelection({
                 ))}
             </Box>
           ))}
-        </Box>
+        </SwipeableViews>
 
         {/* Next button - only on mobile*/}
         {isMobile && (
