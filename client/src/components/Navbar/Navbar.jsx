@@ -10,19 +10,19 @@ import {
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
-import NavDrawer from '../../components/Drawers/NavDrawer';
-import CartDrawer from '../../components/Drawers/CartDrawer';
+import NavDrawer from '../Drawers/NavDrawer';
+import CartDrawer from '../Drawers/CartDrawer';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import SearchBar from '../../components/Search/Search';
+import SearchBar from '../Search/Search';
 import { useLocation } from 'react-router-dom';
-import AlertsDrawer from '../../components/Drawers/AlertsDrawer';
+import AlertsDrawer from '../Drawers/AlertsDrawer';
 import { User, Vendor } from '../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useLogout } from '../../hooks/useLogout';
-import AuthAlert from '../../components/Alerts/Auth/AuthAlert';
-import GetStarted from '../../components/Buttons/GetStarted';
-import LogoutButton from '../../components/Buttons/Logout';
+import AuthAlert from '../Alerts/Auth/AuthAlert';
+import GetStarted from '../Buttons/GetStarted';
+import LogoutButton from '../Buttons/Logout';
 
 export default function Navbar() {
   const { user, id, type } = useAuthContext();

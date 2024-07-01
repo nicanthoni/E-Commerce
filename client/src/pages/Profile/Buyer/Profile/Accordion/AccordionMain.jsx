@@ -11,7 +11,7 @@ import { useMutation } from '@apollo/client';
 import { delete_user } from '../../../../../graphql/mutations';
 import { useLogout } from '../../../../../hooks/useLogout';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
-import CartImgList from './CartImgList';
+
 import WishImglist from './WishlistImgList';
 import OrdersImgList from './OrdersImgList';
 import ReviewsImgList from './ReviewsImgList';
@@ -79,35 +79,6 @@ export default function ProfileAccordion({
           ) : (
             <Typography variant='caption'>
               There are 0 items in your wishlist. Explore items{' '}
-              <Link underline='hover' fontWeight='bold' href='/explore'>
-                here!
-              </Link>
-            </Typography>
-          )}
-        </AccordionDetails>
-      </Accordion>
-
-      {/* CART */}
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'
-        >
-          <Typography>Cart</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {userData.cart.length > 0 ? (
-            <Typography variant='caption'>
-              <CartImgList
-                refetchUserData={refetchUserData}
-                loadUser={loadUser}
-                userData={userData}
-              />
-            </Typography>
-          ) : (
-            <Typography variant='caption'>
-              There are 0 items in your cart. Explore items{' '}
               <Link underline='hover' fontWeight='bold' href='/explore'>
                 here!
               </Link>

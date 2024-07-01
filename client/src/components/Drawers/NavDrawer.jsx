@@ -7,7 +7,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
@@ -30,6 +29,9 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Avatar } from '@mui/material';
+import LinearScaleIcon from '@mui/icons-material/LinearScale';
+import MenuIcon from '@mui/icons-material/Menu';
+import WidgetsIcon from '@mui/icons-material/Widgets';
 
 export default function NavDrawer() {
   const { logout } = useLogout();
@@ -305,7 +307,7 @@ export default function NavDrawer() {
         onClick={handleDrawerToggle}
         sx={{ display: { color: '#fff' } }}
       >
-        <MenuIcon />
+        <WidgetsIcon />
       </IconButton>
 
       <Drawer

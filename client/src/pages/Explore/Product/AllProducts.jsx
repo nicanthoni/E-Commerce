@@ -12,6 +12,7 @@ import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
+
 export default function AllProducts({
   products,
   wishlistedItems,
@@ -152,7 +153,7 @@ export default function AllProducts({
         <>
           {/* Product Filters - Price and Date */}
           <Grid item xs={12} marginBottom={2}>
-            <ProductFilters />
+            <ProductFilters products={products} />
           </Grid>
 
           {/* Product Map and create card */}
