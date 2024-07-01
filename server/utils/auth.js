@@ -1,7 +1,10 @@
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
 
-const secret = 'The One Piece is real';
+// Load environment variables
+require('dotenv').config();
+
+const secret = process.env.JWT_SECRET || 'The One Piece is real';
 const exp = '2h';
 
 module.exports = {
