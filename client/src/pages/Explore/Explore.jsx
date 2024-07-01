@@ -1,6 +1,6 @@
 import { Grid, Container, Typography } from '@mui/material';
 import AllProducts from './Product/AllProducts';
-import CategorySelection from './Filters/Categories';
+import CategorySelection from '../../components/Filters/Categories';
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
