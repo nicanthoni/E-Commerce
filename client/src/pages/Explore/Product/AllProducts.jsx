@@ -12,6 +12,7 @@ import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
+
 export default function AllProducts({
   products,
   wishlistedItems,

@@ -78,7 +78,7 @@ export default function Navbar() {
     <Box sx={{ display: 'flex' }}>
       <AppBar
         component='nav'
-        sx={{ backgroundColor: 'white', display: 'flex' }}
+        sx={{ backgroundColor: 'primary', display: 'flex' }}
         elevation={0}
       >
         <Container maxWidth='xl'>

@@ -7,26 +7,40 @@ import {
   FormControl,
   Select,
 } from '@mui/material';
-import {getAverage} from '../../utils/filterPrice';
-import {sortByPriceAsc} from '../../utils/filterPrice';
-import {sortByPriceDesc} from '../../utils/filterPrice';
+import {
+  getAverage,
+  sortByPriceAsc,
+  sortByPriceDesc,
+} from '../../utils/filterPrice';
 
 export default function Filters({ products }) {
   // States
   const [date, setDate] = useState('');
   const [price, setPrice] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
+  const [priceFilter, setPriceFilter] = useState(products);
 
   // Set Category Filter
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
-  // Set Price Filter
+
+  // Calculate average price
+  const averagePrice = getAverage(products);
+  // console.log('Average Price: ', averagePrice);
+
+  // Sort items by price in ascending order
+  const sortedItemsAsc = sortByPriceAsc(products);
+  // console.log('Sorted Items (Ascending):', sortedItemsAsc);
+
+  // Sort items by price in descending order
+  const sortedItemsDesc = sortByPriceDesc(products);
+  // console.log('Sorted Items (Descending):', sortedItemsDesc);
+
+    // Set Price Filter
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
+    console.log('Filtered items by price: ', products)
   };
-
-  console.log('product prices: ', products)
 
   return (
     <Stack direction='row' spacing={4} justifyContent='center'>
