@@ -21,7 +21,7 @@
 - Details coming soon.
 
 ## Deployed application link
-- This application is not yet deployed.
+- [LINK](https://e-commerce-j2er.onrender.com/)
 
 ## How to use?
 - Details coming soon.
