@@ -6,6 +6,7 @@ import {
   Rating,
   Link,
   Avatar,
+  Divider,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -185,28 +186,13 @@ export default function SingleProduct() {
 
   return (
     <Container maxWidth='md'>
-      {/* Vendor info Stack - Name, link to page, and logo eventually*/}
-      <Stack
-        alignItems='center'
-        marginBottom={2}
-        sx={{ marginTop: { xs: 10, md: 12 } }}
-      >
-        {/* <Avatar></Avatar> */}
-        <Typography fontWeight='bolder'>
-          {productData.item.vendor.vendorName}
-        </Typography>
-        <Typography>
-          <Link href='#' underline='hover'>
-            Visit the store
-          </Link>
-        </Typography>
-      </Stack>
-
-      {/* Parent Item Stack */}
+      {/* Parent Stack */}
       <Stack
         sx={{
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
+          justifyContent: 'center',
+          marginTop: { xs: 10, md: 12 },
         }}
       >
         {/* Image & Rating Stack */}
@@ -246,17 +232,31 @@ export default function SingleProduct() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant='h6' component='div'>
-            ${productData.item.price}
+          <Typography>
+            <Link
+              variant='caption'
+              href='#'
+              underline='hover'
+              sx={{
+                color: 'primary.main',
+                '&:hover': { color: 'secondary.main' },
+              }}
+            >
+              {productData.item.vendor.vendorName}
+            </Link>
           </Typography>
 
-          <Typography variant='h5' component='div'>
+          <Typography variant='h6' component='div'>
             {productData.item.name}
           </Typography>
 
-          <Typography variant='body1' color='text.secondary'>
+          <Typography variant='caption' component='div'>
             {productData.item.description}
           </Typography>
+
+          <Typography component='div'>${productData.item.price}</Typography>
+
+          <Divider flexItem variant='unset' sx={{ my: 1 }} />
 
           {/* Buttons */}
           <Stack direction='row'>

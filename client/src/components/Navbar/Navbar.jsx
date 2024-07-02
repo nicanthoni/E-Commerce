@@ -79,9 +79,9 @@ export default function Navbar() {
       <AppBar
         component='nav'
         sx={{ backgroundColor: 'primary', display: 'flex' }}
-        elevation={0}
+        elevation={2}
       >
-        <Container maxWidth='xl'>
+        <Container maxWidth='none'>
           <Toolbar sx={{ justifyContent: 'space-between' }}>
             {/* Navigation drawer - mobile */}
             <Box>
@@ -89,31 +89,32 @@ export default function Navbar() {
             </Box>
 
             {/* Greeting - buyers */}
-            {user && type === 'buyer' && (
+            {user && userData && type === 'buyer' && (
               <Box
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
-                  marginLeft: 2
+                  marginLeft: 1,
                 }}
               >
-                <Typography>Hi, Shopper</Typography>
+                <Typography>Hi, {userData.user.firstName}</Typography>
               </Box>
             )}
             {/* Greeting -  vendor */}
-            {user && type === 'vendor' && (
+            {user && vendorData && type === 'vendor' && (
               <Box
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
+                  marginLeft: 1,
                 }}
               >
-                <Typography>Hi, Vendor</Typography>
+                <Typography>Hi, {vendorData.vendor.vendorName}</Typography>
               </Box>
             )}
 
             {/* SearchBar - desktop view */}
-            <Box sx={{ flexGrow: 1, marginLeft: 3 }}>
+            <Box display='flex' justifyContent='center' sx={{ flexGrow: 1 }}>
               {/* SearchBar - desktop view */}
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>
