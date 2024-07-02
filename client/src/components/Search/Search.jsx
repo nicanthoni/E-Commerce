@@ -32,10 +32,15 @@ export default function SearchBar() {
   return (
     <Paper
       component='form'
-      sx={{ display: 'flex', marginY: 1, width: { sm: '100%', md: '90%', lg: '50%' } }}
+      sx={{
+        display: 'flex',
+        marginY: 1,
+        width: { sm: '100%', md: '90%', lg: '50%' },
+      }}
     >
       {/* Input field */}
       <InputBase
+        autoFocus
         type='search'
         onChange={(e) => setQuery(e.target.value)}
         value={query} // Bind search state to input value

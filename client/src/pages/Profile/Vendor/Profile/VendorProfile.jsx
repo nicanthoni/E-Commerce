@@ -11,6 +11,7 @@ import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
 import StorefrontIcon from '@mui/icons-material/Storefront';
+import { formatDate } from '../../../../utils/formatDate';
 
 export default function VendorProfile() {
   const { user, id } = useAuthContext();
@@ -45,7 +46,7 @@ export default function VendorProfile() {
         <Grid container direction='column' marginTop={12}>
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
-            <Stack direction='column' alignItems='center' spacing={2}>
+            <Stack direction='column' alignItems='center' spacing={1}>
               <Avatar
                 sx={{ bgcolor: 'primary.main' }}
                 alt={`${vendorData.vendorName}'s Logo`}
@@ -56,13 +57,16 @@ export default function VendorProfile() {
               <Typography textAlign='center' variant='h6'>
                 Hi, {vendorData.vendorName} 👋
               </Typography>
+              <Typography textAlign='center' variant='caption'>
+                Member since {formatDate(vendorData.createdAt)}
+              </Typography>
 
               <Stack
                 direction='row'
                 justifyContent='space-around'
                 alignItems='center'
                 textAlign='center'
-                spacing={4}
+                spacing={3}
               >
                 <Stack alignItems='center'>
                   <Typography fontWeight='bold' color='secondary.main'>

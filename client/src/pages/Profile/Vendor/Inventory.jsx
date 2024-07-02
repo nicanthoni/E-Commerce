@@ -145,13 +145,13 @@ export default function Inventory() {
 
   return (
     <Container maxWidth='md'>
-      <Box marginTop={12} textAlign='center'>
+      <Box marginTop={12} textAlign='center' >
         <Typography variant='h6' marginBottom={2}>
           Inventory Management
         </Typography>
         {/* Data grid */}
         <DataGrid
-        
+          sx={{ bgcolor: 'white.main' }}
           rows={rows}
           columns={columns}
           initialState={{

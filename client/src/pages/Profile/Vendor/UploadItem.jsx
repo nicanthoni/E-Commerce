@@ -170,6 +170,7 @@ export default function UploadItem() {
           {/* Item name */}
           <Grid item xs={12}>
             <TextField
+            autoFocus
               onChange={handleChange}
               required
               fullWidth

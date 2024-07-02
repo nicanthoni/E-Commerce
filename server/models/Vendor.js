@@ -47,6 +47,10 @@ const vendorSchema = new mongoose.Schema({
       },
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 vendorSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {

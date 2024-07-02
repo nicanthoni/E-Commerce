@@ -4,10 +4,12 @@ import { gql } from '@apollo/client';
 export const Vendor = gql`
   query VendorQuery($vendorId: ID!) {
     vendor(id: $vendorId) {
+      createdAt
       vendorName
       email
       inventory {
         _id
+        createdAt
         name
         inventory
         category
@@ -48,6 +50,7 @@ export const Vendor = gql`
 export const User = gql`
   query UserQuery($userId: ID!) {
     user(id: $userId) {
+      createdAt
       firstName
       lastName
       email
