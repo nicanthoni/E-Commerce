@@ -94,7 +94,7 @@ export default function Navbar() {
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
-                  marginLeft: 2,
+                  marginLeft: 1,
                 }}
               >
                 <Typography>Hi, {userData.user.firstName}</Typography>
@@ -106,6 +106,7 @@ export default function Navbar() {
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
+                  marginLeft: 1,
                 }}
               >
                 <Typography>Hi, {vendorData.vendor.vendorName}</Typography>

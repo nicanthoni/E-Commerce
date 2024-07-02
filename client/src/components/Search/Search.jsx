@@ -32,7 +32,7 @@ export default function SearchBar() {
   return (
     <Paper
       component='form'
-      sx={{ display: 'flex', marginY: 1, width: { sm: '100%', md: '85%', lg: '65%' } }}
+      sx={{ display: 'flex', marginY: 1, width: { sm: '100%', md: '90%', lg: '50%' } }}
     >
       {/* Input field */}
       <InputBase
