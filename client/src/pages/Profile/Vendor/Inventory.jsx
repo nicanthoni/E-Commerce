@@ -92,9 +92,10 @@ export default function Inventory() {
       width: 130,
       renderCell: (params) => (
         <Link
+          underline='hover'
           to={`/product/${params.row.id}`}
           target='_blank'
-          sx={{ textDecoration: 'none', color: 'none' }}
+          sx={{  color: 'none' }}
         >
           {params.value}
         </Link>

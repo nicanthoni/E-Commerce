@@ -36,19 +36,20 @@ export default function Filters({ products }) {
   const sortedItemsDesc = sortByPriceDesc(products);
   // console.log('Sorted Items (Descending):', sortedItemsDesc);
 
-    // Set Price Filter
+  // Set Price Filter
   const handlePriceChange = (event) => {
     setPrice(event.target.value);
-    console.log('Filtered items by price: ', products)
+    console.log('Filtered items by price: ', products);
   };
 
   return (
     <Stack direction='row' spacing={4} justifyContent='center'>
       {/* Date added filter */}
-      <Box sx={{ width: 126 }}>
+      <Box sx={{ width: 100 }}>
         <FormControl fullWidth size='small'>
-          <InputLabel> Date added </InputLabel>
+          <InputLabel>Date</InputLabel>
           <Select
+            sx={{ bgcolor: 'white.main' }}
             labelId='date-label'
             id='filter-date'
             value={date}
@@ -63,10 +64,11 @@ export default function Filters({ products }) {
       </Box>
 
       {/* Price filter */}
-      <Box sx={{ width: 126 }}>
+      <Box sx={{ width: 100 }}>
         <FormControl fullWidth size='small'>
-          <InputLabel> Price </InputLabel>
+          <InputLabel>Price</InputLabel>
           <Select
+            sx={{ bgcolor: 'white.main' }}
             labelId='price-label'
             id='filter-price'
             value={price}

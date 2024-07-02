@@ -23,6 +23,7 @@ import { useLogout } from '../../hooks/useLogout';
 import AuthAlert from '../Alerts/Auth/AuthAlert';
 import GetStarted from '../Buttons/GetStarted';
 import LogoutButton from '../Buttons/Logout';
+import CategorySelection from '../Filters/Categories'; // append to bottom of navbar
 
 export default function Navbar() {
   const { user, id, type } = useAuthContext();
@@ -217,6 +218,9 @@ export default function Navbar() {
 
           {/* SearchBar - mobile view */}
           {isMobile && isExploreRoute && <SearchBar />}
+
+          {/* Category selection - on explore route  */}
+          {isExploreRoute && <CategorySelection />}
         </Container>
       </AppBar>
       {/* ⚠️Alerts ⚠️*/}

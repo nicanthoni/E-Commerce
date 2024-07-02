@@ -1,12 +1,9 @@
 import { useTheme } from '@mui/material/styles';
-import { Box, Button, MobileStepper } from '@mui/material';
+import { Box, Button, MobileStepper, Tabs, Tab } from '@mui/material';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useMediaQuery } from '@mui/material';
 import { categories } from '../../data/itemData';
-// import SwipeableViews from 'react-swipeable-views';
-
-
 
 function CategorySelection({
   selectedCategory,
@@ -32,111 +29,128 @@ function CategorySelection({
   };
 
   return (
-    <Box
-      marginBottom={1}
-      sx={{
-        maxWidth: 1200,
-        flexGrow: 1,
-        overflow: 'hidden',
-        mx: 'auto',
-        position: 'relative',
-      }}
+    <Box display='flex' justifyContent='center' marginBottom={1} sx={{ bgcolor: 'primary.main' }}>
+    <Tabs
+      sx={{ color: 'white.main' }}
+      textColor='inherit'
+      value={activeStep}
+      onChange={onStepChange}
+      variant='scrollable'
+      scrollButtons='auto'
+      allowScrollButtonsMobile
+      aria-label='scrollable force tabs'
     >
-      <Box
-        sx={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {/* Back button - only on mobile */}
-        {isMobile && (
-          <Button
-            size='small'
-            onClick={handleBack}
-            disabled={activeStep === 0}
-            sx={{ position: 'absolute', left: -20, zIndex: 1 }} // Moved button further to the left
-          >
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-          </Button>
-        )}
+      {categories.map((category) => (
+        <Tab sx={{textTransform: 'none'}}color='white.main'key={category.id} label={category.name} />
+      ))}
+    </Tabs>
+  </Box>
+    // <Box
+    //   marginBottom={1}
+    //   sx={{
+    //     maxWidth: 1200,
+    //     flexGrow: 1,
+    //     overflow: 'hidden',
+    //     mx: 'auto',
+    //     position: 'relative',
+    //   }}
+    // >
+    //   <Box
+    //     sx={{
+    //       position: 'relative',
+    //       display: 'flex',
+    //       alignItems: 'center',
+    //       justifyContent: 'center',
+    //     }}
+    //   >
+    //     {/* Back button - only on mobile */}
+    //     {isMobile && (
+    //       <Button
+    //         size='small'
+    //         onClick={handleBack}
+    //         disabled={activeStep === 0}
+    //         sx={{ position: 'absolute', left: -20, zIndex: 1 }} // Moved button further to the left
+    //       >
+    //         {theme.direction === 'rtl' ? (
+    //           <KeyboardArrowRight />
+    //         ) : (
+    //           <KeyboardArrowLeft />
+    //         )}
+    //       </Button>
+    //     )}
 
-        <Box
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={activeStep}
-          onChangeIndex={onStepChange}
-          // enableMouseEvents    // Only worked with react-swipeable-views component
-          style={{ flex: 1 }}
-        >
-          {/* Category Buttons */}
-          {Array.from({ length: maxSteps }).map((_, index) => (
-            <Box
-              key={index}
-              sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
-            >
-              {categories
-                .slice(
-                  index * categoriesPerView,
-                  (index + 1) * categoriesPerView
-                )
-                .map((category) => (
-                  <Button
-                    size='small'
-                    color={
-                      selectedCategory === category.name
-                        ? 'secondary'
-                        : 'primary'
-                    }
-                    variant='text'
-                    key={category.id}
-                    sx={{
-                      textWrap: 'nowrap',
-                      mx: 1,
-                      textAlign: 'center',
-                      textTransform: 'none',
-                    }}
-                    onClick={() => onCategoryChange(category.name)}
-                  >
-                    {category.name}
-                  </Button>
-                ))}
-            </Box>
-          ))}
-        </Box>
+    //     <Box
+    //       axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+    //       index={activeStep}
+    //       onChangeIndex={onStepChange}
+    //       // enableMouseEvents  // Only worked with react-swipeable-views component
+    //       style={{ flex: 1 }}
+    //     >
+    //       {/* Category Buttons */}
+    //       {Array.from({ length: maxSteps }).map((_, index) => (
+    //         <Box
+    //           key={index}
+    //           sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}
+    //         >
+    //           {categories
+    //             .slice(
+    //               index * categoriesPerView,
+    //               (index + 1) * categoriesPerView
+    //             )
+    //             .map((category) => (
+    //               <Button
+    //                 size='small'
+    //                 color={
+    //                   selectedCategory === category.name
+    //                     ? 'secondary'
+    //                     : 'primary'
+    //                 }
+    //                 variant='text'
+    //                 key={category.id}
+    //                 sx={{
+    //                   textWrap: 'nowrap',
+    //                   mx: 1,
+    //                   textAlign: 'center',
+    //                   textTransform: 'none',
+    //                 }}
+    //                 onClick={() => onCategoryChange(category.name)}
+    //               >
+    //                 {category.name}
+    //               </Button>
+    //             ))}
+    //         </Box>
+    //       ))}
+    //     </Box>
 
-        {/* Next button - only on mobile*/}
-        {isMobile && (
-          <Button
-            size='small'
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-            sx={{ position: 'absolute', right: -20, zIndex: 1 }} // Moved button further to the right
-          >
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        )}
-      </Box>
+    //     {/* Next button - only on mobile*/}
+    //     {isMobile && (
+    //       <Button
+    //         size='small'
+    //         onClick={handleNext}
+    //         disabled={activeStep === maxSteps - 1}
+    //         sx={{ position: 'absolute', right: -20, zIndex: 1 }}
+    //       >
+    //         {theme.direction === 'rtl' ? (
+    //           <KeyboardArrowLeft />
+    //         ) : (
+    //           <KeyboardArrowRight />
+    //         )}
+    //       </Button>
+    //     )}
+    //   </Box>
 
-      {/* Stepper - only show on mobile */}
-      {isMobile && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
-          <MobileStepper
-            steps={maxSteps}
-            position='static'
-            activeStep={activeStep}
-          />
-        </Box>
-      )}
-    </Box>
+    //   {/* Stepper - only show on mobile */}
+    //   {isMobile && (
+    //     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
+    //       <MobileStepper
+    //         sx={{ p: 0 }} // removes white outline from stepper
+    //         steps={maxSteps}
+    //         position='static'
+    //         activeStep={activeStep}
+    //       />
+    //     </Box>
+    //   )}
+    // </Box>
   );
 }
 

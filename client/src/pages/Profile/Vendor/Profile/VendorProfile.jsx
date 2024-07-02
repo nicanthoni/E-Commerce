@@ -102,8 +102,7 @@ export default function VendorProfile() {
               textAlign='center'
             >
               <Typography variant='subtitle2'>
-                Vendor profile's are undergoing maintenence. Soon, you will see
-                your businesses performance data here.
+                Vendor profile's are undergoing maintenence. 
               </Typography>
 
               <Typography variant='subtitle2' fontStyle='italic'>

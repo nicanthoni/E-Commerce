@@ -107,17 +107,17 @@ export default function Explore() {
     <Container maxWidth='xl'>
       <Grid container justifyContent='center' marginTop={16} marginBottom={4}>
         {/* Categories + props */}
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <CategorySelection
             onCategoryChange={handleCategoryChange} // callback to set selected category
             activeStep={activeStep} // state of active step
             onStepChange={handleStepChange} // callback to update the active step
             selectedCategory={selectedCategory} // state of selected Category
           />
-        </Grid>
+        </Grid> */}
 
         {/* Products + props*/}
-        <Grid item xs={12} marginTop={2}>
+        <Grid item xs={12} marginTop={8}>
           <AllProducts
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
