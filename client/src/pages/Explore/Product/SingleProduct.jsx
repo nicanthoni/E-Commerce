@@ -6,6 +6,7 @@ import {
   Rating,
   Link,
   Avatar,
+  Divider,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -231,23 +232,31 @@ export default function SingleProduct() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant='h6' component='div'>
-            ${productData.item.price}
-          </Typography>
-
-          <Typography fontWeight='bolder'>
-            <Link href='#' underline='hover'>
+          <Typography>
+            <Link
+              variant='caption'
+              href='#'
+              underline='hover'
+              sx={{
+                color: 'primary.main',
+                '&:hover': { color: 'secondary.main' },
+              }}
+            >
               {productData.item.vendor.vendorName}
             </Link>
           </Typography>
 
-          <Typography variant='h5' component='div'>
+          <Typography variant='h6' component='div'>
             {productData.item.name}
           </Typography>
 
-          <Typography variant='body1' color='text.secondary'>
+          <Typography variant='caption' component='div'>
             {productData.item.description}
           </Typography>
+
+          <Typography component='div'>${productData.item.price}</Typography>
+
+          <Divider flexItem variant='unset' sx={{ my: 1 }} />
 
           {/* Buttons */}
           <Stack direction='row'>
