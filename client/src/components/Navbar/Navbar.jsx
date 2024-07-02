@@ -89,7 +89,7 @@ export default function Navbar() {
             </Box>
 
             {/* Greeting - buyers */}
-            {user && type === 'buyer' && (
+            {user && userData && type === 'buyer' && (
               <Box
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
@@ -97,18 +97,18 @@ export default function Navbar() {
                   marginLeft: 2
                 }}
               >
-                <Typography>Hi, Shopper</Typography>
+                <Typography>Hi, {userData.user.firstName}</Typography>
               </Box>
             )}
             {/* Greeting -  vendor */}
-            {user && type === 'vendor' && (
+            {user && vendorData && type === 'vendor' && (
               <Box
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
                 }}
               >
-                <Typography>Hi, Vendor</Typography>
+                <Typography>Hi, {vendorData.vendor.vendorName}</Typography>
               </Box>
             )}
 
