@@ -94,7 +94,7 @@ export default function Inventory() {
         <Link
           to={`/product/${params.row.id}`}
           target='_blank'
-          sx={{  textDecoration: 'none' }}
+          sx={{ textDecoration: 'none', color: 'none' }}
         >
           {params.value}
         </Link>
