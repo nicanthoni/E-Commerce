@@ -37,9 +37,6 @@ export default function ReviewsImgList({
   return (
     <Box>
       <ImageList>
-        <ImageListItem key='Subheader' cols={2}>
-          <ListSubheader component='div'>Reviewed Items</ListSubheader>
-        </ImageListItem>
         {userData.ratings.map((rating, index) => (
           <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
@@ -60,6 +57,7 @@ export default function ReviewsImgList({
               />
             </Button>
             <ImageListItemBar
+        
               onClick={() => handleOpenModal(index)}
               title={rating.item.name}
               subtitle={`Rating: ${rating.stars}`}

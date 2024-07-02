@@ -21,6 +21,9 @@ const theme = createTheme({
       // #BDE9B3 - #FACFCE - #54BFA1 - #F28D77 - #F2A391
       main: '#F2A391',
     },
+    background: {
+      main: '#F2F2F2 '
+    }
   },
   typography: {
     fontFamily: 'muli, sans-serif',

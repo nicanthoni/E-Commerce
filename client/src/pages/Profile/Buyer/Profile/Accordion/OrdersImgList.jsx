@@ -1,14 +1,15 @@
-import {ImageList, ImageListItem, ImageListItemBar, ListSubheader, IconButton} from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  ListSubheader,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
-
 export default function OrdersImgList({ refetchUserData, loadUser, userData }) {
-
   return (
     <ImageList>
-      <ImageListItem key='Subheader' cols={2}>
-        <ListSubheader component='div'>Orders</ListSubheader>
-      </ImageListItem>
       {userData.buyHistory.map((item, index) => (
         <ImageListItem key={index}>
           <img
