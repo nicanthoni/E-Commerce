@@ -57,13 +57,13 @@ export default function ReviewsImgList({
               />
             </Button>
             <ImageListItemBar
-        
               onClick={() => handleOpenModal(index)}
               title={rating.item.name}
               subtitle={`Rating: ${rating.stars}`}
+              sx={{ opacity: 0.7, height: '35%' }}
               actionIcon={
                 <IconButton
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  sx={{ color: 'background.main' }}
                   aria-label={`info about ${rating.item.name}`}
                 >
                   <InfoIcon />

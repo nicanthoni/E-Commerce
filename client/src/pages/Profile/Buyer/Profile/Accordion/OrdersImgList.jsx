@@ -30,9 +30,10 @@ export default function OrdersImgList({ refetchUserData, loadUser, userData }) {
           <ImageListItemBar
             title={item.item.name}
             subtitle={item.item.vendor.vendorName}
+            sx={{ opacity: 0.7, height: '35%' }}
             actionIcon={
               <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                sx={{ color: 'background.main' }}
                 aria-label={`info about ${item.item.name}`}
               >
                 <InfoIcon />
