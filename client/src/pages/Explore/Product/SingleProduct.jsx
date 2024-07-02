@@ -22,7 +22,7 @@ import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
 export default function SingleProduct() {
-  const { user, id: userId } = useAuthContext();
+  const { user, type, id: userId } = useAuthContext();
   const { itemId } = useParams();
 
   // Wishlist & Cart statuses
@@ -105,7 +105,7 @@ export default function SingleProduct() {
 
   // Handle wishlist onClick
   const handleWishlist = async () => {
-    if (user) {
+    if (user && type === 'buyer') {
       try {
         if (isInWishlist) {
           // Item already wishlisted, so delete it
@@ -128,6 +128,13 @@ export default function SingleProduct() {
       } catch (e) {
         console.log('Error: ', e);
       }
+    } else if (user && type === 'vendor') {
+      // for vendors
+      setAlertMessage('Switch to buyer account');
+      setItemAlertVisible(true);
+      setTimeout(() => {
+        setItemAlertVisible(false);
+      }, 1000);
     } else {
       // for non-authenticated users
       setAlertMessage('Sign in first');
@@ -140,7 +147,7 @@ export default function SingleProduct() {
 
   // Handle Cart onClick
   const handleCart = async () => {
-    if (user) {
+    if (user && type === 'buyer') {
       try {
         if (isInCart) {
           // if item's in the cart already, delete it
@@ -164,6 +171,13 @@ export default function SingleProduct() {
       } catch (e) {
         console.log('Add to cart error:', e);
       }
+    } else if (user && type === 'vendor') {
+      // for vendors
+      setAlertMessage('Switch to buyer account');
+      setItemAlertVisible(true);
+      setTimeout(() => {
+        setItemAlertVisible(false);
+      }, 1000);
     } else {
       // for non-authenticated users
       setAlertMessage('Sign in first');

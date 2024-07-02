@@ -18,6 +18,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
+import { Link } from 'react-router-dom';
 
 export default function Inventory() {
   // Auth context
@@ -26,9 +27,9 @@ export default function Inventory() {
   // States
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [itemToDelete, setItemToDelete] = useState(null); // stores itemId
+  const [itemToDelete, setItemToDelete] = useState(null); // stores itemId to delete
   const [deleteConfirmation, setDeleteConfirmation] = useState(false); //  confirmation prompt
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null); // stores the id ofa selected row
 
   // Mutation - delete item
   const [
@@ -85,7 +86,20 @@ export default function Inventory() {
           : [],
     },
     { field: 'id', headerName: 'ID', width: 80 },
-    { field: 'itemName', headerName: 'Item', width: 130 },
+    {
+      field: 'itemName',
+      headerName: 'Item',
+      width: 130,
+      renderCell: (params) => (
+        <Link
+          to={`/product/${params.row.id}`}
+          target='_blank'
+          sx={{  textDecoration: 'none' }}
+        >
+          {params.value}
+        </Link>
+      ),
+    },
     { field: 'category', headerName: 'Category', width: 130 },
     { field: 'price', headerName: 'Price', type: 'number', width: 80 },
     { field: 'units', headerName: 'Units', type: 'number', width: 65 },
@@ -161,6 +175,7 @@ export default function Inventory() {
           }}
           pageSizeOptions={[10, 25, 50]}
           checkboxSelection
+          disableRowSelectionOnClick
           onRowSelectionModelChange={(newSelection) =>
             onRowSelection(newSelection)
           }
