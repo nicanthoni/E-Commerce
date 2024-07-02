@@ -126,12 +126,13 @@ export default function Inventory() {
   // On checkbox selection - show delete icon
   const onRowSelection = (selectionModel) => {
     setSelectedRow(selectionModel.length > 0 ? selectionModel[0] : null);
-    console.log('selected row: ', selectionModel);
+    // console.log('selected row: ', selectionModel);
   };
 
   // onClick of delete icon - show delete confirmation
   const handleConfirmation = (itemId) => {
     setItemToDelete(itemId);
+    console.log('selected item: ', itemId);
     setDeleteConfirmation(true);
   };
 
@@ -176,6 +177,7 @@ export default function Inventory() {
           pageSizeOptions={[10, 25, 50]}
           checkboxSelection
           disableRowSelectionOnClick
+          disableMultipleRowSelection
           onRowSelectionModelChange={(newSelection) =>
             onRowSelection(newSelection)
           }
