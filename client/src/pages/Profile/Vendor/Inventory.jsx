@@ -100,7 +100,7 @@ export default function Inventory() {
         </Link>
       ),
     },
-    { field: 'category', headerName: 'Category', width: 130 },
+    { field: 'category', headerName: 'Category', width: 120 },
     { field: 'price', headerName: 'Price', type: 'number', width: 80 },
     { field: 'units', headerName: 'Units', type: 'number', width: 65 },
     {
@@ -132,7 +132,7 @@ export default function Inventory() {
   // onClick of delete icon - show delete confirmation
   const handleConfirmation = (itemId) => {
     setItemToDelete(itemId);
-    console.log('selected item: ', itemId);
+    // console.log('selected item: ', itemId);
     setDeleteConfirmation(true);
   };
 
