@@ -30,12 +30,18 @@ export default function BottomNav() {
 
   return (
     <>
-      {/* Only display component on mobile view */}
+      {/* Only display on mobile view */}
       {isMobile ? (
         <Box>
           <Paper
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-            elevation={0}
+            sx={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              bgcolor: 'background.paper', // to see the shadow from elevation prop
+            }}
+            elevation={2}
           >
             <BottomNavigation
               sx={{ bgcolor: 'primary.main' }}

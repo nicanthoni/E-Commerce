@@ -79,9 +79,9 @@ export default function Navbar() {
       <AppBar
         component='nav'
         sx={{ backgroundColor: 'primary', display: 'flex' }}
-        elevation={0}
+        elevation={2}
       >
-        <Container maxWidth='xl'>
+        <Container maxWidth='none'>
           <Toolbar sx={{ justifyContent: 'space-between' }}>
             {/* Navigation drawer - mobile */}
             <Box>
@@ -94,7 +94,7 @@ export default function Navbar() {
                 sx={{
                   display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
-                  marginLeft: 2
+                  marginLeft: 2,
                 }}
               >
                 <Typography>Hi, {userData.user.firstName}</Typography>
@@ -113,7 +113,7 @@ export default function Navbar() {
             )}
 
             {/* SearchBar - desktop view */}
-            <Box sx={{ flexGrow: 1, marginLeft: 3 }}>
+            <Box display='flex' justifyContent='center' sx={{ flexGrow: 1 }}>
               {/* SearchBar - desktop view */}
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>
