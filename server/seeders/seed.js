@@ -181,9 +181,9 @@ db.once("open", async () => {
     item1.inCart += 2;
     users[0].cart.push({ item: item2._id, quantity: 1 });
     item2.inCart += 1;
-    users[1].cart.push({ item: item3._id, quantity: 20 });
+    users[1].cart.push({ item: item3._id, quantity: 2 });
     item3.inCart += 20;
-    users[1].cart.push({ item: item4._id, quantity: 10 });
+    users[1].cart.push({ item: item4._id, quantity: 3 });
     item4.inCart += 10;
     users[2].cart.push({ item: item5._id, quantity: 4 });
     item5.inCart += 4;
@@ -191,7 +191,7 @@ db.once("open", async () => {
     item6.inCart += 1;
     users[3].cart.push({ item: item7._id, quantity: 2 });
     item7.inCart += 2;
-    users[3].cart.push({ item: item8._id, quantity: 10 });
+    users[3].cart.push({ item: item8._id, quantity: 1 });
     item8.inCart += 10;
     users[3].cart.push({ item: item9._id, quantity: 3 });
     item9.inCart += 3;

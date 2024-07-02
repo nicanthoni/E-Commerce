@@ -88,8 +88,32 @@ export default function Navbar() {
               <NavDrawer />
             </Box>
 
+            {/* Greeting - buyers */}
+            {user && type === 'buyer' && (
+              <Box
+                sx={{
+                  display: { xs: 'none', sm: 'flex' },
+                  alignItems: 'center',
+                  marginLeft: 2
+                }}
+              >
+                <Typography>Hi, Shopper</Typography>
+              </Box>
+            )}
+            {/* Greeting -  vendor */}
+            {user && type === 'vendor' && (
+              <Box
+                sx={{
+                  display: { xs: 'none', sm: 'flex' },
+                  alignItems: 'center',
+                }}
+              >
+                <Typography>Hi, Vendor</Typography>
+              </Box>
+            )}
+
             {/* SearchBar - desktop view */}
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1, marginLeft: 3 }}>
               {/* SearchBar - desktop view */}
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>
@@ -142,7 +166,34 @@ export default function Navbar() {
                 </>
               ) : (
                 // Logout button - authenticated users
-                <LogoutButton onClick={handleLogout} />
+                <>
+                  {user && type === 'buyer' && (
+                    <Button
+                      key='Explore'
+                      sx={{ color: '#fff', textTransform: 'none' }}
+                    >
+                      <NavLink
+                        to='/explore'
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                      >
+                        Shop
+                      </NavLink>
+                    </Button>
+                  )}
+                  <Button
+                    key='Profile'
+                    sx={{ color: '#fff', textTransform: 'none' }}
+                  >
+                    <NavLink
+                      to='/profile'
+                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
+                      Profile
+                    </NavLink>
+                  </Button>
+
+                  <LogoutButton onClick={handleLogout} />
+                </>
               )}
             </Box>
 
