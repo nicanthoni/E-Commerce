@@ -37,9 +37,6 @@ export default function ReviewsImgList({
   return (
     <Box>
       <ImageList>
-        <ImageListItem key='Subheader' cols={2}>
-          <ListSubheader component='div'>Reviewed Items</ListSubheader>
-        </ImageListItem>
         {userData.ratings.map((rating, index) => (
           <ImageListItem key={index}>
             <Button onClick={() => handleOpenModal(index)}>
@@ -63,9 +60,10 @@ export default function ReviewsImgList({
               onClick={() => handleOpenModal(index)}
               title={rating.item.name}
               subtitle={`Rating: ${rating.stars}`}
+              sx={{ opacity: 0.7, height: '35%' }}
               actionIcon={
                 <IconButton
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  sx={{ color: 'background.main' }}
                   aria-label={`info about ${rating.item.name}`}
                 >
                   <InfoIcon />

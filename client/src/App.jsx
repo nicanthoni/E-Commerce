@@ -8,18 +8,22 @@ import '../src/assets/global.css';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
 
-// Custom Theme - Colors & Font
+// Application Theme - Colors & Font
 const theme = createTheme({
   palette: {
     primary: {
-      // Backup primary colors:
-      // #577399 -
+      // Backup primary colors: #577399 -
       main: '#024959',
     },
     secondary: {
-      // Backup secondary colors:
-      // #BDE9B3 - #FACFCE - #54BFA1 - #F28D77 - #F2A391
+      // Backup secondary colors: #BDE9B3 - #FACFCE - #54BFA1 - #F28D77 - #F2A391
       main: '#F2A391',
+    },
+    background: {
+      main: '#F2F2F2 ',
+    },
+    white: {
+      main: '#fff',
     },
   },
   typography: {

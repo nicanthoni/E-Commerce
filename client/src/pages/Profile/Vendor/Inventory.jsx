@@ -28,7 +28,7 @@ export default function Inventory() {
   const [alertMessage, setAlertMessage] = useState('');
   const [itemToDelete, setItemToDelete] = useState(null); // stores itemId
   const [deleteConfirmation, setDeleteConfirmation] = useState(false); //  confirmation prompt
-  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   // Mutation - delete item
   const [
@@ -73,7 +73,7 @@ export default function Inventory() {
       type: 'actions',
       width: 20,
       getActions: (params) =>
-        selectedRows.includes(params.id)
+        params.id === selectedRow
           ? [
               <GridActionsCellItem
                 key={params.id}
@@ -111,8 +111,8 @@ export default function Inventory() {
 
   // On checkbox selection - show delete icon
   const onRowSelection = (selectionModel) => {
-    setSelectedRows(selectionModel);
-    console.log('selected rows: ', selectionModel);
+    setSelectedRow(selectionModel.length > 0 ? selectionModel[0] : null);
+    console.log('selected row: ', selectionModel);
   };
 
   // onClick of delete icon - show delete confirmation
@@ -151,7 +151,7 @@ export default function Inventory() {
         </Typography>
         {/* Data grid */}
         <DataGrid
-        
+          sx={{ bgcolor: 'white.main' }}
           rows={rows}
           columns={columns}
           initialState={{

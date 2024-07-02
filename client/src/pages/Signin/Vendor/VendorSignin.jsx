@@ -16,7 +16,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useVendorSignin } from '../../../hooks/Signin/useVendorSignin';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
-
 export default function Signin() {
   const { signin, stateError, isLoading } = useVendorSignin(); // custom signin hook
   const navigate = useNavigate();
@@ -85,6 +84,7 @@ export default function Signin() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+              autoFocus
                 required
                 fullWidth
                 id='email'
@@ -92,6 +92,7 @@ export default function Signin() {
                 name='email'
                 autoComplete='email'
                 onChange={handleChange}
+                sx={{ bgcolor: 'white.main' }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -104,6 +105,7 @@ export default function Signin() {
                 id='password'
                 autoComplete='new-password'
                 onChange={handleChange}
+                sx={{ bgcolor: 'white.main' }}
               />
             </Grid>
           </Grid>

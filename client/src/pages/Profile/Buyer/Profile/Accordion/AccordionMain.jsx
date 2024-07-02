@@ -56,6 +56,7 @@ export default function ProfileAccordion({
     }
   };
 
+
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
       {/* WISHLIST */}
@@ -151,7 +152,7 @@ export default function ProfileAccordion({
         >
           <Typography>Account Details</Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{ backgroundColor: '#F2F2F2' }}>
+        <AccordionDetails >
           <Typography variant='caption'>
             <List>
               <ListItem>Account Type: {type}</ListItem>

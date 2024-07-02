@@ -14,7 +14,6 @@ import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function LoginType() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
@@ -62,7 +61,7 @@ export default function LoginType() {
           <form onSubmit={handleSubmit}>
             <FormControl sx={{ m: 3 }} error={error} variant='standard'>
               <RadioGroup
-                sx={{ alignSelf: 'center'}}
+                sx={{ alignSelf: 'center' }}
                 aria-labelledby='demo-error-radios'
                 name='loginType'
                 value={value}

@@ -256,7 +256,7 @@ export default function SingleProduct() {
 
           <Typography component='div'>${productData.item.price}</Typography>
 
-          <Divider flexItem variant='unset' sx={{ my: 1 }} />
+          <Divider variant='unset' sx={{ my: 0.5 }} />
 
           {/* Buttons */}
           <Stack direction='row'>

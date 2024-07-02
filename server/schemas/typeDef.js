@@ -12,6 +12,7 @@ const typeDefs = `
         buyHistory: [CartItem]
         ratings: [Rating]
         total: Float
+        createdAt: String
     }
     type CartItem {
         item: Item
@@ -29,6 +30,7 @@ const typeDefs = `
         isOnline: Boolean
         inventory: [Item]
         sales: [SoldItems]
+        createdAt: String
     }
     type Item {
         _id: ID

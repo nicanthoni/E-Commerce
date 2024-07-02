@@ -1,14 +1,15 @@
-import {ImageList, ImageListItem, ImageListItemBar, ListSubheader, IconButton} from '@mui/material';
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  ListSubheader,
+  IconButton,
+} from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
-
 export default function OrdersImgList({ refetchUserData, loadUser, userData }) {
-
   return (
     <ImageList>
-      <ImageListItem key='Subheader' cols={2}>
-        <ListSubheader component='div'>Orders</ListSubheader>
-      </ImageListItem>
       {userData.buyHistory.map((item, index) => (
         <ImageListItem key={index}>
           <img
@@ -29,9 +30,10 @@ export default function OrdersImgList({ refetchUserData, loadUser, userData }) {
           <ImageListItemBar
             title={item.item.name}
             subtitle={item.item.vendor.vendorName}
+            sx={{ opacity: 0.7, height: '35%' }}
             actionIcon={
               <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                sx={{ color: 'background.main' }}
                 aria-label={`info about ${item.item.name}`}
               >
                 <InfoIcon />

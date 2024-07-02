@@ -151,6 +151,7 @@ export default function BuyerSignup() {
                 id='firstName'
                 label='First Name'
                 onChange={handleChange}
+                sx={{ bgcolor: 'white.main' }}
                 autoFocus
               />
             </Grid>
@@ -163,6 +164,7 @@ export default function BuyerSignup() {
                 name='lastName'
                 autoComplete='family-name'
                 onChange={handleChange}
+                sx={{ bgcolor: 'white.main' }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -174,6 +176,7 @@ export default function BuyerSignup() {
                 name='email'
                 autoComplete='email'
                 onChange={handleChange}
+                sx={{ bgcolor: 'white.main' }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -186,6 +189,7 @@ export default function BuyerSignup() {
                 id='password'
                 autoComplete='new-password'
                 onChange={handleChange}
+                sx={{ bgcolor: 'white.main' }}
               />
             </Grid>
           </Grid>

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
 import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
+import { formatDate } from '../../../../utils/formatDate';
 
 export default function BuyerProfile() {
   const { user, id } = useAuthContext();
@@ -40,7 +41,7 @@ export default function BuyerProfile() {
         <Grid container direction='column' marginTop={12}>
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
-            <Stack direction='column' alignItems='center' spacing={2}>
+            <Stack direction='column' alignItems='center' spacing={1}>
               <Avatar
                 sx={{ bgcolor: 'primary.main' }}
                 alt={`${userData.firstName}'s Avatar`}
@@ -49,12 +50,17 @@ export default function BuyerProfile() {
               <Typography textAlign='center' variant='h6'>
                 Hi, {userData.firstName}
               </Typography>
+
+              <Typography textAlign='center' variant='caption'>
+                Member since {formatDate(userData.createdAt)}
+              </Typography>
+
               <Stack
                 direction='row'
                 justifyContent='space-around'
                 alignItems='center'
                 textAlign='center'
-                spacing={4}
+                spacing={3}
               >
                 <Stack alignItems='center'>
                   <Typography fontWeight='bold' color='secondary.main'>

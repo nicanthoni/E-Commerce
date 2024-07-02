@@ -112,6 +112,17 @@ export default function Navbar() {
                 <Typography>Hi, {vendorData.vendor.vendorName}</Typography>
               </Box>
             )}
+            {!user && (
+              <Box
+                sx={{
+                  display: { xs: 'none', sm: 'flex' },
+                  alignItems: 'center',
+                  marginLeft: 1,
+                }}
+              >
+                <Typography fontWeight='bolder'> AppName</Typography>
+              </Box>
+            )}
 
             {/* SearchBar - desktop view */}
             <Box display='flex' justifyContent='center' sx={{ flexGrow: 1 }}>

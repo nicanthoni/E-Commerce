@@ -1,16 +1,14 @@
-import Navbar from '../components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { Box } from '@mui/material';
+import Navbar from '../components/Navbar/Navbar';
 import BottomNav from '../components/Navbar/BottomNav';
 
 export default function RootLayout() {
-  const { user } = useAuthContext();
-
   return (
-    <>
+    <Box bgcolor='background.main' height='100vh'>
       <Navbar />
       <Outlet />
       <BottomNav />
-    </>
+    </Box>
   );
 }
