@@ -5,6 +5,8 @@ import {
   Grid,
   Avatar,
   Divider,
+  LinearProgress,
+  Box,
 } from '@mui/material';
 import { Vendor } from '../../../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
@@ -30,7 +32,11 @@ export default function VendorProfile() {
     console.error('GraphQL Error:', error);
   }
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary.main' />
+      </Box>
+    );
   }
   if (!data || !data.vendor) {
     return <Typography>No vendor data found</Typography>;
@@ -102,7 +108,7 @@ export default function VendorProfile() {
               textAlign='center'
             >
               <Typography variant='subtitle2'>
-                Vendor profile's are undergoing maintenence. 
+                Vendor profile's are undergoing maintenence.
               </Typography>
 
               <Typography variant='subtitle2' fontStyle='italic'>

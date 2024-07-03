@@ -7,6 +7,7 @@ import {
   Link,
   Avatar,
   Divider,
+  LinearProgress,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -90,9 +91,9 @@ export default function SingleProduct() {
   }
   if (productLoading) {
     return (
-      <Typography variant='h6' textAlign='center' marginTop={15}>
-        Loading product data...
-      </Typography>
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary.main' />
+      </Box>
     );
   }
   if (!productData) {

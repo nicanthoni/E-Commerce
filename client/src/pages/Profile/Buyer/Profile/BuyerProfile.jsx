@@ -1,4 +1,4 @@
-import { Typography, Container } from '@mui/material';
+import { Typography, Container, Box, LinearProgress } from '@mui/material';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../graphql/queries';
 import { useEffect } from 'react';
@@ -25,7 +25,11 @@ export default function BuyerProfile() {
     console.error('GraphQL Error:', error);
   }
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary.main' />
+      </Box>
+    );
   }
   if (!data || !data.user) {
     return <Typography>No user data found</Typography>;

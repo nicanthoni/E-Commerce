@@ -9,6 +9,7 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  LinearProgress,
 } from '@mui/material';
 import { delete_Item } from '../../../graphql/mutations';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
@@ -47,7 +48,12 @@ export default function Inventory() {
   });
 
   // If loading
-  if (loading) return <CircularProgress />;
+  if (loading)
+    return (
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary.main' />
+      </Box>
+    );
 
   // If error
   if (error) return <Typography>Error! {error.message}</Typography>;
@@ -95,7 +101,7 @@ export default function Inventory() {
           underline='hover'
           to={`/product/${params.row.id}`}
           target='_blank'
-          sx={{  color: 'none' }}
+          sx={{ color: 'none' }}
         >
           {params.value}
         </Link>
