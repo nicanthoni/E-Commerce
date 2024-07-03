@@ -23,17 +23,25 @@ import { useLogout } from '../../hooks/useLogout';
 import AuthAlert from '../Alerts/Auth/AuthAlert';
 import GetStarted from '../Buttons/GetStarted';
 import LogoutButton from '../Buttons/Logout';
-import CategorySelection from '../Filters/Categories'; // append to bottom of navbar
+import CategorySelection from '../Filters/Categories';
 
 export default function Navbar() {
+  // Contexts
   const { user, id, type } = useAuthContext();
+
+  //
   const location = useLocation();
   const theme = useTheme();
+
+  // Booleans
   const isExploreRoute = location.pathname === '/explore'; // Check if current path is '/explore'
   const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for medium size or less
 
   // Hooks
   const { logout } = useLogout();
+
+  // Category filter states
+  const [value, setValue] = useState(0);
 
   // Alert States
   const [alertMessage, setAlertMessage] = useState('');
@@ -73,6 +81,11 @@ export default function Navbar() {
     } catch (e) {
       console.log('Logout error: ', e);
     }
+  };
+
+  // onChange of category tab...
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -219,10 +232,9 @@ export default function Navbar() {
           {/* SearchBar - mobile view */}
           {isMobile && isExploreRoute && <SearchBar />}
 
-          {/* Category selection - on explore route  */}
-          {/* {isExploreRoute && <CategorySelection />} */}
+          {/* Category filter - on explore route  */}
+          {isExploreRoute && <CategorySelection />}
         </Container>
-
       </AppBar>
       {/* ⚠️Alerts ⚠️*/}
       <AuthAlert visible={showLogoutAlert} message={alertMessage} />

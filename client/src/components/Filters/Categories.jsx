@@ -1,11 +1,19 @@
-import { useTheme } from '@mui/material/styles';
+import { useState, useContext } from 'react';
+import { CategoryContext } from '../../contexts/CategoryContext';
 import { Box, Tabs, Tab } from '@mui/material';
-import { useMediaQuery } from '@mui/material';
 import { categories } from '../../data/itemData';
 
-function CategorySelection({ selectedCategory, onCategoryChange, activeStep }) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile/sm size
+function CategorySelection() {
+  // Context
+  const { handleCategoryChange } = useContext(CategoryContext);
+
+  // States
+  const [value, setValue] = useState(0);
+
+  // onChange of category tab...
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Box
@@ -13,13 +21,12 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep }) {
       justifyContent='center'
       marginBottom={1}
       sx={{ bgcolor: 'primary.main' }}
-      index={activeStep}
     >
       <Tabs
+        onChange={handleChange}
+        value={value}
         indicatorColor='secondary.main'
         textColor='white.main'
-        value={activeStep}
-        index={activeStep}
         variant='scrollable'
         scrollButtons='auto'
         allowScrollButtonsMobile
@@ -27,10 +34,11 @@ function CategorySelection({ selectedCategory, onCategoryChange, activeStep }) {
       >
         {categories.map((category) => (
           <Tab
+            color='white.main'
             key={category.id}
             label={category.name}
             sx={{ textTransform: 'none' }}
-            onClick={() => onCategoryChange(category.name)}
+            onClick={() => handleCategoryChange(category.name)} // sets selectedCategory value, to be used via context
           />
         ))}
       </Tabs>

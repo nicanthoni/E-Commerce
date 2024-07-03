@@ -6,16 +6,15 @@ import {
   LinearProgress,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
-import CategorySelection from '../../components/Filters/Categories';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { CategoryContext } from '../../contexts/CategoryContext';
 
 export default function Explore() {
   const { user, id } = useAuthContext();
-  const [selectedCategory, setSelectedCategory] = useState(''); // state of selected Category
-  const [activeStep, setActiveStep] = useState(0); // state of active step in CategorySelection's carousel
+  const { selectedCategory } = useContext(CategoryContext); // category context - handled in Navbar component
 
   // Load Products  - filter loaded products by selected category
   const [
@@ -91,12 +90,6 @@ export default function Explore() {
     return <Typography>No product data found</Typography>;
   }
 
-  // Callback to update the selected category
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
-
-
   // Grab Product data
   const products = productsData ? productsData.filterItems : [];
   // console.log(`${selectedCategory} items: `, productData);
@@ -109,19 +102,10 @@ export default function Explore() {
   const cartedItems = cartData ? cartData.usersCart : [];
   // console.log('Cart Data', cartedItems)
 
+  // Products displayed
   return (
     <Container maxWidth='xl'>
       <Grid container justifyContent='center' marginTop={16} marginBottom={4}>
-        {/* Categories + props */}
-        <Grid item xs={12}>
-          <CategorySelection
-            onCategoryChange={handleCategoryChange} // callback to set selected category
-            activeStep={activeStep} // state of active step
-            selectedCategory={selectedCategory} // state of selected Category
-          />
-        </Grid>
-
-        {/* Products + props*/}
         <Grid item xs={12} marginTop={8}>
           <AllProducts
             products={products} // products by chosen category
