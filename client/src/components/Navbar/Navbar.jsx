@@ -234,6 +234,7 @@ export default function Navbar() {
 
           {/* Category filter - on explore route  */}
           {isExploreRoute && <CategorySelection />}
+          
         </Container>
       </AppBar>
       {/* ⚠️Alerts ⚠️*/}
