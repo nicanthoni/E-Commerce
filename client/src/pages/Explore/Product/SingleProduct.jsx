@@ -92,7 +92,7 @@ export default function SingleProduct() {
   if (productLoading) {
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary.main' />
+        <LinearProgress color='primary' />
       </Box>
     );
   }

@@ -27,7 +27,7 @@ export default function BuyerProfile() {
   if (loading) {
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary.main' />
+        <LinearProgress color='primary' />
       </Box>
     );
   }

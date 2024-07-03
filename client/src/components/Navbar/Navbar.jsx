@@ -220,8 +220,9 @@ export default function Navbar() {
           {isMobile && isExploreRoute && <SearchBar />}
 
           {/* Category selection - on explore route  */}
-          {isExploreRoute && <CategorySelection />}
+          {/* {isExploreRoute && <CategorySelection />} */}
         </Container>
+
       </AppBar>
       {/* ⚠️Alerts ⚠️*/}
       <AuthAlert visible={showLogoutAlert} message={alertMessage} />

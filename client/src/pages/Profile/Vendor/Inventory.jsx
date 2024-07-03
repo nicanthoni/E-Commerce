@@ -51,7 +51,7 @@ export default function Inventory() {
   if (loading)
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary.main' />
+        <LinearProgress color='primary' />
       </Box>
     );
 

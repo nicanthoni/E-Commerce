@@ -1,4 +1,10 @@
-import { Grid, Container, Typography } from '@mui/material';
+import {
+  Grid,
+  Container,
+  Typography,
+  Box,
+  LinearProgress,
+} from '@mui/material';
 import AllProducts from './Product/AllProducts';
 import CategorySelection from '../../components/Filters/Categories';
 import { useEffect, useState } from 'react';
@@ -74,7 +80,11 @@ export default function Explore() {
   }
 
   if (loadingProducts || loadingWishlist || loadingCart) {
-    return <Typography>Loading...</Typography>;
+    return (
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary' />
+      </Box>
+    );
   }
 
   if (!productsData) {
@@ -86,10 +96,6 @@ export default function Explore() {
     setSelectedCategory(category);
   };
 
-  // Callback to update the active step in the carousel
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
 
   // Grab Product data
   const products = productsData ? productsData.filterItems : [];
@@ -107,14 +113,13 @@ export default function Explore() {
     <Container maxWidth='xl'>
       <Grid container justifyContent='center' marginTop={16} marginBottom={4}>
         {/* Categories + props */}
-        {/* <Grid item xs={12}>
+        <Grid item xs={12}>
           <CategorySelection
             onCategoryChange={handleCategoryChange} // callback to set selected category
             activeStep={activeStep} // state of active step
-            onStepChange={handleStepChange} // callback to update the active step
             selectedCategory={selectedCategory} // state of selected Category
           />
-        </Grid> */}
+        </Grid>
 
         {/* Products + props*/}
         <Grid item xs={12} marginTop={8}>
