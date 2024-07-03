@@ -7,6 +7,7 @@ import {
   Link,
   Avatar,
   Divider,
+  LinearProgress,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -22,7 +23,7 @@ import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
 export default function SingleProduct() {
-  const { user, id: userId } = useAuthContext();
+  const { user, type, id: userId } = useAuthContext();
   const { itemId } = useParams();
 
   // Wishlist & Cart statuses
@@ -90,9 +91,9 @@ export default function SingleProduct() {
   }
   if (productLoading) {
     return (
-      <Typography variant='h6' textAlign='center' marginTop={15}>
-        Loading product data...
-      </Typography>
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary' />
+      </Box>
     );
   }
   if (!productData) {
@@ -105,7 +106,7 @@ export default function SingleProduct() {
 
   // Handle wishlist onClick
   const handleWishlist = async () => {
-    if (user) {
+    if (user && type === 'buyer') {
       try {
         if (isInWishlist) {
           // Item already wishlisted, so delete it
@@ -128,6 +129,13 @@ export default function SingleProduct() {
       } catch (e) {
         console.log('Error: ', e);
       }
+    } else if (user && type === 'vendor') {
+      // for vendors
+      setAlertMessage('Switch to buyer account');
+      setItemAlertVisible(true);
+      setTimeout(() => {
+        setItemAlertVisible(false);
+      }, 1000);
     } else {
       // for non-authenticated users
       setAlertMessage('Sign in first');
@@ -140,7 +148,7 @@ export default function SingleProduct() {
 
   // Handle Cart onClick
   const handleCart = async () => {
-    if (user) {
+    if (user && type === 'buyer') {
       try {
         if (isInCart) {
           // if item's in the cart already, delete it
@@ -164,6 +172,13 @@ export default function SingleProduct() {
       } catch (e) {
         console.log('Add to cart error:', e);
       }
+    } else if (user && type === 'vendor') {
+      // for vendors
+      setAlertMessage('Switch to buyer account');
+      setItemAlertVisible(true);
+      setTimeout(() => {
+        setItemAlertVisible(false);
+      }, 1000);
     } else {
       // for non-authenticated users
       setAlertMessage('Sign in first');

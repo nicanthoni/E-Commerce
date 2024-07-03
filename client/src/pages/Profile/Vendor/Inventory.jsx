@@ -9,6 +9,7 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  LinearProgress,
 } from '@mui/material';
 import { delete_Item } from '../../../graphql/mutations';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
@@ -18,6 +19,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useState } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
+import { Link } from 'react-router-dom';
 
 export default function Inventory() {
   // Auth context
@@ -26,9 +28,9 @@ export default function Inventory() {
   // States
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [itemToDelete, setItemToDelete] = useState(null); // stores itemId
+  const [itemToDelete, setItemToDelete] = useState(null); // stores itemId to delete
   const [deleteConfirmation, setDeleteConfirmation] = useState(false); //  confirmation prompt
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null); // stores the id ofa selected row
 
   // Mutation - delete item
   const [
@@ -46,7 +48,12 @@ export default function Inventory() {
   });
 
   // If loading
-  if (loading) return <CircularProgress />;
+  if (loading)
+    return (
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress color='primary' />
+      </Box>
+    );
 
   // If error
   if (error) return <Typography>Error! {error.message}</Typography>;
@@ -85,8 +92,22 @@ export default function Inventory() {
           : [],
     },
     { field: 'id', headerName: 'ID', width: 80 },
-    { field: 'itemName', headerName: 'Item', width: 130 },
-    { field: 'category', headerName: 'Category', width: 130 },
+    {
+      field: 'itemName',
+      headerName: 'Item',
+      width: 130,
+      renderCell: (params) => (
+        <Link
+          underline='hover'
+          to={`/product/${params.row.id}`}
+          target='_blank'
+          sx={{ color: 'none' }}
+        >
+          {params.value}
+        </Link>
+      ),
+    },
+    { field: 'category', headerName: 'Category', width: 120 },
     { field: 'price', headerName: 'Price', type: 'number', width: 80 },
     { field: 'units', headerName: 'Units', type: 'number', width: 65 },
     {
@@ -112,12 +133,13 @@ export default function Inventory() {
   // On checkbox selection - show delete icon
   const onRowSelection = (selectionModel) => {
     setSelectedRow(selectionModel.length > 0 ? selectionModel[0] : null);
-    console.log('selected row: ', selectionModel);
+    // console.log('selected row: ', selectionModel);
   };
 
   // onClick of delete icon - show delete confirmation
   const handleConfirmation = (itemId) => {
     setItemToDelete(itemId);
+    // console.log('selected item: ', itemId);
     setDeleteConfirmation(true);
   };
 
@@ -161,6 +183,8 @@ export default function Inventory() {
           }}
           pageSizeOptions={[10, 25, 50]}
           checkboxSelection
+          disableRowSelectionOnClick
+          disableMultipleRowSelection
           onRowSelectionModelChange={(newSelection) =>
             onRowSelection(newSelection)
           }

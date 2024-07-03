@@ -144,7 +144,7 @@ export default function NavDrawer() {
 
         {/* EXPLORE - non-authorized users */}
         {user ? null : (
-          <ListItem key='Explore' disablePadding>
+          <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <StoreIcon sx={{ color: '#fff' }} />
@@ -153,7 +153,7 @@ export default function NavDrawer() {
                 to='/explore'
                 style={{ textDecoration: 'none', color: '#fff' }}
               >
-                <ListItemText primary='Explore' />
+                <ListItemText primary='Shop' />
               </NavLink>
             </ListItemButton>
           </ListItem>
