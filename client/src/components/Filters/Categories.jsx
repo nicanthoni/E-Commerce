@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import { Box, Tabs, Tab } from '@mui/material';
-import { tabsClasses } from '@mui/material';
 import { categories } from '../../data/itemData';
 
 function CategorySelection() {

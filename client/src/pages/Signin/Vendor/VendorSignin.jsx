@@ -84,7 +84,7 @@ export default function Signin() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-              autoFocus
+                autoFocus
                 required
                 fullWidth
                 id='email'
@@ -128,7 +128,6 @@ export default function Signin() {
               <Link
                 href='/signup'
                 variant='body2'
-                align='center'
                 sx={{ textDecoration: 'none' }}
               >
                 Don't have an account? Sign up here

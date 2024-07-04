@@ -16,7 +16,6 @@ import { useBuyerSignup } from '../../../hooks/Signup/useBuyerSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
 
-
 export default function BuyerSignup() {
   const { user } = useAuthContext();
   const { signup, stateError, isLoading } = useBuyerSignup(); // custom hook
@@ -212,7 +211,6 @@ export default function BuyerSignup() {
               <Link
                 href='/signin/buyer'
                 variant='body2'
-                align='center'
                 sx={{ textDecoration: 'none' }}
               >
                 Already have an account? Sign in

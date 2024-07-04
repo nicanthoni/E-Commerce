@@ -35,6 +35,7 @@ export default function BottomNav() {
         <Box>
           <Paper
             sx={{
+              opacity: 0.95,
               position: 'fixed',
               bottom: 0,
               left: 0,

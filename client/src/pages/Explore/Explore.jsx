@@ -4,7 +4,6 @@ import {
   Typography,
   Box,
   LinearProgress,
-  Stack,
   Pagination,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
@@ -104,7 +103,7 @@ export default function Explore() {
   // Products & Pagination
   return (
     <Container maxWidth='xl'>
-      <Grid container justifyContent='center' marginTop={16} marginBottom={4}>
+      <Grid container justifyContent='center' marginTop={16} marginBottom={0}>
         <Grid item xs={12} marginTop={8}>
           <AllProducts
             products={products} // products by chosen category

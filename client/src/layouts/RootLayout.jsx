@@ -5,7 +5,7 @@ import BottomNav from '../components/Navbar/BottomNav';
 
 export default function RootLayout() {
   return (
-    <Box bgcolor='background.main' height='100vh'>
+    <Box bgcolor='background.main' height='100%'>
       <Navbar />
       <Outlet />
       <BottomNav />

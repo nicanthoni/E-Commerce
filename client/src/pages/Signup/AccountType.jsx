@@ -15,7 +15,6 @@ import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function AccountType() {
   const navigate = useNavigate();
   const [value, setValue] = useState('');
@@ -44,7 +43,7 @@ export default function AccountType() {
   };
 
   return (
-    <Grid container component='main'>
+    <Grid container minHeight='100vh'>
       <Grid item xs={12}>
         <Box
           sx={{
@@ -66,7 +65,7 @@ export default function AccountType() {
                 Hint: Do you intend to sell or purchase items?
               </FormLabel>
               <RadioGroup
-              sx={{ alignSelf: 'center'}}
+                sx={{ alignSelf: 'center' }}
                 aria-labelledby='demo-error-radios'
                 name='accountType'
                 value={value}
@@ -98,12 +97,7 @@ export default function AccountType() {
               </Button>
             </FormControl>
           </form>
-          <Link
-            color='text.secondary'
-            href='/signin'
-            variant='body2'
-            sx={{ textDecoration: 'none' }}
-          >
+          <Link href='/signin' variant='body2' sx={{ textDecoration: 'none' }}>
             Already have an account? Sign in
           </Link>
           <Copyright sx={{ mt: 3 }} />
