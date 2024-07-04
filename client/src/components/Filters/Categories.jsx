@@ -16,25 +16,17 @@ function CategorySelection() {
   };
 
   return (
-    <Box
-      display='flex'
-      justifyContent='center'
-      marginBottom={1}
-      sx={{ bgcolor: 'primary.main' }}
-    >
+    <Box display='flex' justifyContent='center'>
       <Tabs
         onChange={handleChange}
         value={value}
-        indicatorColor='secondary.main'
-        textColor='white.main'
+        indicatorColor='secondary'
+        textColor='white'
         variant='scrollable'
-        scrollButtons='auto'
         allowScrollButtonsMobile
-        aria-label='scrollable force tabs'
       >
         {categories.map((category) => (
           <Tab
-            color='white.main'
             key={category.id}
             label={category.name}
             sx={{ textTransform: 'none' }}

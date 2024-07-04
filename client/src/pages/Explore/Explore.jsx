@@ -4,6 +4,7 @@ import {
   Typography,
   Box,
   LinearProgress,
+  Pagination,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
 import { useEffect, useState, useContext } from 'react';
@@ -92,20 +93,17 @@ export default function Explore() {
 
   // Grab Product data
   const products = productsData ? productsData.filterItems : [];
-  // console.log(`${selectedCategory} items: `, productData);
 
   // Grab wishlistedItems IDs
   const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
-  //  console.log('Wishlist Data:', wishlistedItems);
 
   // Grab cartItems IDs
   const cartedItems = cartData ? cartData.usersCart : [];
-  // console.log('Cart Data', cartedItems)
 
-  // Products displayed
+  // Products & Pagination
   return (
     <Container maxWidth='xl'>
-      <Grid container justifyContent='center' marginTop={16} marginBottom={4}>
+      <Grid container justifyContent='center' marginTop={16} marginBottom={0}>
         <Grid item xs={12} marginTop={8}>
           <AllProducts
             products={products} // products by chosen category
@@ -114,6 +112,9 @@ export default function Explore() {
             refetchWishlist={refetchWishlist} // refetch Wishlist query
             refetchCart={refetchCart} // refetch Cart query
           />
+        </Grid>
+        <Grid item>
+          <Pagination count={10} color='secondary' />
         </Grid>
       </Grid>
     </Container>
