@@ -85,7 +85,7 @@ export default function CartLayout({
       ) : (
         <Grid
           item
-          p={1}
+          alignSelf='center'
           sx={{
             overflowY: 'auto',
             justifyContent: 'flex-start',
