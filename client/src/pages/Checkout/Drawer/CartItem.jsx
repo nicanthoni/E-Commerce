@@ -76,7 +76,7 @@ export default function CartItem({
           padding={3}
           flexWrap='nowrap'
           justifyContent='flex-start'
-          bgcolor='#F2F2F2'
+          
         >
           {/* Product IMG & Incrementer */}
           <Stack gap={1} alignItems={'center'}>
