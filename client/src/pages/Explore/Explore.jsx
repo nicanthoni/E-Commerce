@@ -103,8 +103,8 @@ export default function Explore() {
   // Products & Pagination
   return (
     <Container maxWidth='xl'>
-      <Grid container justifyContent='center' marginTop={16} marginBottom={0}>
-        <Grid item xs={12} marginTop={8}>
+      <Grid container justifyContent='center' gap={3} marginTop={16}>
+        <Grid item xs={12} marginTop={6}>
           <AllProducts
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
@@ -114,7 +114,7 @@ export default function Explore() {
           />
         </Grid>
         <Grid item>
-          <Pagination count={10} color='secondary' />
+          <Pagination count={5} color='secondary' />
         </Grid>
       </Grid>
     </Container>

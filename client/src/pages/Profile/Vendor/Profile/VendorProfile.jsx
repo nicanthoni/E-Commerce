@@ -13,7 +13,7 @@ import { useLazyQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
 import StorefrontIcon from '@mui/icons-material/Storefront';
-import { formatDate } from '../../../../utils/formatDate';
+import { formatDate } from '../../../../utils/formatters/formatDate';
 
 export default function VendorProfile() {
   const { user, id } = useAuthContext();

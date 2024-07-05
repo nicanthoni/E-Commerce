@@ -1,8 +1,21 @@
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
-import { Typography, Grid, Stack } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  CardActionArea,
+  Divider,
+  Box,
+} from '@mui/material';
+import {
+  Typography,
+  Grid,
+  Stack,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import ProductFilters from '../../../components/Filters/ProductFilters';
+import SortBy from '../../../components/Filters/SortBy';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
@@ -11,7 +24,13 @@ import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
-
+import {
+  sortByPriceAsc,
+  sortByPriceDesc,
+  sortByAlphabetical,
+  sortByReverseAlphabetical,
+  sortByNewest,
+} from '../../../utils/filters/productFilters';
 
 export default function AllProducts({
   products,
@@ -21,10 +40,17 @@ export default function AllProducts({
   refetchCart,
 }) {
   const { user, id: userId } = useAuthContext();
+  const theme = useTheme();
+
+  // Mobile check
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile size
 
   // Wishlist & Cart statuses
   const [wishlistStatus, setWishlistStatus] = useState({});
   const [cartStatus, setCartStatus] = useState({});
+
+  // Sorting state
+  const [sortedProducts, setSortedProducts] = useState(products); // Initial state is products
 
   // Alert vsibility and contents
   const [alertMessage, setAlertMessage] = useState('');
@@ -129,8 +155,25 @@ export default function AllProducts({
     }
   };
 
+  // Handle sort by
+  const handleSorting = (selectedFilter) => {
+    const sortFunction =
+      filterMappings[selectedFilter] || ((products) => products);
+    const sorted = sortFunction([...products]); // Apply sorting function
+    setSortedProducts(sorted); // Update sortedProducts state
+  };
+
+  // Sort By' mappings
+  const filterMappings = {
+    'Price: Low-High': sortByPriceAsc,
+    'Price: High-Low': sortByPriceDesc,
+    'Name: A-Z': sortByAlphabetical,
+    'Name: Z-A': sortByReverseAlphabetical,
+    Newest: sortByNewest,
+  };
+
   return (
-    <Grid container spacing={3} marginBottom={6}>
+    <Grid container justifyContent='center' spacing={3} marginBottom={0}>
       {/* If no products in selected category, render message, else map */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -151,13 +194,15 @@ export default function AllProducts({
         </Grid>
       ) : (
         <>
-          {/* Product Filters - Price and Date */}
-          <Grid item xs={12} marginBottom={2}>
-            <ProductFilters products={products} />
-          </Grid>
+          {/* Product Filters - Mobile view */}
+          {isMobile && (
+            <Grid item xs={12}>
+              <SortBy handleSorting={handleSorting} />
+            </Grid>
+          )}
 
           {/* Product Map and create card */}
-          {products.map((result, index) => (
+          {sortedProducts.map((result, index) => (
             // Grid item/card created for each product
             <Grid item xs={12} sm={6} md={4} key={index} align='center'>
               <Card sx={{ maxWidth: 400 }}>

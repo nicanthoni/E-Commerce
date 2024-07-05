@@ -16,7 +16,7 @@ import { IndividualProduct, Cart, Wishlist } from '../../../graphql/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
-import { getAverage } from '../../../utils/getAverage';
+import { getAverage } from '../../../utils/calculations/getAverage';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
@@ -200,7 +200,7 @@ export default function SingleProduct() {
   };
 
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth='md' >
       {/* Parent Stack */}
       <Stack
         sx={{
