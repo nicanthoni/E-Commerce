@@ -15,7 +15,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import ProductFilters from '../../../components/Filters/ProductFilters';
+import SortBy from '../../../components/Filters/SortBy';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
@@ -197,7 +197,7 @@ export default function AllProducts({
           {/* Product Filters - Mobile view */}
           {isMobile && (
             <Grid item xs={12}>
-              <ProductFilters handleSorting={handleSorting} />
+              <SortBy handleSorting={handleSorting} />
             </Grid>
           )}
 

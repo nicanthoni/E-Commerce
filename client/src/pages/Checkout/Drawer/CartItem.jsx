@@ -1,6 +1,5 @@
 import { Stack, Box, Typography } from '@mui/material';
 import { useState } from 'react';
-import DeleteItem from '../../../components/Buttons/DeleteItem';
 import QuantityIncrementer from '../../../components/Cart/Incrementer';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import { useCart } from '../../../hooks/Products/useCart';
@@ -115,7 +114,6 @@ export default function CartItem({
             <Typography textAlign='left' variant='body1' sx={{ fontSize: 14 }}>
               {item.item.name}
             </Typography>
-
             {/* Price */}
             <Typography
               textAlign='left'
@@ -125,7 +123,6 @@ export default function CartItem({
             >
               ${item.item.price}
             </Typography>
-
             {/* Description */}
             <Typography
               textAlign='left'
@@ -141,10 +138,16 @@ export default function CartItem({
               {item.item.description}
             </Typography>
 
-            {/* Buttons  */}
-            <DeleteItem
+            {/* Remove button */}
+            <Typography
               onClick={() => handleDeleteItem(item.item._id)} // pass item._id to function as itemId
-            />
+              textAlign='left'
+              color='error'
+              variant='button'
+              sx={{ cursor: 'pointer', textTransform: 'none' }}
+            >
+              Remove
+            </Typography>
           </Stack>
           {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
           <ItemAlert visible={itemAlertVisible} message={alertMessage} />

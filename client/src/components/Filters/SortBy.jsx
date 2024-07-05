@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-export default function Filters({ handleSorting }) {
+export default function SortBy({ handleSorting }) {
   const [filter, setFilter] = useState('');
 
   const handleFilterChange = (event) => {
