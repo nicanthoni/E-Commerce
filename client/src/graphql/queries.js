@@ -132,6 +132,7 @@ export const Products = gql`
       _id
       name
       price
+      createdAt
       description
       category
       vendor {

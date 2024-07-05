@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
 import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
-import { formatDate } from '../../../../utils/formatDate';
+import { formatDate } from '../../../../utils/formatters/formatDate';
 
 export default function BuyerProfile() {
   const { user, id } = useAuthContext();
