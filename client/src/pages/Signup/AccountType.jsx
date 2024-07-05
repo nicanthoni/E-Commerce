@@ -43,7 +43,7 @@ export default function AccountType() {
   };
 
   return (
-    <Grid container minHeight='100vh'>
+    <Grid container>
       <Grid item xs={12}>
         <Box
           sx={{

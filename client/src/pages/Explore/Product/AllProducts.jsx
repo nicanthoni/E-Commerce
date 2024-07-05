@@ -12,7 +12,6 @@ import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
 
-
 export default function AllProducts({
   products,
   wishlistedItems,
@@ -130,7 +129,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container spacing={3} marginBottom={6}>
+    <Grid container justifyContent='center' spacing={3} marginBottom={0}>
       {/* If no products in selected category, render message, else map */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
