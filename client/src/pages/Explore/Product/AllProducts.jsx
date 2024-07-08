@@ -194,6 +194,20 @@ export default function AllProducts({
         </Grid>
       ) : (
         <>
+          {/* Page title */}
+          <Grid item xs={12} marginTop={1} marginBottom={-1}>
+            <Typography
+              variant='h6'
+              fontWeight='bold'
+              sx={{ textAlign: { sm: 'left', md: 'center' } }}
+            >
+              Explore{' '}
+              <Typography variant='caption'>
+                ({products.length} products)
+              </Typography>
+            </Typography>
+          </Grid>
+
           {/* Product Filters - Mobile view */}
           {isMobile && (
             <Grid item xs={12}>
