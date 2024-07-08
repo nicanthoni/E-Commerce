@@ -7,25 +7,15 @@ function CategorySelection() {
   // Context
   const { handleCategoryChange } = useContext(CategoryContext);
 
-  // States
-  const [value, setValue] = useState(0);
-
-  // onChange of category tab...
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   return (
     <Box display='flex' justifyContent='center'>
       <Tabs
-        onChange={handleChange}
-        value={value}
         indicatorColor='secondary'
         textColor='white'
         variant='scrollable'
         allowScrollButtonsMobile
       >
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <Tab
             key={category.id}
             label={category.name}

@@ -40,9 +40,6 @@ export default function Navbar() {
   // Hooks
   const { logout } = useLogout();
 
-  // Category filter states
-  const [value, setValue] = useState(0);
-
   // Alert States
   const [alertMessage, setAlertMessage] = useState('');
   const [showLogoutAlert, setShowLogoutAlert] = useState(false); // manage logout alert visibility
@@ -81,11 +78,6 @@ export default function Navbar() {
     } catch (e) {
       console.log('Logout error: ', e);
     }
-  };
-
-  // onChange of category tab...
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
   };
 
   return (
