@@ -7,7 +7,7 @@ import {
   Pagination,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -106,6 +106,8 @@ export default function Explore() {
       <Grid container justifyContent='center' gap={3} marginTop={16}>
         <Grid item xs={12} marginTop={6}>
           <AllProducts
+            key={selectedCategory} // add this key prop
+            selectedCategory={selectedCategory}
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
             cartedItems={cartedItems} // items in users cart
