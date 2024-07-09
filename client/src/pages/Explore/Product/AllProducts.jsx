@@ -38,7 +38,7 @@ export default function AllProducts({
   refetchWishlist,
   cartedItems,
   refetchCart,
-  selectedCategory
+  selectedCategory,
 }) {
   const { user, id: userId } = useAuthContext();
   const theme = useTheme();
@@ -207,6 +207,7 @@ export default function AllProducts({
                 ({products.length} products)
               </Typography>
             </Typography>
+            <Divider variant='unset' />
           </Grid>
 
           {/* Product Filters - Mobile view */}

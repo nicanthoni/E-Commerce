@@ -5,6 +5,7 @@ import {
   Box,
   LinearProgress,
   Pagination,
+  Stack,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
 import { useEffect, useContext } from 'react';
@@ -103,11 +104,11 @@ export default function Explore() {
   // Products & Pagination
   return (
     <Container maxWidth='xl'>
-      <Grid container justifyContent='center' gap={3} marginTop={16}>
-        <Grid item xs={12} marginTop={6}>
+      <Grid container gap={3} sx={{ marginTop: { xs: 22, md: 16 } }}>
+        <Grid item xs={12}>
           <AllProducts
-            key={selectedCategory} // add this key prop
-            selectedCategory={selectedCategory}
+            key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
+            selectedCategory={selectedCategory} // name of selected category
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
             cartedItems={cartedItems} // items in users cart
@@ -115,10 +116,10 @@ export default function Explore() {
             refetchCart={refetchCart} // refetch Cart query
           />
         </Grid>
-        <Grid item>
-          <Pagination count={5} color='secondary' />
-        </Grid>
       </Grid>
+      <Box display='flex' justifyContent='center' pt={3} pb={1}>
+        <Pagination count={5} color='secondary' />
+      </Box>
     </Container>
   );
 }
