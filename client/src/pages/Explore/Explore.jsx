@@ -117,11 +117,11 @@ export default function Explore() {
 
   // Products & Pagination
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='none'>
       <Grid
         container
         sx={{
-          marginTop: { xs: 22, md: 16 },
+          marginTop: { xs: 24, md: 16 },
         }}
       >
         {/* Products */}
