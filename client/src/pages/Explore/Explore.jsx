@@ -16,14 +16,12 @@ import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { CategoryContext } from '../../contexts/CategoryContext';
-import { SortProductsContext } from '../../contexts/SortContext';
-import SortByDesktop from '../../components/Filters/test.SortBy.Desktop';
+import Promotion from '../../components/Banners/Promotion';
 
 export default function Explore() {
   // Context
   const { user, id } = useAuthContext();
   const { selectedCategory } = useContext(CategoryContext); // category context - handled in Navbar component
-  // const { selectedSortBy } = useContext(SortProductsContext); // sortby context
 
   // Mobile check
   const theme = useTheme();
@@ -119,40 +117,19 @@ export default function Explore() {
 
   // Products & Pagination
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='xl' >
       <Grid
         container
-        justifyContent='center'
-        spacing={1}
+      
         sx={{
           marginTop: { xs: 22, md: 16 },
-          columnGap: { xs: 0, md: 9, lg: 0 },
+         
         }}
       >
-        {/* SortBy filter - desktop */}
-        {isMobile ? null : (
-          <Grid item xs={0} md={2} marginTop={5}>
-            <SortByDesktop
-              refetchProducts={refetchProducts}
-              selectedCategory={selectedCategory}
-            />
-          </Grid>
-        )}
-
-        {/* Header & Products */}
+        {/* Products */}
         <Grid item xs={12} md={9} marginTop={1} marginBottom={-1}>
-          <Typography
-            variant='h6'
-            fontWeight='bold'
-            sx={{ textAlign: { sm: 'left', md: 'center' } }}
-          >
-            {selectedCategory}{' '}
-            <Typography variant='caption'>
-              ({products.length} products)
-            </Typography>
-          </Typography>
-
           <AllProducts
+            selectedCategory={selectedCategory}
             key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
