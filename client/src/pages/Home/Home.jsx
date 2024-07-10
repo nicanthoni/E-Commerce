@@ -7,7 +7,6 @@ import HomeTestimonials from './HomeTestimonials';
 import HomeCTA from './HomeCTA';
 import Footer from '../../components/Footer/Footer';
 
-
 // Parent Home component
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       {/* <Navbar/> */}
       <Box sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth='xl' className='home-main-container'>
-          
           <Grid container spacing={4} alignItems='center'>
             {/* Text Section */}
             <Grid
@@ -29,15 +27,9 @@ export default function Home() {
             </Grid>
 
             {/* Logo Section */}
-            <Grid
-              item
-              xs={12} 
-              md={6}
-              lg={6}
-            >
+            <Grid item xs={12} md={6} lg={6}>
               <HomeLogo />
             </Grid>
-
           </Grid>
         </Container>
       </Box>

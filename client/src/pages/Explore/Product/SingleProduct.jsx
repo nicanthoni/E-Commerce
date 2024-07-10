@@ -200,7 +200,7 @@ export default function SingleProduct() {
   };
 
   return (
-    <Container maxWidth='md' >
+    <Container maxWidth='xl'>
       {/* Parent Stack */}
       <Stack
         sx={{

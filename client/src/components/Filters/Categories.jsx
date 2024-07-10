@@ -7,9 +7,20 @@ function CategorySelection() {
   // Context
   const { handleCategoryChange } = useContext(CategoryContext);
 
+  // State
+  const [selected, setSelected] = useState(0);
+
+  // onChange of tabs - set new state value & update selectedCategories value (context)
+  const handleChange = (event, newValue) => {
+    setSelected(newValue);
+    handleCategoryChange(categories[newValue].name); // sets selectedCategory's value
+  };
+
   return (
     <Box display='flex' justifyContent='center'>
       <Tabs
+        value={selected}
+        onChange={handleChange}
         indicatorColor='secondary'
         textColor='white'
         variant='scrollable'
@@ -20,7 +31,6 @@ function CategorySelection() {
             key={category.id}
             label={category.name}
             sx={{ textTransform: 'none' }}
-            onClick={() => handleCategoryChange(category.name)} // sets selectedCategory value, to be used via context
           />
         ))}
       </Tabs>
