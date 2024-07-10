@@ -7,6 +7,7 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
+  Box,
 } from '@mui/material';
 import { Typography, Grid, Stack } from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
@@ -170,7 +171,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container marginBottom={0} >
+    <Grid container marginBottom={0}>
       {/* If no products in  category.... else */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -193,13 +194,13 @@ export default function AllProducts({
         <>
           {/* SortBy filter - desktop version  */}
           {!isMobile && (
-            <Grid item md={4} lg={3} marginTop={5} justifySelf='center'>
+            <Grid item md={4} lg={3} marginTop={7} >
               <SortBy />
             </Grid>
           )}
 
           {/* All Products */}
-          <Grid item xs={12} md={8} lg={9} >
+          <Grid item xs={12} md={8} lg={9}>
             <Typography
               gutterBottom
               variant='h6'
@@ -212,8 +213,6 @@ export default function AllProducts({
               </Typography>
             </Typography>
 
-            
-
             {/* SortBy filter - mobile version  */}
             {isMobile && (
               <Grid item xs={12} mb={2}>
@@ -221,13 +220,14 @@ export default function AllProducts({
               </Grid>
             )}
 
-            <Grid container spacing={2} >
+            <Grid container spacing={2}>
               <Grid item xs={12}>
-              <Divider />
+                <Divider />
               </Grid>
+
               {sortedProducts.map((result, index) => (
                 // Product Cards
-                <Grid item xs={6} sm={6} md={4} lg={3} key={index} >
+                <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
                   <Card sx={{ maxWidth: 300 }}>
                     <Stack
                       direction='column'

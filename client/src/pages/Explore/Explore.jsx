@@ -117,17 +117,15 @@ export default function Explore() {
 
   // Products & Pagination
   return (
-    <Container maxWidth='xl' >
+    <Container maxWidth='xl'>
       <Grid
         container
-      
         sx={{
           marginTop: { xs: 22, md: 16 },
-         
         }}
       >
         {/* Products */}
-        <Grid item xs={12} md={9} marginTop={1} marginBottom={-1}>
+        <Grid item xs={12} md={9} marginBottom={-1}>
           <AllProducts
             selectedCategory={selectedCategory}
             key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
