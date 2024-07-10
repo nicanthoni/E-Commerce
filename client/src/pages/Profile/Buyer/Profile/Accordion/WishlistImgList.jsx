@@ -81,7 +81,7 @@ export default function WishImglist({ refetchUserData, userData }) {
                 onClick={() => handleOpenModal(index)}
                 title={item.item.name}
                 subtitle={`$${item.item.price}`}
-                sx={{ opacity: 0.7, height: '35%' }}
+                sx={{ opacity: 0.7, height: '40%' }}
                 actionIcon={
                   <IconButton
                     sx={{ color: 'background.main' }}

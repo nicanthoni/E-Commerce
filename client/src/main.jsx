@@ -7,6 +7,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 // Contexts
 import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CategoryContextProvider } from './contexts/CategoryContext.jsx';
+import { SortProductsContextProvider } from './contexts/SortContext.jsx';
 
 // Apollo Client
 const client = new ApolloClient({
@@ -17,11 +18,13 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <CategoryContextProvider>
-        <ApolloProvider client={client}>
-          <App />
-        </ApolloProvider>
-      </CategoryContextProvider>
+      <SortProductsContextProvider>
+        <CategoryContextProvider>
+          <ApolloProvider client={client}>
+            <App />
+          </ApolloProvider>
+        </CategoryContextProvider>
+      </SortProductsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

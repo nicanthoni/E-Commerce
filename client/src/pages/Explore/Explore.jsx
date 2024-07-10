@@ -6,6 +6,9 @@ import {
   LinearProgress,
   Pagination,
   Stack,
+  Divider,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
 import { useEffect, useContext } from 'react';
@@ -13,15 +16,28 @@ import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { CategoryContext } from '../../contexts/CategoryContext';
+import { SortProductsContext } from '../../contexts/SortContext';
+import SortByDesktop from '../../components/Filters/test.SortBy.Desktop';
 
 export default function Explore() {
+  // Context
   const { user, id } = useAuthContext();
   const { selectedCategory } = useContext(CategoryContext); // category context - handled in Navbar component
+  // const { selectedSortBy } = useContext(SortProductsContext); // sortby context
+
+  // Mobile check
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile size
 
   // Load Products  - filter loaded products by selected category
   const [
     loadProducts,
-    { loading: loadingProducts, data: productsData, error: productsError },
+    {
+      loading: loadingProducts,
+      data: productsData,
+      error: productsError,
+      refetch: refetchProducts,
+    },
   ] = useLazyQuery(Products, {
     variables: { category: selectedCategory },
   });
@@ -39,7 +55,7 @@ export default function Explore() {
     variables: { id: id },
   });
 
-  // Load Cart - array of prodcutIds (items in users' cart). Refetch whenever item is added/removed
+  // Load Cart - array of productIds (items in users' cart). Refetch whenever item is added/removed
   const [
     loadCart,
     {
@@ -104,22 +120,53 @@ export default function Explore() {
   // Products & Pagination
   return (
     <Container maxWidth='xl'>
-      <Grid container gap={3} sx={{ marginTop: { xs: 22, md: 16 } }}>
-        <Grid item xs={12}>
+      <Grid
+        container
+        justifyContent='center'
+        spacing={1}
+        sx={{
+          marginTop: { xs: 22, md: 16 },
+          columnGap: { xs: 0, md: 9, lg: 0 },
+        }}
+      >
+        {/* SortBy filter - desktop */}
+        {isMobile ? null : (
+          <Grid item xs={0} md={2} marginTop={5}>
+            <SortByDesktop
+              refetchProducts={refetchProducts}
+              selectedCategory={selectedCategory}
+            />
+          </Grid>
+        )}
+
+        {/* Header & Products */}
+        <Grid item xs={12} md={9} marginTop={1} marginBottom={-1}>
+          <Typography
+            variant='h6'
+            fontWeight='bold'
+            sx={{ textAlign: { sm: 'left', md: 'center' } }}
+          >
+            {selectedCategory}{' '}
+            <Typography variant='caption'>
+              ({products.length} products)
+            </Typography>
+          </Typography>
+
           <AllProducts
             key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
-            selectedCategory={selectedCategory} // name of selected category
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
             cartedItems={cartedItems} // items in users cart
             refetchWishlist={refetchWishlist} // refetch Wishlist query
             refetchCart={refetchCart} // refetch Cart query
           />
+
+          {/* Pagination */}
+          <Box display='flex' justifyContent='center' pt={4} pb={2}>
+            <Pagination count={5} color='secondary' />
+          </Box>
         </Grid>
       </Grid>
-      <Box display='flex' justifyContent='center' pt={3} pb={1}>
-        <Pagination count={5} color='secondary' />
-      </Box>
     </Container>
   );
 }

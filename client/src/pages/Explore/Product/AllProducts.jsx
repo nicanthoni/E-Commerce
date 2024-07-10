@@ -1,12 +1,5 @@
 import { Link } from 'react-router-dom';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-  Divider,
-  Box,
-} from '@mui/material';
+import { Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import {
   Typography,
   Grid,
@@ -19,7 +12,7 @@ import SortBy from '../../../components/Filters/SortBy';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
@@ -31,29 +24,31 @@ import {
   sortByReverseAlphabetical,
   sortByNewest,
 } from '../../../utils/filters/productFilters';
+import { SortProductsContext } from '../../../contexts/SortContext';
 
 export default function AllProducts({
-  products,
-  wishlistedItems,
-  refetchWishlist,
-  cartedItems,
-  refetchCart,
-  selectedCategory,
+  products, // product data
+  wishlistedItems, // itemIds in users wishlist
+  refetchWishlist, // refetch() itemIds in users wishlist
+  cartedItems, // itemIds in users cart
+  refetchCart, // refetch() itemIds in users cart
 }) {
+  // Contexts
   const { user, id: userId } = useAuthContext();
-  const theme = useTheme();
+  const { selectedSortBy } = useContext(SortProductsContext);
 
   // Mobile check
+  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // mediaQuery hook for mobile size
 
   // Wishlist & Cart statuses
   const [wishlistStatus, setWishlistStatus] = useState({});
   const [cartStatus, setCartStatus] = useState({});
 
-  // Sorting state
-  const [sortedProducts, setSortedProducts] = useState(products); // Initial state is products
+  // SortBy state
+  const [sortedProducts, setSortedProducts] = useState(products); // Product data passed from <Explore/>
 
-  // Alert vsibility and contents
+  // Alert visibility and contents
   const [alertMessage, setAlertMessage] = useState('');
   const [itemAlertVisible, setItemAlertVisible] = useState(false);
 
@@ -82,6 +77,19 @@ export default function AllProducts({
       setCartStatus(status);
     }
   }, [cartedItems, products]);
+
+  // Effect to sort products based on selectedSortBy context value
+  useEffect(() => {
+    const sortFunction = {
+      'Price: Low-High': sortByPriceAsc,
+      'Price: High-Low': sortByPriceDesc,
+      'Name: A-Z': sortByAlphabetical,
+      'Name: Z-A': sortByReverseAlphabetical,
+      Newest: sortByNewest,
+    }[selectedSortBy] || ((products) => products);
+
+    setSortedProducts(sortFunction([...products]));
+  }, [products, selectedSortBy]);
 
   // Handle wishlist onClick
   const handleWishlist = async (itemId) => {
@@ -156,25 +164,8 @@ export default function AllProducts({
     }
   };
 
-  // Handle sort by
-  const handleSorting = (selectedFilter) => {
-    const sortFunction =
-      filterMappings[selectedFilter] || ((products) => products);
-    const sorted = sortFunction([...products]); // Apply sorting function
-    setSortedProducts(sorted); // Update sortedProducts state
-  };
-
-  // Sort By' mappings
-  const filterMappings = {
-    'Price: Low-High': sortByPriceAsc,
-    'Price: High-Low': sortByPriceDesc,
-    'Name: A-Z': sortByAlphabetical,
-    'Name: Z-A': sortByReverseAlphabetical,
-    Newest: sortByNewest,
-  };
-
   return (
-    <Grid container justifyContent='center' spacing={3} marginBottom={0}>
+    <Grid container justifyContent='center' spacing={2} marginBottom={0}>
       {/* If no products in selected category, render message, else map */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -195,32 +186,17 @@ export default function AllProducts({
         </Grid>
       ) : (
         <>
-          {/* Page title */}
-          <Grid item xs={12} marginTop={1} marginBottom={-1}>
-            <Typography
-              variant='h6'
-              fontWeight='bold'
-              sx={{ textAlign: { sm: 'left', md: 'center' } }}
-            >
-              {selectedCategory}{' '}
-              <Typography variant='caption'>
-                ({products.length} products)
-              </Typography>
-            </Typography>
-            <Divider variant='unset' />
-          </Grid>
-
-          {/* Product Filters - Mobile view */}
+          {/* SortBy filter - Mobile view */}
           {isMobile && (
             <Grid item xs={12}>
-              <SortBy handleSorting={handleSorting} />
+              <SortBy />
             </Grid>
           )}
 
           {/* Product Map and create card */}
           {sortedProducts.map((result, index) => (
             // Grid item/card created for each product
-            <Grid item xs={12} sm={6} md={4} key={index} align='center'>
+            <Grid item xs={12} sm={8} md={6} lg={4} key={index} align='center'>
               <Card sx={{ maxWidth: 400 }}>
                 <Stack
                   direction='row'
