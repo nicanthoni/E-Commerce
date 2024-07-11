@@ -121,6 +121,7 @@ export default function Explore() {
     <Container maxWidth='xl'>
       <Grid
         container
+   
         spacing={2}
         sx={{
           marginTop: { xs: 22, md: 16 },

@@ -24,7 +24,6 @@ import AuthAlert from '../Alerts/Auth/AuthAlert';
 import GetStarted from '../Buttons/GetStarted';
 import LogoutButton from '../Buttons/Logout';
 import CategorySelection from '../Filters/Categories';
-import Promotion from '../Banners/Promotion';
 
 export default function Navbar() {
   // Contexts
