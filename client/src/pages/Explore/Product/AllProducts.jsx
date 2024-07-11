@@ -35,8 +35,6 @@ export default function AllProducts({
   refetchWishlist, // refetch() itemIds in users wishlist
   cartedItems, // itemIds in users cart
   refetchCart, // refetch() itemIds in users cart
-
-  selectedCategory, // context value for selectedCategory or products
 }) {
   // Contexts
   const { user, id: userId } = useAuthContext();
@@ -192,7 +190,7 @@ export default function AllProducts({
         </Grid>
       ) : (
         <>
-          {/* All Products */}
+          {/* Product cards */}
           {sortedProducts.map((result, index) => (
             <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
               <Card sx={{ maxWidth: 300 }}>

@@ -121,38 +121,60 @@ export default function Explore() {
     <Container maxWidth='xl'>
       <Grid
         container
+        spacing={2}
         sx={{
-          marginTop: { xs: 24, md: 16 },
+          marginTop: { xs: 22, md: 16 },
         }}
       >
-        {/* Filter - sort by */}
+        {/* Sort By - filter */}
         {isMobile ? (
           // mobile version
-          <Grid item xs={12} mb={2}>
-            <SortBy isMobile={isMobile} />
+          <Grid item xs={12} md={9} marginBottom={-1}>
+            <Typography
+              gutterBottom
+              variant='h6'
+              fontWeight='bold'
+              sx={{ textAlign: { sm: 'left', md: 'center' } }}
+            >
+              {selectedCategory}{' '}
+              <Typography variant='caption'>
+                ({products.length} products)
+              </Typography>
+            </Typography>
+
+            <Grid item xs={12} mb={2}>
+              <SortBy isMobile={isMobile} />
+            </Grid>
+            <Divider sx={{ mb: 2 }} />
           </Grid>
         ) : (
           // desktop version
-          <Grid item md={3} lg={3} mt={5}>
+          <Grid item md={3} lg={3} mt={8}>
             <SortBy />
           </Grid>
         )}
 
-        {/* Products */}
         <Grid item xs={12} md={9} marginBottom={-1}>
-          <Typography
-            gutterBottom
-            variant='h6'
-            fontWeight='bold'
-            sx={{ textAlign: { sm: 'left', md: 'center' } }}
-          >
-            {selectedCategory}{' '}
-            <Typography variant='caption'>
-              ({products.length} products)
-            </Typography>
-          </Typography>
+          {/* Products + header */}
+          {isMobile ? null : ( // hide header on on mobile
+            <>
+              <Typography
+                gutterBottom
+                variant='h6'
+                fontWeight='bold'
+                sx={{ textAlign: { sm: 'left', md: 'center' } }}
+              >
+                {selectedCategory}{' '}
+                <Typography variant='caption'>
+                  ({products.length} products)
+                </Typography>
+              </Typography>
+              <Divider sx={{ mb: 3 }} />
+            </>
+          )}
+
+          {/* Products */}
           <AllProducts
-            selectedCategory={selectedCategory}
             key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
@@ -160,11 +182,10 @@ export default function Explore() {
             refetchWishlist={refetchWishlist} // refetch Wishlist query
             refetchCart={refetchCart} // refetch Cart query
           />
-
           {/* Pagination */}
-          <Grid item display='flex' pt={4} pb={2}>
+          <Box display='flex' pt={4} pb={4} justifyContent='center'>
             <Pagination count={5} color='secondary' />
-          </Grid>
+          </Box>
         </Grid>
       </Grid>
     </Container>
