@@ -169,7 +169,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container marginBottom={0} spacing={2}>
+    <Grid container marginBottom={0} spacing={2} justifyContent='center'>
       {/* If no products in  category.... else */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -194,20 +194,23 @@ export default function AllProducts({
           {sortedProducts.map((result, index) => (
             <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
               <Card sx={{ maxWidth: 300 }}>
-                <Stack
-                  direction='column'
-                  justifyContent='center'
-                  alignItems='center'
-                >
+                <Stack direction='column' alignItems='center'>
+                  {/* Wishlist - button */}
+                  <Box alignSelf='flex-end'>
+                    <WishlistButton
+                      wishlistStatus={wishlistStatus[result._id] || false} // pass wishlist status (in or out) for product
+                      onClick={() => handleWishlist(result._id)} // pass result._id to function as itemId
+                    />
+                  </Box>
                   {/* Clickable area */}
                   <CardActionArea
                     component={Link}
                     to={`/product/${result._id}`}
                     sx={{
                       width: '100%',
-                      height: 200,
+                      height: { xs: 125, md: 150, lg: 175 },
                       display: 'flex',
-                      alignItems: 'center',
+                      alignItems: 'flex-end',
                       justifyContent: 'center',
                     }}
                   >
@@ -228,7 +231,7 @@ export default function AllProducts({
                     />
                   </CardActionArea>
 
-                  <Stack direction='column' textAlign='center'>
+                  <Stack direction='column' textAlign='center' >
                     <CardContent>
                       {/* Product Name */}
                       <Typography
@@ -238,7 +241,7 @@ export default function AllProducts({
                           display: '-webkit-box',
                           WebkitLineClamp: 1,
                           WebkitBoxOrient: 'vertical',
-                          textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
+                          textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 1 lines
                           overflow: 'hidden',
                         }}
                       >
@@ -254,7 +257,7 @@ export default function AllProducts({
                           display: '-webkit-box',
                           WebkitLineClamp: 1,
                           WebkitBoxOrient: 'vertical',
-                          textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
+                          textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 1 lines
                           overflow: 'hidden',
                         }}
                       >
@@ -266,29 +269,16 @@ export default function AllProducts({
                         ${result.price}
                       </Typography>
 
-                      {/* Buttons - Cart & Wishlist */}
-                      <Stack
-                        direction='row'
-                        flexWrap='wrap'
-                        justifyContent='center'
-                      >
-                        <>
-                          {cartedItems.includes(result._id) ? (
-                            <RemoveFromCart
-                              onClick={() => handleCart(result._id)} // pass result._id to function as itemId
-                            />
-                          ) : (
-                            <AddToCart
-                              onClick={() => handleCart(result._id)} // pass result._id to function as itemId
-                            />
-                          )}
-
-                          <WishlistButton
-                            wishlistStatus={wishlistStatus[result._id] || false} // pass wishlist status (in or out) for product
-                            onClick={() => handleWishlist(result._id)} // pass result._id to function as itemId
-                          />
-                        </>
-                      </Stack>
+                      {/* Cart - button */}
+                      {cartedItems.includes(result._id) ? (
+                        <RemoveFromCart
+                          onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                        />
+                      ) : (
+                        <AddToCart
+                          onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                        />
+                      )}
                     </CardContent>
                   </Stack>
                 </Stack>

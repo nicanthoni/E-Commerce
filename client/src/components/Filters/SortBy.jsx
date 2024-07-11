@@ -104,7 +104,7 @@ function SortByDesktop() {
               id='nested-list-subheader'
               sx={{ fontWeight: 'bold' }}
             >
-              Sort by: {selectedSortBy}
+              Sorted by: {selectedSortBy}
             </ListSubheader>
           }
         >
