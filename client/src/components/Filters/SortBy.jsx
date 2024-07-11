@@ -11,6 +11,8 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  Divider,
+  Paper,
 } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -66,7 +68,7 @@ function SortByMobile() {
   );
 }
 
-//  DESKTOP / non-mobile
+//  NON-mobile
 function SortByDesktop() {
   // Contexts
   const { handleSortByChange, selectedSortBy } =
@@ -91,95 +93,98 @@ function SortByDesktop() {
   };
 
   return (
-    <Box display='flex'>
-      <List
-        sx={{ bgcolor: 'background.paper' }}
-        component='nav'
-        aria-labelledby='nested-list-subheader'
-        subheader={
-          <ListSubheader component='div' id='nested-list-subheader'>
-            Sort by: {selectedSortBy}
-          </ListSubheader>
-        }
-      >
-        {/* Newest */}
-        <ListItemButton value='Newest' onClick={handleFilterChange}>
-          <ListItemIcon>
-            <ScheduleIcon />
-          </ListItemIcon>
-          <ListItemText primary='Newest' />
-        </ListItemButton>
-
-        {/* Price */}
-        <ListItemButton onClick={handlePriceClick}>
-          <ListItemIcon>
-            <AttachMoneyIcon />
-          </ListItemIcon>
-          <ListItemText primary='Price' />
-          {priceOpen ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-
-        {/* Price - collapsable items */}
-        <Collapse in={priceOpen} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding>
-            <ListItemButton
-              value='Price: Low-High'
-              onClick={handleFilterChange}
-              sx={{ pl: 2 }}
+    <Box display='flex' justifyContent='flex-end' >
+      <Paper>
+        <List
+          component='nav'
+          aria-labelledby='nested-list-subheader'
+          subheader={
+            <ListSubheader
+              component='div'
+              id='nested-list-subheader'
+              sx={{ fontWeight: 'bold' }}
             >
-              <ListItemIcon>
-                <ArrowDownwardIcon />
-              </ListItemIcon>
-              <ListItemText primary='Low to High' />
-            </ListItemButton>
-            <ListItemButton
-              value='Price: High-Low'
-              onClick={handleFilterChange}
-              sx={{ pl: 2 }}
-            >
-              <ListItemIcon>
-                <ArrowUpwardIcon />
-              </ListItemIcon>
-              <ListItemText primary='High to Low' />
-            </ListItemButton>
-          </List>
-        </Collapse>
-
-        {/* Alphabetize */}
-        <ListItemButton onClick={handleAlphabetizeClick}>
-          <ListItemIcon>
-            <SortByAlphaIcon />
-          </ListItemIcon>
-          <ListItemText primary='Alphabetize' />
-          {alphabetizeOpen ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-
-        {/* Alphabetical - collapsable items */}
-        <Collapse in={alphabetizeOpen} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding>
-            <ListItemButton
-              value='Name: A-Z'
-              onClick={handleFilterChange}
-              sx={{ pl: 2 }}
-            >
-              <ListItemIcon>
-                <ArrowForwardIcon />
-              </ListItemIcon>
-              <ListItemText primary='A - Z' />
-            </ListItemButton>
-            <ListItemButton
-              value='Name: Z-A'
-              onClick={handleFilterChange}
-              sx={{ pl: 2 }}
-            >
-              <ListItemIcon>
-                <ArrowBackIcon />
-              </ListItemIcon>
-              <ListItemText primary='Z - A' />
-            </ListItemButton>
-          </List>
-        </Collapse>
-      </List>
+              Sort by: {selectedSortBy}
+            </ListSubheader>
+          }
+        >
+          {' '}
+          <Divider />
+          {/* Newest */}
+          <ListItemButton value='Newest' onClick={handleFilterChange}>
+            <ListItemIcon>
+              <ScheduleIcon />
+            </ListItemIcon>
+            <ListItemText primary='Newest' />
+          </ListItemButton>
+          {/* Price */}
+          <ListItemButton onClick={handlePriceClick}>
+            <ListItemIcon>
+              <AttachMoneyIcon />
+            </ListItemIcon>
+            <ListItemText primary='Price' />
+            {priceOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          {/* Price - collapsable items */}
+          <Collapse in={priceOpen} timeout='auto' unmountOnExit>
+            <List component='div' disablePadding>
+              <ListItemButton
+                value='Price: Low-High'
+                onClick={handleFilterChange}
+                sx={{ pl: 2 }}
+              >
+                <ListItemIcon>
+                  <ArrowDownwardIcon />
+                </ListItemIcon>
+                <ListItemText primary='Low to High' />
+              </ListItemButton>
+              <ListItemButton
+                value='Price: High-Low'
+                onClick={handleFilterChange}
+                sx={{ pl: 2 }}
+              >
+                <ListItemIcon>
+                  <ArrowUpwardIcon />
+                </ListItemIcon>
+                <ListItemText primary='High to Low' />
+              </ListItemButton>
+            </List>
+          </Collapse>
+          {/* Alphabetize */}
+          <ListItemButton onClick={handleAlphabetizeClick}>
+            <ListItemIcon>
+              <SortByAlphaIcon />
+            </ListItemIcon>
+            <ListItemText primary='Alphabetize' />
+            {alphabetizeOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          {/* Alphabetical - collapsable items */}
+          <Collapse in={alphabetizeOpen} timeout='auto' unmountOnExit>
+            <List component='div' disablePadding>
+              <ListItemButton
+                value='Name: A-Z'
+                onClick={handleFilterChange}
+                sx={{ pl: 2 }}
+              >
+                <ListItemIcon>
+                  <ArrowForwardIcon />
+                </ListItemIcon>
+                <ListItemText primary='A - Z' />
+              </ListItemButton>
+              <ListItemButton
+                value='Name: Z-A'
+                onClick={handleFilterChange}
+                sx={{ pl: 2 }}
+              >
+                <ListItemIcon>
+                  <ArrowBackIcon />
+                </ListItemIcon>
+                <ListItemText primary='Z - A' />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </List>
+      </Paper>
     </Box>
   );
 }
