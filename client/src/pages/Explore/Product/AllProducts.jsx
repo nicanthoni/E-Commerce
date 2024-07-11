@@ -171,7 +171,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container marginBottom={0}>
+    <Grid container marginBottom={0} spacing={2}>
       {/* If no products in  category.... else */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -192,150 +192,111 @@ export default function AllProducts({
         </Grid>
       ) : (
         <>
-          {/* SortBy filter - desktop version  */}
-          {!isMobile && (
-            <Grid item md={4} lg={3} marginTop={7} >
-              <SortBy />
-            </Grid>
-          )}
-
           {/* All Products */}
-          <Grid item xs={12} md={8} lg={9}>
-            <Typography
-              gutterBottom
-              variant='h6'
-              fontWeight='bold'
-              sx={{ textAlign: { sm: 'left', md: 'center' } }}
-            >
-              {selectedCategory}{' '}
-              <Typography variant='caption'>
-                ({products.length} products)
-              </Typography>
-            </Typography>
+          {sortedProducts.map((result, index) => (
+            <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
+              <Card sx={{ maxWidth: 300 }}>
+                <Stack
+                  direction='column'
+                  justifyContent='center'
+                  alignItems='center'
+                >
+                  {/* Clickable area */}
+                  <CardActionArea
+                    component={Link}
+                    to={`/product/${result._id}`}
+                    sx={{
+                      width: '100%',
+                      height: 200,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <CardMedia
+                      component='img'
+                      image={
+                        // check img property for if a seeded img, or img added via multer upload
+                        result.img.startsWith('/images/seededItems')
+                          ? result.img
+                          : `http://localhost:3001/${result.img}`
+                      }
+                      alt={`Photo of a ${result.name}`}
+                      sx={{
+                        width: '85%',
+                        height: '85%',
+                        objectFit: 'contain',
+                      }}
+                    />
+                  </CardActionArea>
 
-            {/* SortBy filter - mobile version  */}
-            {isMobile && (
-              <Grid item xs={12} mb={2}>
-                <SortBy isMobile={isMobile} />
-              </Grid>
-            )}
-
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Divider />
-              </Grid>
-
-              {sortedProducts.map((result, index) => (
-                // Product Cards
-                <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
-                  <Card sx={{ maxWidth: 300 }}>
-                    <Stack
-                      direction='column'
-                      justifyContent='center'
-                      alignItems='center'
-                    >
-                      {/* Clickable area of card */}
-                      <CardActionArea
-                        component={Link}
-                        to={`/product/${result._id}`}
+                  <Stack direction='column' textAlign='center'>
+                    <CardContent>
+                      {/* Product Name */}
+                      <Typography
+                        fontWeight='bold'
+                        fontSize='small'
                         sx={{
-                          width: '100%',
-                          height: 200,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: 'vertical',
+                          textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
+                          overflow: 'hidden',
                         }}
                       >
-                        <CardMedia
-                          component='img'
-                          image={
-                            // check img property for if a seeded img, or img added via multer upload
-                            result.img.startsWith('/images/seededItems')
-                              ? result.img
-                              : `http://localhost:3001/${result.img}`
-                          }
-                          alt={`Photo of a ${result.name}`}
-                          sx={{
-                            width: '85%',
-                            height: '85%',
-                            objectFit: 'contain',
-                          }}
-                        />
-                      </CardActionArea>
+                        {result.name}
+                      </Typography>
 
-                      {/* Product Info */}
-                      <Stack direction='column' textAlign='center'>
-                        <CardContent>
-                          {/* Product Name */}
-                          <Typography
-                            fontWeight='bold'
-                            fontSize='small'
-                            sx={{
-                              display: '-webkit-box',
-                              WebkitLineClamp: 1,
-                              WebkitBoxOrient: 'vertical',
-                              textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
-                              overflow: 'hidden',
-                            }}
-                          >
-                            {result.name}
-                          </Typography>
+                      {/* Product Description */}
+                      <Typography
+                        fontSize='small'
+                        variant='body2'
+                        color='text.secondary'
+                        sx={{
+                          display: '-webkit-box',
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: 'vertical',
+                          textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {result.description}
+                      </Typography>
 
-                          {/* Product Description */}
-                          <Typography
-                            fontSize='small'
-                            variant='body2'
-                            color='text.secondary'
-                            sx={{
-                              display: '-webkit-box',
-                              WebkitLineClamp: 1,
-                              WebkitBoxOrient: 'vertical',
-                              textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 2 lines
-                              overflow: 'hidden',
-                            }}
-                          >
-                            {result.description}
-                          </Typography>
+                      {/* Product Price */}
+                      <Typography fontWeight={'bold'} fontSize='small'>
+                        ${result.price}
+                      </Typography>
 
-                          {/* Product Price */}
-                          <Typography fontWeight={'bold'} fontSize='small'>
-                            ${result.price}
-                          </Typography>
+                      {/* Buttons - Cart & Wishlist */}
+                      <Stack
+                        direction='row'
+                        flexWrap='wrap'
+                        justifyContent='center'
+                      >
+                        <>
+                          {cartedItems.includes(result._id) ? (
+                            <RemoveFromCart
+                              onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                            />
+                          ) : (
+                            <AddToCart
+                              onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                            />
+                          )}
 
-                          {/* Buttons - Cart & Wishlist */}
-
-                          <Stack
-                            direction='row'
-                            flexWrap='wrap'
-                            justifyContent='center'
-                          >
-                            <>
-                              {cartedItems.includes(result._id) ? (
-                                <RemoveFromCart
-                                  onClick={() => handleCart(result._id)} // pass result._id to function as itemId
-                                />
-                              ) : (
-                                <AddToCart
-                                  onClick={() => handleCart(result._id)} // pass result._id to function as itemId
-                                />
-                              )}
-
-                              <WishlistButton
-                                wishlistStatus={
-                                  wishlistStatus[result._id] || false
-                                } // pass wishlist status (in or out) for product
-                                onClick={() => handleWishlist(result._id)} // pass result._id to function as itemId
-                              />
-                            </>
-                          </Stack>
-                        </CardContent>
+                          <WishlistButton
+                            wishlistStatus={wishlistStatus[result._id] || false} // pass wishlist status (in or out) for product
+                            onClick={() => handleWishlist(result._id)} // pass result._id to function as itemId
+                          />
+                        </>
                       </Stack>
-                    </Stack>
-                  </Card>
-                </Grid>
-              ))}
+                    </CardContent>
+                  </Stack>
+                </Stack>
+              </Card>
             </Grid>
-          </Grid>
+          ))}
         </>
       )}
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
