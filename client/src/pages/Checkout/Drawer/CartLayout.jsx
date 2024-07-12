@@ -127,6 +127,7 @@ export default function CartLayout({
                 marginBottom: 2,
                 fontWeight: 'bold',
                 textTransform: 'none',
+                borderRadius: 6,
               }}
             >
               Checkout

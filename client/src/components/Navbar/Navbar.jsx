@@ -82,7 +82,7 @@ export default function Navbar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar component='nav' sx={{ backgroundColor: 'primary' }} elevation={2}>
-        <Container maxWidth='none'>
+        <Container maxWidth='xl'>
           <Toolbar>
             {/*  LEFT - Nav Drawer & Greetings*/}
             <Box display='flex' justifyContent='flex-start'>
@@ -123,7 +123,7 @@ export default function Navbar() {
             </Box>
 
             {/* CENTER */}
-            <Box display='flex' justifyContent='center' sx={{ flexGrow: 1 }}>
+            <Box display='flex' justifyContent='flex-end' sx={{ flexGrow: 1 }}>
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>
 

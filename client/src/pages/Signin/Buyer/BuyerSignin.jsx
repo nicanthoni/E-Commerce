@@ -118,6 +118,7 @@ export default function Signin() {
               mb: 2,
               textTransform: 'none',
               color: 'primary.main',
+              borderRadius: 6,
             }}
           >
             Sign in

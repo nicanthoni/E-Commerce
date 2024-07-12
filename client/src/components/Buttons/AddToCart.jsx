@@ -11,6 +11,7 @@ export default function AddToCart({ onClick }) {
       sx={{
         color: 'primary.main',
         textTransform: 'none',
+        borderRadius: 6,
       }}
     >
       Add to cart

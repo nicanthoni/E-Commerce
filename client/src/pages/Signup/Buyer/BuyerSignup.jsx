@@ -202,6 +202,7 @@ export default function BuyerSignup() {
               mb: 2,
               textTransform: 'none',
               color: 'primary.main',
+              borderRadius: 6,
             }}
           >
             Sign Up

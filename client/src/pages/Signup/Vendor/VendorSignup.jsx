@@ -188,6 +188,7 @@ export default function VendorSignup() {
               mb: 2,
               textTransform: 'none',
               color: 'primary.main',
+              borderRadius: 6,
             }}
           >
             Sign Up
