@@ -11,6 +11,7 @@ export default function RemoveFromCart({ onClick }) {
       sx={{
         color: 'secondary.main',
         textTransform: 'none',
+        borderRadius: 6,
       }}
     >
       Remove

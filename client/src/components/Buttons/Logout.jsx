@@ -10,6 +10,7 @@ export default function LogoutButton({ onClick }) {
       sx={{
         color: 'primary.main',
         textTransform: 'none',
+        borderRadius: 6,
       }}
     >
       Logout

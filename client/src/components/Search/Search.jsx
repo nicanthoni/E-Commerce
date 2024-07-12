@@ -34,22 +34,10 @@ export default function SearchBar() {
       component='form'
       sx={{
         display: 'flex',
-        width: { sm: '100%', md: '80%', lg: '50%'},
+        width: { sm: '100%', md: '80%', lg: '50%' },
+        borderRadius: 6,
       }}
     >
-      {/* Input field */}
-      <InputBase
-        autoFocus
-        type='search'
-        onChange={(e) => setQuery(e.target.value)}
-        value={query} // Bind search state to input value
-        sx={{ ml: 2, flex: 1 }}
-        placeholder='Search Products'
-        inputProps={{ 'aria-label': 'search' }}
-        name='search'
-        inputRef={inputRef} // Assign inputRef to the InputBase component
-      />
-
       {/* Search button */}
       <IconButton
         onClick={handleSubmit} // submit search
@@ -57,9 +45,9 @@ export default function SearchBar() {
         type='button'
         bgcolor='secondary'
         sx={{
-          borderRadius: 1,
+          borderRadius: 6,
           p: '10px',
-          bgcolor: 'secondary.main',
+
           '&:hover': {
             bgcolor: 'secondary.main', // Maintain bgcolor on hover
           },
@@ -68,12 +56,18 @@ export default function SearchBar() {
         <SearchIcon />
       </IconButton>
 
-      {/* Returned products */}
-      {/* <Box>
-        {filteredProducts.map((product, index) => (
-          <div key={index}>{product}</div>
-        ))}
-      </Box> */}
+      {/* Input field */}
+      <InputBase
+        autoFocus
+        type='search'
+        onChange={(e) => setQuery(e.target.value)}
+        value={query} // Bind search state to input value
+        sx={{ flex: 1 }}
+        placeholder='Search Products'
+        inputProps={{ 'aria-label': 'search' }}
+        name='search'
+        inputRef={inputRef} // Assign inputRef to the InputBase component
+      />
     </Paper>
   );
 }
