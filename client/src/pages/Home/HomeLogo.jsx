@@ -6,7 +6,7 @@ export default function HomeLogo() {
   return (
     <Stack direction='column' textAlign={'center'}>
       
-      <Box sx={{ padding: {xs: 3, sm: 10}}}>
+      <Box sx={{ padding: {xs: 4, sm: 6 }}}>
 
         <img src={homeGraphic} />
 

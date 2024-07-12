@@ -7,12 +7,9 @@ export default function HomeServices() {
   return (
     <Stack
       direction='row'
-      justifyContent='space-around'
       alignItems='center'
-      // On small screens, change direction to column
       sx={{
-        flexDirection: { xs: 'column', sm: 'row' },
-        marginY: { xs: 1, sm: 2, lg: 4 },
+        justifyContent: {xs: 'center', sm: 'space-around'}
       }}>
       <Stack padding={4} alignItems='center'>
         <StorefrontIcon sx={{ fontSize: 90, color: 'primary.main' }} />

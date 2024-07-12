@@ -78,16 +78,28 @@ const resolvers = {
         if (category && category !== 'All Products') {
           // If a category FILTER is selected, fetch by category
           console.log(`Fetching products from: ${category}`);
-          const filteredProducts = await Item.find({ category });
+          const filteredProducts = await Item.find({ category }).populate({
+            path: 'ratings',
+            select: 'stars review', // Specify fields to populate
+            populate: { path: 'user' }, // Populate the user field inside ratings
+          });
           return filteredProducts;
         } else if (category == 'All Products') {
           // If all products is chosen, show all Items data
-          const allProducts = await Item.find({});
+          const allProducts = await Item.find({}).populate({
+            path: 'ratings',
+            select: 'stars review',
+            populate: { path: 'user' },
+          });
           return allProducts;
         } else {
           // If NO selection made, fetch all items from db
           console.log('Fetching ALL products from db');
-          const allProducts = await Item.find({});
+          const allProducts = await Item.find({}).populate({
+            path: 'ratings',
+            select: 'stars review',
+            populate: { path: 'user' },
+          });
           return allProducts;
         }
       } catch (e) {

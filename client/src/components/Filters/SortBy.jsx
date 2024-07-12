@@ -93,9 +93,10 @@ function SortByDesktop() {
   };
 
   return (
-    <Box display='flex' justifyContent='flex-end' >
-      <Paper>
+    <Box display='flex' >
+      <Paper >
         <List
+        
           component='nav'
           aria-labelledby='nested-list-subheader'
           subheader={
@@ -104,7 +105,7 @@ function SortByDesktop() {
               id='nested-list-subheader'
               sx={{ fontWeight: 'bold' }}
             >
-              Sort by: {selectedSortBy}
+              Sorted by: {selectedSortBy}
             </ListSubheader>
           }
         >

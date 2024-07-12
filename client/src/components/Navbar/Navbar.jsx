@@ -9,13 +9,12 @@ import {
   Button,
 } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import LogoDevIcon from '@mui/icons-material/LogoDev';
 import NavDrawer from '../Drawers/NavDrawer';
-import CartDrawer from '../Drawers/CartDrawer';
-import { useAuthContext } from '../../hooks/useAuthContext';
 import SearchBar from '../Search/Search';
-import { useLocation } from 'react-router-dom';
+import CartDrawer from '../Drawers/CartDrawer';
 import AlertsDrawer from '../Drawers/AlertsDrawer';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useLocation } from 'react-router-dom';
 import { User, Vendor } from '../../graphql/queries';
 import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
@@ -24,7 +23,6 @@ import AuthAlert from '../Alerts/Auth/AuthAlert';
 import GetStarted from '../Buttons/GetStarted';
 import LogoutButton from '../Buttons/Logout';
 import CategorySelection from '../Filters/Categories';
-import Promotion from '../Banners/Promotion';
 
 export default function Navbar() {
   // Contexts
@@ -83,67 +81,59 @@ export default function Navbar() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar
-        component='nav'
-        sx={{ backgroundColor: 'primary', display: 'flex' }}
-        elevation={2}
-      >
+      <AppBar component='nav' sx={{ backgroundColor: 'primary' }} elevation={2}>
         <Container maxWidth='none'>
-          <Toolbar sx={{ justifyContent: 'space-between' }}>
-            {/* Navigation drawer - mobile */}
-            <Box>
+          <Toolbar>
+            {/*  LEFT - Nav Drawer & Greetings*/}
+            <Box display='flex' justifyContent='flex-start'>
               <NavDrawer />
+              {user && userData && type === 'buyer' && (
+                <Box
+                  sx={{
+                    display: { xs: 'none', sm: 'flex' },
+                    alignItems: 'center',
+                    marginLeft: 1,
+                  }}
+                >
+                  <Typography>Hi, {userData.user.firstName}</Typography>
+                </Box>
+              )}
+              {user && vendorData && type === 'vendor' && (
+                <Box
+                  sx={{
+                    display: { xs: 'none', sm: 'flex' },
+                    alignItems: 'center',
+                    marginLeft: 1,
+                  }}
+                >
+                  <Typography>Hi, {vendorData.vendor.vendorName}</Typography>
+                </Box>
+              )}
+              {!user && (
+                <Box
+                  sx={{
+                    display: { xs: 'none', sm: 'flex' },
+                    alignItems: 'center',
+                    marginLeft: 1,
+                  }}
+                >
+                  <Typography fontWeight='bolder'> AppName</Typography>
+                </Box>
+              )}
             </Box>
 
-            {/* Greeting - buyers */}
-            {user && userData && type === 'buyer' && (
-              <Box
-                sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  alignItems: 'center',
-                  marginLeft: 1,
-                }}
-              >
-                <Typography>Hi, {userData.user.firstName}</Typography>
-              </Box>
-            )}
-            {/* Greeting -  vendor */}
-            {user && vendorData && type === 'vendor' && (
-              <Box
-                sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  alignItems: 'center',
-                  marginLeft: 1,
-                }}
-              >
-                <Typography>Hi, {vendorData.vendor.vendorName}</Typography>
-              </Box>
-            )}
-            {!user && (
-              <Box
-                sx={{
-                  display: { xs: 'none', sm: 'flex' },
-                  alignItems: 'center',
-                  marginLeft: 1,
-                }}
-              >
-                <Typography fontWeight='bolder'> AppName</Typography>
-              </Box>
-            )}
-
-            {/* SearchBar - desktop view */}
+            {/* CENTER */}
             <Box display='flex' justifyContent='center' sx={{ flexGrow: 1 }}>
-              {/* SearchBar - desktop view */}
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>
 
-            {/* MAIN navbar */}
+            {/* RIGHT */}
             <Box
               sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}
             >
               {!user ? (
+                // unauthenticated - Home, Shop, & Signin
                 <>
-                  {/* Home */}
                   <Button
                     key='Home'
                     sx={{ color: '#fff', textTransform: 'none' }}
@@ -155,8 +145,6 @@ export default function Navbar() {
                       Home
                     </NavLink>
                   </Button>
-
-                  {/* Shop */}
                   <Button
                     key='Explore'
                     sx={{ color: '#fff', textTransform: 'none' }}
@@ -168,8 +156,6 @@ export default function Navbar() {
                       Shop
                     </NavLink>
                   </Button>
-
-                  {/* Sign in */}
                   <Button
                     key='Signin'
                     sx={{ color: '#fff', textTransform: 'none' }}
@@ -184,7 +170,7 @@ export default function Navbar() {
                   <GetStarted />
                 </>
               ) : (
-                // Logout button - authenticated users
+                // authenticated users - Shop, Profile, & Logout
                 <>
                   {user && type === 'buyer' && (
                     <Button
@@ -216,16 +202,16 @@ export default function Navbar() {
               )}
             </Box>
 
-            {/* Checkout & Alerts drawers - right side */}
+            {/* Checkout/Alerts drawers  */}
             <Box>
               {user && type === 'vendor' ? <AlertsDrawer /> : <CartDrawer />}
             </Box>
           </Toolbar>
 
-          {/* SearchBar - mobile view */}
+          {/* CENTER - mobile view */}
           {isMobile && isExploreRoute && <SearchBar />}
 
-          {/* Category filter - on explore route  */}
+          {/* Category selection - product filter */}
           {isExploreRoute && <CategorySelection />}
         </Container>
       </AppBar>

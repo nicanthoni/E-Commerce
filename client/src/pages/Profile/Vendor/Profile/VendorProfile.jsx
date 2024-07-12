@@ -48,7 +48,7 @@ export default function VendorProfile() {
 
   return (
     <>
-      <Container maxWidth='xl'>
+      <Container maxWidth='md'>
         <Grid container direction='column' marginTop={12}>
           {/* OVERVIEW stats */}
           <Grid item marginBottom={4}>
