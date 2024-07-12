@@ -93,7 +93,7 @@ function SortByDesktop() {
   };
 
   return (
-    <Box display='flex' justifyContent='flex-end' >
+    <Box display='flex' >
       <Paper>
         <List
           component='nav'

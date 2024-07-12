@@ -121,7 +121,7 @@ export default function Explore() {
     <Container maxWidth='xl'>
       <Grid
         container
-        spacing={2}
+        spacing={1}
         sx={{
           marginTop: { xs: 22, md: 16 },
         }}
@@ -149,12 +149,12 @@ export default function Explore() {
           </Grid>
         ) : (
           // desktop version
-          <Grid item md={3} lg={3} mt={8}>
+          <Grid item sm={1.5} md={2.8} lg={2.1} mt={8}  >
             <SortBy />
           </Grid>
         )}
 
-        <Grid item xs={12} md={9} marginBottom={-1}>
+        <Grid item xs={12} md={9} marginBottom={-1} >
           {/* Products + header */}
           {isMobile ? null : ( // hide header on on mobile
             <>

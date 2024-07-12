@@ -6,12 +6,10 @@ import {
   CardActionArea,
   useMediaQuery,
   useTheme,
-  Divider,
   Box,
 } from '@mui/material';
 import { Typography, Grid, Stack } from '@mui/material';
 import { useAuthContext } from '../../../hooks/useAuthContext';
-import SortBy from '../../../components/Filters/SortBy';
 import placeholder from '../../../assets/images/brand/no-products.svg';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
@@ -169,7 +167,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container marginBottom={0} spacing={2} justifyContent='center'>
+    <Grid container marginBottom={0} spacing={2} >
       {/* If no products in  category.... else */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -231,7 +229,7 @@ export default function AllProducts({
                     />
                   </CardActionArea>
 
-                  <Stack direction='column' textAlign='center' >
+                  <Stack direction='column' textAlign='center'>
                     <CardContent>
                       {/* Product Name */}
                       <Typography
