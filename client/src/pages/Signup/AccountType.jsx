@@ -91,6 +91,7 @@ export default function AccountType() {
                   mt: 2,
                   color: 'primary.main',
                   textTransform: 'none',
+                  borderRadius: 6,
                 }}
               >
                 Submit
