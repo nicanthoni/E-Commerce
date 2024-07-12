@@ -109,7 +109,6 @@ export default function Explore() {
 
   // Grab Product data
   const products = productsData ? productsData.filterItems : [];
-  console.log('explore page Products: ', products)
 
   // Grab wishlistedItems IDs
   const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
@@ -150,12 +149,12 @@ export default function Explore() {
           </Grid>
         ) : (
           // desktop version
-          <Grid item sm={1.5} md={2.8} lg={2.1} mt={8}  >
+          <Grid item sm={1.5} md={2.8} lg={2.1} mt={8}>
             <SortBy />
           </Grid>
         )}
 
-        <Grid item xs={12} md={9} marginBottom={-1} >
+        <Grid item xs={12} md={9} marginBottom={-1}>
           {/* Products + header */}
           {isMobile ? null : ( // hide header on on mobile
             <>

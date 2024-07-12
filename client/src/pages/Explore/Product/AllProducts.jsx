@@ -170,7 +170,6 @@ export default function AllProducts({
 
   // Average Rating calculation
   const avgStars = (ratings) => {
-    console.log('sorted products: ', sortedProducts); // Check what ratings array looks like
     if (ratings.length === 0) {
       return 0; // case with no ratings
     }
@@ -258,15 +257,13 @@ export default function AllProducts({
                         {result.name}
                       </Typography>
 
-                      {/* Product Description */}
-                      <Box>
-                        <Rating
-                          size='small'
-                          name='read-only'
-                          value={avgStars(result.ratings)}
-                          readOnly
-                        />
-                      </Box>
+                      {/* Product Rating */}
+                      <Rating
+                        size='small'
+                        name='read-only'
+                        value={avgStars(result.ratings)}
+                        readOnly
+                      />
 
                       {/* Product Price */}
                       <Typography fontWeight={'bold'} fontSize='small'>
@@ -274,15 +271,17 @@ export default function AllProducts({
                       </Typography>
 
                       {/* Cart - button */}
-                      {cartedItems.includes(result._id) ? (
-                        <RemoveFromCart
-                          onClick={() => handleCart(result._id)} // pass result._id to function as itemId
-                        />
-                      ) : (
-                        <AddToCart
-                          onClick={() => handleCart(result._id)} // pass result._id to function as itemId
-                        />
-                      )}
+                      <Box mt={1}>
+                        {cartedItems.includes(result._id) ? (
+                          <RemoveFromCart
+                            onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                          />
+                        ) : (
+                          <AddToCart
+                            onClick={() => handleCart(result._id)} // pass result._id to function as itemId
+                          />
+                        )}
+                      </Box>
                     </CardContent>
                   </Stack>
                 </Stack>

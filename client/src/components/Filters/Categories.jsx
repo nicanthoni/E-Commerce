@@ -22,7 +22,7 @@ function CategorySelection() {
         value={selected}
         onChange={handleChange}
         indicatorColor='secondary'
-        textColor='white'
+        textColor='inherit'
         variant='scrollable'
         allowScrollButtonsMobile
       >
