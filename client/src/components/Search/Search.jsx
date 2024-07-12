@@ -34,8 +34,7 @@ export default function SearchBar() {
       component='form'
       sx={{
         display: 'flex',
-        marginY: 1,
-        width: { sm: '100%', md: '90%', lg: '50%' },
+        width: { sm: '100%', md: '80%', lg: '50%'},
       }}
     >
       {/* Input field */}

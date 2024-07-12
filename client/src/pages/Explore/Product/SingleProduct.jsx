@@ -207,7 +207,7 @@ export default function SingleProduct() {
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
           justifyContent: 'center',
-          marginTop: { xs: 10, md: 12 },
+          marginTop: { xs: 15, md: 18 },
         }}
       >
         {/* Image & Rating Stack */}

@@ -109,6 +109,7 @@ export default function Explore() {
 
   // Grab Product data
   const products = productsData ? productsData.filterItems : [];
+  console.log('explore page Products: ', products)
 
   // Grab wishlistedItems IDs
   const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
