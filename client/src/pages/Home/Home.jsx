@@ -13,21 +13,15 @@ export default function Home() {
     <>
       {/* <Navbar/> */}
       <Box sx={{ backgroundColor: 'primary.main' }}>
-        <Container maxWidth='xl' className='home-main-container'>
+        <Container maxWidth='xl'>
           <Grid container spacing={4} alignItems='center'>
             {/* Text Section */}
-            <Grid
-              item
-              xs={12}
-              md={6}
-              lg={6}
-              sx={{ marginTop: { xs: 10, lg: 0 } }}
-            >
+            <Grid item xs={12} md={6} sx={{ marginTop: { xs: 12, lg: 0 } }}>
               <HomeInfo />
             </Grid>
 
             {/* Logo Section */}
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={6}>
               <HomeLogo />
             </Grid>
           </Grid>

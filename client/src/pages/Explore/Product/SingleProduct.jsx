@@ -211,7 +211,7 @@ export default function SingleProduct() {
         }}
       >
         {/* Image & Rating Stack */}
-        <Stack alignItems={'center'} gap={1}>
+        <Stack alignItems='center' gap={1}>
           <Box
             sx={{
               height: { xs: '200px', md: '400px' },

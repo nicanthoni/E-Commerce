@@ -178,7 +178,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container marginBottom={0} spacing={2}>
+    <Grid container marginBottom={0} spacing={2}  justifyContent='center'>
       {/* If no products in  category.... else */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
