@@ -37,7 +37,7 @@ export default function AccountType() {
       setError(false);
       navigate('/signup/vendor');
     } else {
-      setHelperText('Please select an account type the create');
+      setHelperText('Select your preferred account type');
       setError(true);
     }
   };
@@ -61,9 +61,9 @@ export default function AccountType() {
 
           <form onSubmit={handleSubmit}>
             <FormControl sx={{ m: 3 }} error={error} variant='standard'>
-              <FormLabel id='demo-error-radios' sx={{ marginBottom: 2 }}>
+              {/* <FormLabel id='demo-error-radios' sx={{ marginBottom: 2 }}>
                 Hint: Do you intend to sell or purchase items?
-              </FormLabel>
+              </FormLabel> */}
               <RadioGroup
                 sx={{ alignSelf: 'center' }}
                 aria-labelledby='demo-error-radios'
@@ -83,6 +83,7 @@ export default function AccountType() {
                 />
               </RadioGroup>
               <FormHelperText>{helperText}</FormHelperText>
+
               <Button
                 variant='contained'
                 color='secondary'

@@ -36,7 +36,7 @@ export default function LoginType() {
       setError(false);
       navigate('/signin/vendor');
     } else {
-      setHelperText(`Please select the type  of account you're logging into`);
+      setHelperText(`Select your account type`);
       setError(true);
     }
   };
