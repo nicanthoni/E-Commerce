@@ -14,7 +14,7 @@ export default function RemoveFromCart({ onClick }) {
         borderRadius: 6,
       }}
     >
-      Remove
+      Remove from Cart
     </Button>
   );
 }

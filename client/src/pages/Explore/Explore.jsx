@@ -4,14 +4,12 @@ import {
   Typography,
   Box,
   LinearProgress,
-  Pagination,
-  Stack,
   Divider,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -116,65 +114,38 @@ export default function Explore() {
   // Grab cartItems IDs
   const cartedItems = cartData ? cartData.usersCart : [];
 
-  // Products & Pagination
   return (
     <Container maxWidth='xl'>
       <Grid
         container
+        justifyContent='center'
         spacing={1}
         sx={{
-          marginTop: { xs: 22, md: 16 },
+          marginTop: { xs: 20, md: 18 },
         }}
       >
-        {/* Sort By - filter */}
-        {isMobile ? (
-          // mobile version
-          <Grid item xs={12} md={9} marginBottom={-1}>
-            <Typography
-              gutterBottom
-              variant='h6'
-              fontWeight='bold'
-              sx={{ textAlign: { sm: 'left', md: 'center' } }}
-            >
-              {selectedCategory}{' '}
-              <Typography variant='caption'>
-                ({products.length} products)
-              </Typography>
-            </Typography>
+        {/* Page header */}
+        <Grid item xs={12}>
+          <Typography
+            gutterBottom
+            variant='h6'
+            fontWeight='bold'
+            sx={{ textAlign: { sm: 'left', md: 'center' } }}
+          >
+            {selectedCategory}{' '}
+            <Typography variant='caption'>({products.length} )</Typography>
+          </Typography>
+        </Grid>
 
-            <Grid item xs={12} mb={2}>
-              <SortBy isMobile={isMobile} />
-            </Grid>
-            <Divider sx={{ mb: 2 }} />
-          </Grid>
-        ) : (
-          // desktop version
-          <Grid item sm={1.5} md={2.8} lg={2.1} mt={8}>
-            <SortBy />
-          </Grid>
-        )}
+        {/* Sortby filter */}
+        <Grid item xs={12} md={4} sx={{ mb: { xs: 2, sm: 3 } }}>
+          <SortBy />
+        </Grid>
 
+        {/* Products - uniform for all screen sizes*/}
         <Grid item xs={12} md={9} marginBottom={-1}>
-          {/* Products + header */}
-          {isMobile ? null : ( // hide header on on mobile
-            <>
-              <Typography
-                gutterBottom
-                variant='h6'
-                fontWeight='bold'
-                sx={{ textAlign: { sm: 'left', md: 'center' } }}
-              >
-                {selectedCategory}{' '}
-                <Typography variant='caption'>
-                  ({products.length} products)
-                </Typography>
-              </Typography>
-              <Divider sx={{ mb: 3 }} />
-            </>
-          )}
-
-          {/* Products */}
           <AllProducts
+            isMobile={isMobile}
             key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
@@ -182,10 +153,6 @@ export default function Explore() {
             refetchWishlist={refetchWishlist} // refetch Wishlist query
             refetchCart={refetchCart} // refetch Cart query
           />
-          {/* Pagination */}
-          <Box display='flex' pt={4} pb={4} justifyContent='center'>
-            <Pagination count={5} color='secondary' />
-          </Box>
         </Grid>
       </Grid>
     </Container>

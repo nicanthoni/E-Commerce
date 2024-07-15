@@ -10,6 +10,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { Paper } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
@@ -23,7 +24,7 @@ export default function AccountType() {
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
-    setHelperText(' ');
+    // setHelperText(' ');
     setError(false);
   };
 
@@ -37,7 +38,7 @@ export default function AccountType() {
       setError(false);
       navigate('/signup/vendor');
     } else {
-      setHelperText('Please select an account type the create');
+      setHelperText('Select your preferred account type');
       setError(true);
     }
   };
@@ -61,9 +62,9 @@ export default function AccountType() {
 
           <form onSubmit={handleSubmit}>
             <FormControl sx={{ m: 3 }} error={error} variant='standard'>
-              <FormLabel id='demo-error-radios' sx={{ marginBottom: 2 }}>
+              {/* <FormLabel id='demo-error-radios' sx={{ marginBottom: 2 }}>
                 Hint: Do you intend to sell or purchase items?
-              </FormLabel>
+              </FormLabel> */}
               <RadioGroup
                 sx={{ alignSelf: 'center' }}
                 aria-labelledby='demo-error-radios'
@@ -83,6 +84,7 @@ export default function AccountType() {
                 />
               </RadioGroup>
               <FormHelperText>{helperText}</FormHelperText>
+
               <Button
                 variant='contained'
                 color='secondary'
