@@ -10,7 +10,7 @@ const Pages = ({ totalProducts, productsPerPage, setCurrentPage, currentPage }) 
   return (
     <Pagination
       count={pages.length}
-      color="secondary"
+      color="primary"
       page={currentPage}
       onChange={(event, page) => setCurrentPage(page)}
       renderProducts={(products) => (

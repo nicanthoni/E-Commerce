@@ -28,7 +28,7 @@ import {
   sortByNewest,
 } from '../../../utils/filters/productFilters';
 import { SortProductsContext } from '../../../contexts/SortContext';
-import Pages from '../../../components/pagination/pagination';
+import Pagination from '../../../components/pagination/pagination';
 
 export default function AllProducts({
   products, // product data
@@ -44,7 +44,7 @@ export default function AllProducts({
 
   // Pagination - associated states
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(isMobile ? 16 : 12);
+  const [productsPerPage, setProductsPerPage] = useState(isMobile ? 16 : 8);
 
   // Wishlist & Cart statuses
   const [wishlistStatus, setWishlistStatus] = useState({});
@@ -301,7 +301,7 @@ export default function AllProducts({
           {/* Pagination */}
           <Grid item xs={12}>
             <Box display='flex' pt={4} pb={4} justifyContent='center'>
-              <Pages
+              <Pagination
                 totalProducts={products.length}
                 productsPerPage={productsPerPage}
                 setCurrentPage={setCurrentPage}
