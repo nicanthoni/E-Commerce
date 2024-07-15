@@ -10,6 +10,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { Paper } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
@@ -23,7 +24,7 @@ export default function AccountType() {
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
-    setHelperText(' ');
+    // setHelperText(' ');
     setError(false);
   };
 

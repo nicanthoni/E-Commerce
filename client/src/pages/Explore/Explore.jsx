@@ -4,14 +4,12 @@ import {
   Typography,
   Box,
   LinearProgress,
-  Pagination,
-  Stack,
   Divider,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import AllProducts from './Product/AllProducts';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { Products, Wishlist, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -116,7 +114,6 @@ export default function Explore() {
   // Grab cartItems IDs
   const cartedItems = cartData ? cartData.usersCart : [];
 
-  // Products & Pagination
   return (
     <Container maxWidth='xl'>
       <Grid
@@ -175,6 +172,7 @@ export default function Explore() {
 
           {/* Products */}
           <AllProducts
+          isMobile={isMobile}
             key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
             products={products} // products by chosen category
             wishlistedItems={wishlistedItems} // items in users wishlist
@@ -182,10 +180,6 @@ export default function Explore() {
             refetchWishlist={refetchWishlist} // refetch Wishlist query
             refetchCart={refetchCart} // refetch Cart query
           />
-          {/* Pagination */}
-          <Box display='flex' pt={4} pb={4} justifyContent='center'>
-            <Pagination count={5} color='secondary' />
-          </Box>
         </Grid>
       </Grid>
     </Container>

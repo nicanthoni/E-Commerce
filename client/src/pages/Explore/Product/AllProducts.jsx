@@ -28,6 +28,7 @@ import {
   sortByNewest,
 } from '../../../utils/filters/productFilters';
 import { SortProductsContext } from '../../../contexts/SortContext';
+import Pages from '../../../components/pagination/pagination';
 
 export default function AllProducts({
   products, // product data
@@ -35,14 +36,15 @@ export default function AllProducts({
   refetchWishlist, // refetch() itemIds in users wishlist
   cartedItems, // itemIds in users cart
   refetchCart, // refetch() itemIds in users cart
+  isMobile, // mediaQuery for mobile/medium size screens
 }) {
   // Contexts
   const { user, id: userId } = useAuthContext();
   const { selectedSortBy } = useContext(SortProductsContext);
 
-  // Screen size check
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery hook for mobile/medium size screens
+  // Pagination - associated states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(isMobile ? 16 : 12);
 
   // Wishlist & Cart statuses
   const [wishlistStatus, setWishlistStatus] = useState({});
@@ -94,6 +96,14 @@ export default function AllProducts({
 
     setSortedProducts(sortFunction([...products]));
   }, [products, selectedSortBy]);
+
+  // Pagination - products to display based on pagination
+  const lastProductIndex = currentPage * productsPerPage;
+  const firstProductIndex = lastProductIndex - productsPerPage;
+  const currentProducts = sortedProducts.slice(
+    firstProductIndex,
+    lastProductIndex
+  );
 
   // Handle wishlist onClick
   const handleWishlist = async (itemId) => {
@@ -178,7 +188,7 @@ export default function AllProducts({
   };
 
   return (
-    <Grid container marginBottom={0} spacing={2}  justifyContent='center'>
+    <Grid container marginBottom={0} spacing={2} justifyContent='center'>
       {/* If no products in  category.... else */}
       {!products || products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -200,7 +210,7 @@ export default function AllProducts({
       ) : (
         <>
           {/* Product cards */}
-          {sortedProducts.map((result, index) => (
+          {currentProducts.map((result, index) => (
             <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
               <Card sx={{ maxWidth: 300 }}>
                 <Stack direction='column' alignItems='center'>
@@ -288,6 +298,17 @@ export default function AllProducts({
               </Card>
             </Grid>
           ))}
+          {/* Pagination */}
+          <Grid item xs={12}>
+            <Box display='flex' pt={4} pb={4} justifyContent='center'>
+              <Pages
+                totalProducts={products.length}
+                productsPerPage={productsPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            </Box>
+          </Grid>
         </>
       )}
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
