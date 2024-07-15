@@ -138,11 +138,9 @@ export default function Explore() {
         </Grid>
 
         {/* Sortby filter */}
-        <Grid item xs={12} md={4} mb={2} sx={{ mb: { xs: 2, sm: 3 } }} justifyContent='flex-start'>
+        <Grid item xs={12} md={4} sx={{ mb: { xs: 2, sm: 3 } }}>
           <SortBy />
         </Grid>
-
-
 
         {/* Products - uniform for all screen sizes*/}
         <Grid item xs={12} md={9} marginBottom={-1}>
