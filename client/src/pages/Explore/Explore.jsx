@@ -16,6 +16,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import Promotion from '../../components/Banners/Promotion';
 import SortBy from '../../components/Filters/SortBy';
+import Footer from '../../components/Footer/Footer';
 
 export default function Explore() {
   // Context
@@ -121,7 +122,7 @@ export default function Explore() {
         display='flex'
         justifyContent='center'
         alignContent='center'
-        bgcolor='secondary.main'
+        bgcolor='#BF0F0F'
         sx={{ marginTop: { xs: 18.5, sm: 19.5, md: 14 } }}
       >
         <Promotion />
@@ -162,6 +163,9 @@ export default function Explore() {
           </Grid>
         </Grid>
       </Container>
+
+      {/* Footer */}
+      <Footer/>
     </>
   );
 }

@@ -1,4 +1,3 @@
-import Copyright from '../../../components/Footer/Copyright';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {
@@ -15,6 +14,7 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { useBuyerSignup } from '../../../hooks/Signup/useBuyerSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
+import Footer from '../../../components/Footer/Footer';
 
 export default function BuyerSignup() {
   const { user } = useAuthContext();
@@ -224,7 +224,7 @@ export default function BuyerSignup() {
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showSignupAlert} message={alertMessage} />
 
-      <Copyright sx={{ mt: 3 }} />
+      <Footer />
     </Container>
   );
 }

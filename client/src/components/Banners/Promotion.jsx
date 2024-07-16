@@ -1,4 +1,4 @@
-import { Box, Typography, Link, IconButton, Slide } from '@mui/material';
+import { Box, Typography, Link, IconButton, Slide, Zoom, Fade } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useState, useEffect } from 'react';
@@ -15,8 +15,9 @@ export default function Promotion() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideIn, setSlideIn] = useState(true);
   const [direction, setDirection] = useState('left');
+  const [initialLoad, setInitialLoad] = useState(true);
 
-  // Update message every 4 secs
+  // Update message every 5 secs
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
@@ -34,6 +35,8 @@ export default function Promotion() {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % promotionalMessages.length);
       setSlideIn(true);
     }, 300); // Slide transition duration
+
+    setInitialLoad(false);
   };
 
   // Previous button
@@ -49,24 +52,39 @@ export default function Promotion() {
       );
       setSlideIn(true);
     }, 300); // Slide transition duration
+
+    setInitialLoad(false);
   };
 
   return (
-    <Box display='flex' alignItems='center' > 
+    <Box display='flex' alignItems='center' >
       <IconButton onClick={handlePrev}>
         <ChevronLeftIcon sx={{ color: 'white.main' }} />
       </IconButton>
       <Box overflow="hidden" px={15}>
-        <Slide in={slideIn} direction={direction}>
-          <Box>
-            <Typography padding={1.5} color='white.main' fontSize='small'>
-              {promotionalMessages[currentIndex].message}{' '}
-              <Link underline='always' color='white.main'>
-                Click here!
-              </Link>
-            </Typography>
-          </Box>
-        </Slide>
+        {initialLoad ? (
+          <Fade in={true} timeout={600}>
+            <Box>
+              <Typography padding={1.5} color='white.main' fontSize='small'>
+                {promotionalMessages[currentIndex].message}{' '}
+                <Link underline='always' color='white.main'>
+                  Click here!
+                </Link>
+              </Typography>
+            </Box>
+          </Fade>
+        ) : (
+          <Slide in={slideIn} direction={direction}>
+            <Box>
+              <Typography padding={1.5} color='white.main' fontSize='small'>
+                {promotionalMessages[currentIndex].message}{' '}
+                <Link underline='always' color='white.main'>
+                  Click here!
+                </Link>
+              </Typography>
+            </Box>
+          </Slide>
+        )}
       </Box>
       <IconButton onClick={handleNext}>
         <ChevronRightIcon sx={{ color: 'white.main' }} />

@@ -1,4 +1,3 @@
-import Copyright from '../../../components/Footer/Copyright';
 import {
   Avatar,
   Button,
@@ -15,6 +14,7 @@ import { useState, useEffect } from 'react';
 import { useVendorSignup } from '../../../hooks/Signup/useVendorSignup';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
+import Footer from '../../../components/Footer/Footer';
 
 export default function VendorSignup() {
   const { user } = useAuthContext();
@@ -210,7 +210,7 @@ export default function VendorSignup() {
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showSignupAlert} message={alertMessage} />
 
-      <Copyright sx={{ mt: 3 }} />
+      <Footer/>
     </Container>
   );
 }

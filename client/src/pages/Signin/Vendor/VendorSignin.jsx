@@ -1,4 +1,3 @@
-import Copyright from '../../../components/Footer/Copyright';
 import {
   Avatar,
   Button,
@@ -15,6 +14,7 @@ import { useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useVendorSignin } from '../../../hooks/Signin/useVendorSignin';
 import AuthAlert from '../../../components/Alerts/Auth/AuthAlert';
+import Footer from '../../../components/Footer/Footer';
 
 export default function Signin() {
   const { signin, stateError, isLoading } = useVendorSignin(); // custom signin hook
@@ -141,7 +141,7 @@ export default function Signin() {
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showLoginAlert} message={alertMessage} />
 
-      <Copyright sx={{ mt: 3 }} />
+      <Footer />
     </Container>
   );
 }
