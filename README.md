@@ -5,7 +5,10 @@
 - Details coming soon.
 
 ## Screenshots
-- Details coming soon.
+![ScreenShot](/src/assets/screenshots/Home.png)
+![ScreenShot](/src/assets/screenshots/MobileBuyer.png)
+![ScreenShot](/src/assets/screenshots/mobileCart.png)
+![ScreenShot](/src/assets/screenshots/MobileMenu.png)
 
 ## Techs/frameworks used
 
