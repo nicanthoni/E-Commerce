@@ -8,6 +8,7 @@ export default function WishlistButton({ onClick, wishlistStatus }) {
     <Box>
       <Tooltip title='Add to wishlist' placement='right'>
         <Checkbox
+          sx={{ color: 'primary.main' }}
           onClick={onClick}
           color='error'
           checked={wishlistStatus}
