@@ -21,6 +21,7 @@ import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
+import Footer from '../../../components/Footer/Footer';
 
 export default function SingleProduct() {
   const { user, type, id: userId } = useAuthContext();
@@ -293,6 +294,8 @@ export default function SingleProduct() {
 
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
       <ItemAlert visible={itemAlertVisible} message={alertMessage} />
+
+      <Footer/>
     </Container>
   );
 }

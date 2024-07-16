@@ -1,4 +1,12 @@
-import { Box, Typography, Link, IconButton, Slide, Zoom, Fade } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Link,
+  IconButton,
+  Slide,
+  Zoom,
+  Fade,
+} from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useState, useEffect } from 'react';
@@ -6,9 +14,9 @@ import { useState, useEffect } from 'react';
 export default function Promotion() {
   // Promotional Messages
   const promotionalMessages = [
-    { message: 'Promotion 1' },
-    { message: 'Promotion 2' },
-    { message: 'Promotion 3' },
+    { message: 'Promotional offer ' },
+    { message: 'Become a vendor ' },
+    { message: 'Something else ' },
   ];
 
   // States
@@ -32,7 +40,9 @@ export default function Promotion() {
     setSlideIn(false);
 
     setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % promotionalMessages.length);
+      setCurrentIndex(
+        (prevIndex) => (prevIndex + 1) % promotionalMessages.length
+      );
       setSlideIn(true);
     }, 300); // Slide transition duration
 
@@ -57,18 +67,18 @@ export default function Promotion() {
   };
 
   return (
-    <Box display='flex' alignItems='center' >
+    <Box display='flex' alignItems='center'>
       <IconButton onClick={handlePrev}>
         <ChevronLeftIcon sx={{ color: 'white.main' }} />
       </IconButton>
-      <Box overflow="hidden" px={15}>
+      <Box overflow='hidden' px={10}>
         {initialLoad ? (
           <Fade in={true} timeout={600}>
             <Box>
-              <Typography padding={1.5} color='white.main' fontSize='small'>
+              <Typography padding={1.5} color='white.main' fontSize='small' textAlign='center'>
                 {promotionalMessages[currentIndex].message}{' '}
                 <Link underline='always' color='white.main'>
-                  Click here!
+                  here!
                 </Link>
               </Typography>
             </Box>
@@ -76,10 +86,10 @@ export default function Promotion() {
         ) : (
           <Slide in={slideIn} direction={direction}>
             <Box>
-              <Typography padding={1.5} color='white.main' fontSize='small'>
+              <Typography padding={1.5} color='white.main' fontSize='small' textAlign='center'>
                 {promotionalMessages[currentIndex].message}{' '}
                 <Link underline='always' color='white.main'>
-                  Click here!
+                  here!
                 </Link>
               </Typography>
             </Box>
