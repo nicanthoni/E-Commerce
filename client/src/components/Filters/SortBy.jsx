@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, Box, MenuItem, Select, Typography } from '@mui/material';
 
 import { SortProductsContext } from '../../contexts/SortContext';
 
-export default function SortBy({ isMobile }) {
+export default function SortBy() {
   // Contexts
   const { handleSortByChange, selectedSortBy } =
     useContext(SortProductsContext);
@@ -20,19 +20,33 @@ export default function SortBy({ isMobile }) {
 
   return (
     <FormControl fullWidth size='small'>
-      <InputLabel>Sort by:</InputLabel>
-      <Select
-        sx={{ bgcolor: 'white.main' }}
-        value={selected}
-        onChange={handleFilterChange}
-        label='Sort by'
+      <Box 
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          
+        }}
       >
-        <MenuItem value='Price: Low-High'>Price: Low-High</MenuItem>
-        <MenuItem value='Price: High-Low'>Price: High-Low</MenuItem>
-        <MenuItem value='Name: A-Z'>Name: A-Z</MenuItem>
-        <MenuItem value='Name: Z-A'>Name: Z-A</MenuItem>
-        <MenuItem value='Newest'>Newest</MenuItem>
-      </Select>
+        <Typography mr={1}>Sort by:</Typography>
+        <Select
+          sx={{
+            '.MuiOutlinedInput-notchedOutline': {
+              border: 'none',
+            },
+            '.MuiInputBase-input': {
+              padding: 0,
+            },
+          }}
+          value={selected}
+          onChange={handleFilterChange}
+        >
+          <MenuItem value='Price: Low-High'>Price: Low-High</MenuItem>
+          <MenuItem value='Price: High-Low'>Price: High-Low</MenuItem>
+          <MenuItem value='Name: A-Z'>Name: A-Z</MenuItem>
+          <MenuItem value='Name: Z-A'>Name: Z-A</MenuItem>
+          <MenuItem value='Newest'>Newest</MenuItem>
+        </Select>
+      </Box>
     </FormControl>
   );
 }
