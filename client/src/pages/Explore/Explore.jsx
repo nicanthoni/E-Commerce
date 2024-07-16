@@ -138,7 +138,7 @@ export default function Explore() {
           {/* Header + Filter*/}
           <Grid container mb={2} alignItems='flex-end' pl={1}>
             <Grid item xs={12}>
-              <Typography variant='h6' fontWeight='bold'>
+              <Typography variant='h6' fontWeight='bolder'>
                 {selectedCategory} ({products.length} )
               </Typography>
             </Grid>

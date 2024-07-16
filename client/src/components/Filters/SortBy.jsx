@@ -20,14 +20,15 @@ export default function SortBy() {
 
   return (
     <FormControl fullWidth size='small'>
-      <Box 
+      <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
-          
         }}
       >
-        <Typography mr={1}>Sort by:</Typography>
+        <Typography mr={1} fontWeight='bold'>
+          Sort by:
+        </Typography>
         <Select
           sx={{
             '.MuiOutlinedInput-notchedOutline': {
