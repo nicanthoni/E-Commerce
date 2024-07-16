@@ -1,9 +1,9 @@
-import Copyright from './Copyright';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Link } from '@mui/material';
 
-export default function Footer() {
+export default function Footer(props) {
   return (
     <Box
       component='footer'
@@ -16,7 +16,19 @@ export default function Footer() {
         <Typography variant='body2' textAlign={'center'}>
           My sticky footer can be found here.
         </Typography>
-        <Copyright />
+        <Typography
+          variant='body2'
+          color='text.secondary'
+          align='center'
+          {...props}
+        >
+          {'Copyright © '}
+          <Link color='inherit' href='/'>
+            AppName
+          </Link>{' '}
+          {new Date().getFullYear()}
+          {'.'}
+        </Typography>
       </Container>
     </Box>
   );

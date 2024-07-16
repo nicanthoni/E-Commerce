@@ -16,6 +16,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { CategoryContext } from '../../contexts/CategoryContext';
 import Promotion from '../../components/Banners/Promotion';
 import SortBy from '../../components/Filters/SortBy';
+import Footer from '../../components/Footer/Footer';
 
 export default function Explore() {
   // Context
@@ -115,46 +116,56 @@ export default function Explore() {
   const cartedItems = cartData ? cartData.usersCart : [];
 
   return (
-    <Container maxWidth='xl'>
-      <Grid
-        container
+    <>
+      {/* Banner */}
+      <Box
+        display='flex'
         justifyContent='center'
-        spacing={1}
-        sx={{
-          marginTop: { xs: 20, md: 18 },
-        }}
+        alignContent='center'
+        bgcolor='#BF0F0F'
+        sx={{ marginTop: { xs: 18.5, sm: 19.5, md: 14 } }}
       >
-        {/* Page header */}
-        <Grid item xs={12}>
-          <Typography
-            gutterBottom
-            variant='h6'
-            fontWeight='bold'
-            sx={{ textAlign: { sm: 'left', md: 'center' } }}
-          >
-            {selectedCategory}{' '}
-            <Typography variant='caption'>({products.length} )</Typography>
-          </Typography>
-        </Grid>
+        <Promotion />
+      </Box>
+      <Container maxWidth='xl'>
+        <Grid
+          container
+          justifyContent='center'
+          spacing={1}
+          sx={{
+            marginTop: { xs: 2, md: 3 },
+          }}
+        >
+          {/* Header + Filter*/}
+          <Grid container mb={2} alignItems='flex-end' pl={1}>
+            <Grid item xs={12}>
+              <Typography variant='h6' fontWeight='bolder'>
+                {selectedCategory} ({products.length} )
+              </Typography>
+            </Grid>
 
-        {/* Sortby filter */}
-        <Grid item xs={12} md={4} sx={{ mb: { xs: 2, sm: 3 } }}>
-          <SortBy />
-        </Grid>
+            <Grid item xs={12}>
+              <SortBy />
+            </Grid>
+          </Grid>
 
-        {/* Products - uniform for all screen sizes*/}
-        <Grid item xs={12} md={9} marginBottom={-1}>
-          <AllProducts
-            isMobile={isMobile}
-            key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
-            products={products} // products by chosen category
-            wishlistedItems={wishlistedItems} // items in users wishlist
-            cartedItems={cartedItems} // items in users cart
-            refetchWishlist={refetchWishlist} // refetch Wishlist query
-            refetchCart={refetchCart} // refetch Cart query
-          />
+          {/* Products */}
+          <Grid item xs={12} marginBottom={-1}>
+            <AllProducts
+              isMobile={isMobile}
+              key={selectedCategory} //  key - helps React differentiate between the products & update more efficiently
+              products={products} // products by chosen category
+              wishlistedItems={wishlistedItems} // items in users wishlist
+              cartedItems={cartedItems} // items in users cart
+              refetchWishlist={refetchWishlist} // refetch Wishlist query
+              refetchCart={refetchCart} // refetch Cart query
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+
+      {/* Footer */}
+      <Footer/>
+    </>
   );
 }

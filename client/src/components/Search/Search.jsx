@@ -58,11 +58,10 @@ export default function SearchBar() {
 
       {/* Input field */}
       <InputBase
-        autoFocus
         type='search'
         onChange={(e) => setQuery(e.target.value)}
         value={query} // Bind search state to input value
-        sx={{ flex: 1 }}
+        sx={{ flex: 1, pr: 3 }}
         placeholder='Search Products'
         inputProps={{ 'aria-label': 'search' }}
         name='search'

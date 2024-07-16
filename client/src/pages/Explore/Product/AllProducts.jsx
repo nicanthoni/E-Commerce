@@ -44,7 +44,7 @@ export default function AllProducts({
 
   // Pagination - associated states
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(isMobile ? 16 : 8);
+  const [productsPerPage, setProductsPerPage] = useState(isMobile ? 16 : 12);
 
   // Wishlist & Cart statuses
   const [wishlistStatus, setWishlistStatus] = useState({});
@@ -211,7 +211,7 @@ export default function AllProducts({
         <>
           {/* Product cards */}
           {currentProducts.map((result, index) => (
-            <Grid item xs={6} sm={4} md={4} lg={3} key={index}>
+            <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
               <Card sx={{ maxWidth: 300 }}>
                 <Stack direction='column' alignItems='center'>
                   {/* Wishlist - button */}

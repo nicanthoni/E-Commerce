@@ -123,7 +123,7 @@ export default function Navbar() {
             </Box>
 
             {/* CENTER */}
-            <Box display='flex' justifyContent='flex-end' sx={{ flexGrow: 1 }}>
+            <Box display='flex' justifyContent='center' sx={{ flexGrow: 1 }}>
               {!isMobile && isExploreRoute && <SearchBar />}
             </Box>
 
