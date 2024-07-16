@@ -5,10 +5,11 @@
 - Details coming soon.
 
 ## Screenshots
-![ScreenShot](/src/assets/screenshots/Home.png)
-![ScreenShot](/src/assets/screenshots/MobileBuyer.png)
-![ScreenShot](/src/assets/screenshots/mobileCart.png)
-![ScreenShot](/src/assets/screenshots/MobileMenu.png)
+![ScreenShot](client/src/assets/screenshots/Home.png)
+![ScreenShot](client/src/assets/screenshots/MobileBuyer.png)
+![ScreenShot](client/src/assets/screenshots/mobileCart.png)
+![ScreenShot](client/src/assets/screenshots/MobileMenu.png)
+
 
 ## Techs/frameworks used
 
