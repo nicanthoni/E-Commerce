@@ -67,7 +67,7 @@ export default function SearchBar() {
   };
 
   return (
-    <>
+    <Box position='relative' display='flex' justifyContent='center'>
       <Paper
         component='form'
         sx={{
@@ -101,7 +101,7 @@ export default function SearchBar() {
           onChange={handleChange}
           value={search} // Bind search state to input value
           sx={{ flex: 1, pr: 3 }}
-          placeholder='Search Products'
+          placeholder='Search Products...'
           inputProps={{ 'aria-label': 'search' }}
           name='search'
         />
@@ -110,14 +110,15 @@ export default function SearchBar() {
       {/* Filtered Results - display null if no matches */}
       {search !== '' && searchData.length > 0 ? (
         <Box
-          mx={6}
+          position='absolute'
+          top='100%'
+          width='90%'
           bgcolor='white.main'
           display='flex'
           flexDirection='column'
-          mt={1}
-          pb={2}
-          zIndex={1}
-          justifyContent={'center'}
+          pb={1}
+          zIndex={100}
+          boxShadow={3}
         >
           {searchData.slice(0, 10).map(
             (data, index) =>
@@ -149,6 +150,6 @@ export default function SearchBar() {
           )}
         </Box>
       ) : null}
-    </>
+    </Box>
   );
 }
