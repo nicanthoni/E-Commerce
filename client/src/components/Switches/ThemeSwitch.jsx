@@ -4,7 +4,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 
 
 
-export default function ToggleTheme() {
+export default function ThemeSwitch() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [checked, setChecked] = useState(theme === 'light');
 

@@ -17,14 +17,14 @@ export default function HomeInfo() {
           fontWeight: 'bold',
           textAlign: { xs: 'center', sm: 'center', md: 'left' },
         }}
-        color='#fff'
+        color='white.main'
       >
         Sell Your Passion, Shop the World.
       </Typography>
 
       {/* Lorem ipsum */}
       <Typography
-        color='#fff'
+        color='white.main'
         sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' } }}
       >
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum nulla

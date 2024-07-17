@@ -4,7 +4,7 @@ import { lightTheme, darkTheme } from '../theme/Theme';
 
 export const ThemeContext = createContext();
 
-// Context provider used to make dark mode globally accessible via switch component
+// Context provider globally accessible via switch component (ToggleTheme)
 export const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useState('dark');
 

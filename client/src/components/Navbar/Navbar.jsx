@@ -23,7 +23,7 @@ import AuthAlert from '../Alerts/Auth/AuthAlert';
 import GetStarted from '../Buttons/GetStarted';
 import LogoutButton from '../Buttons/Logout';
 import CategorySelection from '../Filters/Categories';
-import ToggleTheme from '../Switches/ToggleTheme';
+import ToggleTheme from '../Switches/ThemeSwitch';
 
 export default function Navbar() {
   // Contexts
@@ -169,7 +169,6 @@ export default function Navbar() {
                     </NavLink>
                   </Button>
                   <GetStarted />
-                  
                 </>
               ) : (
                 // authenticated users - Shop, Profile, & Logout

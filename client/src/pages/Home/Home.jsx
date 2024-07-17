@@ -28,14 +28,14 @@ export default function Home() {
       </Box>
 
       {/* Services  */}
-      <Box sx={{ backgroundColor: '#FFF', width: '100%' }} padding={2}>
+      <Box sx={{ backgroundColor: 'white.main', width: '100%' }} padding={2}>
         <Container maxWidth='xl'>
           <HomeServices />
         </Container>
       </Box>
 
       {/* Testimonials */}
-      <Box sx={{ backgroundColor: '#F2F2F2', width: '100%' }}>
+      <Box sx={{ backgroundColor: 'background.main', width: '100%' }}>
         <Container maxWidth='xl'>
           <HomeTestimonials />
         </Container>
