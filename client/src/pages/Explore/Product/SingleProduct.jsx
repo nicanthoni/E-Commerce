@@ -208,6 +208,7 @@ export default function SingleProduct() {
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
           justifyContent: 'center',
+
           marginTop: { xs: 15, md: 18 },
         }}
       >
@@ -235,8 +236,9 @@ export default function SingleProduct() {
             />
           </Box>
 
-          <Box sx={{ marginBottom: { xs: 2, md: 0 } }}>
+          <Box sx={{ marginBottom: { xs: 2, md: 0 } }} textAlign='center'>
             <Rating name='read-only' value={avgStars(ratings)} readOnly />
+            <Typography variant='body2'>({ratings.length} reviews)</Typography>
           </Box>
         </Stack>
 
@@ -295,7 +297,7 @@ export default function SingleProduct() {
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
       <ItemAlert visible={itemAlertVisible} message={alertMessage} />
 
-      <Footer/>
+      <Footer />
     </Container>
   );
 }

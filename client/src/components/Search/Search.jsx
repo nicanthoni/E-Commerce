@@ -146,7 +146,7 @@ export default function SearchBar() {
                     color='black'
                     target='_blank'
                     href={`/product/${data._id}`}
-                    underline='none'
+                    underline='hover'
                   >
                     {data.name}
                   </Link>
