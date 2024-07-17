@@ -67,12 +67,17 @@ export default function SearchBar() {
   };
 
   return (
-    <Box position='relative' display='flex' justifyContent='center'>
+    <Box
+      position='relative'
+      display='flex'
+      justifyContent='center'
+      sx={{ width: { xs: '100%', md: '90%', lg: '70%' } }}
+    >
       <Paper
         component='form'
         sx={{
           display: 'flex',
-          width: { sm: '100%', md: '80%', lg: '50%' },
+          width: '100%',
           borderRadius: 6,
         }}
       >

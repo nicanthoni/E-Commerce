@@ -211,7 +211,7 @@ export default function Navbar() {
           {/* CENTER - mobile view */}
           {isMobile && isExploreRoute && <SearchBar />}
 
-          {/* Category selection - product filter */}
+          {/* BASE - Category filter */}
           {isExploreRoute && <CategorySelection />}
         </Container>
       </AppBar>
