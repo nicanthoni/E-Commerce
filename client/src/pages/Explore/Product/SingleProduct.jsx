@@ -296,7 +296,7 @@ export default function SingleProduct() {
 
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
       <ItemAlert visible={itemAlertVisible} message={alertMessage} />
-
+      
       <Footer />
     </Container>
   );

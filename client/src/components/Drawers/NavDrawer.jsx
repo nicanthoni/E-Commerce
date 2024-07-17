@@ -29,9 +29,8 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Avatar } from '@mui/material';
-import LinearScaleIcon from '@mui/icons-material/LinearScale';
-import MenuIcon from '@mui/icons-material/Menu';
 import WidgetsIcon from '@mui/icons-material/Widgets';
+import ToggleTheme from '../Switches/ToggleTheme';
 
 export default function NavDrawer() {
   const { logout } = useLogout();
@@ -96,6 +95,11 @@ export default function NavDrawer() {
 
       {/* DRAWER ITEMS */}
       <List sx={{ display: 'inline-block' }}>
+        {/* Toggle Mode (dark & light) */}
+        <ListItem key='mode'>
+          <ToggleTheme />
+        </ListItem>
+
         {/* HOME - buyer */}
         {user && type === 'vendor' ? null : user && type === 'buyer' ? (
           <ListItem key='Shop' disablePadding>

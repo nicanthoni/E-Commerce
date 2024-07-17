@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { FormControl, Box, MenuItem, Select, Typography } from '@mui/material';
-
 import { SortProductsContext } from '../../contexts/SortContext';
 
 export default function SortBy() {
-  // Contexts
+  // Context
   const { handleSortByChange, selectedSortBy } =
     useContext(SortProductsContext);
 
