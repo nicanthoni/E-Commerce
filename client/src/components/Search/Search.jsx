@@ -1,72 +1,154 @@
-import { Paper, InputBase, IconButton, Box } from '@mui/material';
-import { useState, useRef, useMemo } from 'react';
+import {
+  Paper,
+  InputBase,
+  IconButton,
+  Box,
+  Typography,
+  Link,
+} from '@mui/material';
+import { useState, useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { Products } from '../../graphql/queries';
 import SearchIcon from '@mui/icons-material/Search';
 
 export default function SearchBar() {
-  const [products, setProducts] = useState([]);
-  const [query, setQuery] = useState('');
-  const inputRef = useRef();
+  // States
+  const [selectedItem, setSelectedItem] = useState(-1); // item selected by keyboard action
+  const [searchData, setSearchData] = useState([]); // data fetched via query
+  const [search, setSearch] = useState(''); // typed value in input field
 
-  // Only updte list of filtered items, when products or query parameters change
-  // Check if any of the products match the search query
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      return product.toLowerCase().includes(query.toLowerCase());
+  // Load Products  - passing no variables returns ALL products
+  const [loadProducts, { loading, data, error, refetch: refetchProducts }] =
+    useLazyQuery(Products, {
+      variables: {},
     });
-  }, [products, query]);
 
-  // handle Search
+  // handleChange - setSearch euqal to typed input value
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  // handleKeyDown - setSelectedItem based on keyboard action; open in new tab on 'enter'
+  const handleKeyDown = (e) => {
+    if (selectedItem < searchData.length) {
+      if (e.key === 'ArrowUp' && selectedItem > 0) {
+        setSelectedItem((prev) => prev - 1);
+      } else if (
+        e.key === 'ArrowDown' &&
+        selectedItem < searchData.length - 1
+      ) {
+        setSelectedItem((prev) => prev + 1);
+      } else if (e.key === 'Enter' && selectedItem >= 0) {
+        window.open(`/product/${searchData[selectedItem]._id}`);
+      } else {
+        setSelectedItem(-1);
+      }
+    }
+  };
+
+  // Effect - when input value is provided, query products data and filter the data for products that include typed value
+  useEffect(() => {
+    if (search !== '') {
+      loadProducts().then((response) => {
+        const filteredData = response.data.filterItems.filter((product) => {
+          return product.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setSearchData(filteredData);
+        // console.log('searchData: ', searchData);
+      });
+    } else {
+      setSearchData([]);
+    }
+  }, [search, loadProducts]);
+
+  // handleSubmit - INACTIVE (eventually will load products on explore page that match some criteria)
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log('Searched for: ', query);
-    const searchValue = inputRef.current.value;
-    if (searchValue === '') return;
-    setProducts((prev) => {
-      return [...prev, searchValue];
-    });
-    setQuery(''); // clear search bar
-    inputRef.current.value = '';
   };
 
   return (
-    <Paper
-      component='form'
-      sx={{
-        display: 'flex',
-        width: { sm: '100%', md: '80%', lg: '50%' },
-        borderRadius: 6,
-      }}
-    >
-      {/* Search button */}
-      <IconButton
-        onClick={handleSubmit} // submit search
-        aria-label='search'
-        type='button'
-        bgcolor='secondary'
+    <>
+      <Paper
+        component='form'
         sx={{
+          display: 'flex',
+          width: { sm: '100%', md: '80%', lg: '50%' },
           borderRadius: 6,
-          p: '10px',
-
-          '&:hover': {
-            bgcolor: 'secondary.main', // Maintain bgcolor on hover
-          },
         }}
       >
-        <SearchIcon />
-      </IconButton>
+        {/* Search button */}
+        <IconButton
+          onClick={{ handleSubmit }} // submit search
+          aria-label='search'
+          type='button'
+          bgcolor='secondary'
+          sx={{
+            borderRadius: 6,
+            p: '10px',
 
-      {/* Input field */}
-      <InputBase
-        type='search'
-        onChange={(e) => setQuery(e.target.value)}
-        value={query} // Bind search state to input value
-        sx={{ flex: 1, pr: 3 }}
-        placeholder='Search Products'
-        inputProps={{ 'aria-label': 'search' }}
-        name='search'
-        inputRef={inputRef} // Assign inputRef to the InputBase component
-      />
-    </Paper>
+            '&:hover': {
+              bgcolor: 'secondary.main',
+            },
+          }}
+        >
+          <SearchIcon />
+        </IconButton>
+
+        {/* Input */}
+        <InputBase
+          type='search'
+          onKeyDown={handleKeyDown}
+          onChange={handleChange}
+          value={search} // Bind search state to input value
+          sx={{ flex: 1, pr: 3 }}
+          placeholder='Search Products'
+          inputProps={{ 'aria-label': 'search' }}
+          name='search'
+        />
+      </Paper>
+
+      {/* Filtered Results - display null if no matches */}
+      {search !== '' && searchData.length > 0 ? (
+        <Box
+          mx={6}
+          bgcolor='white.main'
+          display='flex'
+          flexDirection='column'
+          mt={1}
+          pb={2}
+          zIndex={1}
+          justifyContent={'center'}
+        >
+          {searchData.slice(0, 10).map(
+            (data, index) =>
+              data.name && (
+                <Typography
+                  pl={2}
+                  pt={1}
+                  key={index}
+                  sx={{
+                    backgroundColor:
+                      selectedItem === index
+                        ? 'background.main'
+                        : 'transparent',
+                    '&:hover': {
+                      backgroundColor: 'background.main',
+                    },
+                  }}
+                >
+                  <Link
+                    color='black'
+                    target='_blank'
+                    href={`/product/${data._id}`}
+                    underline='none'
+                  >
+                    {data.name}
+                  </Link>
+                </Typography>
+              )
+          )}
+        </Box>
+      ) : null}
+    </>
   );
 }

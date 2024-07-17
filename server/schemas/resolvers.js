@@ -76,7 +76,7 @@ const resolvers = {
     filterItems: async (parent, { category }) => {
       try {
         if (category && category !== 'All Products') {
-          // If a category FILTER is selected, fetch by category
+          // If a category filter IS selected, fetch by category
           console.log(`Fetching products from: ${category}`);
           const filteredProducts = await Item.find({ category }).populate({
             path: 'ratings',
@@ -85,7 +85,7 @@ const resolvers = {
           });
           return filteredProducts;
         } else if (category == 'All Products') {
-          // If all products is chosen, show all Items data
+          // If 'All Products' is chosen, show all Items data
           const allProducts = await Item.find({}).populate({
             path: 'ratings',
             select: 'stars review',
@@ -93,7 +93,7 @@ const resolvers = {
           });
           return allProducts;
         } else {
-          // If NO selection made, fetch all items from db
+          // If no category is chosen, fetch ALL items from db
           console.log('Fetching ALL products from db');
           const allProducts = await Item.find({}).populate({
             path: 'ratings',
