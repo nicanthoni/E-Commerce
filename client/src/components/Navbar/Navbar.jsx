@@ -8,7 +8,7 @@ import {
   useTheme,
   Button,
 } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { Link } from '@mui/material';
 import NavDrawer from '../Drawers/NavDrawer';
 import SearchBar from '../Search/Search';
 import CartDrawer from '../Drawers/CartDrawer';
@@ -137,36 +137,36 @@ export default function Navbar() {
                 <>
                   <Button
                     key='Home'
-                    sx={{ color: '#fff', textTransform: 'none' }}
+                    sx={{ color: 'white.main', textTransform: 'none' }}
                   >
-                    <NavLink
-                      to='/'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    <Link
+                      href='/'
+                      sx={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Home
-                    </NavLink>
+                    </Link>
                   </Button>
                   <Button
                     key='Explore'
-                    sx={{ color: '#fff', textTransform: 'none' }}
+                    sx={{ color: 'white.main', textTransform: 'none' }}
                   >
-                    <NavLink
-                      to='/explore'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    <Link
+                      href='/explore'
+                      sx={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Shop
-                    </NavLink>
+                    </Link>
                   </Button>
                   <Button
                     key='Signin'
-                    sx={{ color: '#fff', textTransform: 'none' }}
+                    sx={{ color: 'white.main', textTransform: 'none' }}
                   >
-                    <NavLink
-                      to='/signin'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    <Link
+                      href='/signin'
+                      sx={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Sign In
-                    </NavLink>
+                    </Link>
                   </Button>
                   <GetStarted />
                 </>
@@ -176,26 +176,26 @@ export default function Navbar() {
                   {user && type === 'buyer' && (
                     <Button
                       key='Explore'
-                      sx={{ color: '#fff', textTransform: 'none' }}
+                      sx={{ color: 'white.main', textTransform: 'none' }}
                     >
-                      <NavLink
-                        to='/explore'
-                        style={{ textDecoration: 'none', color: 'inherit' }}
+                      <Link
+                        href='/explore'
+                        sx={{ textDecoration: 'none', color: 'inherit' }}
                       >
                         Shop
-                      </NavLink>
+                      </Link>
                     </Button>
                   )}
                   <Button
                     key='Profile'
-                    sx={{ color: '#fff', textTransform: 'none' }}
+                    sx={{ color: 'white.main', textTransform: 'none' }}
                   >
-                    <NavLink
-                      to='/profile'
-                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    <Link
+                      href='/profile'
+                      sx={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       Profile
-                    </NavLink>
+                    </Link>
                   </Button>
 
                   <LogoutButton onClick={handleLogout} />
