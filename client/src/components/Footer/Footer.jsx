@@ -9,7 +9,7 @@ export default function Footer(props) {
       component='footer'
       sx={{
         py: 5,
-        backgroundColor: '#background.main',
+        backgroundColor: '#background.default',
       }}
     >
       <Container maxWidth='xl'>
@@ -18,7 +18,7 @@ export default function Footer(props) {
         </Typography>
         <Typography
           variant='body2'
-          color='text.secondary'
+  
           align='center'
           {...props}
         >

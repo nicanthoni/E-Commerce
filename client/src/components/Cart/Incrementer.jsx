@@ -18,10 +18,10 @@ const QuantityIncrementer = ({
           width: '24px',
           height: '24px',
           color: 'primary.main',
-          bgcolor: '#fff',
+          bgcolor: 'white.main',
           '&:hover': {
             bgcolor: 'primary.main', // Background color on hover
-            color: '#fff',
+            color: 'white.main',
           },
         }}
       >
@@ -34,7 +34,7 @@ const QuantityIncrementer = ({
         value={quantity}
         variant='outlined'
         sx={{
-          backgroundColor: '#fff',
+          backgroundColor: 'white.main',
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
               borderColor: '#ccc',
@@ -66,10 +66,10 @@ const QuantityIncrementer = ({
           width: '24px',
           height: '24px',
           color: 'primary.main',
-          bgcolor: '#fff',
+          bgcolor: 'white.main',
           '&:hover': {
             bgcolor: 'primary.main', // Background color on hover
-            color: '#fff',
+            color: 'white.main',
           },
         }}
       >

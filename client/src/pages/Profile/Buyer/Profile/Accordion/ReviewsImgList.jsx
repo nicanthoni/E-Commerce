@@ -63,7 +63,7 @@ export default function ReviewsImgList({
               sx={{ opacity: 0.7, height: '35%' }}
               actionIcon={
                 <IconButton
-                  sx={{ color: 'background.main' }}
+                  sx={{ color: 'background.default' }}
                   aria-label={`info about ${rating.item.name}`}
                 >
                   <InfoIcon />

@@ -28,7 +28,7 @@ export default function DeleteAccount({ onClick }) {
         variant='contained'
         color='error'
         sx={{
-          color: 'white',
+          color: 'white.main',
           textTransform: 'none',
           maxWidth: 140,
         }}
@@ -54,7 +54,7 @@ export default function DeleteAccount({ onClick }) {
             onClick={handleClose}
             sx={{
               textTransform: 'none',
-              backgroundColor: 'white',
+              backgroundColor: 'white.main',
               color: 'primary.main',
             }}
           >

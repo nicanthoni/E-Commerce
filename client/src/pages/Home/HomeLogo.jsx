@@ -15,7 +15,7 @@ export default function HomeLogo() {
         fontSize={8} 
         marginTop={0} 
         href='https://storyset.com/online' 
-        sx={{  color: '#fff'}}>
+        sx={{  color: 'white.main'}}>
           People illustrations by Storyset
         </Link>
         

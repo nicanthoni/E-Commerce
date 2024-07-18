@@ -70,7 +70,7 @@ export default function CartItem({
         <Stack
           key={index}
           borderBottom='inset'
-          borderColor='white'
+          borderColor='white.main'
           direction='row'
           gap={2}
           padding={3}

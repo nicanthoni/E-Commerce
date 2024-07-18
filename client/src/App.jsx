@@ -5,35 +5,9 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import '../src/assets/global.css';
-import { createTheme } from '@mui/material';
-import { ThemeProvider } from '@mui/material';
 
-// Application Theme - Colors & Font
-const theme = createTheme({
-  palette: {
-    primary: {
-      // Backup primary colors: #577399 -
-      main: '#024959',
-    },
-    secondary: {
-      // Backup secondary colors: #BDE9B3 - #FACFCE - #54BFA1 - #F28D77 - #F2A391
-      main: '#F2A391',
-    },
-    background: {
-      main: '#F2F2F2 ',
-    },
-    white: {
-      main: '#fff',
-    },
-  },
-  typography: {
-    fontFamily: 'muli, sans-serif',
-    fontWeightLight: 300,
-    fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    fontWeightBold: 600,
-  },
-});
+// Context
+import { ThemeContextProvider } from './contexts/ThemeContext.jsx';
 
 // Layouts
 import RootLayout from './layouts/RootLayout';
@@ -55,8 +29,6 @@ import ErrorPage from './pages/ErrorPage';
 import UploadItem from './pages/Profile/Vendor/UploadItem.jsx';
 import Inventory from './pages/Profile/Vendor/Inventory.jsx';
 import VendorDashboard from './pages/Profile/Vendor/PerformanceData/VendorDashboard.jsx';
-
-// Test routes
 
 // Routes
 const router = createBrowserRouter(
@@ -87,9 +59,9 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeContextProvider>
       <RouterProvider router={router} />
-    </ThemeProvider>
+    </ThemeContextProvider>
   );
 }
 

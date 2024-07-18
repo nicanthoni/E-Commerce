@@ -76,7 +76,7 @@ export default function CartDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ ml: { xs: 0, md: 2 }, display: { color: '#fff' } }}
+        sx={{ ml: { xs: 0, md: 2 },  color: 'text.secondary'  }}
       >
         <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
           <Badge badgeContent={itemsInCart} max={20} color='error'>
@@ -116,7 +116,7 @@ export default function CartDrawer() {
         ) : (
           <>
             <Stack textAlign='center'>
-              <Typography variant='h6' sx={{ m: 2 }}>
+              <Typography variant='h6' sx={{ m: 2, color: 'black'  }}>
                 Sign in to view your cart.
               </Typography>
 

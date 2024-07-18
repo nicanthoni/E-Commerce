@@ -47,7 +47,7 @@ export default function BuyerProfile() {
           <Grid item marginBottom={4}>
             <Stack direction='column' alignItems='center' spacing={1}>
               <Avatar
-                sx={{ bgcolor: 'primary.main' }}
+                sx={{ bgcolor: 'action.active' }}
                 alt={`${userData.firstName}'s Avatar`}
               />
 

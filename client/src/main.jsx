@@ -9,6 +9,7 @@ import { AuthContextProvider } from './contexts/AuthContext.jsx';
 import { CategoryContextProvider } from './contexts/CategoryContext.jsx';
 import { SortProductsContextProvider } from './contexts/SortContext.jsx';
 
+
 // Apollo Client
 const client = new ApolloClient({
   uri: '/graphql',

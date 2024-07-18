@@ -19,7 +19,7 @@ export default function HomeTestimonials() {
       {/* Section Heading */}
       <Typography
         variant='h4'
-        color='primary.main'
+        color='text.alt'
         fontWeight='bold'
         textAlign='center'
         padding={6}
@@ -39,7 +39,7 @@ export default function HomeTestimonials() {
         {/* Review 1 */}
         <Stack padding={2} alignItems='center' gap={1} direction='column'>
           <Avatar src={NicsAvatar} alt='Customer Photo' 
-          sx={{ bgcolor: 'primary.main', width: 68, height: 68 }}>
+          sx={{ bgcolor: 'text.alt', width: 68, height: 68 }}>
           </Avatar>
 
           <Typography>
@@ -62,7 +62,7 @@ export default function HomeTestimonials() {
         {/* Review 2 */}
         <Stack padding={2} alignItems='center' gap={1} direction='column'>
           <Avatar src={Avatar2} alt='Customer Photo' 
-          sx={{ bgcolor: 'primary.main', width: 68, height: 68 }}>
+          sx={{ bgcolor: 'text.alt', width: 68, height: 68 }}>
           </Avatar>
 
           <Typography>
@@ -85,7 +85,7 @@ export default function HomeTestimonials() {
         {/* Review 3 */}
         <Stack padding={2} alignItems='center' gap={1} direction='column'>
           <Avatar src={Avatar1} alt='Customer Photo' 
-          sx={{ bgcolor: 'primary.main', width: 68, height: 68 }}>
+          sx={{ bgcolor: 'text.alt', width: 68, height: 68 }}>
           </Avatar>
 
           <Typography>

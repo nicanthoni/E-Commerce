@@ -84,7 +84,7 @@ export default function WishImglist({ refetchUserData, userData }) {
                 sx={{ opacity: 0.7, height: '40%' }}
                 actionIcon={
                   <IconButton
-                    sx={{ color: 'background.main' }}
+                    sx={{ color: 'background.default' }}
                     aria-label={`info about ${item.item.name}`}
                     onClick={() => handleOpenModal(index)}
                   >

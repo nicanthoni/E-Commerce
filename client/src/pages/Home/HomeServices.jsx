@@ -13,7 +13,7 @@ export default function HomeServices() {
       }}
     >
       <Stack padding={4} alignItems='center'>
-        <StorefrontIcon sx={{ fontSize: 90, color: 'primary.main' }} />
+        <StorefrontIcon sx={{ fontSize: 90, color: 'action.active' }} />
         <Button
           variant='contained'
           href='signup/buyer'
@@ -25,7 +25,7 @@ export default function HomeServices() {
       </Stack>
 
       <Stack padding={4} alignItems='center'>
-        <LocalAtmIcon sx={{ fontSize: 90, color: 'primary.main' }} />
+        <LocalAtmIcon sx={{ fontSize: 90, color: 'action.active' }} />
         <Button
           variant='contained'
           href='/signup/vendor'
@@ -37,7 +37,7 @@ export default function HomeServices() {
       </Stack>
 
       <Stack padding={4} alignItems='center'>
-        <SupportAgentIcon sx={{ fontSize: 90, color: 'primary.main' }} />
+        <SupportAgentIcon sx={{ fontSize: 90, color: 'action.active' }} />
         <Button
           variant='contained'
           href='/support'

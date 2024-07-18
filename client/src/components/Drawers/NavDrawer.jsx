@@ -7,7 +7,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import LogoutButton from '../Buttons/Logout';
@@ -23,15 +22,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import MailIcon from '@mui/icons-material/Mail';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import LoginIcon from '@mui/icons-material/Login';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Avatar } from '@mui/material';
-import LinearScaleIcon from '@mui/icons-material/LinearScale';
-import MenuIcon from '@mui/icons-material/Menu';
 import WidgetsIcon from '@mui/icons-material/Widgets';
+import ThemeSwitch from '../Switches/ThemeSwitch';
+import { Link } from '@mui/material';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 export default function NavDrawer() {
   const { logout } = useLogout();
@@ -79,36 +78,41 @@ export default function NavDrawer() {
       <Box sx={{ bgcolor: 'primary.main' }}>
         <Typography
           variant='h6'
-          color='#fff'
+          color='text.secondary'
           sx={{ my: 1.4, display: 'inline-block' }}
         >
           {user ? (
             <Avatar
               alt='users avatar'
               sizes='sm'
-              sx={{ bgcolor: '#fff', color: 'primary.main' }}
+              sx={{ bgcolor: 'text.secondary', color: 'primary.main' }}
             />
           ) : (
-            <LogoDevIcon />
+            <LogoDevIcon sx={{ color: 'text.secondary' }}/>
           )}
         </Typography>
       </Box>
 
       {/* DRAWER ITEMS */}
       <List sx={{ display: 'inline-block' }}>
-        {/* HOME - buyer */}
+        {/* Toggle Mode (dark & light) */}
+        <ListItem key='mode'>
+          <ThemeSwitch />
+        </ListItem>
+
+        {/* SHOP - buyer */}
         {user && type === 'vendor' ? null : user && type === 'buyer' ? (
           <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <StoreIcon sx={{ color: '#fff' }} />
+                <StorefrontIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/explore'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/explore'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Shop' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : (
@@ -116,11 +120,14 @@ export default function NavDrawer() {
           <ListItem key='Home' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <HomeIcon sx={{ color: '#fff' }} />
+                <HomeIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink to='/' style={{ textDecoration: 'none', color: '#fff' }}>
+              <Link
+                href='/'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
+              >
                 <ListItemText primary='Home' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -130,31 +137,31 @@ export default function NavDrawer() {
           <ListItem key='Dashboard' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <InsightsIcon sx={{ color: '#fff' }} />
+                <InsightsIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/dash'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/dash'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Dashboard' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
 
-        {/* EXPLORE - non-authorized users */}
+        {/* SHOP - non-authorized users */}
         {user ? null : (
           <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <StoreIcon sx={{ color: '#fff' }} />
+                <StorefrontIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/explore'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/explore'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Shop' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -164,14 +171,14 @@ export default function NavDrawer() {
           <ListItem key='Profile' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <AccountBoxIcon sx={{ color: '#fff' }} />
+                <AccountBoxIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/profile'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/profile'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
-                <ListItemText primary='Profile' />
-              </NavLink>
+                <ListItemText primary='Profile' color='text.secondary' />
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -181,14 +188,14 @@ export default function NavDrawer() {
           <ListItem key='Inventory' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <InventoryIcon sx={{ color: '#fff' }} />
+                <InventoryIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/inventory'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/inventory'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Inventory' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
@@ -198,14 +205,14 @@ export default function NavDrawer() {
           <ListItem key='Upload' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <AddBoxIcon sx={{ color: '#fff' }} />
+                <AddBoxIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/uploaditem'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/uploaditem'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Upload item' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
@@ -215,14 +222,14 @@ export default function NavDrawer() {
           <ListItem key='Dashboard' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <FavoriteIcon sx={{ color: '#fff' }} />
+                <FavoriteIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/wishlist'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/wishlist'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Wishlist' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
@@ -232,14 +239,14 @@ export default function NavDrawer() {
           <ListItem key='Inbox' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <MailIcon sx={{ color: '#fff' }} />
+                <MailIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/inbox'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/inbox'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Inbox' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -249,14 +256,14 @@ export default function NavDrawer() {
           <ListItem key='Support' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <ContactSupportIcon sx={{ color: '#fff' }} />
+                <SupportAgentIcon sx={{ color: 'text.secondary' }} />
               </ListItemIcon>
-              <NavLink
-                to='/support'
-                style={{ textDecoration: 'none', color: '#fff' }}
+              <Link
+                href='/support'
+                sx={{ textDecoration: 'none', color: 'text.secondary' }}
               >
                 <ListItemText primary='Support' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -277,14 +284,14 @@ export default function NavDrawer() {
               <ListItem key='SignIn' disablePadding>
                 <ListItemButton onClick={closeDrawer}>
                   <ListItemIcon sx={{ minWidth: '30px' }}>
-                    <LoginIcon sx={{ color: '#fff' }} />
+                    <LoginIcon sx={{ color: 'text.secondary' }} />
                   </ListItemIcon>
-                  <NavLink
-                    to='/signin'
-                    style={{ textDecoration: 'none', color: '#fff' }}
+                  <Link
+                    href='/signin'
+                    sx={{ textDecoration: 'none', color: 'text.secondary' }}
                   >
                     <ListItemText primary='Sign In' />
-                  </NavLink>
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -305,7 +312,7 @@ export default function NavDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ display: { color: '#fff' } }}
+        sx={{ color: 'text.secondary' }}
       >
         <WidgetsIcon />
       </IconButton>
