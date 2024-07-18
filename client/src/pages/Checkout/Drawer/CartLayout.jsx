@@ -60,7 +60,7 @@ export default function CartLayout({
       >
         <Typography
           variant='h6'
-          color='#fff'
+          color='white.main'
           sx={{ my: 2, display: 'inline-block' }}
         >
           <ShoppingCartIcon />
@@ -114,7 +114,7 @@ export default function CartLayout({
           }}
         >
           <Box>
-            <Typography padding={1} color='#fff'>
+            <Typography padding={1} color='white.main'>
               <span style={{ fontWeight: 'bold' }}>Subtotal:</span> ${subtotal}
             </Typography>
 

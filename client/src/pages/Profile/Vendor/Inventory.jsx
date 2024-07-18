@@ -210,7 +210,7 @@ export default function Inventory() {
             onClick={handleClose}
             sx={{
               textTransform: 'none',
-              backgroundColor: 'white',
+              backgroundColor: 'white.main',
               color: 'primary.main',
             }}
           >

@@ -76,7 +76,7 @@ export default function CartDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ ml: { xs: 0, md: 2 }, display: { color: 'white' } }}
+        sx={{ ml: { xs: 0, md: 2 }, display: { color: 'white.main' } }}
       >
         <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
           <Badge badgeContent={itemsInCart} max={20} color='error'>
