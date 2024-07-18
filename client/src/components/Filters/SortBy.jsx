@@ -19,7 +19,7 @@ export default function SortBy() {
 
   return (
     <FormControl fullWidth size='small'>
-      <Box
+      <Box 
         sx={{
           display: 'flex',
           alignItems: 'center',

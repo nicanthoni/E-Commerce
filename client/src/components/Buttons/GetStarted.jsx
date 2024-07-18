@@ -6,10 +6,10 @@ export default function GetStarted() {
 
   return (
     <Button
+      color='secondary'
       variant='contained'
       href={!user ? '/signup' : '/profile'} // if already logged in, send to profile instead
-      color='secondary'
-      sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6, }}
+      sx={{ textTransform: 'none', borderRadius: 6 }}
     >
       Get Started
     </Button>

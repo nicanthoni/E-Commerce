@@ -123,7 +123,7 @@ export default function SearchBar() {
           flexDirection='column'
           pb={1}
           zIndex={100}
-          boxShadow={3}
+          boxShadow={2}
         >
           {searchData.slice(0, 10).map(
             (data, index) =>
@@ -135,10 +135,10 @@ export default function SearchBar() {
                   sx={{
                     backgroundColor:
                       selectedItem === index
-                        ? 'background.main'
+                        ? 'background.default'
                         : 'transparent',
                     '&:hover': {
-                      backgroundColor: 'background.main',
+                      backgroundColor: 'background.default',
                     },
                   }}
                 >

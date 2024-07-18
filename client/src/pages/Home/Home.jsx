@@ -34,7 +34,7 @@ export default function Home() {
       </Box>
 
       {/* Testimonials */}
-      <Box sx={{ backgroundColor: 'background.main', width: '100%' }}>
+      <Box sx={{ backgroundColor: 'background.default', width: '100%' }}>
         <Container maxWidth='xl'>
           <HomeTestimonials />
         </Container>

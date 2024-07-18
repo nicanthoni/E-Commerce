@@ -9,7 +9,7 @@ export default function Footer(props) {
       component='footer'
       sx={{
         py: 5,
-        backgroundColor: '#background.main',
+        backgroundColor: '#background.default',
       }}
     >
       <Container maxWidth='xl'>
