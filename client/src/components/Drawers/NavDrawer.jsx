@@ -7,7 +7,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import LogoDevIcon from '@mui/icons-material/LogoDev';
 import LogoutButton from '../Buttons/Logout';
@@ -23,14 +22,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import MailIcon from '@mui/icons-material/Mail';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import LoginIcon from '@mui/icons-material/Login';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import StoreIcon from '@mui/icons-material/Store';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Avatar } from '@mui/material';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import ThemeSwitch from '../Switches/ThemeSwitch';
+import { Link } from '@mui/material';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 export default function NavDrawer() {
   const { logout } = useLogout();
@@ -100,19 +100,19 @@ export default function NavDrawer() {
           <ThemeSwitch />
         </ListItem>
 
-        {/* HOME - buyer */}
+        {/* SHOP - buyer */}
         {user && type === 'vendor' ? null : user && type === 'buyer' ? (
           <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <StoreIcon sx={{ color: 'white.main' }} />
+                <StorefrontIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/explore'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/explore'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Shop' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : (
@@ -122,9 +122,12 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <HomeIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink to='/' style={{ textDecoration: 'none', color: 'white.main' }}>
+              <Link
+                href='/'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
+              >
                 <ListItemText primary='Home' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -136,29 +139,29 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <InsightsIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/dash'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/dash'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Dashboard' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
 
-        {/* EXPLORE - non-authorized users */}
+        {/* SHOP - non-authorized users */}
         {user ? null : (
           <ListItem key='Shop' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <StoreIcon sx={{ color: 'white.main' }} />
+                <StorefrontIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/explore'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/explore'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Shop' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -170,12 +173,12 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <AccountBoxIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/profile'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/profile'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
-                <ListItemText primary='Profile' />
-              </NavLink>
+                <ListItemText primary='Profile' color='white.main' />
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -187,12 +190,12 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <InventoryIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/inventory'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/inventory'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Inventory' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
@@ -204,12 +207,12 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <AddBoxIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/uploaditem'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/uploaditem'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Upload item' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
@@ -221,12 +224,12 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <FavoriteIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/wishlist'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/wishlist'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Wishlist' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         ) : null}
@@ -238,12 +241,12 @@ export default function NavDrawer() {
               <ListItemIcon sx={{ minWidth: '30px' }}>
                 <MailIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/inbox'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/inbox'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Inbox' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -253,14 +256,14 @@ export default function NavDrawer() {
           <ListItem key='Support' disablePadding>
             <ListItemButton onClick={closeDrawer}>
               <ListItemIcon sx={{ minWidth: '30px' }}>
-                <ContactSupportIcon sx={{ color: 'white.main' }} />
+                <SupportAgentIcon sx={{ color: 'white.main' }} />
               </ListItemIcon>
-              <NavLink
-                to='/support'
-                style={{ textDecoration: 'none', color: 'white.main' }}
+              <Link
+                href='/support'
+                sx={{ textDecoration: 'none', color: 'white.main' }}
               >
                 <ListItemText primary='Support' />
-              </NavLink>
+              </Link>
             </ListItemButton>
           </ListItem>
         )}
@@ -283,12 +286,12 @@ export default function NavDrawer() {
                   <ListItemIcon sx={{ minWidth: '30px' }}>
                     <LoginIcon sx={{ color: 'white.main' }} />
                   </ListItemIcon>
-                  <NavLink
-                    to='/signin'
-                    style={{ textDecoration: 'none', color: 'white.main' }}
+                  <Link
+                    href='/signin'
+                    sx={{ textDecoration: 'none', color: 'white.main' }}
                   >
                     <ListItemText primary='Sign In' />
-                  </NavLink>
+                  </Link>
                 </ListItemButton>
               </ListItem>
 
@@ -309,7 +312,7 @@ export default function NavDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ display: { color: 'white' } }}
+        sx={{ color: 'white.main' }}
       >
         <WidgetsIcon />
       </IconButton>
