@@ -27,7 +27,7 @@ export default function AlertsDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ ml:{xs: 0, md: 2}, display: { color: 'white.main' } }}
+        sx={{ ml:{xs: 0, md: 2},  color: 'white.main'  }}
       >
         <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
           <Badge badgeContent={1} max={20} color='error'>

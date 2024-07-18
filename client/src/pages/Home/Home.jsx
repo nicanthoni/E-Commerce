@@ -10,7 +10,6 @@ import Footer from '../../components/Footer/Footer';
 export default function Home() {
   return (
     <>
-      {/* <Navbar/> */}
       <Box sx={{ backgroundColor: 'primary.main' }}>
         <Container maxWidth='xl'>
           <Grid container spacing={4} alignItems='center'>
