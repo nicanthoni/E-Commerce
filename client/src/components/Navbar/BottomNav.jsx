@@ -7,7 +7,7 @@ import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import StoreIcon from '@mui/icons-material/Store';
-import { NavLink } from 'react-router-dom';
+
 import { useAuthContext } from '../../hooks/useAuthContext';
 import InsightsIcon from '@mui/icons-material/Insights';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -16,6 +16,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LoginIcon from '@mui/icons-material/Login';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import {Link} from '@mui/material';
 import Home from '../../pages/Home/Home';
 
 export default function BottomNav() {
@@ -54,15 +55,15 @@ export default function BottomNav() {
               {/* Home - unauthorized user */}
               {!user && (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/'
+                  component={Link}
+                  href='/'
                   label='Home'
-                  icon={<HomeIcon sx={{ color: '#fff' }} />}
+                  icon={<HomeIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
@@ -71,29 +72,29 @@ export default function BottomNav() {
               {/* Shop OR Dashboard - buyer or vendor*/}
               {user && type === 'vendor' ? (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/dash'
+                  component={Link}
+                  href='/dash'
                   label='Dash'
-                  icon={<InsightsIcon sx={{ color: '#fff' }} />}
+                  icon={<InsightsIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
               ) : (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/explore'
+                  component={Link}
+                  href='/explore'
                   label='Shop'
-                  icon={<StoreIcon sx={{ color: '#fff' }} />}
+                  icon={<StoreIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
@@ -102,15 +103,15 @@ export default function BottomNav() {
               {/* Sign in - unauthorized user */}
               {!user && (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/signin'
+                  component={Link}
+                  href='/signin'
                   label='Sign in'
-                  icon={<LoginIcon sx={{ color: '#fff' }} />}
+                  icon={<LoginIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
@@ -119,15 +120,15 @@ export default function BottomNav() {
               {/* Profile - authorized users */}
               {user && (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/profile'
+                  component={Link}
+                  href='/profile'
                   label='Profile'
-                  icon={<AccountBoxIcon sx={{ color: '#fff' }} />}
+                  icon={<AccountBoxIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
@@ -136,15 +137,15 @@ export default function BottomNav() {
               {/* Inventory - vendor */}
               {user && type === 'vendor' ? (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/inventory'
+                  component={Link}
+                  href='/inventory'
                   label='Inventory'
-                  icon={<InventoryIcon sx={{ color: '#fff' }} />}
+                  icon={<InventoryIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
@@ -153,15 +154,15 @@ export default function BottomNav() {
               {/* Upload item -vendor  */}
               {user && type === 'vendor' ? (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/uploaditem'
+                  component={Link}
+                  href='/uploaditem'
                   label='Upload'
-                  icon={<AddBoxIcon sx={{ color: '#fff' }} />}
+                  icon={<AddBoxIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
@@ -170,15 +171,15 @@ export default function BottomNav() {
               {/* Wishlist - buyer  */}
               {user && type === 'buyer' ? (
                 <BottomNavigationAction
-                  component={NavLink}
-                  to='/wishlist'
+                  component={Link}
+                  href='/wishlist'
                   label='Wishlist'
-                  icon={<FavoriteIcon sx={{ color: '#fff' }} />}
+                  icon={<FavoriteIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
-                    color: '#fff',
+                    color: 'white.main',
                     '&.Mui-selected': {
-                      color: '#fff',
+                      color: 'white.main',
                     },
                   }}
                 />
