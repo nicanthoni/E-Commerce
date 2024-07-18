@@ -7,9 +7,9 @@ export default function RemoveFromCart({ onClick }) {
     <Button
       onClick={onClick}
       variant='contained'
-      color='primary'
       sx={{
-        color: 'secondary.main',
+        bgcolor: 'text.alt',
+        color: 'text.secondary',
         textTransform: 'none',
         borderRadius: 6,
       }}

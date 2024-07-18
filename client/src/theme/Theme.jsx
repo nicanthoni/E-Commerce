@@ -22,6 +22,7 @@ const darkTheme = createTheme({
     text: {
       primary: 'rgba(0, 0, 0, 0.87)', // black
       secondary: '#fff', // white
+      alt: '#024959' // blue
     
     },
   },
@@ -37,26 +38,26 @@ const darkTheme = createTheme({
 const lightTheme = createTheme({
   palette: {
     primary: {
-      main: '#fff', // white ('contained' buttons use this by default) 
+      main: '#F2F2F2', // gray ('contained' buttons use this by default) 
     },
     secondary: {
-      main: '#F2A391', // pink (using on buttons)
+      main: '#024959', // blue (using on buttons)
     },
     background: {
-      default: '#fff', // grey
-      paper: '#F2F2F2', // white
+      default: '#fff', // white
+      paper: '#F2F2F2', // gray
     },
     white: {
       main: '#fff', // white
     },
     action: {
       // button
-      active: '#F2A391', // pink
+      active: '#024959', // blue
     },
     text: {
-      primary: '#fff', // white
-      secondary: 'rgba(0, 0, 0, 0.87)', // black
-    
+      primary: 'rgba(0, 0, 0, 0.87)', // black
+      secondary: '#024959', // blue
+      alt: '#F2A391', // pink
     },
   },
   typography: {

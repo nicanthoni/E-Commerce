@@ -137,7 +137,7 @@ export default function Navbar() {
                 <>
                   <Button
                     key='Home'
-                    sx={{ color: 'white.main', textTransform: 'none' }}
+                    sx={{ color: 'text.secondary', textTransform: 'none' }}
                   >
                     <Link
                       href='/'
@@ -148,7 +148,7 @@ export default function Navbar() {
                   </Button>
                   <Button
                     key='Explore'
-                    sx={{ color: 'white.main', textTransform: 'none' }}
+                    sx={{ color: 'text.secondary', textTransform: 'none' }}
                   >
                     <Link
                       href='/explore'
@@ -159,7 +159,7 @@ export default function Navbar() {
                   </Button>
                   <Button
                     key='Signin'
-                    sx={{ color: 'white.main', textTransform: 'none' }}
+                    sx={{ color: 'text.secondary', textTransform: 'none' }}
                   >
                     <Link
                       href='/signin'
@@ -176,7 +176,7 @@ export default function Navbar() {
                   {user && type === 'buyer' && (
                     <Button
                       key='Explore'
-                      sx={{ color: 'white.main', textTransform: 'none' }}
+                      sx={{ color: 'text.secondary', textTransform: 'none' }}
                     >
                       <Link
                         href='/explore'
@@ -188,7 +188,7 @@ export default function Navbar() {
                   )}
                   <Button
                     key='Profile'
-                    sx={{ color: 'white.main', textTransform: 'none' }}
+                    sx={{ color: 'text.secondary', textTransform: 'none' }}
                   >
                     <Link
                       href='/profile'

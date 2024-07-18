@@ -18,7 +18,7 @@ export default function Footer(props) {
         </Typography>
         <Typography
           variant='body2'
-          color='text.secondary'
+  
           align='center'
           {...props}
         >

@@ -54,7 +54,7 @@ export default function VendorProfile() {
           <Grid item marginBottom={4}>
             <Stack direction='column' alignItems='center' spacing={1}>
               <Avatar
-                sx={{ bgcolor: 'primary.main' }}
+                sx={{ bgcolor: 'action.active' }}
                 alt={`${vendorData.vendorName}'s Logo`}
               >
                 <StorefrontIcon />
