@@ -24,6 +24,7 @@ import LogoutButton from '../Buttons/Logout';
 import CategorySelection from '../Filters/Categories';
 import ToggleTheme from '../Switches/ThemeSwitch';
 
+
 export default function Navbar() {
   // Contexts
   const { user, id, type } = useAuthContext();

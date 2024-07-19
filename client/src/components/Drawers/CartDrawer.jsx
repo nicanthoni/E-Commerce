@@ -14,6 +14,7 @@ import { useLazyQuery } from '@apollo/client';
 import { User, Cart } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
+
 export default function CartDrawer() {
   let itemsInCart = 0;
   const { user, id } = useAuthContext();
@@ -79,7 +80,7 @@ export default function CartDrawer() {
         sx={{ ml: { xs: 0, md: 0.5 }, color: 'text.secondary' }}
       >
         <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
-          <Badge badgeContent={itemsInCart} max={20} color='error'>
+          <Badge badgeContent={itemsInCart} max={20} color='error' >
             <ShoppingCartIcon />
           </Badge>
         </Box>
