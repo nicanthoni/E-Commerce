@@ -93,6 +93,9 @@ export default function Signin() {
                 autoComplete='email'
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' } // Change the label color
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,6 +109,9 @@ export default function Signin() {
                 autoComplete='new-password'
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' } // Change the label color
+                }}
               />
             </Grid>
           </Grid>
@@ -141,7 +147,7 @@ export default function Signin() {
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showLoginAlert} message={alertMessage} />
 
-      <Footer />
+  
     </Container>
   );
 }

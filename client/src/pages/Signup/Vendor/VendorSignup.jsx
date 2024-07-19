@@ -142,7 +142,7 @@ export default function VendorSignup() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-              autoFocus
+                autoFocus
                 onChange={handleChange}
                 required
                 fullWidth
@@ -150,6 +150,9 @@ export default function VendorSignup() {
                 label='Vendor Name'
                 name='vendorName'
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' }, // Change the label color
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -162,6 +165,9 @@ export default function VendorSignup() {
                 name='email'
                 autoComplete='email'
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' }, // Change the label color
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -175,6 +181,9 @@ export default function VendorSignup() {
                 id='password'
                 autoComplete='new-password'
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' }, // Change the label color
+                }}
               />
             </Grid>
           </Grid>
@@ -209,8 +218,6 @@ export default function VendorSignup() {
 
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showSignupAlert} message={alertMessage} />
-
-      <Footer/>
     </Container>
   );
 }

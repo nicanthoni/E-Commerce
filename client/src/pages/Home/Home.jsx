@@ -47,8 +47,7 @@ export default function Home() {
         </Container>
       </Box>
 
-      {/* Footer */}
-      <Footer />
+     
     </>
   );
 }

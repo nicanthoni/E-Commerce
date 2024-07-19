@@ -8,22 +8,21 @@ export default function Footer(props) {
     <Box
       component='footer'
       sx={{
-        py: 5,
-        backgroundColor: '#background.default',
+        py: 4,
       }}
     >
       <Container maxWidth='xl'>
-        <Typography variant='body2' textAlign={'center'}>
+        <Typography variant='body2' textAlign='center' color='text.primary'>
           My sticky footer can be found here.
         </Typography>
         <Typography
           variant='body2'
-  
           align='center'
           {...props}
+          color='text.primary'
         >
           {'Copyright © '}
-          <Link color='inherit' href='/'>
+          <Link color='text.primary' href='/'>
             AppName
           </Link>{' '}
           {new Date().getFullYear()}

@@ -151,6 +151,9 @@ export default function BuyerSignup() {
                 label='First Name'
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' } // Change the label color
+                }}
                 autoFocus
               />
             </Grid>
@@ -164,6 +167,9 @@ export default function BuyerSignup() {
                 autoComplete='family-name'
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' } // Change the label color
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -176,6 +182,9 @@ export default function BuyerSignup() {
                 autoComplete='email'
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' } // Change the label color
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -189,6 +198,9 @@ export default function BuyerSignup() {
                 autoComplete='new-password'
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
+                InputLabelProps={{
+                  sx: { color: 'text.primary' } // Change the label color
+                }}
               />
             </Grid>
           </Grid>
@@ -224,7 +236,7 @@ export default function BuyerSignup() {
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showSignupAlert} message={alertMessage} />
 
-      <Footer />
+
     </Container>
   );
 }

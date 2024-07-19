@@ -107,7 +107,7 @@ export default function AccountType() {
           </Box>
         </Grid>
       </Grid>
-      <Footer />
+     
     </>
   );
 }
