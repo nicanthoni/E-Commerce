@@ -8,8 +8,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import { Paper } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
 import { useState } from 'react';
@@ -63,9 +61,6 @@ export default function AccountType() {
 
             <form onSubmit={handleSubmit}>
               <FormControl sx={{ m: 3 }} error={error} variant='standard'>
-                {/* <FormLabel id='demo-error-radios' sx={{ marginBottom: 2 }}>
-                Hint: Do you intend to sell or purchase items?
-              </FormLabel> */}
                 <RadioGroup
                   sx={{ alignSelf: 'center' }}
                   aria-labelledby='demo-error-radios'
@@ -74,13 +69,14 @@ export default function AccountType() {
                   onChange={handleRadioChange}
                 >
                   <FormControlLabel
+                  
                     value='buyer'
-                    control={<Radio />}
+                    control={<Radio sx={{ color: 'primary.main'}}/>}
                     label='Buyer'
                   />
                   <FormControlLabel
                     value='vendor'
-                    control={<Radio />}
+                    control={<Radio sx={{ color: 'primary.main'}}/>}
                     label='Vendor'
                   />
                 </RadioGroup>

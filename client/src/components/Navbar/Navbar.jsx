@@ -20,7 +20,6 @@ import { useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useLogout } from '../../hooks/useLogout';
 import AuthAlert from '../Alerts/Auth/AuthAlert';
-import GetStarted from '../Buttons/GetStarted';
 import LogoutButton from '../Buttons/Logout';
 import CategorySelection from '../Filters/Categories';
 import ToggleTheme from '../Switches/ThemeSwitch';
@@ -168,7 +167,7 @@ export default function Navbar() {
                       Sign In
                     </Link>
                   </Button>
-                  <GetStarted />
+                  <ToggleTheme />
                 </>
               ) : (
                 // authenticated users - Shop, Profile, & Logout
@@ -199,6 +198,7 @@ export default function Navbar() {
                   </Button>
 
                   <LogoutButton onClick={handleLogout} />
+                  <ToggleTheme />
                 </>
               )}
             </Box>

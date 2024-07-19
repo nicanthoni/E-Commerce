@@ -3,10 +3,10 @@ import { createTheme } from '@mui/material';
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: '#024959', // blue ('contained' buttons use this by default) 
+      main: '#024959', // blue - 'contained' buttons  will use this by default-
     },
     secondary: {
-      main: '#F2A391', // pink (using on buttons)
+      main: '#F2A391', // pink - using on buttons
     },
     background: {
       default: '#F2F2F2', // grey
@@ -20,10 +20,9 @@ const darkTheme = createTheme({
       active: '#024959', // blue
     },
     text: {
-      primary: 'rgba(0, 0, 0, 0.87)', // black
+      primary: 'rgba(0, 0, 0, 0.87)', // black - (change to white, once them reworked to be true dark mode)
       secondary: '#fff', // white
-      alt: '#024959' // blue
-    
+      alt: '#024959', // blue
     },
   },
   typography: {
@@ -38,14 +37,14 @@ const darkTheme = createTheme({
 const lightTheme = createTheme({
   palette: {
     primary: {
-      main: '#F2F2F2', // gray ('contained' buttons use this by default) 
+      main: '#fff', // white - 'contained' buttons  will use this by default
     },
     secondary: {
-      main: '#024959', // blue (using on buttons)
+      main: '#F2A391', // pink - using on buttons
     },
     background: {
       default: '#fff', // white
-      paper: '#F2F2F2', // gray
+      paper: '#fff', // white
     },
     white: {
       main: '#fff', // white
@@ -55,8 +54,8 @@ const lightTheme = createTheme({
       active: '#024959', // blue
     },
     text: {
-      primary: 'rgba(0, 0, 0, 0.87)', // black
-      secondary: '#024959', // blue
+      primary: '#024959', // blue
+      secondary: 'rgba(0, 0, 0, 0.87)', // black
       alt: '#F2A391', // pink
     },
   },
