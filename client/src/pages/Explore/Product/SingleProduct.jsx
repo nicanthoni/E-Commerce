@@ -201,13 +201,12 @@ export default function SingleProduct() {
   };
 
   return (
-    <Container maxWidth='xl' >
+    <Container maxWidth='xl'>
       {/* Parent Stack */}
       <Stack
-      minHeight=''
         sx={{
-          flexDirection: { xs: 'column', md: 'row' },
-          alignItems: { xs: 'center', md: 'flex-end' },
+          flexDirection: 'row',
+          alignItems: 'flex-end',
           justifyContent: 'center',
 
           marginTop: { xs: 15, md: 18 },
@@ -237,7 +236,7 @@ export default function SingleProduct() {
             />
           </Box>
 
-          <Box sx={{ marginBottom: { xs: 2, md: 0 } }} textAlign='center'>
+          <Box textAlign='center'>
             <Rating name='read-only' value={avgStars(ratings)} readOnly />
             <Typography variant='body2'>({ratings.length} reviews)</Typography>
           </Box>
@@ -247,8 +246,7 @@ export default function SingleProduct() {
         <Stack
           direction='column'
           sx={{
-            alignItems: { xs: 'center', md: 'flex-start' },
-            textAlign: { xs: 'center', md: 'left' },
+            alignItems: 'flex-start',
           }}
         >
           <Typography>
@@ -297,8 +295,6 @@ export default function SingleProduct() {
 
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
       <ItemAlert visible={itemAlertVisible} message={alertMessage} />
-      
-  
     </Container>
   );
 }
