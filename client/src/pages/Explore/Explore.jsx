@@ -164,8 +164,7 @@ export default function Explore() {
         </Grid>
       </Container>
 
-      {/* Footer */}
-      <Footer/>
+ 
     </>
   );
 }

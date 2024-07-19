@@ -70,12 +70,12 @@ export default function LoginType() {
                 >
                   <FormControlLabel
                     value='buyer'
-                    control={<Radio />}
+                    control={<Radio sx={{ color: 'primary.main' }} />}
                     label='Buyer'
                   />
                   <FormControlLabel
                     value='vendor'
-                    control={<Radio />}
+                    control={<Radio sx={{ color: 'primary.main' }} />}
                     label='Vendor'
                   />
                 </RadioGroup>
@@ -105,7 +105,6 @@ export default function LoginType() {
           </Box>
         </Grid>
       </Grid>
-      <Footer />
     </>
   );
 }

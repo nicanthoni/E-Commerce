@@ -201,9 +201,10 @@ export default function SingleProduct() {
   };
 
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth='xl' >
       {/* Parent Stack */}
       <Stack
+      minHeight=''
         sx={{
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-end' },
@@ -297,7 +298,7 @@ export default function SingleProduct() {
       {/* ⚠️ Alerts ⚠️ - visibility controlled by local state */}
       <ItemAlert visible={itemAlertVisible} message={alertMessage} />
       
-      <Footer />
+  
     </Container>
   );
 }
