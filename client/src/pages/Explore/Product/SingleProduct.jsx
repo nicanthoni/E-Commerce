@@ -276,7 +276,7 @@ export default function SingleProduct() {
           <Divider variant='unset' sx={{ my: 0.5 }} />
 
           {/* Buttons */}
-          <Stack direction='row'>
+          <Stack direction='row' flexWrap='wrap'>
             <>
               {isInCart ? (
                 <RemoveFromCart onClick={handleCart} />
