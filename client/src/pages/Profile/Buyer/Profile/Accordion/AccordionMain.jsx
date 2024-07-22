@@ -13,7 +13,6 @@ import { useLogout } from '../../../../../hooks/useLogout';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
 
 import WishImglist from './WishlistImgList';
-import OrdersImgList from './OrdersImgList';
 import ReviewsImgList from './ReviewsImgList';
 import AuthAlert from '../../../../../components/Alerts/Auth/AuthAlert';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
@@ -56,7 +55,6 @@ export default function ProfileAccordion({
     }
   };
 
-
   return (
     <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
       {/* WISHLIST */}
@@ -88,19 +86,19 @@ export default function ProfileAccordion({
         </AccordionDetails>
       </Accordion>
 
-      {/*   ORDER HISTORY  */}
+      {/*   REVIEW HISTORY  */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
           id='panel2-header'
         >
-          <Typography>Order History</Typography>
+          <Typography>Orders & Reviews</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {userData.buyHistory.length > 0 ? (
             <Typography variant='caption'>
-              <OrdersImgList
+              <ReviewsImgList
                 refetchUserData={refetchUserData}
                 loadUser={loadUser}
                 userData={userData}
@@ -117,32 +115,6 @@ export default function ProfileAccordion({
         </AccordionDetails>
       </Accordion>
 
-      {/*   REVIEW HISTORY  */}
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'
-        >
-          <Typography>Reviews</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {userData.ratings.length > 0 ? (
-            <Typography variant='caption'>
-              <ReviewsImgList
-                refetchUserData={refetchUserData}
-                loadUser={loadUser}
-                userData={userData}
-              />
-            </Typography>
-          ) : (
-            <Typography variant='caption'>
-              There have been 0 reviews left from this account.
-            </Typography>
-          )}
-        </AccordionDetails>
-      </Accordion>
-
       {/* ACCOUNT DETAILS */}
       <Accordion>
         <AccordionSummary
@@ -152,7 +124,7 @@ export default function ProfileAccordion({
         >
           <Typography>Account Details</Typography>
         </AccordionSummary>
-        <AccordionDetails >
+        <AccordionDetails>
           <Typography variant='caption'>
             <List>
               <ListItem>Account Type: {type}</ListItem>

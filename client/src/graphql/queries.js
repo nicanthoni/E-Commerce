@@ -82,10 +82,16 @@ export const User = gql`
       buyHistory {
         item {
           name
+          description
           price
           img
           vendor {
             vendorName
+          }
+          ratings {
+            review
+            stars
+            createdAt
           }
         }
         quantity
@@ -93,8 +99,6 @@ export const User = gql`
       ratings {
         item {
           name
-          img
-          description
         }
         review
         stars

@@ -23,7 +23,10 @@ const resolvers = {
         })
         .populate({
           path: 'buyHistory.item',
-          populate: { path: 'vendor' },
+          populate: [
+            { path: 'vendor' },
+            { path: 'ratings' }  // this line populates the ratings
+          ],
         })
         .populate({
           path: 'ratings',
