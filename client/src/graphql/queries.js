@@ -73,6 +73,7 @@ export const User = gql`
           img
           description
           name
+          category
           price
           vendor {
             vendorName

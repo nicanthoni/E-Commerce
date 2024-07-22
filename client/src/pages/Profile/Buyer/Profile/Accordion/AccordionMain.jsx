@@ -11,9 +11,8 @@ import { useMutation } from '@apollo/client';
 import { delete_user } from '../../../../../graphql/mutations';
 import { useLogout } from '../../../../../hooks/useLogout';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
-
 import WishImglist from './WishlistImgList';
-import ReviewsImgList from './ReviewsImgList';
+import OrdersAndReviewsImgList from './OrdersAndReviewsImgList';
 import AuthAlert from '../../../../../components/Alerts/Auth/AuthAlert';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
 
@@ -56,7 +55,7 @@ export default function ProfileAccordion({
   };
 
   return (
-    <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
+    <Box >
       {/* WISHLIST */}
       <Accordion defaultExpanded>
         <AccordionSummary
@@ -98,7 +97,7 @@ export default function ProfileAccordion({
         <AccordionDetails>
           {userData.buyHistory.length > 0 ? (
             <Typography variant='caption'>
-              <ReviewsImgList
+              <OrdersAndReviewsImgList
                 refetchUserData={refetchUserData}
                 loadUser={loadUser}
                 userData={userData}
@@ -106,7 +105,7 @@ export default function ProfileAccordion({
             </Typography>
           ) : (
             <Typography variant='caption'>
-              There have been 0 orders placed from this account. Explore items{' '}
+              There have been 0 orders placed. Explore items{' '}
               <Link underline='hover' fontWeight='bold' href='/explore'>
                 here!
               </Link>

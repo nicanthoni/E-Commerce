@@ -7,6 +7,7 @@ import {
   Modal,
   Rating,
   Link,
+  Stack,
 } from '@mui/material';
 import {
   ImageList,
@@ -17,7 +18,7 @@ import {
 import { formatDate } from '../../../../../utils/formatters/formatDate';
 import InfoIcon from '@mui/icons-material/Info';
 
-export default function ReviewsImgList({
+export default function OrdersAndReviewsImgList({
   refetchUserData,
   loadUser,
   userData,
@@ -85,23 +86,15 @@ export default function ReviewsImgList({
               onClose={() => handleCloseModal(index)}
               aria-labelledby='modal-modal-title'
               aria-describedby='modal-modal-description'
+              sx={{ alignContent: 'center', justifySelf: 'center' }}
             >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  width: 400,
-                  bgcolor: 'background.paper',
-                  border: '1px solid #000',
-                  boxShadow: 24,
-                  p: 4,
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
+              <Stack
+                alignItems='center'
+                width={400}
+                bgcolor='background.paper'
+                padding={4}
+                boxShadow={24}
+                gap={0}
               >
                 <img
                   srcSet={
@@ -129,7 +122,7 @@ export default function ReviewsImgList({
 
                 <Typography variant='caption' marginBottom={2}></Typography>
                 <Typography textAlign='center' variant='caption'>
-                  Reviewed on {' '}
+                  Reviewed on{' '}
                   {order.item.ratings.length > 0
                     ? formatDate(order.item.ratings[0].createdAt)
                     : 'No reviews'}
@@ -149,7 +142,7 @@ export default function ReviewsImgList({
                   }
                   readOnly
                 />
-              </Box>
+              </Stack>
             </Modal>
           </ImageListItem>
         ))}

@@ -56,7 +56,7 @@ export default function WishImglist({ refetchUserData, userData }) {
 
   return (
     <Box>
-      <ImageList>
+      <ImageList cols={3} >
         {userData.wishlist.map((item, index) => {
           return (
             <ImageListItem key={index}>
