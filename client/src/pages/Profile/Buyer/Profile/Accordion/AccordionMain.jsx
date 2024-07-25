@@ -11,10 +11,7 @@ import { useMutation } from '@apollo/client';
 import { delete_user } from '../../../../../graphql/mutations';
 import { useLogout } from '../../../../../hooks/useLogout';
 import { useAuthContext } from '../../../../../hooks/useAuthContext';
-
-import WishImglist from './WishlistImgList';
-import OrdersImgList from './OrdersImgList';
-import ReviewsImgList from './ReviewsImgList';
+import OrdersAndReviewsImgList from './OrdersAndReviewsImgList';
 import AuthAlert from '../../../../../components/Alerts/Auth/AuthAlert';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
 
@@ -56,51 +53,21 @@ export default function ProfileAccordion({
     }
   };
 
-
   return (
-    <Box sx={{ marginBottom: { xs: 8, md: 0 } }}>
-      {/* WISHLIST */}
-      <Accordion defaultExpanded>
-        <AccordionSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'
-        >
-          <Typography>Wishlist</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {userData.wishlist.length > 0 ? (
-            <Typography variant='caption'>
-              <WishImglist
-                refetchUserData={refetchUserData}
-                loadUser={loadUser}
-                userData={userData}
-              />
-            </Typography>
-          ) : (
-            <Typography variant='caption'>
-              There are 0 items in your wishlist. Explore items{' '}
-              <Link underline='hover' fontWeight='bold' href='/explore'>
-                here!
-              </Link>
-            </Typography>
-          )}
-        </AccordionDetails>
-      </Accordion>
-
-      {/*   ORDER HISTORY  */}
+    <Box>
+      {/*   Order & Review History */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
           id='panel2-header'
         >
-          <Typography>Order History</Typography>
+          <Typography>Orders & Reviews</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {userData.buyHistory.length > 0 ? (
             <Typography variant='caption'>
-              <OrdersImgList
+              <OrdersAndReviewsImgList
                 refetchUserData={refetchUserData}
                 loadUser={loadUser}
                 userData={userData}
@@ -108,36 +75,10 @@ export default function ProfileAccordion({
             </Typography>
           ) : (
             <Typography variant='caption'>
-              There have been 0 orders placed from this account. Explore items{' '}
+              There have been 0 orders placed. Explore items{' '}
               <Link underline='hover' fontWeight='bold' href='/explore'>
                 here!
               </Link>
-            </Typography>
-          )}
-        </AccordionDetails>
-      </Accordion>
-
-      {/*   REVIEW HISTORY  */}
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDropDownIcon />}
-          aria-controls='panel2-content'
-          id='panel2-header'
-        >
-          <Typography>Reviews</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {userData.ratings.length > 0 ? (
-            <Typography variant='caption'>
-              <ReviewsImgList
-                refetchUserData={refetchUserData}
-                loadUser={loadUser}
-                userData={userData}
-              />
-            </Typography>
-          ) : (
-            <Typography variant='caption'>
-              There have been 0 reviews left from this account.
             </Typography>
           )}
         </AccordionDetails>
@@ -152,7 +93,7 @@ export default function ProfileAccordion({
         >
           <Typography>Account Details</Typography>
         </AccordionSummary>
-        <AccordionDetails >
+        <AccordionDetails>
           <Typography variant='caption'>
             <List>
               <ListItem>Account Type: {type}</ListItem>

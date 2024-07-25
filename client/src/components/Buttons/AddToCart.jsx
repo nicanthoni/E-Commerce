@@ -12,6 +12,7 @@ export default function AddToCart({ onClick }) {
         color: 'primary.main',
         textTransform: 'none',
         borderRadius: 6,
+        textWrap: 'nowrap'
       }}
     >
       Add to cart

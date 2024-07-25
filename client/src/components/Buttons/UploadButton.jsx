@@ -24,6 +24,7 @@ export default function UploadButton({ onChange }) {
       sx={{
         color: 'primary.main',
         textTransform: 'none',
+        textWrap: 'nowrap',
       }}
     >
       Image

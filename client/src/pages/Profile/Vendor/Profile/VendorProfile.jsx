@@ -5,7 +5,7 @@ import {
   Grid,
   Avatar,
   Divider,
-  LinearProgress,
+  CircularProgress,
   Box,
 } from '@mui/material';
 import { Vendor } from '../../../../graphql/queries';
@@ -34,7 +34,7 @@ export default function VendorProfile() {
   if (loading) {
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary' />
+        <CircularProgress color='primary' />
       </Box>
     );
   }

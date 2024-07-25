@@ -11,9 +11,8 @@ import { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartLayout from '../../pages/Checkout/Drawer/CartLayout';
 import { useLazyQuery } from '@apollo/client';
-import { User, Cart } from '../../graphql/queries';
+import { User } from '../../graphql/queries';
 import { useAuthContext } from '../../hooks/useAuthContext';
-
 
 export default function CartDrawer() {
   let itemsInCart = 0;
@@ -21,19 +20,6 @@ export default function CartDrawer() {
 
   // Drawer state
   const [showCart, setShowCart] = useState(false);
-
-  // Load Cart - array of prodcutIds (items in users' cart). Refetch whenever item is added/removed
-  const [
-    loadCart,
-    {
-      loading: loadingCart,
-      data: cartData,
-      error: cartError,
-      refetch: refetchCart,
-    },
-  ] = useLazyQuery(Cart, {
-    variables: { id: id },
-  });
 
   // Load User
   const [
@@ -60,14 +46,16 @@ export default function CartDrawer() {
   useEffect(() => {
     if (user) {
       loadUser();
-      loadCart();
     }
-  }, [loadCart, loadUser, user]);
+  }, [loadUser, user]);
 
   // Set cart badge = number of items in users cart
-  if (user && cartData) {
-    itemsInCart = cartData.usersCart.length;
+  if (user && userData) {
+    itemsInCart = userData.user.cart.length;
   }
+
+  // Users cart data - ids
+  const cartData = userData?.user.cart.map((cartItem) => cartItem.item._id);
 
   return (
     <>
@@ -80,7 +68,7 @@ export default function CartDrawer() {
         sx={{ ml: { xs: 0, md: 0.5 }, color: 'text.secondary' }}
       >
         <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
-          <Badge badgeContent={itemsInCart} max={20} color='error' >
+          <Badge badgeContent={itemsInCart} max={20} color='error'>
             <ShoppingCartIcon />
           </Badge>
         </Box>
@@ -107,7 +95,6 @@ export default function CartDrawer() {
           <>
             <CartLayout
               refetchUserData={refetchUserData}
-              refetchCart={refetchCart}
               loadUser={loadUser}
               userId={id}
               userData={userData}

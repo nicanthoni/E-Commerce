@@ -19,11 +19,11 @@ const resolvers = {
         })
         .populate({
           path: 'wishlist.item',
-          populate: { path: 'vendor' },
+          populate: [{ path: 'vendor' }, { path: 'ratings' }],
         })
         .populate({
           path: 'buyHistory.item',
-          populate: { path: 'vendor' },
+          populate: [{ path: 'vendor' }, { path: 'ratings' }],
         })
         .populate({
           path: 'ratings',

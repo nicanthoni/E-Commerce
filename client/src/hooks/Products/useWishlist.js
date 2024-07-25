@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { add_wishlist, delete_wishlist } from "../../graphql/mutations";
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { add_wishlist, delete_wishlist } from '../../graphql/mutations';
 
 export const useWishlist = (refetch) => {
   const [stateError, setStateError] = useState(null);
@@ -30,7 +30,7 @@ export const useWishlist = (refetch) => {
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
-      console.error("addWishlist error in useWishlist() hook: ", e);
+      console.error('addWishlist error in useWishlist() hook: ', e);
     }
   };
 
@@ -48,7 +48,7 @@ export const useWishlist = (refetch) => {
     } catch (e) {
       setStateError(true);
       setIsLoading(false);
-      console.error("deleteWishlist error in useWishlist() hook: ", e);
+      console.error('deleteWishlist error in useWishlist() hook: ', e);
     }
   };
 

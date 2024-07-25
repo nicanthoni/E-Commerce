@@ -5,14 +5,13 @@ import {
   Stack,
   Rating,
   Link,
-  Avatar,
   Divider,
-  LinearProgress,
+  CircularProgress,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
-import { IndividualProduct, Cart, Wishlist } from '../../../graphql/queries';
+import { useEffect, useState, useMemo } from 'react';
+import { IndividualProduct, User } from '../../../graphql/queries';
 import { useAuthContext } from '../../../hooks/useAuthContext';
 import AddToCart from '../../../components/Buttons/AddToCart';
 import WishlistButton from '../../../components/Buttons/WishlistButton';
@@ -21,7 +20,6 @@ import { useWishlist } from '../../../hooks/Products/useWishlist';
 import { useCart } from '../../../hooks/Products/useCart';
 import ItemAlert from '../../../components/Alerts/Items/ItemUpdate';
 import RemoveFromCart from '../../../components/Buttons/RemoveFromCart';
-import Footer from '../../../components/Footer/Footer';
 
 export default function SingleProduct() {
   const { user, type, id: userId } = useAuthContext();
@@ -44,43 +42,52 @@ export default function SingleProduct() {
     { loading: productLoading, data: productData, error: productError },
   ] = useLazyQuery(IndividualProduct, { variables: { id: itemId } });
 
-  // loadWishlist Query - returns array of productIds (in users wishlist). Refetch when item is added/removed
-  const [loadWishlist, { data: wishlistData, refetch: refetchWishlist }] =
-    useLazyQuery(Wishlist, {
-      variables: { id: userId },
-    });
+  // Load User data (includes cart, wishlist, etc)
+  const [
+    loadUser,
+    {
+      loading: loadingUser,
+      data: userData,
+      error: userError,
+      refetch: refetchUserData,
+    },
+  ] = useLazyQuery(User, {
+    variables: { userId },
+  });
 
-  // loadCart Query - returns array of productIds (in users' cart). Refetch when item is added/removed
-  const [loadCart, { data: cartData, refetch: refetchCart }] = useLazyQuery(
-    Cart,
-    { variables: { id: userId } }
+
+  // Wishlist & Cart data
+  const usersWishlist = useMemo(
+    () =>
+      userData
+        ? userData.user.wishlist.map((cartItem) => cartItem.item._id)
+        : [],
+    [userData]
   );
 
-  // Grab cartItems IDs
-  const cartedItems = cartData ? cartData.usersCart : [];
+  const usersCart = useMemo(
+    () =>
+      userData ? userData.user.cart.map((cartItem) => cartItem.item._id) : [],
+    [userData]
+  );
 
-  // Check if item with matching id is in cart
-  const isInCart = cartedItems.includes(itemId);
+  // Check cart/wishlist for item
+  const isInCart = usersCart.includes(itemId);
+  const isInWishlist = usersWishlist.includes(itemId);
 
-  // Grab wishlistedItems IDs
-  const wishlistedItems = wishlistData ? wishlistData.usersWishlist : [];
 
-  // Check if item with matching id is in users wishlist
-  const isInWishlist = wishlistedItems.includes(itemId);
-
-  // Load product data, check users wishlist & cart for item
+  // Load product & user data
   useEffect(() => {
-    loadWishlist();
-    loadCart();
+    loadUser();
     loadProduct();
-  }, [loadProduct, loadCart, loadWishlist]);
+  }, [loadProduct, loadUser]);
 
-  // check if current item is in array of users wishlistedItems - setWishlistStatus state accoordingly
+  // check if current item is in array of users wishlist - setWishlistStatus state accoordingly
   useEffect(() => {
-    if (Array.isArray(wishlistedItems)) {
-      setWishlistStatus(wishlistedItems.includes(itemId));
+    if (Array.isArray(usersWishlist)) {
+      setWishlistStatus(usersWishlist.includes(itemId));
     }
-  }, [wishlistedItems, itemId]);
+  }, [usersWishlist, itemId]);
 
   if (productError) {
     console.error('GraphQL Error:', productError);
@@ -93,7 +100,7 @@ export default function SingleProduct() {
   if (productLoading) {
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary' />
+        <CircularProgress color='primary' />
       </Box>
     );
   }
@@ -126,7 +133,7 @@ export default function SingleProduct() {
             setItemAlertVisible(false);
           }, 1000);
         }
-        refetchWishlist(); // refetch wishlist after deleting or adding item
+        refetchUserData(); // refetch wishlist after deleting or adding item
       } catch (e) {
         console.log('Error: ', e);
       }
@@ -159,7 +166,7 @@ export default function SingleProduct() {
           setTimeout(() => {
             setItemAlertVisible(false);
           }, 1000);
-          refetchCart();
+          refetchUserData();
         } else {
           // if item's not in cart, add it
           await addCart(itemId, userId); // call add to cart hook
@@ -168,7 +175,7 @@ export default function SingleProduct() {
           setTimeout(() => {
             setItemAlertVisible(false);
           }, 1000);
-          refetchCart();
+          refetchUserData();
         }
       } catch (e) {
         console.log('Add to cart error:', e);
@@ -276,7 +283,7 @@ export default function SingleProduct() {
           <Divider variant='unset' sx={{ my: 0.5 }} />
 
           {/* Buttons */}
-          <Stack direction='row'>
+          <Stack direction='row' flexWrap='wrap'>
             <>
               {isInCart ? (
                 <RemoveFromCart onClick={handleCart} />

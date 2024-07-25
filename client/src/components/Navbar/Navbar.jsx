@@ -24,7 +24,6 @@ import LogoutButton from '../Buttons/Logout';
 import CategorySelection from '../Filters/Categories';
 import ToggleTheme from '../Switches/ThemeSwitch';
 
-
 export default function Navbar() {
   // Contexts
   const { user, id, type } = useAuthContext();
@@ -174,17 +173,30 @@ export default function Navbar() {
                 // authenticated users - Shop, Profile, & Logout
                 <>
                   {user && type === 'buyer' && (
-                    <Button
-                      key='Explore'
-                      sx={{ color: 'text.secondary', textTransform: 'none' }}
-                    >
-                      <Link
-                        href='/explore'
-                        sx={{ textDecoration: 'none', color: 'inherit' }}
+                    <>
+                      <Button
+                        key='Explore'
+                        sx={{ color: 'text.secondary', textTransform: 'none' }}
                       >
-                        Shop
-                      </Link>
-                    </Button>
+                        <Link
+                          href='/explore'
+                          sx={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                          Shop
+                        </Link>
+                      </Button>
+                      <Button
+                        key='Wishlist'
+                        sx={{ color: 'text.secondary', textTransform: 'none' }}
+                      >
+                        <Link
+                          href='/wishlist'
+                          sx={{ textDecoration: 'none', color: 'inherit' }}
+                        >
+                          Wishlist
+                        </Link>
+                      </Button>
+                    </>
                   )}
                   <Button
                     key='Profile'

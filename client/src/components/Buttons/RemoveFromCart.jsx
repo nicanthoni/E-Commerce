@@ -11,6 +11,7 @@ export default function RemoveFromCart({ onClick }) {
         bgcolor: 'text.alt',
         color: 'text.secondary',
         textTransform: 'none',
+        textWrap: 'nowrap',
         borderRadius: 6,
       }}
     >
