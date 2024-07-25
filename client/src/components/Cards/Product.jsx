@@ -25,8 +25,8 @@ export default function Product(props) {
   };
 
   return (
-    <Card elevation={2}>
-      <Stack gap={1} display='flex' textAlign='center'>
+    <Card elevation={3}>
+      <Stack gap={{xs: 0, sm: 1}} textAlign='center'>
         <Box alignSelf='flex-end'>
           <WishlistButton
             wishlistStatus={props.inWishlist}
@@ -55,7 +55,7 @@ export default function Product(props) {
             }
             alt={`Photo of a ${props.name}`}
             sx={{
-              width: '100%',
+              width: { xs: '90%', sm: '100%' },
               height: '100%',
               objectFit: 'contain',
             }}
@@ -71,11 +71,11 @@ export default function Product(props) {
                 display: '-webkit-box',
                 WebkitLineClamp: 1,
                 WebkitBoxOrient: 'vertical',
-                textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 1 lines
+                textOverflow: 'ellipsis', // ellipsis + hidden overflow if text exceeds 1 line
                 overflow: 'hidden',
               }}
             >
-              {props.name}
+              {props.name} 
             </Typography>
 
             {/* Rating */}
@@ -86,7 +86,9 @@ export default function Product(props) {
               readOnly
             />
             {/* Price */}
-            <Typography fontSize='small'>${props.price}</Typography>
+            <Typography fontSize='small' fontWeight='bold'>
+              ${props.price}
+            </Typography>
             {/* Button */}
             {!props.inCart ? (
               <AddToCart onClick={props.handleCart} />

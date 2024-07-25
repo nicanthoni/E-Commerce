@@ -207,7 +207,7 @@ export default function AllProducts(props) {
           {/* Product cards */}
           {currentProducts.map((result, index) => (
             <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
-              <Card sx={{ maxWidth: 300 }}>
+              <Card sx={{ maxWidth: 300 }} elevation={3}>
                 <Stack direction='column' alignItems='center'>
                   {/* Wishlist - button */}
                   <Box alignSelf='flex-end'>

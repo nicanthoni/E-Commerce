@@ -9,6 +9,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Product from '../../../components/Cards/Product';
 
+
 export default function WishlistPage() {
   // contexts
   const { user, id: userId } = useAuthContext();
@@ -17,27 +18,26 @@ export default function WishlistPage() {
   const { deleteWishlist } = useWishlist();
   const { addCart, deleteCart } = useCart();
 
-  // Carousel settings:
+  // Carousel settings: naming/sizes adjusted to match material ui
   const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 1024 },
+    lg: {
+      breakpoint: { max: 4000, min: 1200 },
       items: 6,
       slidesToSlide: 3,
     },
-    desktop: {
-      breakpoint: { max: 1024, min: 800 },
+    md: {
+      breakpoint: { max: 1200, min: 900 },
       items: 5,
       slidesToSlide: 3,
     },
-    tablet: {
-      breakpoint: { max: 800, min: 464 },
-      items: 5,
-      slidesToSlide: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
+    sm: {
+      breakpoint: { max: 900, min: 600 },
       items: 4,
+      slidesToSlide: 2,
+    },
+    xs: {
+      breakpoint: { max: 600, min: 0 },
+      items: 3,
       slidesToSlide: 2,
     },
   };
@@ -102,7 +102,7 @@ export default function WishlistPage() {
 
   // Users wishlist data
   const wishlist = data.user.wishlist.map((item, index) => (
-    <Box key={index} mx={1} mb={4}>
+    <Box key={index} mx={{xs: 0.3, sm: 0.5, md: 1}} mb={5} mt={2}>
       <Product
         isAuthenticated={user ? true : false}
         id={item.item._id}
@@ -126,7 +126,6 @@ export default function WishlistPage() {
         fontWeight='bold'
         textAlign='left'
         ml={1}
-        mb={2}
         mt={12}
       >
         My Wishlist ({wishlist.length})
