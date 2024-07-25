@@ -30,28 +30,23 @@ import {
 import { SortProductsContext } from '../../../contexts/SortContext';
 import Pagination from '../../../components/pagination/pagination';
 
-export default function AllProducts({
-  products, // product data
-  wishlistedItems, // itemIds in users wishlist
-  refetchWishlist, // refetch() itemIds in users wishlist
-  cartedItems, // itemIds in users cart
-  refetchCart, // refetch() itemIds in users cart
-  isMobile, // mediaQuery for mobile/medium size screens
-}) {
+export default function AllProducts(props) {
   // Contexts
   const { user, id: userId } = useAuthContext();
   const { selectedSortBy } = useContext(SortProductsContext);
 
   // Pagination - associated states
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(isMobile ? 16 : 12);
+  const [productsPerPage, setProductsPerPage] = useState(
+    props.isMobile ? 16 : 12
+  );
 
   // Wishlist & Cart statuses
   const [wishlistStatus, setWishlistStatus] = useState({});
   const [cartStatus, setCartStatus] = useState({});
 
   // SortBy state
-  const [sortedProducts, setSortedProducts] = useState(products); // Product data passed from <Explore/>
+  const [sortedProducts, setSortedProducts] = useState(props.products); // Product data passed from <Explore/>
 
   // Alert visibility and contents
   const [alertMessage, setAlertMessage] = useState('');
@@ -61,27 +56,27 @@ export default function AllProducts({
   const { addWishlist, deleteWishlist } = useWishlist();
   const { addCart, deleteCart } = useCart();
 
-  // Update wishlistStatus state based on wishlistedItems
+  // Update wishlistStatus state based on usersWishlist
   useEffect(() => {
-    if (Array.isArray(wishlistedItems)) {
+    if (Array.isArray(props.usersWishlist)) {
       const status = {};
-      products.forEach((product) => {
-        status[product._id] = wishlistedItems.includes(product._id);
+      props.products.forEach((product) => {
+        status[product._id] = props.usersWishlist.includes(product._id);
       });
       setWishlistStatus(status);
     }
-  }, [wishlistedItems, products]);
+  }, [props.usersWishlist, props.products]);
 
-  // Update cartStatus state based on cartedItems
+  // Update cartStatus state based on usersCart
   useEffect(() => {
-    if (Array.isArray(cartedItems)) {
+    if (Array.isArray(props.usersCart)) {
       const status = {};
-      products.forEach((product) => {
-        status[product._id] = cartedItems.includes(product._id);
+      props.products.forEach((product) => {
+        status[product._id] = props.usersCart.includes(product._id);
       });
       setCartStatus(status);
     }
-  }, [cartedItems, products]);
+  }, [props.usersCart, props.products]);
 
   // Effect to sort products based on selectedSortBy context value
   useEffect(() => {
@@ -94,8 +89,8 @@ export default function AllProducts({
         Newest: sortByNewest,
       }[selectedSortBy] || ((products) => products);
 
-    setSortedProducts(sortFunction([...products]));
-  }, [products, selectedSortBy]);
+    setSortedProducts(sortFunction([...props.products]));
+  }, [props.products, selectedSortBy]);
 
   // Pagination - products to display based on pagination
   const lastProductIndex = currentPage * productsPerPage;
@@ -108,7 +103,7 @@ export default function AllProducts({
   // Handle wishlist onClick
   const handleWishlist = async (itemId) => {
     if (user) {
-      const isInWishlist = wishlistedItems.includes(itemId); // Check if item with matching id is in wishlist
+      const isInWishlist = props.usersWishlist.includes(itemId); // Check if item with matching id is in wishlist
       try {
         if (isInWishlist) {
           // Item already wishlisted, so delete it
@@ -127,7 +122,7 @@ export default function AllProducts({
             setItemAlertVisible(false);
           }, 1000);
         }
-        refetchWishlist(); // refetch wishlist after deleting or adding item
+        props.refetchUserData(); // refetch wishlist after deleting or adding item
       } catch (e) {
         console.log('Error: ', e);
       }
@@ -144,7 +139,7 @@ export default function AllProducts({
   // Handle Cart onClick
   const handleCart = async (itemId) => {
     if (user) {
-      const isInCart = cartedItems.includes(itemId); // Check if item with matching id is in wishlist
+      const isInCart = props.usersCart.includes(itemId); // Check if item with matching id is in wishlist
       try {
         if (isInCart) {
           // if item's in the cart already, delete it
@@ -154,16 +149,16 @@ export default function AllProducts({
           setTimeout(() => {
             setItemAlertVisible(false);
           }, 1000);
-          refetchCart();
+          props.refetchUserData();
         } else {
           // if item's not in cart, add it
           await addCart(itemId, userId); // call add to cart hook
           setAlertMessage('Added'); // set message
-          setItemAlertVisible(true); // show alert
+          setItemAlertVisible(true); // show alertprops.props.
           setTimeout(() => {
             setItemAlertVisible(false);
           }, 1000);
-          refetchCart();
+          props.refetchUserData();
         }
       } catch (e) {
         console.log('Add to cart error:', e);
@@ -190,7 +185,7 @@ export default function AllProducts({
   return (
     <Grid container marginBottom={0} spacing={2} justifyContent='center'>
       {/* If no products in  category.... else */}
-      {!products || products.length === 0 ? (
+      {!props.products || props.products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
           <Typography variant='h6'>
             No items in stock for this category.
@@ -254,7 +249,7 @@ export default function AllProducts({
                     <CardContent>
                       {/* Product Name */}
                       <Typography
-                        fontWeight='bold'
+                        fontWeight='bolder'
                         fontSize='small'
                         sx={{
                           display: '-webkit-box',
@@ -282,7 +277,7 @@ export default function AllProducts({
 
                       {/* Cart - button */}
                       <Box mt={1}>
-                        {cartedItems.includes(result._id) ? (
+                        {props.usersCart.includes(result._id) ? (
                           <RemoveFromCart
                             onClick={() => handleCart(result._id)} // pass result._id to function as itemId
                           />
@@ -302,7 +297,7 @@ export default function AllProducts({
           <Grid item xs={12}>
             <Box display='flex' pt={4} pb={4} justifyContent='center'>
               <Pagination
-                totalProducts={products.length}
+                totalProducts={props.products.length}
                 productsPerPage={productsPerPage}
                 setCurrentPage={setCurrentPage}
                 currentPage={currentPage}

@@ -8,7 +8,6 @@ import { useCart } from '../../../hooks/Products/useCart';
 export default function CartItem({
   userId,
   userData,
-  refetchCart,
   refetchUserData,
 }) {
   // Alert States
@@ -30,7 +29,7 @@ export default function CartItem({
       await deleteCart(itemId, userId);
       setAlertMessage('Removed');
       setItemAlertVisible(true);
-      refetchCart(); // refetch the updated cart data
+      refetchUserData(); // refetch the updated cart data
       setTimeout(() => {
         setItemAlertVisible(false);
       }, 1000);
@@ -44,7 +43,7 @@ export default function CartItem({
   const handleQuantIncrease = async (itemId, quantity) => {
     try {
       await increaseQuantity(itemId, userId);
-      refetchCart(); // refetch the updated cart data
+
       refetchUserData(); // refetch updated user data
       // console.log('item quant after increase: ', quantity);
     } catch (e) {
@@ -56,7 +55,7 @@ export default function CartItem({
   const handleQuantDecrease = async (itemId, quantity) => {
     try {
       await decreaseQuantity(itemId, userId);
-      refetchCart(); // refetch the updated cart data
+
       refetchUserData(); // refetch updated user data
       // console.log('item quant after decrease: ', quantity);
     } catch (e) {
@@ -76,7 +75,6 @@ export default function CartItem({
           padding={3}
           flexWrap='nowrap'
           justifyContent='flex-start'
-          
         >
           {/* Product IMG & Incrementer */}
           <Stack gap={1} alignItems={'center'}>

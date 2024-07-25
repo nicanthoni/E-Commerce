@@ -1,4 +1,4 @@
-import { Typography, Container, Box, LinearProgress } from '@mui/material';
+import { Typography, Container, Box, CircularProgress } from '@mui/material';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../graphql/queries';
 import { useEffect } from 'react';
@@ -27,7 +27,7 @@ export default function BuyerProfile() {
   if (loading) {
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary' />
+        <CircularProgress color='primary' />
       </Box>
     );
   }

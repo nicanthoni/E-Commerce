@@ -9,7 +9,6 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  LinearProgress,
 } from '@mui/material';
 import { delete_Item } from '../../../graphql/mutations';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
@@ -51,7 +50,7 @@ export default function Inventory() {
   if (loading)
     return (
       <Box sx={{ width: '100%' }}>
-        <LinearProgress color='primary' />
+        <CircularProgress color='primary' />
       </Box>
     );
 

@@ -10,7 +10,6 @@ export default function CartLayout({
   loadUser,
   userData,
   cartData,
-  refetchCart,
   refetchUserData,
   userId,
 }) {
@@ -68,7 +67,7 @@ export default function CartLayout({
       </Grid>
 
       {/* Items in Cart*/}
-      {cartData.usersCart.length === 0 ? (
+      {cartData.length === 0 ? (
         <Grid item>
           <Typography variant='h6' sx={{ m: 2 }}>
             0 items in your cart.
@@ -95,7 +94,6 @@ export default function CartLayout({
           <CartItem
             userId={userId}
             refetchUserData={refetchUserData}
-            refetchCart={refetchCart}
             userData={userData}
             loadUser={loadUser}
             cartData={cartData}
@@ -104,7 +102,7 @@ export default function CartLayout({
       )}
 
       {/* Checkout Button & Subtotal */}
-      {cartData.usersCart.length === 0 ? null : (
+      {cartData.length === 0 ? null : (
         <Grid
           item
           sx={{

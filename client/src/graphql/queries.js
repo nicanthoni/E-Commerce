@@ -78,6 +78,9 @@ export const User = gql`
           vendor {
             vendorName
           }
+          ratings {
+            stars
+          }
         }
       }
       buyHistory {
