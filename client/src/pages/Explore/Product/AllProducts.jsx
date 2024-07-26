@@ -249,8 +249,8 @@ export default function AllProducts(props) {
                     <CardContent>
                       {/* Product Name */}
                       <Typography
-                        fontWeight='bolder'
-                        fontSize='small'
+                        fontWeight='bold'
+                        fontSize={{xs:'small', md: 'medium'}}
                         sx={{
                           display: '-webkit-box',
                           WebkitLineClamp: 1,

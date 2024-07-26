@@ -9,7 +9,6 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Product from '../../../components/Cards/Product';
 
-
 export default function WishlistPage() {
   // contexts
   const { user, id: userId } = useAuthContext();
@@ -102,7 +101,7 @@ export default function WishlistPage() {
 
   // Users wishlist data
   const wishlist = data.user.wishlist.map((item, index) => (
-    <Box key={index} mx={{xs: 0.3, sm: 0.5, md: 1}} mb={5} mt={2}>
+    <Box key={index} mx={{ xs: 0.3, sm: 0.4, md: 0.8, lg: 1 }} mb={5} mt={2}>
       <Product
         isAuthenticated={user ? true : false}
         id={item.item._id}
@@ -131,7 +130,7 @@ export default function WishlistPage() {
         My Wishlist ({wishlist.length})
       </Typography>
       <Box>
-        <Carousel responsive={responsive} showDots>
+        <Carousel responsive={responsive} keyBoarddC ontrol={true} showDots>
           {wishlist}
         </Carousel>
       </Box>
