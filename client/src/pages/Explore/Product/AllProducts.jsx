@@ -183,7 +183,7 @@ export default function AllProducts(props) {
   };
 
   return (
-    <Grid container marginBottom={0} spacing={2} justifyContent='center'>
+    <Grid container spacing={2} justifyContent='center'>
       {/* If no products in  category.... else */}
       {!props.products || props.products.length === 0 ? (
         <Grid item xs={12} textAlign='center'>
@@ -295,7 +295,7 @@ export default function AllProducts(props) {
           ))}
           {/* Pagination */}
           <Grid item xs={12}>
-            <Box display='flex' pt={4} pb={4} justifyContent='center'>
+            <Box display='flex' pt={3} pb={3} justifyContent='center'>
               <Pagination
                 totalProducts={props.products.length}
                 productsPerPage={productsPerPage}

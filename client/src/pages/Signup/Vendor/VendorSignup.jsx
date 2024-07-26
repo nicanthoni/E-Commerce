@@ -123,10 +123,9 @@ export default function VendorSignup() {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' maxWidth='xs' sx={{ marginTop: 6 }}>
       <Box
         sx={{
-          marginTop: 12,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

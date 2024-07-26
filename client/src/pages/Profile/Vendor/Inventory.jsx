@@ -49,7 +49,7 @@ export default function Inventory() {
   // If loading
   if (loading)
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box marginTop={8} sx={{ width: '100%' }}>
         <CircularProgress color='primary' />
       </Box>
     );
@@ -165,30 +165,37 @@ export default function Inventory() {
   };
 
   return (
-    <Container maxWidth='md'>
-      <Box marginTop={12} textAlign='center'>
-        <Typography variant='h6' marginBottom={2}>
-          Inventory Management
-        </Typography>
-        {/* Data grid */}
-        <DataGrid
-          sx={{ bgcolor: 'white.main' }}
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
+    <Container maxWidth='md' sx={{ marginTop: 6 }}>
+      <Typography textAlign='center' variant='h6' marginBottom={2}>
+        Inventory Management
+      </Typography>
+
+      {/* Data grid */}
+      <DataGrid
+        sx={{
+          bgcolor: 'white.main',
+          '& .MuiDataGrid-checkboxInput': {
+            color: 'text.primary', // Change to the desired color when NOT checked
+            '&.Mui-checked': {
+              color: 'action.active', // Change to the desired color when checked
             },
-          }}
-          pageSizeOptions={[10, 25, 50]}
-          checkboxSelection
-          disableRowSelectionOnClick
-          disableMultipleRowSelection
-          onRowSelectionModelChange={(newSelection) =>
-            onRowSelection(newSelection)
-          }
-        />
-      </Box>
+          },
+        }}
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        pageSizeOptions={[10, 25, 50]}
+        checkboxSelection
+        disableRowSelectionOnClick
+        disableMultipleRowSelection
+        onRowSelectionModelChange={(newSelection) =>
+          onRowSelection(newSelection)
+        }
+      />
 
       {/* Deletion Confirmation */}
       <Dialog open={deleteConfirmation} onClose={handleClose}>

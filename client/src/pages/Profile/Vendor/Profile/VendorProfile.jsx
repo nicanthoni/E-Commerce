@@ -49,10 +49,10 @@ export default function VendorProfile() {
   return (
     <>
       <Container maxWidth='md'>
-        <Grid container direction='column' marginTop={12}>
+        <Grid container direction='column' marginTop={6} gap={4}>
           {/* OVERVIEW stats */}
-          <Grid item marginBottom={4}>
-            <Stack direction='column' alignItems='center' spacing={1}>
+          <Grid item >
+            <Stack direction='column' alignItems='center' spacing={2}>
               <Avatar
                 sx={{ bgcolor: 'action.active' }}
                 alt={`${vendorData.vendorName}'s Logo`}
@@ -72,7 +72,7 @@ export default function VendorProfile() {
                 justifyContent='space-around'
                 alignItems='center'
                 textAlign='center'
-                spacing={3}
+                spacing={5}
               >
                 <Stack alignItems='center'>
                   <Typography fontWeight='bold' color='secondary.main'>

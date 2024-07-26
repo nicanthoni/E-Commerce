@@ -56,13 +56,13 @@ export default function WishlistPage() {
   }
   if (loading) {
     return (
-      <Box mt={12} px={10} sx={{ width: '100%' }}>
+      <Box mt={8} sx={{ width: '100%' }}>
         <CircularProgress color='primary' />
       </Box>
     );
   }
   if (!data || !data.user) {
-    return <Typography mt={12}>No user data found</Typography>;
+    return <Typography mt={8}>No user data found</Typography>;
   }
 
   // Users cart data - ids
@@ -119,14 +119,8 @@ export default function WishlistPage() {
   ));
 
   return (
-    <Container maxWidth='xl' className='Wishlist container'>
-      <Typography
-        variant='h6'
-        fontWeight='bold'
-        textAlign='left'
-        ml={1}
-        mt={12}
-      >
+    <Container maxWidth='xl' className='Wishlist container' sx={{ marginTop: 6 }}>
+      <Typography variant='h6' fontWeight='bold' textAlign='left' ml={1}>
         My Wishlist ({wishlist.length})
       </Typography>
       <Box>

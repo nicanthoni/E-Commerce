@@ -33,7 +33,8 @@ export default function BottomNav() {
     <>
       {/* Only display on mobile view */}
       {isMobile ? (
-        <Box>
+        // pt on box keeps footer in view on mobile mode
+        <Box pt={7}> 
           <Paper
             sx={{
               opacity: 0.95,

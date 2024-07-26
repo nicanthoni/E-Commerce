@@ -102,7 +102,7 @@ export default function Explore() {
         justifyContent='center'
         alignContent='center'
         bgcolor='#BF0F0F'
-        sx={{ marginTop: { xs: 18.5, sm: 19.5, md: 14 } }}
+        sx={{ marginTop: { xs: 12, sm: 13, md: 7.5 } }}
       >
         <Promotion />
       </Box>
@@ -129,7 +129,7 @@ export default function Explore() {
           </Grid>
 
           {/* Products */}
-          <Grid item xs={12} marginBottom={-1}>
+          <Grid item xs={12} >
             <AllProducts
               isMobile={isMobile}
               key={selectedCategory} //  'key' helps React differentiate between products & update more efficiently

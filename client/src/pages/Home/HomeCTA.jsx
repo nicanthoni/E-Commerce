@@ -3,7 +3,7 @@ import GetStarted from '../../components/Buttons/GetStarted';
 
 export default function HomeCTA() {
   return (
-    <Stack direction='column' alignItems={'center'} padding={5} gap={2}>
+    <Stack direction='column' alignItems='center' textAlign='center' padding={5} gap={2}>
       <Typography variant='h4' color='text.secondary'>
         The e-commerce experience for all
       </Typography>

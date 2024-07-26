@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { Grid, Avatar, Stack } from '@mui/material';
 import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
-import { formatDate } from '../../../../utils/formatters/formatDate';
 
 export default function BuyerProfile() {
   const { user, id } = useAuthContext();
@@ -26,7 +25,7 @@ export default function BuyerProfile() {
   }
   if (loading) {
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box marginTop={8} sx={{ width: '100%' }}>
         <CircularProgress color='primary' />
       </Box>
     );
@@ -42,10 +41,10 @@ export default function BuyerProfile() {
   return (
     <>
       <Container maxWidth='md'>
-        <Grid container direction='column' marginTop={12}>
+        <Grid container direction='column' marginTop={6} gap={4}>
           {/* OVERVIEW stats */}
-          <Grid item marginBottom={4}>
-            <Stack direction='column' alignItems='center' spacing={1}>
+          <Grid item>
+            <Stack direction='column' alignItems='center' spacing={2}>
               <Avatar
                 sx={{ bgcolor: 'action.active' }}
                 alt={`${userData.firstName}'s Avatar`}
@@ -55,16 +54,12 @@ export default function BuyerProfile() {
                 Hi, {userData.firstName}
               </Typography>
 
-              <Typography textAlign='center' variant='caption'>
-                Member since {formatDate(userData.createdAt)}
-              </Typography>
-
               <Stack
                 direction='row'
                 justifyContent='space-around'
                 alignItems='center'
                 textAlign='center'
-                spacing={3}
+                spacing={5}
               >
                 <Stack alignItems='center'>
                   <Typography fontWeight='bold' color='secondary.main'>
