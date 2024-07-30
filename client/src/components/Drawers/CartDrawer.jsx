@@ -112,7 +112,7 @@ export default function CartDrawer() {
                 href='/signin'
                 variant='contained'
                 color='secondary'
-                sx={{ textTransform: 'none', mx: 3, borderRadius: 6 }}
+                sx={{ textTransform: 'none', mx: 3, borderRadius: 6,  fontWeight: 'bold'  }}
               >
                 Sign in
               </Button>

@@ -18,7 +18,7 @@ export default function HomeServices() {
           variant='contained'
           href='signup/buyer'
           color='secondary'
-          sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6 }}
+          sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6,  fontWeight: 'bold' }}
         >
           Shop
         </Button>
@@ -30,7 +30,7 @@ export default function HomeServices() {
           variant='contained'
           href='/signup/vendor'
           color='secondary'
-          sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6 }}
+          sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6,  fontWeight: 'bold'  }}
         >
           Sell
         </Button>
@@ -42,7 +42,7 @@ export default function HomeServices() {
           variant='contained'
           href='/support'
           color='secondary'
-          sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6 }}
+          sx={{ color: 'primary.main', textTransform: 'none', borderRadius: 6,  fontWeight: 'bold'  }}
         >
           Support
         </Button>

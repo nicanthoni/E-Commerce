@@ -11,6 +11,7 @@ export default function LogoutButton({ onClick }) {
         color: 'primary.main',
         textTransform: 'none',
         borderRadius: 6,
+        fontWeight: 'bold' 
       }}
     >
       Logout

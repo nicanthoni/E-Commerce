@@ -9,7 +9,7 @@ export default function GetStarted() {
       color='secondary'
       variant='contained'
       href={!user ? '/signup' : '/profile'} // if already logged in, send to profile instead
-      sx={{ textTransform: 'none', borderRadius: 6, textWrap: 'nowrap',}}
+      sx={{ textTransform: 'none', borderRadius: 6, textWrap: 'nowrap', fontWeight: 'bold' }}
     >
       Get Started
     </Button>
