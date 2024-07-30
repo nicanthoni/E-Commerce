@@ -14,6 +14,7 @@ import { useAuthContext } from '../../../../../hooks/useAuthContext';
 import OrdersAndReviewsImgList from './OrdersAndReviewsImgList';
 import AuthAlert from '../../../../../components/Alerts/Auth/AuthAlert';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
+import { formatDate } from '../../../../../utils/formatters/formatDate';
 
 export default function ProfileAccordion({
   refetchUserData,
@@ -56,7 +57,7 @@ export default function ProfileAccordion({
   return (
     <Box>
       {/*   Order & Review History */}
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
@@ -82,10 +83,10 @@ export default function ProfileAccordion({
             </Typography>
           )}
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       {/* ACCOUNT DETAILS */}
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
@@ -96,18 +97,21 @@ export default function ProfileAccordion({
         <AccordionDetails>
           <Typography variant='caption'>
             <List>
-              <ListItem>Account Type: {type}</ListItem>
               <ListItem>
                 Name: {userData.firstName} {userData.lastName}
               </ListItem>
               <ListItem>Email Address: {userData.email}</ListItem>
+              <ListItem>Account Type: {type}</ListItem>
+              <ListItem>
+                Member since: {formatDate(userData.createdAt)}
+              </ListItem>
               <ListItem>
                 <DeleteAccountButton onClick={handleDeleteAccount} />
               </ListItem>
             </List>
           </Typography>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       {/* Alert - visibility controlled by local state */}
       <AuthAlert visible={showAlert} message={alertMessage} />

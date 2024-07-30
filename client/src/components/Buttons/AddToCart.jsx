@@ -1,21 +1,25 @@
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-export default function AddToCart({ onClick }) {
+export default function AddToCart(props) {
   // onClick = callback function defined in parent
 
   return (
     <Button
-      onClick={onClick}
+      onClick={props.onClick}
       variant='contained'
       color='secondary'
+      endIcon={<AddShoppingCartIcon />}
       sx={{
-        color: 'primary.main',
+        color: 'text.secondary',
         textTransform: 'none',
+        textWrap: 'nowrap',
         borderRadius: 6,
-        textWrap: 'nowrap'
+        fontWeight: 'bold',
       }}
     >
-      Add to cart
+      Add
     </Button>
   );
 }

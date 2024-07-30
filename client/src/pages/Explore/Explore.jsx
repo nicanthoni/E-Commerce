@@ -65,17 +65,25 @@ export default function Explore() {
 
   if (productsError) {
     console.error('GraphQL Products Error:', productsError);
-    return <Typography mt={12}>Error fetching product data</Typography>;
+    return (
+      <Typography textAlign='center' variant='h6' mt={13}>
+        Error fetching product data
+      </Typography>
+    );
   }
 
   if (userError) {
     console.error('GraphQL User Error:', userError);
-    return <Typography mt={12}>Error fetching user data</Typography>;
+    return (
+      <Typography textAlign='center' variant='h6' mt={13}>
+        Error fetching user data
+      </Typography>
+    );
   }
 
   if (loadingProducts || loadingUser) {
     return (
-      <Box mt={12} sx={{ width: '100%' }}>
+      <Box mt={13} sx={{ width: '100%' }}>
         <CircularProgress color='primary' />
       </Box>
     );
@@ -102,7 +110,7 @@ export default function Explore() {
         justifyContent='center'
         alignContent='center'
         bgcolor='#BF0F0F'
-        sx={{ marginTop: { xs: 18.5, sm: 19.5, md: 14 } }}
+        sx={{ marginTop: { xs: 12, sm: 13, md: 7.5 } }}
       >
         <Promotion />
       </Box>
@@ -129,7 +137,7 @@ export default function Explore() {
           </Grid>
 
           {/* Products */}
-          <Grid item xs={12} marginBottom={-1}>
+          <Grid item xs={12}>
             <AllProducts
               isMobile={isMobile}
               key={selectedCategory} //  'key' helps React differentiate between products & update more efficiently

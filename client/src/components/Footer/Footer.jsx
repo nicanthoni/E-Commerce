@@ -8,7 +8,7 @@ export default function Footer(props) {
     <Box
       component='footer'
       sx={{
-        py: 4,
+        py: 2,
       }}
     >
       <Container maxWidth='xl'>

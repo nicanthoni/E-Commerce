@@ -124,10 +124,9 @@ export default function BuyerSignup() {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' maxWidth='xs' sx={{ marginTop: 6 }}>
       <Box
         sx={{
-          marginTop: 12,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -152,7 +151,7 @@ export default function BuyerSignup() {
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
                 InputLabelProps={{
-                  sx: { color: 'text.primary' } // Change the label color
+                  sx: { color: 'text.primary' }, // Change the label color
                 }}
                 autoFocus
               />
@@ -168,7 +167,7 @@ export default function BuyerSignup() {
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
                 InputLabelProps={{
-                  sx: { color: 'text.primary' } // Change the label color
+                  sx: { color: 'text.primary' }, // Change the label color
                 }}
               />
             </Grid>
@@ -183,7 +182,7 @@ export default function BuyerSignup() {
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
                 InputLabelProps={{
-                  sx: { color: 'text.primary' } // Change the label color
+                  sx: { color: 'text.primary' }, // Change the label color
                 }}
               />
             </Grid>
@@ -199,7 +198,7 @@ export default function BuyerSignup() {
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
                 InputLabelProps={{
-                  sx: { color: 'text.primary' } // Change the label color
+                  sx: { color: 'text.primary' }, // Change the label color
                 }}
               />
             </Grid>
@@ -235,8 +234,6 @@ export default function BuyerSignup() {
 
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showSignupAlert} message={alertMessage} />
-
-
     </Container>
   );
 }

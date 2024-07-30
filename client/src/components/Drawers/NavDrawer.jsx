@@ -26,11 +26,10 @@ import LoginIcon from '@mui/icons-material/Login';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Avatar } from '@mui/material';
-import WidgetsIcon from '@mui/icons-material/Widgets';
-import ThemeSwitch from '../Switches/ThemeSwitch';
 import { Link } from '@mui/material';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function NavDrawer() {
   const { logout } = useLogout();
@@ -88,18 +87,13 @@ export default function NavDrawer() {
               sx={{ bgcolor: 'text.secondary', color: 'primary.main' }}
             />
           ) : (
-            <LogoDevIcon sx={{ color: 'text.secondary' }}/>
+            <LogoDevIcon sx={{ color: 'text.secondary' }} />
           )}
         </Typography>
       </Box>
 
       {/* DRAWER ITEMS */}
       <List sx={{ display: 'inline-block' }}>
-        {/* Toggle Mode (dark & light) */}
-        <ListItem key='mode'>
-          <ThemeSwitch />
-        </ListItem>
-
         {/* SHOP - buyer */}
         {user && type === 'vendor' ? null : user && type === 'buyer' ? (
           <ListItem key='Shop' disablePadding>
@@ -217,23 +211,6 @@ export default function NavDrawer() {
           </ListItem>
         ) : null}
 
-        {/* WISHLIST - buyer */}
-        {user && type === 'buyer' ? (
-          <ListItem key='Dashboard' disablePadding>
-            <ListItemButton onClick={closeDrawer}>
-              <ListItemIcon sx={{ minWidth: '30px' }}>
-                <FavoriteIcon sx={{ color: 'text.secondary' }} />
-              </ListItemIcon>
-              <Link
-                href='/wishlist'
-                sx={{ textDecoration: 'none', color: 'text.secondary' }}
-              >
-                <ListItemText primary='Wishlist' />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-        ) : null}
-
         {/* INBOX - authorized users */}
         {!user ? null : (
           <ListItem key='Inbox' disablePadding>
@@ -314,7 +291,7 @@ export default function NavDrawer() {
         onClick={handleDrawerToggle}
         sx={{ color: 'text.secondary' }}
       >
-        <WidgetsIcon />
+        <MenuIcon />
       </IconButton>
 
       <Drawer

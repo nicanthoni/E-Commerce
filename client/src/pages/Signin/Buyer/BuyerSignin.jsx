@@ -66,10 +66,9 @@ export default function Signin() {
   };
 
   return (
-    <Container component='main' maxWidth='xs'>
+    <Container component='main' maxWidth='xs' sx={{ marginTop: 6 }}>
       <Box
         sx={{
-          marginTop: 12,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -83,7 +82,6 @@ export default function Signin() {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-         
                 autoFocus
                 required
                 fullWidth
@@ -94,9 +92,8 @@ export default function Signin() {
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
                 InputLabelProps={{
-                  sx: { color: 'text.primary' } // Change the label color
+                  sx: { color: 'text.primary' }, // Change the label color
                 }}
-              
               />
             </Grid>
             <Grid item xs={12}>
@@ -112,7 +109,7 @@ export default function Signin() {
                 onChange={handleChange}
                 sx={{ bgcolor: 'white.main' }}
                 InputLabelProps={{
-                  sx: { color: 'text.primary' } // Change the label color
+                  sx: { color: 'text.primary' }, // Change the label color
                 }}
               />
             </Grid>
@@ -148,8 +145,6 @@ export default function Signin() {
 
       {/* ⚠️ Alert ⚠️ */}
       <AuthAlert visible={showLoginAlert} message={alertMessage} />
-
-
     </Container>
   );
 }

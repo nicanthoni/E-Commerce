@@ -43,11 +43,10 @@ export default function AccountType() {
 
   return (
     <>
-      <Grid container>
+      <Grid container marginTop={6}>
         <Grid item xs={12}>
           <Box
             sx={{
-              marginTop: 12,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -69,14 +68,13 @@ export default function AccountType() {
                   onChange={handleRadioChange}
                 >
                   <FormControlLabel
-                  
                     value='buyer'
-                    control={<Radio sx={{ color: 'primary.main'}}/>}
+                    control={<Radio sx={{ color: 'primary.main' }} />}
                     label='Buyer'
                   />
                   <FormControlLabel
                     value='vendor'
-                    control={<Radio sx={{ color: 'primary.main'}}/>}
+                    control={<Radio sx={{ color: 'primary.main' }} />}
                     label='Vendor'
                   />
                 </RadioGroup>
@@ -107,7 +105,6 @@ export default function AccountType() {
           </Box>
         </Grid>
       </Grid>
-     
     </>
   );
 }

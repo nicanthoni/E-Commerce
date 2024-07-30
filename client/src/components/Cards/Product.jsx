@@ -8,6 +8,7 @@ import {
   Typography,
   Rating,
   Link,
+  Modal,
 } from '@mui/material';
 import AddToCart from '../Buttons/AddToCart';
 import RemoveFromCart from '../Buttons/RemoveFromCart';
@@ -25,8 +26,8 @@ export default function Product(props) {
   };
 
   return (
-    <Card elevation={2}>
-      <Stack gap={1} display='flex' textAlign='center'>
+    <Card elevation={3}>
+      <Stack textAlign='center'>
         <Box alignSelf='flex-end'>
           <WishlistButton
             wishlistStatus={props.inWishlist}
@@ -34,7 +35,7 @@ export default function Product(props) {
           />
         </Box>
         <CardActionArea
-          component={Link}
+          component={props.listType === 'wishlist' ? Link : null} // determine the component type by listType prop
           href={`/product/${props.id}`}
           sx={{
             width: '100%',
@@ -55,23 +56,30 @@ export default function Product(props) {
             }
             alt={`Photo of a ${props.name}`}
             sx={{
-              width: '100%',
-              height: '100%',
+              width: { xs: '80%', sm: '90%', md: '100%' },
+              height: { xs: '80%', sm: '90%', md: '100%' },
               objectFit: 'contain',
+              pb: 1,
             }}
           />
         </CardActionArea>
         <Stack bgcolor='background.default' width='100%' alignItems='center'>
-          <CardContent>
+          <CardContent
+            sx={{
+              '&:last-child': {
+                paddingBottom: 2,
+              },
+            }}
+          >
             {/* Name */}
             <Typography
-              fontWeight='bolder'
-              fontSize='small'
+              fontWeight='bold'
+              fontSize={{ xs: 'small', sm: 'medium' }}
               sx={{
                 display: '-webkit-box',
                 WebkitLineClamp: 1,
                 WebkitBoxOrient: 'vertical',
-                textOverflow: 'ellipsis', // ellipsis + hidden overflow if content exceeds 1 lines
+                textOverflow: 'ellipsis', // ellipsis + hidden overflow if text exceeds 1 line
                 overflow: 'hidden',
               }}
             >
@@ -86,13 +94,17 @@ export default function Product(props) {
               readOnly
             />
             {/* Price */}
-            <Typography fontSize='small'>${props.price}</Typography>
+            <Typography fontSize='small' fontWeight='bold'>
+              ${props.price}
+            </Typography>
             {/* Button */}
-            {!props.inCart ? (
-              <AddToCart onClick={props.handleCart} />
-            ) : (
-              <RemoveFromCart onClick={props.handleCart} />
-            )}
+            <Box pt={1.5}>
+              {!props.inCart ? (
+                <AddToCart onClick={props.handleCart} />
+              ) : (
+                <RemoveFromCart onClick={props.handleCart} />
+              )}
+            </Box>
           </CardContent>
         </Stack>
       </Stack>

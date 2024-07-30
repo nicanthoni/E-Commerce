@@ -55,7 +55,6 @@ export default function SingleProduct() {
     variables: { userId },
   });
 
-
   // Wishlist & Cart data
   const usersWishlist = useMemo(
     () =>
@@ -74,7 +73,6 @@ export default function SingleProduct() {
   // Check cart/wishlist for item
   const isInCart = usersCart.includes(itemId);
   const isInWishlist = usersWishlist.includes(itemId);
-
 
   // Load product & user data
   useEffect(() => {
@@ -216,7 +214,7 @@ export default function SingleProduct() {
           alignItems: 'flex-end',
           justifyContent: 'center',
 
-          marginTop: { xs: 15, md: 18 },
+          marginTop: { xs: 12, md: 14 },
         }}
       >
         {/* Image & Rating Stack */}
@@ -274,11 +272,11 @@ export default function SingleProduct() {
             {productData.item.name}
           </Typography>
 
+          <Typography component='div'>${productData.item.price}</Typography>
+
           <Typography variant='caption' component='div'>
             {productData.item.description}
           </Typography>
-
-          <Typography component='div'>${productData.item.price}</Typography>
 
           <Divider variant='unset' sx={{ my: 0.5 }} />
 
