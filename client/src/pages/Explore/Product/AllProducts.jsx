@@ -4,8 +4,6 @@ import {
   CardContent,
   CardMedia,
   CardActionArea,
-  useMediaQuery,
-  useTheme,
   Box,
   Rating,
 } from '@mui/material';
@@ -250,7 +248,7 @@ export default function AllProducts(props) {
                       {/* Product Name */}
                       <Typography
                         fontWeight='bold'
-                        fontSize={{xs:'small', md: 'medium'}}
+                        fontSize={{ xs: 'small', md: 'medium' }}
                         sx={{
                           display: '-webkit-box',
                           WebkitLineClamp: 1,

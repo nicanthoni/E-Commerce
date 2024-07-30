@@ -1,16 +1,43 @@
 import { Typography, Container, Box, CircularProgress } from '@mui/material';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../graphql/queries';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { Grid, Avatar, Stack } from '@mui/material';
-import ProfileAccordions from './Accordion/AccordionMain';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
+import ProfileTabs from '../../../../components/Tabs/ProfilePage';
+import { useLogout } from '../../../../hooks/useLogout';
+import { delete_user } from '../../../../graphql/mutations';
+import { formatDate } from '../../../../utils/formatters/formatDate';
+import AuthAlert from '../../../../components/Alerts/Auth/AuthAlert';
+import { useWishlist } from '../../../../hooks/Products/useWishlist';
+import { useCart } from '../../../../hooks/Products/useCart';
+import 'react-multi-carousel/lib/styles.css';
 
 export default function BuyerProfile() {
-  const { user, id } = useAuthContext();
+  // Hooks
+  const { user, id: userId, type } = useAuthContext();
+  const { logout } = useLogout();
+  const { deleteWishlist } = useWishlist();
+  const { addCart, deleteCart } = useCart();
+
+  // Alert states
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+
+  // Modal states
+  const [openModal, setOpenModal] = useState([]);
+
+  // Mutation
+  const [
+    DeleteUser,
+    { loading: deletionLoading, data: deletionData, error: deletionError },
+  ] = useMutation(delete_user);
+
+  // Query - load user data
   const [loadUser, { loading, data, error, refetch: refetchUserData }] =
     useLazyQuery(User, {
-      variables: { userId: id },
+      variables: { userId },
     });
 
   useEffect(() => {
@@ -34,16 +61,73 @@ export default function BuyerProfile() {
     return <Typography>No user data found</Typography>;
   }
 
-  // User data object
+  // User data
   const userData = data.user;
-  // console.log('user data: ', userData)
+
+  // Users cart data - ids
+  const cartData = data.user.cart.map((cartItem) => cartItem.item._id);
+
+  // Handle account deletion
+  const handleDeleteAccount = async () => {
+    try {
+      await DeleteUser({ variables: { userId } }); // delete user
+      setAlertMessage('Account successfuly deleted.');
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        logout();
+      }, 2000);
+    } catch (e) {
+      console.log('User Deletion error: ', e);
+    }
+  };
+
+  // Handle wishlist item (removal)
+  const handleWishlist = async (itemId) => {
+    try {
+      await deleteWishlist(itemId, userId);
+      refetchUserData(); // refetch data
+    } catch (e) {
+      // console.log('Error removing wishlist item: ', e);
+    }
+  };
+
+  // Handle cart item (add & remove)
+  const handleCart = async (itemId) => {
+    const isInCart = cartData.includes(itemId); // Check if item with matching id is in wishlist
+    try {
+      if (isInCart) {
+        await deleteCart(itemId, userId);
+        refetchUserData();
+      } else {
+        await addCart(itemId, userId);
+        refetchUserData();
+      }
+    } catch (e) {
+      console.log('Add to cart error:', e);
+    }
+  };
+
+  // Handle Open Modal - for order history items
+  const handleOpenModal = (index) => {
+    const newOpenModal = [...openModal];
+    newOpenModal[index] = true;
+    setOpenModal(newOpenModal);
+  };
+
+  // Handle Close Modal - for order history items
+  const handleCloseModal = (index) => {
+    const newOpenModal = [...openModal];
+    newOpenModal[index] = false;
+    setOpenModal(newOpenModal);
+  };
 
   return (
     <>
-      <Container maxWidth='md'>
-        <Grid container direction='column' marginTop={6} gap={4}>
+      <Container maxWidth='lg'>
+        <Grid container marginTop={6} gap={4}>
           {/* OVERVIEW stats */}
-          <Grid item>
+          <Grid item xs={12}>
             <Stack direction='column' alignItems='center' spacing={2}>
               <Avatar
                 sx={{ bgcolor: 'action.active' }}
@@ -83,16 +167,28 @@ export default function BuyerProfile() {
             </Stack>
           </Grid>
 
-          {/* ACCORDIONS - component  */}
-          <Grid item>
-            <ProfileAccordions
+          <Grid item xs={12}>
+            <ProfileTabs
               refetchUserData={refetchUserData}
               loadUser={loadUser}
               userData={userData}
-              userId={id}
+              userId={userId}
+              name={userData.firstName + ' ' + userData.lastName}
+              email={userData.email}
+              accountType={type}
+              memberSince={formatDate(userData.createdAt)}
+              onClick={handleDeleteAccount}
+              isAuthenticated={user ? true : false}
+              handleWishlist={handleWishlist}
+              handleCart={handleCart}
+              openModal={handleOpenModal}
+              closeModal={handleCloseModal}
             />
           </Grid>
         </Grid>
+
+        {/* Alert - visibility controlled by local state */}
+        <AuthAlert visible={showAlert} message={alertMessage} />
       </Container>
     </>
   );

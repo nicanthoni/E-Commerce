@@ -173,30 +173,17 @@ export default function Navbar() {
                 // authenticated users - Shop, Profile, & Logout
                 <>
                   {user && type === 'buyer' && (
-                    <>
-                      <Button
-                        key='Explore'
-                        sx={{ color: 'text.secondary', textTransform: 'none' }}
+                    <Button
+                      key='Explore'
+                      sx={{ color: 'text.secondary', textTransform: 'none' }}
+                    >
+                      <Link
+                        href='/explore'
+                        sx={{ textDecoration: 'none', color: 'inherit' }}
                       >
-                        <Link
-                          href='/explore'
-                          sx={{ textDecoration: 'none', color: 'inherit' }}
-                        >
-                          Shop
-                        </Link>
-                      </Button>
-                      <Button
-                        key='Wishlist'
-                        sx={{ color: 'text.secondary', textTransform: 'none' }}
-                      >
-                        <Link
-                          href='/wishlist'
-                          sx={{ textDecoration: 'none', color: 'inherit' }}
-                        >
-                          Wishlist
-                        </Link>
-                      </Button>
-                    </>
+                        Shop
+                      </Link>
+                    </Button>
                   )}
                   <Button
                     key='Profile'

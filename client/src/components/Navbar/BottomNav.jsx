@@ -16,7 +16,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LoginIcon from '@mui/icons-material/Login';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import {Link} from '@mui/material';
+import { Link } from '@mui/material';
 import Home from '../../pages/Home/Home';
 
 export default function BottomNav() {
@@ -34,7 +34,7 @@ export default function BottomNav() {
       {/* Only display on mobile view */}
       {isMobile ? (
         // pt on box keeps footer in view on mobile mode
-        <Box pt={7}> 
+        <Box pt={7}>
           <Paper
             sx={{
               opacity: 0.95,
@@ -169,13 +169,13 @@ export default function BottomNav() {
                 />
               ) : null}
 
-              {/* Wishlist - buyer  */}
+              {/* Inbox - buyer  */}
               {user && type === 'buyer' ? (
                 <BottomNavigationAction
                   component={Link}
-                  href='/wishlist'
-                  label='Wishlist'
-                  icon={<FavoriteIcon sx={{ color: 'white.main' }} />}
+                  href='/inbox'
+                  label='Inbox'
+                  icon={<MailIcon sx={{ color: 'white.main' }} />}
                   showLabel
                   sx={{
                     color: 'white.main',

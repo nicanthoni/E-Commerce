@@ -57,7 +57,7 @@ export default function ProfileAccordion({
   return (
     <Box>
       {/*   Order & Review History */}
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
@@ -83,10 +83,10 @@ export default function ProfileAccordion({
             </Typography>
           )}
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       {/* ACCOUNT DETAILS */}
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary
           expandIcon={<ArrowDropDownIcon />}
           aria-controls='panel2-content'
@@ -111,7 +111,7 @@ export default function ProfileAccordion({
             </List>
           </Typography>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       {/* Alert - visibility controlled by local state */}
       <AuthAlert visible={showAlert} message={alertMessage} />

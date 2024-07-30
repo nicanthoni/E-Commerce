@@ -8,6 +8,7 @@ import {
   Typography,
   Rating,
   Link,
+  Modal,
 } from '@mui/material';
 import AddToCart from '../Buttons/AddToCart';
 import RemoveFromCart from '../Buttons/RemoveFromCart';
@@ -34,7 +35,7 @@ export default function Product(props) {
           />
         </Box>
         <CardActionArea
-          component={Link}
+          component={props.listType === 'wishlist' ? Link : null} // determine the component type by listType prop
           href={`/product/${props.id}`}
           sx={{
             width: '100%',
