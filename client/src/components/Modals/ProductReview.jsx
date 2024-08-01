@@ -22,18 +22,22 @@ export default function ProductReviewModal(props) {
 
   // handle edit review
   const handleEditReview = () => {
-    if (button === 'edit') {
-      setButton('save');
-      setShowInput(true);
-    } else {
-      setButton('save');
-    }
+    setButton('save');
+    setShowInput(true);
   };
+
+  // handle saving edited review
+  const handleSaveEdit = () => {
+    setShowInput(false);
+  };
+
   return (
     <>
       <Dialog open={props.modalState} onClose={props.onClose}>
         <DialogActions>
-          <IconButton onClick={handleEditReview}>
+          <IconButton
+            onClick={button === 'edit' ? handleEditReview : handleSaveEdit}
+          >
             {button === 'edit' ? <EditIcon /> : <SaveIcon />}
           </IconButton>
         </DialogActions>
@@ -42,7 +46,11 @@ export default function ProductReviewModal(props) {
           {!showInput ? (
             <Typography variant='body2'>"{props.review}"</Typography>
           ) : (
-            <TextField id='edit-review' variant='standard' label='Standard' />
+            <TextField
+              id='edit-review'
+              variant='standard'
+              label='Edit Review'
+            />
           )}
         </Box>
       </Dialog>
