@@ -8,60 +8,71 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Rating } from '@mui/material';
 import { formatDate } from '../../utils/formatters/formatDate';
 import { Typography } from '@mui/material';
+import { Link, Stack } from '@mui/material';
 
 // Created for mobile view only (desktop view shows this data without need for mobile)
 export default function ProductReviewModal(props) {
   return (
     <>
       <Dialog open={props.modalState} onClose={props.onClose}>
-        <DialogTitle id='responsive-dialog-title'>
-          <Rating value={props.rating} />
-        </DialogTitle>
-        <DialogContentText variant='caption' color='text.primary'>
-          <Typography
-            component='span'
-            variant='caption'
-            sx={{ fontWeight: 'bold', paddingLeft: 1 }}
-          >
-            Review:
-          </Typography>{' '}
-          "{props.review}"
-        </DialogContentText>
-        <DialogContentText variant='caption' color='text.primary'>
-          <Typography
-            component='span'
-            variant='caption'
-            sx={{ fontWeight: 'bold', paddingLeft: 1 }}
-          >
-            Date of review:
-          </Typography>{' '}
-          {formatDate(props.reviewDate)}
-        </DialogContentText>
-        <DialogActions>
-          <Button
-            variant='contained'
-            autoFocus
-            onClick={props.onClose}
-            color='grey'
-            sx={{
-              textTransform: 'none',
-              backgroundColor: 'white.main',
-              color: 'primary.main',
-            }}
-          >
-            Close
-          </Button>
+        <Stack p={2} gap={4}>
+          <Stack>
+            <Typography variant='caption'>
+              Reviewed on {formatDate(props.reviewDate)}
+            </Typography>
+            <Typography variant='caption' color='primary.main'>
+              {' '}
+              Sold by {''}
+              <Link
+                variant='caption'
+                href='#'
+                underline='hover'
+                sx={{
+                  color: 'primary.main',
+                  '&:hover': { color: 'secondary.main' },
+                }}
+              >
+                {props.vendorName}
+              </Link>
+            </Typography>
+          </Stack>
 
-          {/*  Necessary? Should anyone be able to update a review? */}
-          <Button
-            variant='contained'
-            onClick={props.onClose}
-            autoFocus
-            sx={{ textTransform: 'none' }}
-          >
-            Edit Review
-          </Button>
-        </DialogActions>
+          <Typography variant='body2'>"{props.review}"</Typography>
+
+          <DialogActions>
+            <Button
+              component={Link}
+              href={`/product/${props.id}`}
+              variant='contained'
+              color='secondary'
+              sx={{
+                color: 'text.secondary',
+                textTransform: 'none',
+                textWrap: 'nowrap',
+                borderRadius: 6,
+                fontWeight: 'bold',
+              }}
+            >
+              Buy Again
+            </Button>
+
+            <Button
+              variant='contained'
+              color='secondary'
+              onClick={props.onClose}
+              autoFocus
+              sx={{
+                color: 'text.secondary',
+                textTransform: 'none',
+                textWrap: 'nowrap',
+                borderRadius: 6,
+                fontWeight: 'bold',
+              }}
+            >
+              Edit Review
+            </Button>
+          </DialogActions>
+        </Stack>
       </Dialog>
     </>
   );

@@ -26,7 +26,7 @@ export default function Product(props) {
   };
 
   return (
-    <Card elevation={3}>
+    <Card elevation={2}>
       <Stack textAlign='center'>
         <Box alignSelf='flex-end'>
           <WishlistButton

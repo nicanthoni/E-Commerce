@@ -7,6 +7,7 @@ import {
   Container,
   Stack,
   Rating,
+  Paper,
 } from '@mui/material';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
 import Carousel from 'react-multi-carousel';
@@ -16,26 +17,21 @@ import OrdersAndReviewsCard from '../../../../../components/Cards/Product/Orders
 
 export const AccountDetails = (props) => {
   return (
-    <Box
-      bgcolor='white.main'
-      display='flex'
-      justifyContent='flex-start'
-      textAlign='center'
-      p={1}
-      sx={{ marginTop: 4 }}
-    >
-      <Typography variant='caption'>
-        <List>
-          <ListItem>Name: {props.name}</ListItem>
-          <ListItem>Email Address: {props.email}</ListItem>
-          <ListItem>Account Type: {props.accountType}</ListItem>
-          <ListItem>Member since: {props.memberSince}</ListItem>
-          <ListItem>
-            <DeleteAccountButton onClick={props.onClick} />
-          </ListItem>
-        </List>
-      </Typography>
-    </Box>
+    <Paper sx={{ marginTop: 6 }} elevation={2}>
+      <Box display='flex' justifyContent='flex-start' textAlign='center' p={1}>
+        <Typography variant='caption'>
+          <List>
+            <ListItem>Name: {props.name}</ListItem>
+            <ListItem>Email Address: {props.email}</ListItem>
+            <ListItem>Account Type: {props.accountType}</ListItem>
+            <ListItem>Member since: {props.memberSince}</ListItem>
+            <ListItem>
+              <DeleteAccountButton onClick={props.onClick} />
+            </ListItem>
+          </List>
+        </Typography>
+      </Box>
+    </Paper>
   );
 };
 
@@ -76,10 +72,8 @@ export const OrdersandReviews = (props) => {
       <Box
         key={index}
         sx={{
-          // Margin for mobile vs non-mobile
-          mx: props.isMobile ? { xs: 0.3, sm: 0.4, md: 0.8 } : { xs: 0 },
-          mb: props.isMobile ? { xs: 5 } : { xs: 0 },
-          mt: props.isMobile ? { xs: 2 } : { xs: 0 },
+          mx: props.isMobile ? { xs: 0.3, sm: 0.4, md: 0.8 } : 0,
+          mb: props.isMobile ? { xs: 5 } : 0,
         }}
       >
         <OrdersAndReviewsCard
@@ -105,35 +99,19 @@ export const OrdersandReviews = (props) => {
       className='Wishlist container'
       sx={{ marginTop: 6 }}
     >
-      <Box className='Wishlist container' sx={{ marginTop: 4 }}>
+      <Box className='Wishlist container' textAlign='center'>
         {props.userData.buyHistory.length > 0 ? (
           props.isMobile ? (
             <Carousel responsive={responsive} keyBoardControl={true} showDots>
               {orders}
             </Carousel>
           ) : (
-            <Stack
-              direction='row'
-              justifyContent='center'
-              alignItems='flex-end'
-              gap={2}
-            >
-              <>{orders}</>
-              <Stack direction='column' gap={3}>
-                <Rating />
-                <Typography>
-                  "A nice, long, lengthy review to sit and show us how review
-                  data would render here. Ideally, it looks good. Unfortunately,
-                  coding is hard. We will figure it out."
-                </Typography>
-                <Typography>Review on Month, day, year</Typography>
-              </Stack>
-            </Stack>
+            <>{orders}</>
           )
         ) : (
-          <Typography variant='caption'>
+          <Typography>
             There have been 0 orders placed. Explore items{' '}
-            <Link underline='hover' fontWeight='bold' href='/explore'>
+            <Link underline='hover' fontWeight='bolder' href='/explore'>
               here!
             </Link>
           </Typography>
@@ -201,15 +179,15 @@ export const Wishlist = (props) => {
       className='Wishlist container'
       sx={{ marginTop: 6 }}
     >
-      <Box className='Wishlist container' sx={{ marginTop: 4 }}>
+      <Box className='Wishlist container' textAlign='center'>
         {props.userData.wishlist.length > 0 ? (
           <Carousel responsive={responsive} keyBoardControl={true} showDots>
             {wishlist}
           </Carousel>
         ) : (
-          <Typography variant='caption'>
+          <Typography>
             There are 0 items in your wishlist. Explore items{' '}
-            <Link underline='hover' fontWeight='bold' href='/explore'>
+            <Link underline='hover' fontWeight='bolder' href='/explore'>
               here!
             </Link>
           </Typography>
