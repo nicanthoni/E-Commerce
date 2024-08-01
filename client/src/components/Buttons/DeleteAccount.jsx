@@ -28,9 +28,8 @@ export default function DeleteAccount({ onClick }) {
         variant='contained'
         color='error'
         sx={{
-          color: 'white.main',
           textTransform: 'none',
-          maxWidth: 140,
+          borderRadius: 6,
         }}
       >
         Delete Account

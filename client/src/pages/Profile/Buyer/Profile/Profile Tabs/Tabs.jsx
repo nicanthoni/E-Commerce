@@ -36,30 +36,6 @@ export const AccountDetails = (props) => {
 };
 
 export const OrdersandReviews = (props) => {
-  // Carousel settings
-  const responsive = {
-    lg: {
-      breakpoint: { max: 4000, min: 1200 },
-      items: 5,
-      slidesToSlide: 3,
-    },
-    md: {
-      breakpoint: { max: 1200, min: 900 },
-      items: 5,
-      slidesToSlide: 3,
-    },
-    sm: {
-      breakpoint: { max: 900, min: 600 },
-      items: 4,
-      slidesToSlide: 2,
-    },
-    xs: {
-      breakpoint: { max: 600, min: 0 },
-      items: 3,
-      slidesToSlide: 2,
-    },
-  };
-
   // Order history data
   const orders = props.userData.buyHistory.map((item, index) => {
     const itemObject = item.item; // individual item objects
@@ -69,13 +45,7 @@ export const OrdersandReviews = (props) => {
       (rating) => rating.user._id === userId
     );
     return (
-      <Box
-        key={index}
-        sx={{
-          mx: props.isMobile ? { xs: 0.3, sm: 0.4, md: 0.8 } : 0,
-          mb: props.isMobile ? { xs: 5 } : 0,
-        }}
-      >
+      <Box key={index}>
         <OrdersAndReviewsCard
           isAuthenticated={props.isAuthenticated}
           id={item.item._id}
@@ -101,13 +71,7 @@ export const OrdersandReviews = (props) => {
     >
       <Box className='Wishlist container' textAlign='center'>
         {props.userData.buyHistory.length > 0 ? (
-          props.isMobile ? (
-            <Carousel responsive={responsive} keyBoardControl={true} showDots>
-              {orders}
-            </Carousel>
-          ) : (
-            <>{orders}</>
-          )
+          <>{orders}</>
         ) : (
           <Typography>
             There have been 0 orders placed. Explore items{' '}
