@@ -10,10 +10,10 @@ import {
   Link,
   Modal,
 } from '@mui/material';
-import AddToCart from '../Buttons/AddToCart';
-import RemoveFromCart from '../Buttons/RemoveFromCart';
-import WishlistButton from '../Buttons/WishlistButton';
-import { getAverage } from '../../utils/calculations/getAverage';
+import AddToCart from '../../Buttons/AddToCart';
+import RemoveFromCart from '../../Buttons/RemoveFromCart';
+import WishlistButton from '../../Buttons/WishlistButton';
+import { getAverage } from '../../../utils/calculations/getAverage';
 
 export default function Product(props) {
   // Calulation avg rating
@@ -35,7 +35,7 @@ export default function Product(props) {
           />
         </Box>
         <CardActionArea
-          component={props.listType === 'wishlist' ? Link : null} // determine the component type by listType prop
+          component={Link}
           href={`/product/${props.id}`}
           sx={{
             width: '100%',

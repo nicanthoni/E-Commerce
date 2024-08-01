@@ -1,17 +1,25 @@
-import { Typography, Container, Box, CircularProgress } from '@mui/material';
+import {
+  Typography,
+  Container,
+  Box,
+  CircularProgress,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../graphql/queries';
 import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Grid, Avatar, Stack } from '@mui/material';
 import { useAuthContext } from '../../../../hooks/useAuthContext';
-import ProfileTabs from '../../../../components/Tabs/ProfilePage';
+import ProfileTabs from '../../../../components/Tabs/ProfileTabs';
 import { useLogout } from '../../../../hooks/useLogout';
 import { delete_user } from '../../../../graphql/mutations';
 import { formatDate } from '../../../../utils/formatters/formatDate';
 import AuthAlert from '../../../../components/Alerts/Auth/AuthAlert';
 import { useWishlist } from '../../../../hooks/Products/useWishlist';
 import { useCart } from '../../../../hooks/Products/useCart';
+import ProductReviewModal from '../../../../components/Modals/ProductReview';
 import 'react-multi-carousel/lib/styles.css';
 
 export default function BuyerProfile() {
@@ -21,12 +29,13 @@ export default function BuyerProfile() {
   const { deleteWishlist } = useWishlist();
   const { addCart, deleteCart } = useCart();
 
+  // Mobile check
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for mobile/medium screens
+
   // Alert states
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-
-  // Modal states
-  const [openModal, setOpenModal] = useState([]);
 
   // Mutation
   const [
@@ -52,9 +61,11 @@ export default function BuyerProfile() {
   }
   if (loading) {
     return (
-      <Box marginTop={8} sx={{ width: '100%' }}>
-        <CircularProgress color='primary' />
-      </Box>
+      <Container maxWidth='lg'>
+        <Box mt={13}>
+          <CircularProgress size={60} color='primary' />
+        </Box>
+      </Container>
     );
   }
   if (!data || !data.user) {
@@ -106,20 +117,6 @@ export default function BuyerProfile() {
     } catch (e) {
       console.log('Add to cart error:', e);
     }
-  };
-
-  // Handle Open Modal - for order history items
-  const handleOpenModal = (index) => {
-    const newOpenModal = [...openModal];
-    newOpenModal[index] = true;
-    setOpenModal(newOpenModal);
-  };
-
-  // Handle Close Modal - for order history items
-  const handleCloseModal = (index) => {
-    const newOpenModal = [...openModal];
-    newOpenModal[index] = false;
-    setOpenModal(newOpenModal);
   };
 
   return (
@@ -181,8 +178,7 @@ export default function BuyerProfile() {
               isAuthenticated={user ? true : false}
               handleWishlist={handleWishlist}
               handleCart={handleCart}
-              openModal={handleOpenModal}
-              closeModal={handleCloseModal}
+              isMobile={isMobile}
             />
           </Grid>
         </Grid>

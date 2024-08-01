@@ -49,9 +49,11 @@ export default function Inventory() {
   // If loading
   if (loading)
     return (
-      <Box marginTop={8} sx={{ width: '100%' }}>
-        <CircularProgress color='primary' />
-      </Box>
+      <Container maxWidth='md'>
+        <Box mt={13}>
+          <CircularProgress size={60} color='primary' />
+        </Box>
+      </Container>
     );
 
   // If error

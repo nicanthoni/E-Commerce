@@ -5,11 +5,14 @@ import {
   ListItem,
   Link,
   Container,
+  Stack,
+  Rating,
 } from '@mui/material';
 import DeleteAccountButton from '../../../../../components/Buttons/DeleteAccount';
-import Product from '../../../../../components/Cards/Product';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import WishlistCard from '../../../../../components/Cards/Product/WishlistProduct';
+import OrdersAndReviewsCard from '../../../../../components/Cards/Product/OrdersAndReviews';
 
 export const AccountDetails = (props) => {
   return (
@@ -62,22 +65,39 @@ export const OrdersandReviews = (props) => {
   };
 
   // Order history data
-  const orders = props.userData.buyHistory.map((item, index) => (
-    <Box key={index} mx={{ xs: 0.3, sm: 0.4, md: 0.8, lg: 1 }} mb={5} mt={2}>
-      <Product
-        isAuthenticated={props.isAuthenticated}
-        id={item.item._id}
-        userId={props.userId}
-        img={item.item.img}
-        name={item.item.name}
-        price={item.item.price}
-        ratings={item.item.ratings}
-        openModal={props.openModal}
-        closeModal={props.closeModal}
-        listType='orders'
-      />
-    </Box>
-  ));
+  const orders = props.userData.buyHistory.map((item, index) => {
+    const itemObject = item.item; // individual item objects
+    const userId = props.userId; // user's ID
+    const reviewData = itemObject.ratings.find(
+      // Find rating obj (review, rating, reviewDate) from current user
+      (rating) => rating.user._id === userId
+    );
+    return (
+      <Box
+        key={index}
+        sx={{
+          // Margin for mobile vs non-mobile
+          mx: props.isMobile ? { xs: 0.3, sm: 0.4, md: 0.8 } : { xs: 0 },
+          mb: props.isMobile ? { xs: 5 } : { xs: 0 },
+          mt: props.isMobile ? { xs: 2 } : { xs: 0 },
+        }}
+      >
+        <OrdersAndReviewsCard
+          isAuthenticated={props.isAuthenticated}
+          id={item.item._id}
+          userId={props.userId}
+          vendorName={item.item.vendor.vendorName}
+          review={reviewData ? reviewData.review : 'No review available'}
+          reviewDate={reviewData ? reviewData.createdAt : 'N/A'}
+          rating={reviewData ? reviewData.stars : 'No rating available'}
+          img={item.item.img}
+          name={item.item.name}
+          price={item.item.price}
+          isMobile={props.isMobile}
+        />
+      </Box>
+    );
+  });
 
   return (
     <Container
@@ -87,9 +107,29 @@ export const OrdersandReviews = (props) => {
     >
       <Box className='Wishlist container' sx={{ marginTop: 4 }}>
         {props.userData.buyHistory.length > 0 ? (
-          <Carousel responsive={responsive} keyBoardControl={true} showDots>
-            {orders}
-          </Carousel>
+          props.isMobile ? (
+            <Carousel responsive={responsive} keyBoardControl={true} showDots>
+              {orders}
+            </Carousel>
+          ) : (
+            <Stack
+              direction='row'
+              justifyContent='center'
+              alignItems='flex-end'
+              gap={2}
+            >
+              <>{orders}</>
+              <Stack direction='column' gap={3}>
+                <Rating />
+                <Typography>
+                  "A nice, long, lengthy review to sit and show us how review
+                  data would render here. Ideally, it looks good. Unfortunately,
+                  coding is hard. We will figure it out."
+                </Typography>
+                <Typography>Review on Month, day, year</Typography>
+              </Stack>
+            </Stack>
+          )
         ) : (
           <Typography variant='caption'>
             There have been 0 orders placed. Explore items{' '}
@@ -139,7 +179,7 @@ export const Wishlist = (props) => {
   // Users Wishlist
   const wishlist = props.userData.wishlist.map((item, index) => (
     <Box key={index} mx={{ xs: 0.3, sm: 0.4, md: 0.8, lg: 1 }} mb={5}>
-      <Product
+      <WishlistCard
         isAuthenticated={props.isAuthenticated}
         id={item.item._id}
         userId={props.userId}
@@ -151,7 +191,6 @@ export const Wishlist = (props) => {
         inWishlist={wishlistData.includes(item.item._id) ? true : false}
         handleWishlist={() => props.handleWishlist(item.item._id)}
         handleCart={() => props.handleCart(item.item._id, props.userId)}
-        listType='wishlist'
       />
     </Box>
   ));

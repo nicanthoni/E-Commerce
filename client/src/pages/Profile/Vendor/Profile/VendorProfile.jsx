@@ -33,9 +33,11 @@ export default function VendorProfile() {
   }
   if (loading) {
     return (
-      <Box sx={{ width: '100%' }}>
-        <CircularProgress color='primary' />
-      </Box>
+      <Container maxWidth='lg'>
+        <Box mt={13}>
+          <CircularProgress size={60} color='primary' />
+        </Box>
+      </Container>
     );
   }
   if (!data || !data.vendor) {
@@ -48,10 +50,10 @@ export default function VendorProfile() {
 
   return (
     <>
-      <Container maxWidth='md'>
+      <Container maxWidth='lg'>
         <Grid container direction='column' marginTop={6} gap={4}>
           {/* OVERVIEW stats */}
-          <Grid item >
+          <Grid item>
             <Stack direction='column' alignItems='center' spacing={2}>
               <Avatar
                 sx={{ bgcolor: 'action.active' }}
