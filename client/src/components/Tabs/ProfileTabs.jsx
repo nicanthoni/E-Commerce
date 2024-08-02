@@ -24,17 +24,12 @@ export default function ProfileTabs(props) {
             userData={props.userData}
             handleWishlist={props.handleWishlist}
             handleCart={props.handleCart}
-            isMobile={props.isMobile}
             userId={props.userId}
           />
         );
       case 2:
         return (
-          <OrdersandReviews
-            userData={props.userData}
-            isMobile={props.isMobile}
-            userId={props.userId}
-          />
+          <OrdersandReviews userData={props.userData} userId={props.userId} />
         );
       case 3:
         return (
@@ -44,7 +39,6 @@ export default function ProfileTabs(props) {
             email={props.email}
             accountType={props.accountType}
             memberSince={props.memberSince}
-            isMobile={props.isMobile}
             userId={props.userId}
           />
         );

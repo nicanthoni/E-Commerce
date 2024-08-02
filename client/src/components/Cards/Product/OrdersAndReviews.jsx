@@ -2,7 +2,6 @@ import {
   Card,
   Stack,
   Box,
-  CardActionArea,
   CardMedia,
   CardContent,
   Typography,
@@ -10,7 +9,6 @@ import {
   Link,
   Button,
   Grid,
-  Paper,
   Divider,
 } from '@mui/material';
 import { useState } from 'react';
@@ -33,124 +31,113 @@ function OrdersAndReviewsDesktop(props) {
 
   return (
     <Card elevation={1}>
-      <Grid
-        container
-        direction={props.isMobile ? 'column' : 'row'}
-        alignItems={props.isMobile ? 'flex-start' : 'flex-end'}
-        bgcolor='background.default'
-      >
+      <Grid container direction={{ xs: 'column', sm: 'row' }}>
         {/* Product */}
-        <Grid item xs={3}>
-          <Stack
-            bgcolor='background.paper'
-            pt={props.isMobile ? 1 : 3}
-            pb={props.isMobile ? 1 : 0}
-            alignItems='center'
-            direction={props.isMobile ? 'row' : 'column'}
-          >
-            <Box
-              sx={{
-                width: '100%',
-                height: 125,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              {/* Image */}
-              <CardMedia
-                component='img'
-                image={
-                  // check img property for if a seeded img, or img added via multer upload
-                  props.img.startsWith('/images/seededItems')
-                    ? props.img
-                    : `http://localhost:3001/${props.img}`
-                }
-                alt={`Photo of a ${props.name}`}
+        <Grid
+          display='flex'
+          direction={{ xs: 'row', sm: 'column' }}
+          alignContent='center'
+          justifyContent='center'
+          alignItems='center'
+          xs={12}
+          sm={3}
+          md={3}
+          bgcolor='background.paper'
+        >
+          <CardMedia
+            component='img'
+            image={
+              props.img.startsWith('/images/seededItems')
+                ? props.img
+                : `http://localhost:3001/${props.img}`
+            }
+            alt={`Photo of a ${props.name}`}
+            sx={{
+              objectFit: 'contain',
+              width: { xs: '25%', sm: '55%', md: '55%' },
+              pt: 1,
+              pb: { xs: 1, md: 0 },
+            }}
+          />
+
+          <CardContent>
+            <Stack width='100%' alignItems='center' sx={{ textWrap: 'nowrap' }}>
+              <Typography
+                fontWeight='bold'
+                fontSize={{ xs: 'small', md: 'medium' }}
                 sx={{
-                  height: '100%',
-                  objectFit: 'contain',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 1,
+                  WebkitBoxOrient: 'vertical',
+                  textOverflow: 'ellipsis', // ellipsis + hidden overflow if text exceeds 1 line
+                  overflow: 'hidden',
+                  textWrap: 'nowrap',
                 }}
-              />
-            </Box>
-
-            <CardContent>
-              <Stack
-                width='100%'
-                alignItems='center'
-                sx={{ textWrap: 'nowrap' }}
               >
-                {/* Name */}
-                <Typography
-                  fontWeight='bold'
-                  fontSize={{ xs: 'small', md: 'default' }}
-                  sx={{
-                    display: '-webkit-box',
-                    WebkitLineClamp: 1,
-                    WebkitBoxOrient: 'vertical',
-                    textOverflow: 'ellipsis', // ellipsis + hidden overflow if text exceeds 1 line
-                    overflow: 'hidden',
-                    textWrap: 'nowrap',
-                  }}
-                >
-                  {props.name}
-                </Typography>
+                {props.name}
+              </Typography>
 
-                <Typography variant='caption'>
-                  Reviewed {formatDate(props.reviewDate)}
-                </Typography>
+              <Typography variant='caption'>
+                Reviewed {formatDate(props.reviewDate)}
+              </Typography>
 
-                {/* Rating */}
-                <Rating size='small' value={props.rating} />
-              </Stack>
-            </CardContent>
-          </Stack>
+              <Rating size='small' value={props.rating} />
+            </Stack>
+          </CardContent>
         </Grid>
 
-        {/* Review details */}
-        <Grid item xs={9} p={1.5}>
-          <Stack>
+        {/* Review */}
+        <Grid
+          item
+          xs={12}
+          sm={9}
+          md={9}
+          bgcolor='background.default'
+          p={1}
+          display='flex'
+          flexDirection='column'
+          justifyContent='space-between'
+          alignContent='center'
+        >
+          <Box flexGrow={1} pt={8} display='flex' alignItems='center'>
             <Typography
-              textAlign='left'
               variant='body2'
-              fontSize={{ xs: 'small', md: 'default' }}
+              fontStyle='italic'
+              fontSize={{ xs: 'small', md: 'medium' }}
             >
               "{props.review}"
             </Typography>
+          </Box>
 
-            <Stack direction='row' gap={0.5}>
-              <Button
-                component={Link}
-                href={`/product/${props.id}`}
-                variant='text'
-                color='primary'
-                sx={{
-                  textTransform: 'none',
-                  textWrap: 'nowrap',
-                  fontWeight: 'bold',
-                  p: 0.5,
-                }}
-              >
-                Buy Again
-              </Button>
+          <Stack direction='row' justifyContent='flex-end'>
+            <Button
+              component={Link}
+              href={`/product/${props.id}`}
+              variant='text'
+              color='primary'
+              size='small'
+              sx={{
+                textTransform: 'none',
+                textWrap: 'nowrap',
+              }}
+            >
+              Buy Again
+            </Button>
 
-              <Divider flexItem orientation='vertical' />
+            <Divider flexItem orientation='vertical' />
 
-              <Button
-                onClick={handleOpenModal}
-                variant='text'
-                color='primary'
-                autoFocus
-                sx={{
-                  textTransform: 'none',
-                  textWrap: 'nowrap',
-                  fontWeight: 'bold',
-                  p: 0.5,
-                }}
-              >
-                Edit Review
-              </Button>
-            </Stack>
+            <Button
+              onClick={handleOpenModal}
+              variant='text'
+              color='primary'
+              size='small'
+              sx={{
+                textTransform: 'none',
+                textWrap: 'nowrap',
+              }}
+            >
+              Edit Review
+            </Button>
           </Stack>
         </Grid>
       </Grid>
@@ -170,12 +157,3 @@ function OrdersAndReviewsDesktop(props) {
 export default function OrdersAndReviews(props) {
   return <OrdersAndReviewsDesktop {...props} />;
 }
-
-// IF USING A MOBILE COMPONENT VARIATION
-// export default function OrdersAndReviews(props) {
-//   return props.isMobile ? (
-//     <OrdersAndReviewsMobile {...props} />
-//   ) : (
-//     <OrdersAndReviewsDesktop {...props} />
-//   );
-// }

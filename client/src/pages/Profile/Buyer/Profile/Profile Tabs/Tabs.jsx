@@ -57,7 +57,6 @@ export const OrdersandReviews = (props) => {
           img={item.item.img}
           name={item.item.name}
           price={item.item.price}
-          isMobile={props.isMobile}
         />
       </Box>
     );

@@ -29,10 +29,6 @@ export default function BuyerProfile() {
   const { deleteWishlist } = useWishlist();
   const { addCart, deleteCart } = useCart();
 
-  // Mobile check
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // mediaQuery for mobile/medium screens
-
   // Alert states
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -178,7 +174,6 @@ export default function BuyerProfile() {
               isAuthenticated={user ? true : false}
               handleWishlist={handleWishlist}
               handleCart={handleCart}
-              isMobile={isMobile}
             />
           </Grid>
         </Grid>

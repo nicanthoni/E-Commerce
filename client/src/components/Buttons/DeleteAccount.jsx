@@ -24,12 +24,14 @@ export default function DeleteAccount({ onClick }) {
   return (
     <>
       <Button
+        size='small'
         onClick={handleConfirmation}
         variant='text'
         color='error'
         sx={{
           textTransform: 'none',
           p: 0,
+          fontWeight: 'bold',
         }}
       >
         Delete Account
