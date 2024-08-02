@@ -19,7 +19,7 @@ import { formatDate } from '../../../../utils/formatters/formatDate';
 import AuthAlert from '../../../../components/Alerts/Auth/AuthAlert';
 import { useWishlist } from '../../../../hooks/Products/useWishlist';
 import { useCart } from '../../../../hooks/Products/useCart';
-import ProductReviewModal from '../../../../components/Modals/ProductReview';
+import ProductReviewModal from '../../../../components/Modals/EditReview';
 import 'react-multi-carousel/lib/styles.css';
 
 export default function BuyerProfile() {
