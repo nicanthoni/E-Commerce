@@ -128,11 +128,14 @@ function OrdersAndReviewsDesktop(props) {
                   textTransform: 'none',
                   textWrap: 'nowrap',
                   fontWeight: 'bold',
+                  p: 0.5,
                 }}
               >
                 Buy Again
               </Button>
+
               <Divider flexItem orientation='vertical' />
+
               <Button
                 onClick={handleOpenModal}
                 variant='text'
@@ -142,6 +145,7 @@ function OrdersAndReviewsDesktop(props) {
                   textTransform: 'none',
                   textWrap: 'nowrap',
                   fontWeight: 'bold',
+                  p: 0.5,
                 }}
               >
                 Edit Review
