@@ -43,6 +43,7 @@ function OrdersAndReviewsDesktop(props) {
           sm={3}
           md={3}
           bgcolor='background.paper'
+          
         >
           <CardMedia
             component='img'
@@ -54,9 +55,9 @@ function OrdersAndReviewsDesktop(props) {
             alt={`Photo of a ${props.name}`}
             sx={{
               objectFit: 'contain',
-              width: { xs: '25%', sm: '55%', md: '55%' },
-              pt: 1,
-              pb: { xs: 1, md: 0 },
+              width: { xs: '25%', sm: '60%'},
+              pt: 2,
+              pb: { xs: 2, sm: 0},
             }}
           />
 
@@ -99,7 +100,12 @@ function OrdersAndReviewsDesktop(props) {
           justifyContent='space-between'
           alignContent='center'
         >
-          <Box flexGrow={1} pt={8} display='flex' alignItems='center'>
+          <Box
+            flexGrow={1}
+            pt={{ xs: 3, sm: 4, md: 7 }}
+            display='flex'
+            alignItems='center'
+          >
             <Typography
               variant='body2'
               fontStyle='italic'
