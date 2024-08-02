@@ -83,9 +83,11 @@ export default function Explore() {
 
   if (loadingProducts || loadingUser) {
     return (
-      <Box mt={13} sx={{ width: '100%' }}>
-        <CircularProgress color='primary' />
-      </Box>
+      <Container maxWidth='lg'>
+        <Box mt={13}>
+          <CircularProgress size={60} color='primary' />
+        </Box>
+      </Container>
     );
   }
 

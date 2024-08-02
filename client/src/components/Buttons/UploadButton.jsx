@@ -25,6 +25,7 @@ export default function UploadButton({ onChange }) {
         color: 'primary.main',
         textTransform: 'none',
         textWrap: 'nowrap',
+        fontWeight: 'bold' 
       }}
     >
       Image

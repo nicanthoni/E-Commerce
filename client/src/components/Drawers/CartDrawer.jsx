@@ -65,7 +65,7 @@ export default function CartDrawer() {
         aria-label='open drawer'
         edge='start'
         onClick={handleDrawerToggle}
-        sx={{ ml: { xs: 0, md: 0.5 }, color: 'text.secondary' }}
+        sx={{ ml: { xs: 0, md: 0.4 }, color: 'text.secondary' }}
       >
         <Box className='cart-icon' sx={{ cursor: 'pointer' }}>
           <Badge badgeContent={itemsInCart} max={20} color='error'>
@@ -112,7 +112,7 @@ export default function CartDrawer() {
                 href='/signin'
                 variant='contained'
                 color='secondary'
-                sx={{ textTransform: 'none', mx: 3, borderRadius: 6 }}
+                sx={{ textTransform: 'none', mx: 3, borderRadius: 6,  fontWeight: 'bold'  }}
               >
                 Sign in
               </Button>

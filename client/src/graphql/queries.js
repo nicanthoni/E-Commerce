@@ -85,6 +85,7 @@ export const User = gql`
       }
       buyHistory {
         item {
+          _id
           name
           description
           price
@@ -93,6 +94,9 @@ export const User = gql`
             vendorName
           }
           ratings {
+            user {
+              _id
+            }
             review
             stars
             createdAt
@@ -101,7 +105,11 @@ export const User = gql`
         quantity
       }
       ratings {
+        user {
+          _id
+        }
         item {
+          _id
           name
         }
         review

@@ -18,20 +18,21 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <Switch
-      color='secondary'
+    <IconButton
+      onClick={handleToggleMode}
+      color={theme === 'dark' ? 'white' : 'text.primary'}
       checked={checked}
-      onChange={handleToggleMode}
-      inputProps={{ 'aria-label': 'controlled' }}
-    /> 
+    >
+      {theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+    </IconButton>
   );
 }
 
-// WORKING VARIANTS:
+// VARIANTS:
 
 // Single Button
 {
-  /* <IconButton onClick={handleToggleMode} color='secondary' checked={checked}>
+  /* <IconButton onClick={handleToggleMode} color={ theme === 'dark' ? 'white' : 'text.primary' } checked={checked}>
       {theme === 'dark' ? <LightModeIcon/> : <DarkModeIcon />}
     </IconButton> */
 }

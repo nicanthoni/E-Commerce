@@ -3,19 +3,17 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
-import DeleteAccount from '../Buttons/DeleteAccount';
 import {
   AccountDetails,
   Wishlist,
   OrdersandReviews,
-} from '../../pages/Profile/Buyer/Profile/Tabs/Tabs';
+} from '../../pages/Profile/Buyer/Profile/Profile Tabs/Tabs';
 
-export default function BuyerProfile(props) {
+export default function ProfileTabs(props) {
   const [tabValue, setTabValue] = useState(1);
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
-    console.log(`tab ${newValue} selected`);
   };
 
   const renderTabContent = () => {
@@ -26,10 +24,13 @@ export default function BuyerProfile(props) {
             userData={props.userData}
             handleWishlist={props.handleWishlist}
             handleCart={props.handleCart}
+            userId={props.userId}
           />
         );
       case 2:
-        return <OrdersandReviews userData={props.userData} />;
+        return (
+          <OrdersandReviews userData={props.userData} userId={props.userId} />
+        );
       case 3:
         return (
           <AccountDetails
@@ -38,6 +39,7 @@ export default function BuyerProfile(props) {
             email={props.email}
             accountType={props.accountType}
             memberSince={props.memberSince}
+            userId={props.userId}
           />
         );
       default:
