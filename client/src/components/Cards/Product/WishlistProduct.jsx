@@ -74,7 +74,7 @@ export default function Product(props) {
             {/* Name */}
             <Typography
               fontWeight='bold'
-              fontSize={{ xs: 'small', sm: 'medium' }}
+              fontSize={{ xs: 'small', sm: 'default' }}
               sx={{
                 display: '-webkit-box',
                 WebkitLineClamp: 1,

@@ -43,7 +43,7 @@ export default function AccountType() {
 
   return (
     <>
-      <Grid container marginTop={6}>
+      <Grid container marginTop={12}>
         <Grid item xs={12}>
           <Box
             sx={{

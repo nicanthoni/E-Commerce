@@ -10,11 +10,17 @@ import Footer from '../../components/Footer/Footer';
 export default function Home() {
   return (
     <>
-      <Box sx={{ backgroundColor: 'primary.main' }} p={1}>
+      <Box
+        p={1}
+        sx={{
+          backgroundColor: 'primary.main',
+          marginTop: { xs: 7, md: 5, lg: 1 },
+        }}
+      >
         <Container maxWidth='xl'>
-          <Grid container spacing={4} alignItems='center' >
+          <Grid container spacing={4} alignItems='center'>
             {/* Slogan  */}
-            <Grid item xs={12} md={6} >
+            <Grid item xs={12} md={6}>
               <HomeInfo />
             </Grid>
 
@@ -27,7 +33,7 @@ export default function Home() {
       </Box>
 
       {/* Services  */}
-      <Box sx={{ backgroundColor: 'white.main', width: '100%' }}p={1}>
+      <Box sx={{ backgroundColor: 'white.main', width: '100%' }} p={1}>
         <Container maxWidth='xl'>
           <HomeServices />
         </Container>
@@ -46,8 +52,6 @@ export default function Home() {
           <HomeCTA />
         </Container>
       </Box>
-
-     
     </>
   );
 }

@@ -1,11 +1,4 @@
-import {
-  Typography,
-  Container,
-  Box,
-  CircularProgress,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
+import { Typography, Container, Box, CircularProgress } from '@mui/material';
 import { useLazyQuery } from '@apollo/client';
 import { User } from '../../../../graphql/queries';
 import { useEffect, useState } from 'react';
@@ -57,11 +50,9 @@ export default function BuyerProfile() {
   }
   if (loading) {
     return (
-      <Container maxWidth='lg'>
-        <Box mt={13}>
-          <CircularProgress size={60} color='primary' />
-        </Box>
-      </Container>
+      <Box marginTop={15} display='flex' justifyContent='center'>
+        <CircularProgress size={60} color='primary' />
+      </Box>
     );
   }
   if (!data || !data.user) {
@@ -118,7 +109,7 @@ export default function BuyerProfile() {
   return (
     <>
       <Container maxWidth='lg'>
-        <Grid container marginTop={6} gap={4}>
+        <Grid container marginTop={12} gap={4}>
           {/* OVERVIEW stats */}
           <Grid item xs={12}>
             <Stack direction='column' alignItems='center' spacing={2}>

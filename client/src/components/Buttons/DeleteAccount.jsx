@@ -42,7 +42,7 @@ export default function DeleteAccount({ onClick }) {
         <DialogTitle>{'Delete account and associated data?'}</DialogTitle>
 
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText variant='caption' color='text.primary'>
             By proceeding to delete, you authorize the deletion of all of your
             account data. This cannot be undone.
           </DialogContentText>

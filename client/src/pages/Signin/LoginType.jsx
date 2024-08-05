@@ -43,7 +43,7 @@ export default function LoginType() {
 
   return (
     <>
-      <Grid container component='main' marginTop={6}>
+      <Grid container component='main' marginTop={12}>
         <Grid item xs={12}>
           <Box
             sx={{

@@ -17,21 +17,32 @@ import OrdersAndReviewsCard from '../../../../../components/Cards/Product/Orders
 
 export const AccountDetails = (props) => {
   return (
-    <Paper sx={{ marginTop: 6 }} elevation={2}>
-      <Box display='flex' justifyContent='flex-start' textAlign='center' p={1}>
-        <Typography variant='caption'>
-          <List>
-            <ListItem>Name: {props.name}</ListItem>
-            <ListItem>Email Address: {props.email}</ListItem>
-            <ListItem>Account Type: {props.accountType}</ListItem>
-            <ListItem>Member since: {props.memberSince}</ListItem>
-            <ListItem>
-              <DeleteAccountButton onClick={props.onClick} />
-            </ListItem>
-          </List>
-        </Typography>
-      </Box>
-    </Paper>
+    <Container
+      maxWidth='lg'
+      className='account-details-container'
+      sx={{ marginTop: 6 }}
+    >
+      <Paper elevation={2}>
+        <Box
+          display='flex'
+          justifyContent='flex-start'
+          textAlign='center'
+          p={1}
+        >
+          <Typography variant='caption'>
+            <List>
+              <ListItem>Name: {props.name}</ListItem>
+              <ListItem>Email Address: {props.email}</ListItem>
+              <ListItem>Account Type: {props.accountType}</ListItem>
+              <ListItem>Member since: {props.memberSince}</ListItem>
+              <ListItem>
+                <DeleteAccountButton onClick={props.onClick} />
+              </ListItem>
+            </List>
+          </Typography>
+        </Box>
+      </Paper>
+    </Container>
   );
 };
 
@@ -65,10 +76,10 @@ export const OrdersandReviews = (props) => {
   return (
     <Container
       maxWidth='lg'
-      className='Wishlist container'
+      className='orders-and-reviews-container'
       sx={{ marginTop: 6 }}
     >
-      <Box className='Wishlist container' textAlign='center'>
+      <Box className='profileOrders' textAlign='center'>
         {props.userData.buyHistory.length > 0 ? (
           <>{orders}</>
         ) : (
@@ -139,10 +150,10 @@ export const Wishlist = (props) => {
   return (
     <Container
       maxWidth='lg'
-      className='Wishlist container'
+      className='wishlist-container'
       sx={{ marginTop: 6 }}
     >
-      <Box className='Wishlist container' textAlign='center'>
+      <Box className='profileWishlist' textAlign='center'>
         {props.userData.wishlist.length > 0 ? (
           <Carousel responsive={responsive} keyBoardControl={true} showDots>
             {wishlist}
