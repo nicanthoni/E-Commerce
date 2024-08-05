@@ -49,11 +49,9 @@ export default function Inventory() {
   // If loading
   if (loading)
     return (
-      <Container maxWidth='md'>
-        <Box mt={13}>
-          <CircularProgress size={60} color='primary' />
-        </Box>
-      </Container>
+      <Box marginTop={15} display='flex' justifyContent='center'>
+        <CircularProgress size={60} color='primary' />
+      </Box>
     );
 
   // If error
@@ -167,7 +165,7 @@ export default function Inventory() {
   };
 
   return (
-    <Container maxWidth='md' sx={{ marginTop: 6 }}>
+    <Container maxWidth='md' sx={{ marginTop: 12 }}>
       <Typography textAlign='center' variant='h6' marginBottom={2}>
         Inventory Management
       </Typography>
@@ -204,7 +202,7 @@ export default function Inventory() {
         <DialogTitle>{'Delete item and associated data?'}</DialogTitle>
 
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText variant='caption' color='text.primary'>
             By deleting an item from your inventory, you will be removing it
             from the shop and deleting its associated data. This cannot be
             undone.

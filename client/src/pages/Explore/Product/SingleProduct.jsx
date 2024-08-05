@@ -97,11 +97,9 @@ export default function SingleProduct() {
   }
   if (productLoading) {
     return (
-      <Container maxWidth='lg'>
-        <Box mt={13}>
-          <CircularProgress size={60} color='primary' />
-        </Box>
-      </Container>
+      <Box marginTop={15} display='flex' justifyContent='center'>
+        <CircularProgress size={60} color='primary' />
+      </Box>
     );
   }
   if (!productData) {

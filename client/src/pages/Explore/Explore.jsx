@@ -83,11 +83,9 @@ export default function Explore() {
 
   if (loadingProducts || loadingUser) {
     return (
-      <Container maxWidth='lg'>
-        <Box mt={13}>
-          <CircularProgress size={60} color='primary' />
-        </Box>
-      </Container>
+      <Box marginTop={15} display='flex' justifyContent='center'>
+        <CircularProgress size={60} color='primary' />
+      </Box>
     );
   }
 
@@ -112,7 +110,7 @@ export default function Explore() {
         justifyContent='center'
         alignContent='center'
         bgcolor='#BF0F0F'
-        sx={{ marginTop: { xs: 12, sm: 13, md: 7.5 } }}
+        sx={{ marginTop: { xs: 18, sm: 19, md: 14 } }}
       >
         <Promotion />
       </Box>

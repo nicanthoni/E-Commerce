@@ -76,7 +76,7 @@ export default function CartLayout({
             href='/explore'
             variant='contained'
             color='secondary'
-            sx={{ textTransform: 'none', mx: 3 }}
+            sx={{ textTransform: 'none', mx: 3, borderRadius: 6, fontWeight: 'bold' }}
           >
             Shop Items
           </Button>

@@ -43,7 +43,6 @@ function OrdersAndReviewsDesktop(props) {
           sm={3}
           md={3}
           bgcolor='background.paper'
-          
         >
           <CardMedia
             component='img'
@@ -55,9 +54,9 @@ function OrdersAndReviewsDesktop(props) {
             alt={`Photo of a ${props.name}`}
             sx={{
               objectFit: 'contain',
-              width: { xs: '25%', sm: '60%'},
+              width: { xs: '25%', sm: '60%' },
               pt: 2,
-              pb: { xs: 2, sm: 0},
+              pb: { xs: 2, sm: 0 },
             }}
           />
 
@@ -65,7 +64,7 @@ function OrdersAndReviewsDesktop(props) {
             <Stack width='100%' alignItems='center' sx={{ textWrap: 'nowrap' }}>
               <Typography
                 fontWeight='bold'
-                fontSize={{ xs: 'small', md: 'medium' }}
+                fontSize={{ xs: 'small', md: 'default' }}
                 sx={{
                   display: '-webkit-box',
                   WebkitLineClamp: 1,
@@ -109,7 +108,7 @@ function OrdersAndReviewsDesktop(props) {
             <Typography
               variant='body2'
               fontStyle='italic'
-              fontSize={{ xs: 'small', md: 'medium' }}
+              fontSize={{ xs: 'small', md: 'default' }}
             >
               "{props.review}"
             </Typography>

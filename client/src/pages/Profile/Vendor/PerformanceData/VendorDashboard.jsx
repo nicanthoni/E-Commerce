@@ -21,7 +21,7 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 export default function VendorDashboard() {
   return (
     <>
-      <Container maxWidth='xl' sx={{ marginTop: 6}}>
+      <Container maxWidth='xl' sx={{ marginTop: 12}}>
         <Stack
           direction='column'
           alignItems={'center'}

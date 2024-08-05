@@ -33,11 +33,9 @@ export default function VendorProfile() {
   }
   if (loading) {
     return (
-      <Container maxWidth='lg'>
-        <Box mt={13}>
-          <CircularProgress size={60} color='primary' />
-        </Box>
-      </Container>
+      <Box marginTop={15} display='flex' justifyContent='center'>
+        <CircularProgress size={60} color='primary' />
+      </Box>
     );
   }
   if (!data || !data.vendor) {
@@ -51,7 +49,7 @@ export default function VendorProfile() {
   return (
     <>
       <Container maxWidth='lg'>
-        <Grid container direction='column' marginTop={6} gap={4}>
+        <Grid container direction='column' marginTop={12} gap={4}>
           {/* OVERVIEW stats */}
           <Grid item>
             <Stack direction='column' alignItems='center' spacing={2}>

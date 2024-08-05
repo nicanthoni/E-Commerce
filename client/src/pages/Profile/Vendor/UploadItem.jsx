@@ -129,7 +129,7 @@ export default function UploadItem() {
   };
 
   return (
-    <Container component='main' maxWidth='xs' sx={{ marginTop: 6}}>
+    <Container component='main' maxWidth='xs' sx={{ marginTop: 12}}>
       <Box  textAlign='center'>
         <Typography variant='h6' marginBottom={1}>
           Upload items

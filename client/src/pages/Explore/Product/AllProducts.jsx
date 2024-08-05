@@ -248,7 +248,7 @@ export default function AllProducts(props) {
                       {/* Product Name */}
                       <Typography
                         fontWeight='bold'
-                        fontSize={{ xs: 'small', md: 'medium' }}
+                        fontSize={{ xs: 'small', md: 'default' }}
                         sx={{
                           display: '-webkit-box',
                           WebkitLineClamp: 1,
